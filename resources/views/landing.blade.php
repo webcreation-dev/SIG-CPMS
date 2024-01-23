@@ -453,7 +453,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <DIV CLASS = "signup-banner top-signup-banner with-video">
  <DIV CLASS = "container">
    <DIV CLASS = "text-center">
-<DIV CLASS = "videothumb"><DIV CLASS="play-btn"><A HREF = "shipitovideo.html" onClick = "return gaPopUpDisplay(this);"><IMG STYLE="width:45px;height:45px;" SRC="shipito/fr/imgs/home/play.svg"/></A></DIV><IMG SRC="shipito/fr/imgs/home/Video_Icon.png"/></DIV>
+<DIV CLASS = "videothumb"><DIV CLASS="play-btn"><A HREF = "#" onClick = "#"><IMG STYLE="width:45px;height:45px;" SRC="shipito/fr/imgs/home/play.svg"/></A></DIV><IMG SRC="shipito/fr/imgs/home/Video_Icon.png"/></DIV>
    </DIV>
    <DIV CLASS = "text-center us-address">
     <DIV>Obtenez une adresse gratuite en France!</DIV>
