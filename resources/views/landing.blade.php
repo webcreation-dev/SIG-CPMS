@@ -386,10 +386,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div class="carousel-caption">
                   <h1 STYLE = "line-height: 50px;">Achetez ce que vous voulez<BR>
 
-                  Nous allons
-                  <img STYLE="height:38px;" CLASS="h1-logo not-mobile" SRC = "shipito/fr/imgs/home/logo_black.svg"/>
-                  <img CLASS="h1-logo mobile-logo" SRC = "shipito/fr/imgs/home/logo_black.svg"/>
-                  vous.
                   </h1>
               </div>
                <DIV CLASS = "row not-mobile banner-thumbs">
