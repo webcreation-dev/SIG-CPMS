@@ -1,0 +1,193 @@
+var LEAVE_PAGE_WARNING_TITLE='Warning';var LEAVE_PAGE_WARNING_BODY='If you leave this page, any changes you have made will be lost.';var LEAVE_PAGE_WARNING_YES='Leave Page';var LEAVE_PAGE_WARNING_NO='Stay on Page';function showFormConfirm(f,title,message,yescaption,nocaption)
+{confirmDialog(title,message,yescaption,nocaption,function(){FORM_SUBMISSION_CANCELLED=false;formvalidator.submitForm(f);});}
+function showThrobber(f,message)
+{var throbberbody='<DIV CLASS = \"throbbercontainer\" ID = \"throbber\">'
++' <DIV CLASS = \"throbberbackdrop\"></DIV>'
++' <DIV CLASS = \"throbberbody\">'
++'  <H2>Please Wait . . .</H2>'
++'  <TABLE><TR>'
++'	<TD ALIGN = \"center\"><I CLASS = \"fa fa-spinner fa-spin fa-3x fa-fw\"></I></TD>'
++'    <TD ALIGN = \"left\">'+message+'</TD>'
++'  </TR></TABLE>'
++' </DIV>'
++'</DIV>';if(!document.getElementById('throbbercontainer'))
+$('body').append(throbberbody);$('#throbber').show();return true;}
+function showImagePreview(lnk)
+{var popup='<DIV CLASS = \"modal popup fade\" ID = \"imagepopup" role = \"dialog\">'
++'	  <DIV CLASS = \"modal-dialog modal-fullscreen\">'
++'       <DIV CLASS = "modal-content" ID = \"imagepopupcontent\">'
++'	    <SPAN>'
++'	     <I CLASS = \"fa fa-spinner fa-spin fa-3x fa-fw\"></I> '
++'Loading . . .'
++'        </SPAN>'
++'	  </DIV>';+'	 </DIV>';if(!document.getElementById('imagepopup'))
+$('body').append(popup);$('#imagepopup').modal('show');$('#imagepopupcontent').load(lnk.href,function(response,status,xhr){if(status=="error")
+{var msg="<H1>ERROR:</H1> ";$("#imagepopupcontent").html(msg+xhr.status+" "+xhr.statusText);}});return false;}
+function gaPopUpDisplay(lnk)
+{var popup='<DIV CLASS = \"modal popup fade\" ID = \"popup" role = \"dialog\">'
++'	 <DIV CLASS = \"modal-dialog modal-lg\">'
++'      <DIV CLASS = \"modal-content\" ID = \"popupcontent\">'
++'  	  </DIV>'
++'	 </DIV>'
++'	</DIV>';if(!document.getElementById('popup'))
+$('body').append(popup);var loading='	   <DIV CLASS = \"modal-body\">'
++'	    <SPAN>'
++'	     <I CLASS = \"fa fa-spinner fa-spin fa-3x fa-fw\"></I> '
++'Loading . . .'
++'        </SPAN>'
++'	   </DIV>'
++'	   <DIV CLASS = \"modal-footer\">'
++'        <BUTTON TYPE = \"button\" CLASS = \"btn btn-default\" data-dismiss = \"modal\">Close</BUTTON>'
++'	   </DIV>';$('#popupcontent').html(loading);$('#popup').modal('show');$('#popupcontent').load(lnk.href,function(response,status,xhr){if(status=="error")
+{var msg="<H1>ERROR:</H1> ";$("#popupcontent").html(msg+xhr.status+" "+xhr.statusText);}});return false;}
+function gaPopUpStaticDisplay(lnk)
+{var popup='<DIV CLASS = \"modal popup fade static-modal\" ID = \"popup" role = \"dialog\">'
++'	 <DIV CLASS = \"modal-dialog modal-lg\">'
++'      <DIV CLASS = \"modal-content\" ID = \"popupcontent\">'
++'  	  </DIV>'
++'	 </DIV>'
++'	</DIV>';if(!document.getElementById('popup'))
+$('body').append(popup);var loading='	   <DIV CLASS = \"modal-body\">'
++'	    <SPAN>'
++'	     <I CLASS = \"fa fa-spinner fa-spin fa-3x fa-fw\"></I> '
++'Loading . . .'
++'        </SPAN>'
++'	   </DIV>'
++'	   <DIV CLASS = \"modal-footer\">'
++'        <BUTTON TYPE = \"button\" CLASS = \"btn btn-default\" data-dismiss = \"modal\">Close</BUTTON>'
++'	   </DIV>';$('#popupcontent').html(loading);$('#popup').modal({backdrop:'static',keyboard:false,show:true});$('#popupcontent').load(lnk.href,function(response,status,xhr){if(status=="error")
+{var msg="<H1>ERROR:</H1> ";$("#popupcontent").html(msg+xhr.status+" "+xhr.statusText);}});return false;}
+function gaPopUpDisplayByURL(url)
+{var popup='<DIV CLASS = \"modal popup fade\" ID = \"popup" role = \"dialog\">'
++'	 <DIV CLASS = \"modal-dialog modal-lg\">'
++'      <DIV CLASS = \"modal-content\" ID = \"popupcontent\">'
++'  	  </DIV>'
++'	 </DIV>'
++'	</DIV>';if(!document.getElementById('popup'))
+$('body').append(popup);var loading='	   <DIV CLASS = \"modal-body\">'
++'	    <SPAN>'
++'	     <I CLASS = \"fa fa-spinner fa-spin fa-3x fa-fw\"></I> '
++'Loading . . .'
++'        </SPAN>'
++'	   </DIV>'
++'	   <DIV CLASS = \"modal-footer\">'
++'        <BUTTON TYPE = \"button\" CLASS = \"btn btn-default\" data-dismiss = \"modal\">Close</BUTTON>'
++'	   </DIV>';$('#popupcontent').html(loading);$('#popup').modal('show');$('#popupcontent').load(url,function(response,status,xhr){if(status=="error")
+{var msg="<H1>ERROR:</H1> ";$("#popupcontent").html(msg+xhr.status+" "+xhr.statusText);}});return false;}
+function gaPopOverCampaign(lnk,closetext)
+{var popup='<DIV CLASS = \"modal popup fade\" ID = \"campaignpopup\" role = \"dialog\">'
++'	 <DIV CLASS = \"modal-dialog modal-lg\">'
++'      <DIV CLASS = \"modal-content\">'
++'        <DIV CLASS = \"modal-header\">'
++'          <BUTTON STYLE=\"margin-top:30px;\" TYPE= \"button\" data-dismiss = \"modal\" CLASS = \"close\"><I CLASS = \"icon-close\"></I></BUTTON>'
++'        </DIV>'
++'        <DIV CLASS = \"modal-body\" ID = \"campaignpopupcontent\"></DIV>'
++'      </DIV>'
++'	 </DIV>'
++'	</DIV>';if(!document.getElementById('campaignpopup'))
+$('body').append(popup);var loading='	   <DIV CLASS = \"modal-body\">'
++'	    <SPAN>'
++'	     <I CLASS = \"fa fa-spinner fa-spin fa-3x fa-fw\"></I> '
++'Loading . . .'
++'        </SPAN>'
++'	   </DIV>'
++'	   <DIV CLASS = \"modal-footer\">'
++'        <BUTTON TYPE = \"button\" CLASS = \"btn btn-default\" data-dismiss = \"modal\">'+closetext+'</BUTTON>'
++'	   </DIV>';$('#campaignpopupcontent').html(loading);$('#campaignpopup').modal('show');$('#campaignpopupcontent').load(lnk,function(response,status,xhr){if(status=="error"){var msg="<H1>ERROR:</H1> ";$("#campaignpopupcontent").html(msg+xhr.status+" "+xhr.statusText);}});return false;}
+function loadAJAX(url,target)
+{$('#'+target).html('<SPAN><I CLASS = \"fa fa-spinner fa-spin fa-3x fa-fw\"></I></SPAN>');$('#'+target).load(url,function(response,status,xhr){if(status=="error")
+{var msg="<H1>ERROR:</H1> ";$('#'+target).html(msg+xhr.status+" "+xhr.statusText+"<HR>"+url);}});return false;}
+function hideThrobber()
+{$('#throbber').hide();}
+function openPageInModal(url,title)
+{var popup='<DIV CLASS = \"modal popup fade\" ID = \"popup" role = \"dialog\">'
++'	 <DIV CLASS = \"modal-dialog modal-fullscreen\">'
++'      <DIV CLASS = \"modal-content\" ID = \"popupcontent\">'
++'	   <DIV CLASS = \"modal-header\">'
++'        <BUTTON CLASS = \"close\" TYPE = \"BUTTON\" data-dismiss = \"modal\"><I CLASS = \"fa fa-times fa-fw\"></I></BUTTON>'
++'        <H2>'+title+'</H2>'
++'       </DIV>'
++'	   <DIV CLASS = \"modal-body\">'
++'	    <SPAN>'
++'	     <I CLASS = \"fa fa-spinner fa-spin fa-3x fa-fw\"></I>'
++'        </SPAN>'
++'	   </DIV>'
++'	   <DIV CLASS = \"modal-footer\">'
++'        <BUTTON TYPE = \"button\" CLASS = \"btn btn-default\" data-dismiss = \"modal\">Close</BUTTON>'
++'	   </DIV>'
++'  	  </DIV>'
++'	 </DIV>'
++'	</DIV>';if(!document.getElementById('popup'))
+$('body').append(popup);$('#popup').modal({backdrop:'static',keyboard:false,show:true});$('#popupcontent').load(url,function(response,status,xhr){if(status=="error")
+{var msg="<H1>ERROR:</H1> ";$("#popupcontent").html(msg+xhr.status+" "+xhr.statusText);}});return true;}
+var NOTIFICATIONS_LOADED=false;var NOTIFICATION_TEXT="";function loadPopup(linkurl,divid,loadingmsg)
+{if(!NOTIFICATIONS_LOADED)
+{NOTIFICATION_TEXT='<I CLASS = \"fa fa-spinner fa-spin fa-3x fa-fw\"></I>'+loadingmsg;NOTIFICATIONS_LOADED=true;$.ajax({url:linkurl,success:function(response){NOTIFICATION_TEXT=response;$('#'+divid).html(NOTIFICATION_TEXT);}});}
+return '<DIV ID = \"'+divid+'\">'+NOTIFICATION_TEXT+'</DIV>';}
+var ajaxloads=new Vector();function queueAJAXLoad(src,id)
+{ajaxloads.add(src+'|'+id);}
+function initializeWidgets(){var isOS=/iPad|iPhone|iPod/.test(navigator.platform);if(isOS)
+{$('body').on("touchstart",function(e)
+{$('[data-toggle="tooltip"]').each(function()
+{if(!$(this).is(e.target)&&$(this).has(e.target).length===0&&$('.tooltip').has(e.target).length===0)
+{$(this).tooltip('hide');}});});}
+$('[data-toggle="tooltip"]').tooltip({html:true});$('[data-toggle="popover"]').popover({html:true});$('.yes-no-slider').click(function(evt){evt.preventDefault();var formname=$(this).attr("form-name");if(!formname)return;var varname=$(this).attr("varname");var onval=$(this).attr('on-message');var offval=$(this).attr('off-message');var f=document.forms[formname];var el=f.elements[varname];var oldval=el.value;if(oldval=='true')
+{el.value='false';$(this).children('.slider-caption').html(offval);}
+else
+{el.value='true';$(this).children('.slider-caption').html(onval);}
+$(this).toggleClass('slider-yes');formvalidator.formUpdated(f,el);});$('.panel-heading .btn').click(function(evt){evt.stopPropagation();});$('.checkbox-selector').off('click');$('.checkbox-selector').click(function(evt){$(this).find('input:checkbox').each(function(){if(!$(this).prop('checked'))
+{if(!$(this).prop('disabled'))
+{$(this).prop('checked',true);$(this).click();formvalidator.formUpdated(this.form,this);}}
+else
+{if(!$(this).prop('disabled'))
+{$(this).prop('checked',false);$(this).click();formvalidator.formUpdated(this.form,this);}}});});$('.checkbox-selector input:checkbox').click(function(evt){evt.stopPropagation();return false;});$('.radio-selector input:radio').click(function(evt){evt.stopPropagation();return false;});$('.radio-selector').off('click');$('.radio-selector').click(function(evt){$(this).find('input:radio').each(function(){if(!$(this).prop('checked'))
+{if(!$(this).prop('disabled'))
+{$(this).prop('checked',true);formvalidator.formUpdated(this.form,this);}}});});$('.edit-customer-label').off('click');$('.edit-customer-label').click(function(evt){evt.preventDefault();$(this).closest('.edit-label').toggleClass('editing');});for(var i=0;i<ajaxloads.size();i++)
+{var vals=ajaxloads.elementAt(i).split('|');var src=vals[0];var id=vals[1];loadAJAX(src,id);}
+ajaxloads=new Vector();$('html').on('click',function(e){var title=(typeof($(e.target).data('original-title')));if(title=='undefined')
+$('.notifications-link').popover('hide');});$('.st-main-links LI.dropdown A').hover(function(e){if($(window).width()>767)
+{var parent=$(this).closest('.dropdown');if(!$(parent).hasClass('open'))
+$('.mega-dropdown.open').removeClass('open');}},function(e)
+{});$(window).on('scroll',function(e){if($(window).width()>767)
+$('.mega-dropdown.open').removeClass('open');});$('.ga-form-submit').off();$('.ga-form-submit').click(function(evt){evt.preventDefault();var formname=$(evt.target).attr('ga-form-name');if(!formname)return;var f=document.forms[formname];if(!f)return;if(formvalidator.validateForm(f))
+formvalidator.submitForm(f);});$('BODY.save-progress A').click(function(evt){if($(this).attr('onclick'))return true;if($(this).hasClass('ignore-warnings'))return true;if($(this).hasClass('close'))return true;if($(this).hasClass('delete-address-link'))return true;if($(this).hasClass('back-btn'))return true;if($(this).hasClass('sub-menu-header'))return true;var url=$(this).attr('HREF');if(url.indexOf('gasv=')!=-1)return true;var href=$(this).attr('HREF');if(href=='#')return true;if(href=='')return true;evt.preventDefault();evt.stopPropagation();if(!document.getElementById('saveprogressform'))
+{$('body').append('<FORM NAME = \"saveprogressform\" ID = \"saveprogressform\" METHOD = \"GET\" ACTION = \"\"></FORM>');}
+var f=document.forms['saveprogressform'];$(f).attr('ACTION',$(this).attr('HREF'));formvalidator.confirm(f,LEAVE_PAGE_WARNING_TITLE,LEAVE_PAGE_WARNING_BODY,LEAVE_PAGE_WARNING_YES,LEAVE_PAGE_WARNING_NO);});$('#package-search-btn').off('click');$('#package-search-btn').click(function(evt){if($('#package-search-input').hasClass('collapsed'))
+{$('#package-search-input').toggleClass('collapsed');var f=document.forms['packagesearchform'];f.elements['incomingpackage.keyword'].focus();}
+else
+{var f=document.forms['packagesearchform'];if(f.elements['incomingpackage.keyword'].value!='')
+{if(formvalidator.validateForm(f))
+formvalidator.submitForm(f);}
+else
+{$('#package-search-input').toggleClass('collapsed');}}});$('#responsive-package-search-btn').click(function(evt){if($('#responsive-package-search-wrapper').hasClass('collapsed'))
+{$('#responsive-package-search-wrapper').toggleClass('collapsed');var f=document.forms['responsivepackagesearchform'];f.elements['incomingpackage.keyword'].focus();}
+else
+{var f=document.forms['responsivepackagesearchform'];if(f.elements['incomingpackage.keyword'].value!='')
+{if(formvalidator.validateForm(f))
+formvalidator.submitForm(f);}
+else
+{$('#responsive-package-search-wrapper').toggleClass('collapsed');}}});$('#responsive-package-search-close-btn').click(function(evt){$('#responsive-package-search-wrapper').toggleClass('collapsed');});}
+$(document).ready(function(){initializeWidgets();});function gaOpenAJAXLink(lnk,target)
+{$('#'+target).load(lnk.href,function(response,status,xhr){if(status=="error")
+{var msg="<H1>ERROR:</H1> ";$('#'+target).html(msg+xhr.status+" "+xhr.statusText);}});return false;}
+function gaAlert(msg,btncaption)
+{var modalbody='<DIV ID = "ga-alert" CLASS = "modal fade">'
++' <DIV CLASS = "modal-dialog ga-alert-modal">'
++'  <DIV CLASS = "modal-content">'
++'   <DIV CLASS = "modal-body ga-alert-body">'
++'    <DIV CLASS = "row">'
++'     <DIV CLASS = "col-xs-12 text-center">'
++'      <SPAN ID = "ga-alert-msg"></SPAN>'
++'     </DIV>'
++'    </DIV>'
++'    <DIV CLASS = "row">'
++'     <DIV CLASS = "col-xs-12 text-center">'
++'      <BUTTON TYPE = "button" CLASS = "btn btn-primary" data-dismiss = "modal" ID = "ga-alert-btn"></BUTTON>'
++'     </DIV>'
++'    </DIV>'
++'   </DIV>'
++'  </DIV>'
++' </DIV>'
++' </DIV>';if(!document.getElementById('ga-alert'))
+{$('body').append(modalbody);}
+$('#ga-alert-msg').html('<IMG SRC = "../../imgs/alerts/note.svg">'+msg);$('#ga-alert-btn').html(btncaption);$('#ga-alert').modal('show');}

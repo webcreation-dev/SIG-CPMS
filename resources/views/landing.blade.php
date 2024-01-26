@@ -133,13 +133,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <SPAN CLASS = "ga-caret hide-lg"></SPAN>
  </A>
   <UL CLASS = "dropdown-menu dropdown-menu-left">
-    <LI><A HREF = "#">Qu’est-ce que Lynia Delivery ?</A></LI>
-    <LI><A HREF = "#">Emplacements des entrepôts</A></LI>
-    <LI><A HREF = "#">Blog</A></LI>
-    <LI><A HREF = "#">Actualités</A></LI>
-    <LI><A HREF = "#">Commentaires des clients</A></LI>
-    <LI><A HREF = "#">Programme d’Affiliation</A></LI>
-    <LI><A HREF = "#">Vendeurs directs</A></LI>
+    <LI><A HREF="what_is_lynia">Qu’est-ce que Lynia Delivery ?</A></LI>
+    <LI><A HREF = "lynia_locations">Emplacements des entrepôts</A></LI>
+    {{-- <LI><A HREF = "#">Blog</A></LI>
+    <LI><A HREF = "#">Actualités</A></LI> --}}
+    <LI><A HREF = "lynia_reviews">Commentaires des clients</A></LI>
+    <LI><A HREF = "lynia_affiliates">Programme d’Affiliation</A></LI>
+    <LI><A HREF="lynia_for_direct_sales">Vendeurs directs</A></LI>
   </UL>
 </LI>
     <LI CLASS = "hide-sm"><A HREF = "#" CLASS = "btn btn-secondary btn-login">Connexion</A></LI>
@@ -1340,4 +1340,3 @@ $(document).ready(function() {
 </HTML>
 <!--- Copyright 2024 GlobalAccess All Rights Reserved -->
 <!--- Web Server 3088 -->
-

@@ -1,0 +1,868 @@
+/** Full-Sized Navigation Bar **/
+@media (min-width:1200px) {
+	.nav-right-area {
+		background-color: #CCCCCC;
+		min-height: 157px;
+		width: 200px;
+	}
+	.nav-right-area .dropdown-menu {
+		border: none;
+	}
+	
+	.nav-right-area > .dropdown > BUTTON {
+		display: none;
+	}
+	
+	.nav-right-area > .dropdown > .dropdown-menu {
+		width: 200px;
+		display: block;
+		margin: 0px;
+		box-shadow: none;
+		border-radius: 0px;
+		padding: 5px 20px 10px 20px;
+		height: 157px;
+	}
+	.notifications  H2 {
+		display: none;
+	}
+	.navbar-header > .nav-tabs {
+		margin-top: -43px;
+	}
+}
+
+@media (min-width:768px) {
+	DIV.row.flex-columns {
+	  display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+	}
+   .my-packages A.ACTIVE {
+     line-height: 51px;
+     border-bottom: solid 1px #00A9CE;
+   }
+	.subtabs > .container > DIV > DIV > A.active-ajax-link {
+	  border-bottom: solid 1px #00A9CE;
+	  line-height: 54px;
+	}
+
+	.account-form {
+	 padding-left: 0px;
+    }
+	.account-form.membership-form .col-xs-12 {
+       min-height: 50px;
+       margin-bottom: 10px;
+    }
+	.subtabs > .container > #header-content {
+		max-width: 50%;
+	}
+   .mega-menu.my-account-menu .links A.submenu-title,
+   .mega-menu.my-account-menu .links A.submenu-title:HOVER,
+   .mega-menu .links A.submenu-title {
+	 display: block;
+	 font-size: 16px;
+	 text-transform: uppercase;
+	 line-height: 24px;
+	 color: #000000;
+	 margin: 0px 0px 15px 0px;
+	 font-weight: normal;
+	 padding-top: 0px;
+	 cursor: default;
+   }
+  .links A.submenu-title SPAN.sub-menu-caret {
+     display: none;
+   }
+  .my-account-balance .row .row.payment-methods .col-sm-2 {
+	min-height: 150px;
+   }
+  .my-us-address DIV.top {
+	min-height: 257px;
+	height: 257px;
+  }
+  .my-us-address P.warehouse-description {
+    margin-top: 30px;
+  }
+  .my-us-address DIV.bottom P.how-to-use {
+	line-height: 20px;
+	margin-top: -50px;
+	margin-bottom: 30px;
+  }
+  .my-us-address DIV.bottom A.view-all-link {
+	display: inline-block;
+	line-height: 40px;
+  }
+}
+
+
+/** Mid-Sized (table) Navigation Bar **/
+@media (min-width:768px) and (max-width:1199px) {
+	.nav-right-area {
+		clear: right;
+	}
+	.nav-right-area > .dropdown > BUTTON {
+		width: 200px;
+	}
+   .nav-right-area > .dropdown > .dropdown-menu {
+	   padding: 10px;
+	   width: 200px;
+   }
+   .nav-right-area > .dropdown > .dropdown-menu H2 {
+	   display: none;
+
+   }
+  .my-packages A {
+     font-size: 13px;
+     white-space: nowrap;
+  }
+    .customer-address .upgrade-btn {
+    	text-align: right;
+    }
+	
+	.subtabs > .container > DIV > DIV > A {
+		display: block;
+		text-align: center;
+		font-size: 12px;
+		position: relative;
+		height: 55px;
+		line-height: 55px;
+	    padding: 0px 20px 0px 20px;
+   }
+   .subtabs A SPAN.badge {
+	    position: absolute;
+	    top: -5px;
+	    right: 0px;
+   }
+   .subtabs A SPAN.badge{
+      position: absolute;
+      top: 10px;
+      right: 0px;
+   }
+}
+@media (max-width:767px) {
+    .back-to-top-link {
+       bottom: 80px;
+    }
+    .livechat_button {
+       bottom: 15px;
+    }
+   .my-packages-wrapper {
+     line-height: 30px;
+     position: fixed;
+     bottom: 0px;
+     top: auto;
+     padding-top: 5px;
+     background-color: #FFFFFF;
+     border-top: solid 1px #CCCCCC;
+   }
+   
+   .my-packages A {
+      display: block;
+      text-align: center;
+      line-height: 12px;
+      margin: 0px 0px 0px 0px;
+      position: relative;
+      font-size: 9px;
+      height: 60px;
+      margin: 0px;
+      padding: 15px 15px 0px 15px;
+    }
+   .my-packages A SPAN.badge{
+      position: absolute;
+      top: 3px;
+      left: calc(50% + 10px);
+   }
+   .subtabs {
+      border-top: solid 1px #CCCCCC;
+   }
+  .subtabs DIV {
+      text-align: center;
+   }
+   .subtabs > .container > DIV > DIV > A, .subtabs A {
+	  display: block;
+	  width: 100%;
+	  position: relative;
+	  font-size: 12px;
+	  text-align: center;
+	  display: block;
+	  padding-top: 22px;
+	  line-height: 33px;
+	  white-space: normal;
+   }
+   .subtabs A SPAN.badge {
+	  position: absolute;
+	  top: 9px;
+	  left: calc(50% - 9px);
+   }
+   .page-content .main-body {
+     padding-bottom: 50px;
+   }
+  
+   .package-list H2 {
+	  line-height: 30px;
+   }
+   H1.bread-crumb-heading {
+      margin-top: 0px;
+   }
+   DIV.padded {
+     padding-left: 15px;
+     padding-right: 15px;
+   }
+  TABLE.table-account > TBODY > TR > TD, TABLE.table-account  > TBODY > TR > TH, TABLE.table-account  > THEAD > TR > TH  {
+     font-size: 80%;
+  }
+   
+   DIV.col-xs-12.full-width {
+     padding: 0px;
+   }
+
+   .ga-custom-confirm .modal-header H1 {
+     font-size: 26px;
+   }
+   
+   .modal-body SECTION:FIRST-OF-TYPE {
+      margin-top: 0px;
+   }
+
+   .modal-body SECTION {
+      margin-top: 40px;
+   }
+   
+   .mailout-main H2:First-of-Type {
+      margin-top: 0px;
+      margin-bottom: 20px;
+   }
+   .my-account-main {
+	 padding: 0px 15px 0px 15px
+    }
+  
+   .my-account-main H2.no-pad-left:First-of-Type {
+      padding-left: 0px;
+   }
+   html[dir="rtl"] .my-account-main H2:First-of-Type {
+      padding-left: 0px;
+      padding-right: 15px;
+   }
+   .my-account-main H2:FIRST-CHILD {
+    	margin-top: 30px;
+    }
+   .my-account-main H2.section-title {
+      padding-left: 0px;
+   }
+	
+   .container .my-account-main H4 {
+    	padding-left: 0px;
+    }
+   .container .my-account-main P {
+    	padding-left: 0px;
+    	margin-left: 0px;
+    }
+   .container .my-account-main .btn.pad-top {
+      margin-top: 30px;
+    }
+	
+    html[dir="rtl"] .container-fluid > .navbar-collapse, html[dir="rtl"] .container-fluid > .navbar-header, html[dir="rtl"] .container > .navbar-collapse, html[dir="rtl"] .container > .navbar-header {
+       margin-left: 0px;
+    }
+
+    .navbar-nav > LI {
+	   float: none;
+    }
+
+	.nav-right-area > .dropdown > BUTTON {
+        width: 90%;
+		margin-left: 5%;
+	}
+	.nav-right-area > .dropdown > .dropdown-menu {
+		padding: 10px;
+		margin-left: 5%;
+		margin-right: 5%;
+		font-size: 14px;
+	}
+
+	.nav-right-area > .dropdown > .dropdown-menu > H2 {
+		display: none;
+   }
+	
+	.navbar-header > .nav-tabs {
+		margin-top: 10px;
+	}
+
+	.navbar-header > .nav-tabs > li > A {
+		border: solid 1px #DFE1E7;
+		text-transform: uppercase;
+		max-width: 78px;
+		text-align: center;
+		color: #919DA6;
+		font-size: 10px;
+		min-height: 40px;
+		padding: 5px 3px 5px 3px;
+	}
+
+    .languages {
+		display: none;
+	}
+	.account-logo {
+		position: relative;
+		left: 50%;
+		max-width: 100px;
+		margin: 10px 0px 0px -50px;
+	}
+	.mobile-table {
+	   font-size: 14px;
+	   color: #000000;
+	}
+	.mobile-table DIV.col-xs-1, .mobile-table DIV.col-xs-2, .mobile-table DIV.col-xs-3, .mobile-table DIV.col-xs-4, .mobile-table DIV.col-xs-5, .mobile-table DIV.col-xs-6, .mobile-table DIV.col-xs-7, .mobile-table DIV.col-xs-8, .mobile-table DIV.col-xs-9, .mobile-table DIV.col-xs-10, .mobile-table DIV.col-xs-11, .mobile-table DIV.col-xs-12  {
+	   padding-left: 5px;
+	   padding-right: 5px;
+	}
+	.mobile-table LABEL {
+	   font-weight: 300;
+	   color: #454545;
+	   display: block;
+	}
+    .packing-options LABEL {
+       height: 80px;
+       font-weight: 500;
+    }
+    .packing-options .radio LABEL {
+       height: auto;
+    }
+    .packing-options IMG {
+	   margin: 20px 0px 20px 0px;
+    }
+    .packing-options .packing-details {
+      display: block;
+      text-align: left;
+    }
+	
+	html[dir="rtl"] .account-logo {
+		left: auto;
+	}
+   .mega-dropdown.open .mega-menu {
+     border-bottom: solid 1px #E7E7E7;
+   }
+   .st-navbar .st-main-links LI.active > A {
+     background-color: transparent;
+   }
+
+   .dropdown-menu.my-account-menu {
+     padding-bottom: 0px;
+   }
+   .my-account-menu .container {
+     padding: 0px;
+   }
+   .my-account-menu .row {
+     margin-left: 0px;
+     margin-right: 0px;
+   }
+   
+   .my-account-menu .container .col-xs-12 {
+     padding-left: 0px;
+   }
+   
+   .st-navbar .st-main-links LI.open > A {
+     background-color: #F2F2F2 !important;
+   }
+   
+   .my-account-menu .container .submenu-title {
+     padding-left: 45px;
+     background-color: #E8E8E8;
+   }
+   html[dir="rtl"] .my-account-menu .container .submenu-title {
+	  padding-left: 0px;
+	  padding-right: 45px;
+   }
+   .my-account-menu .container .sub-menu-body {
+     background-color: #E2E2E2;
+   }
+
+   .st-navbar .st-main-links .my-account-balance .btn {
+	  margin-bottom: 30px;
+   }
+
+   .mega-menu.my-account-menu .container .col-xs-12 {
+     padding-right: 0px;
+   }
+   .my-account-balance {
+     padding-bottom: 40px;
+   }
+   .my-account-balance .row .row.payment-methods {
+     margin-left: -15px;
+     margin-right: -15px;
+   }
+   .my-account-balance .row .row.payment-methods .col-xs-4 {
+	    min-height: 140px;
+	    padding-left: 10px;
+	    padding-right: 10px;
+   }
+
+   .st-navbar .my-account-menu  A  {
+  	    margin-bottom: 0px;
+  	    text-transform: uppercase;
+  	    background-color: #EAEAEA;
+   }
+
+   .st-navbar .my-account-menu .sub-menu-body A {
+  	    background-color: #E0E0E0;
+   }
+   .mega-menu .my-us-address {
+        padding-bottom: 20px;
+   }
+   .mega-menu .my-us-address P {
+        margin-top: 30px;
+   }
+   .mega-menu .my-us-address P.warehouse-description {
+        margin-top: 0px;
+   }
+   .mega-menu .my-us-address A.warehouses-link {
+        display: block;
+        color: #00A9CE;
+        line-height: 16px;
+        margin-top: -30px;
+        margin-bottom: 40px;
+        padding-left: 0px;
+   }
+   DIV.default-warehouse-address {
+        padding-bottom: 40px;
+        border-bottom: solid 1px #D7D7D7;
+        margin-bottom: 40px;
+   }
+   DIV.default-warehouse-address P.upper {
+        margin-top: 30px;
+        margin-bottom: 20px;
+   }
+   DIV.my-us-address DIV.bottom {
+	    margin-top: 40px;
+   }
+   DIV.warehouse-map {
+        padding-right: 9px;
+   }
+   .st-navbar .st-main-links .my-packages .row .col-xs-12 {
+        padding-right: 0px;
+   }
+   .st-navbar .st-main-links .my-packages A {
+       padding-right: 0px;
+   }
+  .my-account-balance .row .row.payment-methods {
+  	font-size: 14px;  
+  }
+  .popover {
+	min-width: 275px;
+	max-width: 100%;
+    position: relative !important;
+    z-index: 1039;
+  }
+
+  .modal-body.edit-form {
+	padding-left:15px; padding-right:15px;
+  }
+
+  .subtabs {
+	 position: relative;
+	 top: auto;
+	 z-index: 1030;
+  }
+  
+  .insurance-description {
+	padding-left: 45px;
+  }
+
+  .warehouse-list IMG.warehouse-image {
+	margin: 10px 0px 10px 0px;
+  }
+  .warehouse-list LABEL.custom-radio {
+    text-align: center;
+  }
+  .warehouse-list .wh-address {
+    display: block;
+    min-height: 95px;
+  }
+  TABLE.shipping-method-list THEAD TH {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  TABLE.shipping-method-list TBODY TD {
+	vertical-align: top;
+    font-size: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  TABLE.shipping-method-list TBODY TD LABEL.custom-radio {
+    margin-left: 10px;
+  }
+  HTML[dir="rtl"] TABLE.shipping-method-list TBODY TD LABEL.custom-radio {
+    margin-left: 0px;
+    margin-right: 10px;
+  }
+  TABLE.shipping-method-list TBODY TD P {
+    margin-top: 0px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  TABLE.shipping-method-list TBODY TD SPAN.logo {
+    display: block;
+    height: 50px;
+  }
+  TABLE.shipping-method-list TBODY TD SPAN.logo IMG {
+    max-width: 75px;
+    max-height: 50px;
+  }
+  DIV.top-bar-small {
+    border-top: solid 1px #D7D7D7;
+    margin-top: 30px;
+    padding-top: 30px;
+  }
+  H2 SPAN.mo-step-number {
+	margin-right: 10px;
+	float: left;
+	top: -7px;
+  }
+  HTML[dir="rtl"] H2 SPAN.mo-step-number {
+	margin-right: 0px;
+	margin-left: 10px;
+	float: right;
+  }
+  
+  .other-payment-methods {
+    padding-left: 10px;
+  }
+  .other-payment-methods .col-xs-6 {
+    padding: 0px 5px 0px 5px;
+    font-size: 12px;
+  }
+  TABLE.payment-methods TBODY TD SPAN.hide-lg {
+    line-height: 35px;
+  }
+  TABLE.payment-methods TBODY TR TD {
+    padding: 20px 0px 0px 0px;
+  }
+  TABLE.payment-methods TBODY TR.hide-lg TD {
+    padding-top: 0px;
+    line-height: 20px;
+  }
+  HTML[dir="rtl"] TABLE.payment-methods TBODY TR.hide-lg TD {
+    padding-left: 0px;
+    padding-right: 20px;
+  }
+
+  TABLE.alt-payment-methods {
+    width: 100%;
+  }  
+  TABLE.alt-payment-methods TBODY TR TD {
+	text-align: center;
+	vertical-align: top;
+  }
+  TABLE.alt-payment-methods TBODY TR TD LABEL.custom-radio {
+	margin-top: 5px;
+  }
+  
+  UL.big-bullets LI::before {
+    font-size: 14px;      /* Adjust this value so that it appears what size you want. */
+  }
+}
+/** Full-Sized Action Blocks **/
+@media (min-width:1200px) {
+}
+/** Mid-Sized Action Blocks **/
+@media (min-width:993px) and (max-width:1199px) {
+} 
+/** Extra Small-Sized Action Blocks **/
+@media (min-width:768px) and (max-width:992px) {
+   .action-block DIV.description {
+    	height: 180px;
+    }
+    .my-packages A {
+       font-size: 10px;
+       white-space: nowrap;
+    } 
+    .my-packages A I {
+      font-size: 16px;
+    }
+}
+/** Small-Sized Action Blocks **/
+@media (max-width:767px) {
+   .settings-container {
+	   flex-direction: column;
+   }
+   .mailout-main {
+     padding: 0px;
+   }
+  .footer {
+ 	padding-left: 0px;
+	padding-right: 0px;
+   }
+
+   .table-responsive-x, .table-responsive-x THEAD, .table-responsive-x TBODY, .table-responsive-x TFOOT, .table-responsive-x TH, .table-responsive-x TD, .table-responsive-x TR { 
+		display: block; 
+	}
+	.table-responsive-x THEAD {
+	   display: none;
+	}
+	
+	.table-responsive-x TR {
+		border: solid 1px #DDDDDD; 
+	}
+
+	.table-responsive-x TFOOT > TR, .table-responsive-x TFOOT > TR > TD, .table-responsive-x TFOOT > TR > TH {
+		border: none; 
+	}
+	
+	.table-responsive-x TBODY > TR > TD, .table-responsive-x TBODY > TR > TH { 
+		border: none;
+		border-bottom: solid 1px #DDDDDD; 
+		position: relative;
+		padding-left: 35%;
+		vertical-align: middle;
+	}
+
+	.table-responsive-x TH { 
+		border: none;
+	}
+	
+	.table-responsive-x TBODY > TR > TD:before {
+	    display: block; 
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 30%;
+		height: 100%;
+		padding-left: 5px; 
+		padding-right: 10px; 
+		content: attr(data-caption);
+		font-weight: bold;
+		text-align: left;
+	}
+	
+	.st-alert {
+	  width: 75%;
+	  margin-left:auto;
+	  margin-right:auto;
+	}
+	.ga-custom-confirm .modal-dialog {
+	  width: 80%;
+	  margin-left:auto;
+	  margin-right:auto;
+	  top: calc(50% - 100px);
+	}
+	.ga-custom-confirm .modal-header H2 {
+	  margin-top: 0px;
+	}
+	/*
+	.st-alert {
+	  position: fixed;
+	  width: 200px;
+	  margin-left: -100px;
+	  font-size: 8pt;
+	}
+	*/
+	
+	.campaign-pop .modal-content
+	{
+		width: 300px;
+		margin-left: -150px;
+	}
+	
+	.modal-body .campaign-pop-header H2 { font-size: 25px; }
+	.modal-body .campaign-pop-subheader H3 { font-size: 20px; }
+	.modal-body .campaign-pop-content { line-height: 22px; }
+
+
+	.table-scalable > THEAD > TR > TH, .table-scalable > THEAD > TR > TD, .table-scalable > TBODY > TR > TH, .table-scalable > TBODY > TR > TD, .table-scalable > TFOOT> TR > TH, .table-scalable > TFOOT> TR > TD  {
+	  font-size: 8pt;
+	}
+	
+	.action-block {
+	    height: auto;
+	    margin: -1px 0px 0px 0px;
+	    padding: 20px;
+	    border: solid 1px #DFE1E7;
+        text-align: center;
+     }
+    .action-block DIV.heading{
+    	margin-bottom: 0px;
+    	text-align: left;
+    }
+    .action-block DIV.image {
+    	padding: 0px;
+    }
+
+    .action-block DIV.service {
+		height: auto;
+    	text-align: left;
+    }
+    .action-block DIV.description {
+    	margin-top: 0px;
+    	height: auto;
+    }
+
+    .action-block DIV.select-button BUTTON {
+      margin: 20px 0px 20px 0px;
+    }
+ 
+ 	#responsive-package-search-wrapper {
+ 	    position: fixed;
+ 	    top: 10px;
+ 	    right: 60px;
+ 	    width: calc(100% - 70px);
+ 	    height: 46px;
+ 	    z-index: 1041;
+  	   -webkit-transition: width 0.3s;
+        -moz-transition: width 0.3s;
+        transition: width 0.3s;
+ 	}
+ 	#responsive-package-search-wrapper.collapsed {
+ 	    width: 50px;
+ 	}
+ 	HTML[dir="rtl"] #responsive-package-search-wrapper {
+ 	    right: auto;
+ 	    left: 60px;
+ 	}
+ 	#responsive-package-search-wrapper .form-group {
+ 	   display: block;
+ 	   position: absolute;
+ 	   right: 0px;
+ 	   width: 100%;
+ 	}
+ 	HTML[dir="rtl"] #responsive-package-search-wrapper .form-group {
+ 	   right: auto;
+ 	   left: 0px;
+    }
+ 	#responsive-package-search-wrapper .btn {
+ 	    background-color: #FFFFFF;
+	    color: #00A9CE;
+ 	    border: none;
+ 	    height: 46px;
+ 	    font-size: 20px;
+ 	    padding-left: 5px;
+ 	    padding-right: 5px;
+ 	}
+ 	#responsive-package-search-wrapper.collapsed .form-group {
+ 	    width: 50px;
+ 	}
+ 	#responsive-package-search-wrapper.collapsed .btn {
+  	    background: transparent;
+		color: #FFFFFF;
+ 	    border-top: solid 1px transparent;
+ 	    border-right: solid 1px transparent;
+ 	    border-bottom: solid 1px transparent;
+ 	}
+ 	#responsive-package-search-wrapper.collapsed #responsive-package-search-close-btn {
+  	    display: none;
+ 	}
+ 	#responsive-package-search-wrapper .form-control {
+       box-shadow: none;
+ 	   display: block;
+ 	   padding-right: 0px;
+ 	   border: none;
+ 	   caret-color: #00A9CE;
+ 	}
+ 	#responsive-package-search-wrapper.collapsed .form-control {
+ 	   width: 0px;
+ 	   padding: 0px;
+ 	   border: none;
+ 	}
+ 	
+    .subtabs > .container > #header-content {
+     	display: block;
+     	width: 100%;
+     	clear: both;
+    }
+    .my-packages {
+       padding: 0px 15px 0px 15px;
+    }
+   .my-packages .col-xs-3 {
+	   text-align: left;
+	   padding: 0px;
+    }
+
+    .my-account-left-menu {
+      display: none;
+    }
+   .my-account-main SECTION {
+      padding-left: 15px;
+      padding-right: 15px;
+	  border-bottom: solid 1px #D7D7D7;
+	  margin: 0px -15px 20px -15px;
+	  padding-bottom: 20px;
+   }
+   .my-account-main SECTION P:last-of-type {
+      margin-bottom: 0px;
+   }
+    DIV.rewards-bar SPAN.level SPAN.level-name, DIV.rewards-bar SPAN.level SPAN.level-points {
+     font-size: 11px;
+    }
+    DIV.rewards-bar SPAN.level SPAN.level-points SPAN.number{
+      font-size: 14px;
+    }
+
+    .my-us-address .address-fields SPAN.caption {
+       float: none;
+       min-width: 0px;
+       border-bottom: none;
+     }
+     
+     TABLE.mo-breadcrumbs {
+       display: none;
+     }
+     
+     .main-body DIV.cost-overview {
+       margin-bottom: 20px;
+       padding-bottom: 20px;
+     }
+  }
+
+@media (max-width:1199px) {
+   TABLE.payment-methods THEAD TR TH {
+	padding: 10px 0px 10px 0px;
+   }
+	
+   DIV.customer-address-wrapper, DIV.customer-address-wrapper.carousel  {
+    overflow-x: scroll;
+    width: calc(100vw - 4px);
+    padding-bottom: 15px;
+    scroll-snap-type: x mandatory;
+    margin-bottom: 50px;
+    margin-left: -13px;
+    margin-right: -13px;
+  }
+  HTML[dir="rtl"] DIV.customer-address-wrapper, HTML[dir="rtl"] DIV.customer-address-wrapper.carousel  {
+    scroll-snap-type: none;
+  }
+  DIV.customer-address-wrapper DIV.col-xs-12, DIV.customer-address-wrapper.carousel DIV.col-xs-12 {
+    width: 75vw;
+    min-width: 75vw;
+    float: none;
+    display: table-cell;
+    border-right: solid 1px #D7D7D7;
+    border-bottom: none;
+    scroll-snap-align: center;
+  }
+  HTML[dir="rtl"] DIV.customer-address-wrapper DIV.col-xs-12, HTML[dir="rtl"] DIV.customer-address-wrapper.carousel DIV.col-xs-12 {
+    scroll-snap-align: none;
+  }
+  DIV.customer-address-wrapper DIV.col-xs-12:first-of-type {
+    scroll-snap-align: start;
+  }
+  HTML[dir="rtl"] DIV.customer-address-wrapper DIV.col-xs-12:first-of-type {
+    scroll-snap-align: none;
+  }
+  DIV.customer-address-wrapper DIV.col-xs-12:last-of-type {
+    border-right: none;
+    scroll-snap-align: end;
+  }
+  HTML[dir="rtl"] DIV.customer-address-wrapper DIV.col-xs-12:last-of-type {
+    scroll-snap-align: none;
+  }
+ .customer-address-wrapper:after {
+	display: none;
+  } 
+ .customer-address LABEL.custom-radio {
+	white-space: nowrap;
+  } 
+}  
+
+@media (min-width:768px) and (max-width:1199px) {
+  DIV.customer-address-wrapper DIV.col-xs-12, DIV.customer-address-wrapper.carousel DIV.col-xs-12 {
+    width: 40vw;
+    min-width: 40vw;
+  }
+}
