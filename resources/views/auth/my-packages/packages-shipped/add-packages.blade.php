@@ -67,7 +67,7 @@
             <div class="col-sm-6 col-xs-12 text-right text-center-sm">
               <a href="/purchase-articles" id="add-package-btn" class="btn btn-primary" onclick="return gaPopUpDisplay(this);">
                 <i class="fa fa-plus fa-fw"></i> Ajouter un colis </a>
-              <a href="https://www.shipito.com/fr/account/support-tickets/open-new?crmticket.tickettype=20" id="missing-package-btn" class="btn btn-default" onclick="return gaPopUpDisplay(this);">Signaler un Colis Manquant</a>
+              <a href="#" id="missing-package-btn" class="btn btn-default" onclick="return gaPopUpDisplay(this);">Signaler un Colis Manquant</a>
             </div>
           </div>
           <br>
@@ -122,7 +122,7 @@
                   <div class="radio">
                     <label>
                       <input type="RADIO" name="crmticket.tickettype" value="20" onclick="return formvalidator.formUpdated(this.form, this);" required="REQUIRED" checked="">
-                      <span class="custom-radio-btn"></span>Signaler un colis qui n'a pas été reçu dans l'Entrepôt Shipito </label>
+                      <span class="custom-radio-btn"></span>Signaler un colis qui n'a pas été reçu dans l'Entrepôt Lynia Delivery Express </label>
                   </div>
                   <div class="radio">
                     <label>
@@ -149,7 +149,7 @@
                   <ul>
                     <li>Le nom du vendeur/site internet sur lequel vous avez effectué vos achats</li>
                     <li>Le transporteur et/ou le # de suivi du colis</li>
-                    <li>L'entrepôt Shipito vers lequel le colis a été envoyé</li>
+                    <li>L'entrepôt Lynia Delivery Express vers lequel le colis a été envoyé</li>
                     <li>La date de livraison du colis à l'entrepôt</li>
                   </ul>
                 </div>

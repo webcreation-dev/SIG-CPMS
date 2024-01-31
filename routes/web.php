@@ -17,11 +17,20 @@ Route::get('/', function () {
     return view('landing');
 });
 
+
+
+// ********** PAGES FOR AUTHENTICATION **********
+
+// FORMS
+
+
+Route::get('/signup', function () {
+    return view('auth.forms.signup');
+});
+
 Route::get('/account', function () {
     return view('account');
 });
-
-// PAGES FOR AUTHENTICATION
 
 // PACKAGES EXPECTED
 
@@ -77,8 +86,10 @@ Route::get('/lynia-university', function () {
     return view('auth.lynia-delivery-help.academy-lynia');
 });
 
+// ********** END PAGES FOR AUTHENTICATION **********
 
-// ABOUT
+
+// ********** ABOUT PAGES **********
 
 Route::get('/lynia_locations', function () {
     return view('about.locations');
@@ -99,5 +110,90 @@ Route::get('lynia_reviews', function () {
 Route::get('what_is_lynia', function () {
     return view('about.what-is-lynia');
 });
+
+// ********** END ABOUT PAGES **********
+
+
+
+// ********** GETTING STARTED PAGES **********
+
+Route::get('/faq', function () {
+    return view('getting-started.faq');
+});
+
+Route::get('/lynia-free-fr-address', function () {
+    return view('getting-started.lynia-free-fr-address');
+});
+
+Route::get('/lynia-pricing', function () {
+    return view('getting-started.lynia-pricing');
+});
+
+Route::get('/postage', function () {
+    return view('getting-started.postage');
+});
+
+Route::get('/prohibited-items', function () {
+    return view('getting-started.prohibited-items');
+});
+
+// ********** END GETTING STARTED PAGES **********
+
+
+// ********** FAQ PAGES **********
+Route::get('/account-navigation', function () {
+    return view('faq.account-navigation');
+});
+
+Route::get('/affiliate-faq', function () {
+    return view('faq.affiliate-faq');
+});
+
+Route::get('/carrier-tracking', function () {
+    return view('faq.carrier-tracking');
+});
+
+Route::get('/claims', function () {
+    return view('faq.claims');
+});
+
+Route::get('/customs', function () {
+    return view('faq.customs');
+});
+
+Route::get('/getting-started', function () {
+    return view('faq.getting-started');
+});
+
+Route::get('/services', function () {
+    return view('faq.services');
+});
+
+Route::get('/packages', function () {
+    return view('faq.packages');
+});
+
+Route::get('/payments', function () {
+    return view('faq.payments');
+});
+
+Route::get('/lynia-membership-faq', function () {
+    return view('faq.lynia-membership-faq');
+});
+// ********** END FAQ PAGES **********
+
+
+
+// ********** SERVICES PAGES **********
+
+Route::get('/lynia-for-business', function () {
+    return view('services.lynia-for-business');
+});
+
+Route::get('/lynia-rewards', function () {
+    return view('services.lynia-rewards');
+});
+
+// ********** END SERVICES PAGES **********
 
 

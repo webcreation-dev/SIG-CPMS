@@ -34,12 +34,12 @@
       <div class="main-body">
         <div class="container package-list">
           <h1>Et maintenant ?</h1>
-          <p> Avec votre nouvelle adresse Shipito, vous pouvez commencer vos achats sur presque tous les sites internet. Il vous suffit simplement d’utiliser cette nouvelle adresse lors de vos commandes. Nous vous informons de l'arrivée de vos articles à l'entrepôt. </p>
+          <p> Avec votre nouvelle adresse Lynia Delivery Express, vous pouvez commencer vos achats sur presque tous les sites internet. Il vous suffit simplement d’utiliser cette nouvelle adresse lors de vos commandes. Nous vous informons de l'arrivée de vos articles à l'entrepôt. </p>
           <div id="getting-started">
             <div class="container">
               <div id="start-shopping" class="row">
                 <div class="text-center col-sm-12 col-xs-12">
-                  <p style="font-size:larger; margin-bottom:50px;">Commencez à magasiner et expédiez à votre adresse Shipito!</p>
+                  <p style="font-size:larger; margin-bottom:50px;">Commencez à magasiner et expédiez à votre adresse Lynia Delivery Express!</p>
                 </div>
               </div>
               <div class="row">
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-sm-4 col-xs-12">
                   <img class="step-number" src="files/circle2.svg">
-                  <div class="step-text">Utilisez votre adresse Shipito au moment de la commande</div>
+                  <div class="step-text">Utilisez votre adresse Lynia Delivery Express au moment de la commande</div>
                   <div class="hide-lg">
                     <img id="step2" src="files/GettingStarted_MobileStep2.svg">
                   </div>
@@ -66,14 +66,14 @@
                     <i class="icon-lightbulb bulb"></i> Vous pouvez copier l'adresse dans votre presse-papiers en appuyant sur chaque ligne.
                   </div>
                   <div id="copy-address-btn">
-                    <a href="https://www.shipito.com/fr/account/copy-address" id="btn-copy-address" class="btn btn-lg btn-secondary" onclick="return gaPopUpDisplay(this);"> Copier Mon Adresse</a>
+                    <a href="#" id="btn-copy-address" class="btn btn-lg btn-secondary" onclick="return gaPopUpDisplay(this);"> Copier Mon Adresse</a>
                   </div>
                 </div>
               </div>
               <div class="row" id="getting-started-bottom">
                 <div class="col-sm-12 col-xs-12 text-center">
                   <hr class="hide-lg vbar getting-started">
-                  <a href="https://www.shipito.com/fr/account/help/getting-started" id="btn-getting-started" class="btn btn-lg btn-secondary"> Comment commencer</a>
+                  <a href="#" id="btn-getting-started" class="btn btn-lg btn-secondary"> Comment commencer</a>
                 </div>
               </div>
             </div>

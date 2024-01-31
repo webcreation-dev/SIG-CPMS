@@ -31,22 +31,22 @@
       <div class="container my-packages">
         <div class="row">
           <div class="col-sm-3 col-xs-3">
-            <a href="https://www.shipito.com/fr/account/incoming-packages/action-required">
+            <a href="#">
               <i class="icon-packages-in-warehouse"></i>
               <br class="hide-lg"> Colis dans l'entrepôt </a>
           </div>
           <div class="col-sm-3 col-xs-3">
-            <a href="https://www.shipito.com/fr/account/sent-packages">
+            <a href="#">
               <i class="icon-sent-packages"></i>
               <br class="hide-lg"> Colis Expédiés </a>
           </div>
           <div class="col-sm-3 col-xs-3">
-            <a href="https://www.shipito.com/fr/account/expected-packages">
+            <a href="#">
               <i class="icon-expected-package"></i>
               <br class="hide-lg"> Colis attendus </a>
           </div>
           <div class="col-sm-3 col-xs-3">
-            <a href="https://www.shipito.com/fr/account/assisted-purchase">
+            <a href="#">
               <i class="icon-assisted-purchase"></i>
               <br class="hide-lg"> Achat Assisté </a>
           </div>
@@ -171,15 +171,15 @@
       </style>
       <div class="container-fluid top-banner-outer">
         <div class="container top-banner-inner">
-          <h1>Académie Shipito </h1>
+          <h1>Académie Lynia Delivery Express </h1>
         </div>
       </div>
       <section class="container">
         <div class="text-center">
-          <img src="files/ShipitoUniversityLogo.svg" border="0" class="university-logo">
+          <img src="files/Lynia Delivery ExpressUniversityLogo.svg" border="0" class="university-logo">
         </div>
-        <p> L’Académie Shipito est une banque d’informations qui a pour but d’aider votre navigation sur notre site et l’envoi de vos colis. Chaque courte vidéo vous en apprend davantage sur le fonctionnement de Shipito et sur la navigation dans votre compte. </p>
-        <p> Vous trouverez ci-dessous une série de vidéos vous montrant comment utiliser votre compte Shipito pour faire vos achats aux États-Unis, ainsi qu'un lien vers notre <a href="https://www.shipito.com/fr/help/faq" target="_blank"> Foire Aux Questions </a> et la liste des articles dont l’envoi est <a href="https://www.shipito.com/fr/help/tutorials/prohibited-items" target="_blank"> interdit ou soumis à des restrictions </a>. Grâce à toutes ces informations concernant la façon d’utiliser votre compte Shipito, vous pouvez commencer vos achats et vos envois en toute sérénité. Pour toutes suggestions concernant une prochaine vidéo, contactez-nous à <a href="mailto:Marketing@shipito.com"> Marketing@shipito.com </a>. </p>
+        <p> L’Académie Lynia Delivery Express est une banque d’informations qui a pour but d’aider votre navigation sur notre site et l’envoi de vos colis. Chaque courte vidéo vous en apprend davantage sur le fonctionnement de Lynia Delivery Express et sur la navigation dans votre compte. </p>
+        <p> Vous trouverez ci-dessous une série de vidéos vous montrant comment utiliser votre compte Lynia Delivery Express pour faire vos achats aux États-Unis, ainsi qu'un lien vers notre <a href="#" target="_blank"> interdit ou soumis à des restrictions </a>. Grâce à toutes ces informations concernant la façon d’utiliser votre compte Lynia Delivery Express, vous pouvez commencer vos achats et vos envois en toute sérénité. Pour toutes suggestions concernant une prochaine vidéo, contactez-nous à <a href="mailto:Marketing@shipito.com"> Marketing@shipito.com </a>. </p>
         <div class="list-tabs">
           <div class="scroll-wrapper">
             <table class="my-tabs">
@@ -208,7 +208,7 @@
                   <div class="text-center">
                     <img src="files/best_deal.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Comment bénéficier des meilleures offres de Shipito</div>
+                  <div class="caption">Comment bénéficier des meilleures offres de Lynia Delivery Express</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=bp4nqCXOel4">
@@ -243,9 +243,9 @@
                 <div class="hide-sm clear-it"></div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=0f52neL4g-M">
                   <div class="text-center">
-                    <img src="files/Shipito_address.jpg" class="img-responsive">
+                    <img src="files/Lynia Delivery Express_address.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Comment retrouver votre adresse Shipito</div>
+                  <div class="caption">Comment retrouver votre adresse Lynia Delivery Express</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=7uBcOSguY4c">
@@ -284,16 +284,16 @@
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://youtu.be/kdoV5ighVpU">
                   <div class="text-center">
-                    <img src="files/Shipito_Notifications.jpg" class="img-responsive">
+                    <img src="files/Lynia Delivery Express_Notifications.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Que sont les notifications de Shipito?</div>
+                  <div class="caption">Que sont les notifications de Lynia Delivery Express?</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=-65-RXPY6qI">
                   <div class="text-center">
-                    <img src="files/Call_Shipito_Support.jpg" class="img-responsive">
+                    <img src="files/Call_Lynia Delivery Express_Support.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Comment appeler le service client de Shipito</div>
+                  <div class="caption">Comment appeler le service client de Lynia Delivery Express</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="hide-sm clear-it"></div>
@@ -301,7 +301,7 @@
                   <div class="text-center">
                     <img src="files/membership_plan.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Comment changer votre abonnement Shipito</div>
+                  <div class="caption">Comment changer votre abonnement Lynia Delivery Express</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=dJkLPJVCWcs">
@@ -323,7 +323,7 @@
                   <div class="text-center">
                     <img src="files/Live_Chat.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Comment contacter Shipito via le chat en direct</div>
+                  <div class="caption">Comment contacter Lynia Delivery Express via le chat en direct</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=oIZ0rrnZf5Q">
@@ -342,14 +342,14 @@
                   <div class="text-center">
                     <img src="files/Verify_Your_Card.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Comment ajouter et vérifier votre carte bancaire avec Shipito</div>
+                  <div class="caption">Comment ajouter et vérifier votre carte bancaire avec Lynia Delivery Express</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=DN5Nkys7HQk">
                   <div class="text-center">
                     <img src="files/Fast_MailOut.jpg.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Qu'est-ce que le Fast Mail Out (envoi rapide) de Shipito?</div>
+                  <div class="caption">Qu'est-ce que le Fast Mail Out (envoi rapide) de Lynia Delivery Express?</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=8GGpmF77TYM">
@@ -378,7 +378,7 @@
                   <div class="text-center">
                     <img src="files/Storag_Time.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Comment acheter plus de temps de stockage pour mon colis Shipito</div>
+                  <div class="caption">Comment acheter plus de temps de stockage pour mon colis Lynia Delivery Express</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="hide-sm clear-it"></div>
@@ -386,7 +386,7 @@
                   <div class="text-center">
                     <img src="files/Shipping_Calculator.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Comment utiliser le calculateur de frais d’envoi de Shipito</div>
+                  <div class="caption">Comment utiliser le calculateur de frais d’envoi de Lynia Delivery Express</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=kQI4XHCMrzc">
@@ -415,7 +415,7 @@
                   <div class="text-center">
                     <img src="files/Package_Storage.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Stockage des colis chez Shipito</div>
+                  <div class="caption">Stockage des colis chez Lynia Delivery Express</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=7ayV57hQKmU">
@@ -493,21 +493,21 @@
                   <div class="text-center">
                     <img src="files/Referral_program.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Qu'est-ce que le programme de parrainage de Shipito?</div>
+                  <div class="caption">Qu'est-ce que le programme de parrainage de Lynia Delivery Express?</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=lqyObMekZ6U">
                   <div class="text-center">
                     <img src="files/Affiliate_Program.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Comment gagner de l'argent avec le programme d'affiliation de Shipito</div>
+                  <div class="caption">Comment gagner de l'argent avec le programme d'affiliation de Lynia Delivery Express</div>
                   <div class="date">2021-03-29</div>
                 </div>
                 <div class="col-xs-12 col-sm-4 video-link" data-content="https://www.youtube.com/watch?v=C9VPfi6tzVQ">
                   <div class="text-center">
-                    <img src="files/Shipito_Member_Rewards.jpg" class="img-responsive">
+                    <img src="files/Lynia Delivery Express_Member_Rewards.jpg" class="img-responsive">
                   </div>
-                  <div class="caption">Qu'est-ce que le programme de récompenses de Shipito?</div>
+                  <div class="caption">Qu'est-ce que le programme de récompenses de Lynia Delivery Express?</div>
                   <div class="date">2021-03-29</div>
                 </div>
               </div>
@@ -521,16 +521,16 @@
         </h2>
         <p class="text-center"> Nous avons conçu une liste de réponses aux questions les plus fréquemment posées. Pour trouver la réponse à vos questions, cliquez sur l'icône de la catégorie correspondante. </p>
         <div class="faq-items">
-          <a href="https://www.shipito.com/fr/help/faq/getting-started" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/GetStarted.svg" border="0">
             </div>
             <div class="content">
               <h2>Par où commencer</h2>
-              <p>Découvrez comment devenir un abonné Shipito.</p>
+              <p>Découvrez comment devenir un abonné Lynia Delivery Express.</p>
             </div>
           </a>
-          <a href="https://www.shipito.com/fr/help/faq/packages" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/Packages.svg" border="0">
             </div>
@@ -539,7 +539,7 @@
               <p>Renseignements concernant le traitement des colis et les entrepôts.</p>
             </div>
           </a>
-          <a href="https://www.shipito.com/fr/help/tutorials/prohibited-items" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/Prohibited.svg" border="0">
             </div>
@@ -548,7 +548,7 @@
               <p>Important! Avant de commencer vos achats, vérifiez ce qui peut être expédié vers votre pays ou pas.</p>
             </div>
           </a>
-          <a href="https://www.shipito.com/fr/help/faq/account-navigation" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/AccountNav.svg" border="0">
             </div>
@@ -557,7 +557,7 @@
               <p>Familiarisez-vous avec votre compte et les abonnements.</p>
             </div>
           </a>
-          <a href="https://www.shipito.com/fr/help/faq/carrier-tracking" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/Tracking.svg" border="0">
             </div>
@@ -567,7 +567,7 @@
             </div>
           </a>
           <div class="break"></div>
-          <a href="https://www.shipito.com/fr/help/faq/customs" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/Customs.svg" border="0">
             </div>
@@ -576,7 +576,7 @@
               <p>En savoir plus sur les exigences douanières, les formulaires EEI, les droits et taxes à payer.</p>
             </div>
           </a>
-          <a href="https://www.shipito.com/fr/help/faq/services" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/Services.svg" border="0">
             </div>
@@ -585,16 +585,16 @@
               <p>Découvrez tous les services disponibles pour vos envois.</p>
             </div>
           </a>
-          <a href="https://www.shipito.com/fr/help/faq/payments" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/Payments.svg" border="0">
             </div>
             <div class="content">
               <h2>Paiements</h2>
-              <p>Quels modes de paiement et devises sont acceptés par Shipito?</p>
+              <p>Quels modes de paiement et devises sont acceptés par Lynia Delivery Express?</p>
             </div>
           </a>
-          <a href="https://www.shipito.com/fr/help/faq/claims" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/Claims.svg" border="0">
             </div>
@@ -603,13 +603,13 @@
               <p>Signalez perte, vol ou dommages.</p>
             </div>
           </a>
-          <a href="https://www.shipito.com/fr/help/faq/affiliate-faq" class="topic">
+          <a href="#" class="topic">
             <div class="icon">
               <img src="files/AffiliateIcon.svg" border="0">
             </div>
             <div class="content">
               <h2>Affilié</h2>
-              <p>Rejoignez le programme d’affiliation de Shipito et découvrez comment gagner de l’argent à chaque nouvelle recommandation!</p>
+              <p>Rejoignez le programme d’affiliation de Lynia Delivery Express et découvrez comment gagner de l’argent à chaque nouvelle recommandation!</p>
             </div>
           </a>
         </div>

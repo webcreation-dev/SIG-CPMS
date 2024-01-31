@@ -94,7 +94,7 @@
       </div>
       <div class="main-body">
         <div class="container package-list">
-          <h2>Vos colis actuellement au sein de l’entrepôt de Shipito sont prêts pour l’envoi</h2>
+          <h2>Vos colis actuellement au sein de l’entrepôt de Lynia Delivery Express sont prêts pour l’envoi</h2>
           <div class="row action-blocks">
             <div class="col-sm-4 col-xs-12 action-block">
               <div class="row">

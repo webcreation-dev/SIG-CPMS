@@ -1,169 +1,14 @@
 
-
-
-
-
 <!DOCTYPE HTML>
 <HTML dir = "ltr" lang = "fr">
 
 <!-- Mirrored from www.shipito.com/fr/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Jan 2024 13:42:19 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<HEAD>
-<META NAME = "viewport" CONTENT = "width=device-width, initial-scale=1">
- <META HTTP-EQUIV = "Content-Type" CONTENT = "text/html; charset=UTF-8"/>
-<META NAME = "Keywords" CONTENT = "Lynia Delivery, service de réexpédition Lynia Delivery, réexpédition de colis, réexpédition de courrier, service de réexpédition"/>
-<META NAME = "Description" CONTENT = "Lynia Delivery offre un service de réexpédition rapide, fiable et efficace, pour colis et courriers, vers plus de 220 pays. Nous facilitons les achats dans les boutiques francaises en ligne pour les clients de par le monde."/>
-<META NAME = "Author" CONTENT = "Lynia Delivery"/>
-<script>
-var GOOGLE_ANALYTICS_CLIENT_ID = 'xxx';
-</script>
-<meta name="naver-site-verification" content="5811976554acda385789a352e7acb5ed712ee791"/>
-<meta name="msvalidate.01" content="37E3BE29D02AAD4C4D89FCBEC36FF784" />
-<meta name="yandex-verification" content="9d94273c7f4e1ea7" />
-<meta name="msvalidate.01" content="01844C70BB05E20528AC362F798D2C3A" />
-<meta name="google-site-verification" content="NY8600mcXDKG3x-fLtZ4ZXrxH8L0tEd_SK5uT3xcKzA" />
-<LINK rel = "canonical" href = "#"/>
-<LINK rel = "alternate" hreflang = "x-default" href = "https://www.shipito.com/en/"/>
-<LINK rel = "alternate" hreflang = "en" href = "https://www.shipito.com/en/"/>
-<LINK rel = "alternate" hreflang = "ar" href = "https://www.shipito.com/ar/"/>
-<LINK rel = "alternate" hreflang = "zh-Hans" href = "https://www.shipito.com/zh/"/>
-<LINK rel = "alternate" hreflang = "zh-Hant" href = "https://www.shipito.com/zt/"/>
-<LINK rel = "alternate" hreflang = "cs" href = "https://www.shipito.com/cs/"/>
-<LINK rel = "alternate" hreflang = "fr" href = "index.html"/>
-<LINK rel = "alternate" hreflang = "de" href = "https://www.shipito.com/de/"/>
-<LINK rel = "alternate" hreflang = "he" href = "https://www.shipito.com/he/"/>
-<LINK rel = "alternate" hreflang = "ja" href = "https://www.shipito.com/ja/"/>
-<LINK rel = "alternate" hreflang = "pt" href = "https://www.shipito.com/pt/"/>
-<LINK rel = "alternate" hreflang = "ru" href = "https://www.shipito.com/ru/"/>
-<LINK rel = "alternate" hreflang = "es" href = "https://www.shipito.com/es/"/>
-<LINK rel = "alternate" hreflang = "tr" href = "https://www.shipito.com/tr/"/>
-<LINK REL = "manifest" HREF = "https://www.shipito.com/site.webmanifest"/>
- <TITLE>Lynia Delivery | Achetez en France et expédiez où vous voulez | Adresse gratuite en France</TITLE>
- <LINK REL = "stylesheet" HREF = "shipito/cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
- <LINK REL = "stylesheet" HREF = "shipito/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- <SCRIPT SRC = "shipito/ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></SCRIPT>
- <SCRIPT SRC = "shipito/cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></SCRIPT>
- <META CHARSET = "UTF-8">
- <META NAME = "viewport" CONTENT = "width=device-width, initial-scale=1">
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'shipito/www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5NGCCHV');</script>
-<!-- End Google Tag Manager -->
-<SCRIPT SRC = "shipito/scripts/v2/countrypicker.js"></SCRIPT>
-<SCRIPT SRC = "shipito/unpkg.com/aos%402.3.1/dist/aos.js"></SCRIPT>
-<SCRIPT SRC = "shipito/scripts/publicscripts.js"></SCRIPT>
- <LINK REL = "StyleSheet" HREF = "https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700" TYPE = "text/css"/>
- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/common.css" TYPE = "text/css"/>
- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/icons.css" TYPE = "text/css"/>
- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/ststyles.css" TYPE = "text/css"/>
- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/flags.css" TYPE = "text/css"/>
- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/landingpage.css" TYPE = "text/css"/>
- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/calculator.css" TYPE = "text/css"/>
- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/landingpage.css" TYPE = "text/css"/>
- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/aos.css" TYPE = "text/css"/>
- <link rel="shortcut icon" type="image/jpg" href="shipito/fr/imgs/favicon.png" />
-
-</HEAD>
+@include('layouts.head-guest')
 <BODY CLASS = "landing-page light" ID = "home-page">
 <DIV ID = "menu-filler"></DIV>
 <A NAME = "page-top" ID = "page-top"></A>
-<NAV CLASS = "navbar navbar-default navbar-fixed-top st-navbar">
- <DIV ID = "banner-container" CLASS = "top-banners"></DIV>
- <DIV CLASS = "container">
-  <DIV CLASS = "navbar-header">
-   <BUTTON TYPE = "BUTTON" CLASS = "navbar-toggle collapsed" data-toggle = "collapse" data-target = "#main-nav">
-    <SPAN CLASS = "icon-bar top-bar"></SPAN>
-    <SPAN CLASS = "icon-bar middle-bar"></SPAN>
-    <SPAN CLASS = "icon-bar bottom-bar"></SPAN>
-   </BUTTON>
-   <DIV CLASS = "navbar-brand slide-position" >
-    <A HREF = "#" >
-        {{-- <I CLASS = "icon-shipito-logo"></I> --}}
-        <img src="shipito/fr/imgs/logo.png" class="logo-desktop" alt="">
-        <img src="shipito/fr/imgs/logo-mobile.png" class="logo-mobile" alt="">
-    </A>
-   </DIV>
-
-  </DIV>
-  <DIV CLASS = "collapse navbar-collapse" ID = "main-nav">
-   <UL CLASS = "nav navbar-nav navbar-right hide-lg nav-buttons">
-    <LI>
-	  <DIV CLASS = "row top-buttons">
-	   <DIV CLASS = "col-xs-6 text-center left">
-       <A HREF = "#" CLASS = "btn btn-lg btn-secondary btn-login">Connexion</A>
-	   </DIV>
-	   <DIV CLASS = "col-xs-6 text-center right">
-	    <A HREF = "#" CLASS = "btn btn-lg btn-primary">INSCRIPTION</A>
-	   </DIV>
-	  </DIV>
-    </LI>
-   </UL>
-
-   <BR CLASS = "hide-sm">
-   <UL CLASS = "nav navbar-nav navbar-right st-main-links">
-<LI CLASS = "dropdown">
- <A HREF = "#" data-toggle = "dropdown">
-<I CLASS = "icon-services"></I>Nos services
-<SPAN CLASS = "ga-caret hide-lg"></SPAN>
- </A>
-  <UL CLASS = "dropdown-menu dropdown-menu-left">
-    <LI><A HREF = "#">Lynia Delivery Pour Mois</A></LI>
-    <LI><A HREF = "#">Lynia Delivery Pour les Entreprises</A></LI>
-  </UL>
-</LI>
-<LI CLASS = "dropdown">
- <A HREF = "#" data-toggle = "dropdown">
-<I CLASS = "icon-pricing"></I>Débuter
-<SPAN CLASS = "ga-caret hide-lg"></SPAN>
- </A>
-  <UL CLASS = "dropdown-menu dropdown-menu-left">
-    <LI><A HREF = "#">Comment ça Marche</A></LI>
-    <LI><A HREF = "#">Tarifs et Options</A></LI>
-    <LI><A HREF = "#">FAQs</A></LI>
-    <LI><A HREF = "#">Modes de livraison</A></LI>
-    <LI><A HREF = "#">Que puis-je expédier ?</A></LI>
-  </UL>
-</LI>
-<LI CLASS = "dropdown">
- <A HREF = "#" data-toggle = "dropdown">
-<I CLASS = "icon-about-us"></I>À Propos de Nous
-<SPAN CLASS = "ga-caret hide-lg"></SPAN>
- </A>
-  <UL CLASS = "dropdown-menu dropdown-menu-left">
-    <LI><A HREF="what_is_lynia">Qu’est-ce que Lynia Delivery ?</A></LI>
-    <LI><A HREF = "lynia_locations">Emplacements des entrepôts</A></LI>
-    {{-- <LI><A HREF = "#">Blog</A></LI>
-    <LI><A HREF = "#">Actualités</A></LI> --}}
-    <LI><A HREF = "lynia_reviews">Commentaires des clients</A></LI>
-    <LI><A HREF = "lynia_affiliates">Programme d’Affiliation</A></LI>
-    <LI><A HREF="lynia_for_direct_sales">Vendeurs directs</A></LI>
-  </UL>
-</LI>
-    <LI CLASS = "hide-sm"><A HREF = "/account" CLASS = "btn btn-secondary btn-login">Connexion</A></LI>
-    <LI CLASS = "hide-sm"><A HREF = "#" CLASS = "btn btn-primary">INSCRIPTION</A></LI>
-    <LI CLASS = "dropdown hide-lg">
-     <A CLASS = "dropdown-toggle contact-sm-link" data-toggle = "dropdown" HREF = "#"><I CLASS = "icon-contact-us"></I> Service clientèle <SPAN CLASS = "ga-caret"></SPAN></A>
-     <DIV CLASS = "dropdown-menu contact-sm">
-    <DIV CLASS = "contact"><A HREF = "#"><I CLASS = "icon-contact-us"></I> Prenez Contact Avec Nous</A></DIV>
-    <DIV CLASS = "contact"><A HREF = "mailto:support@shipito.com"><IMG SRC = "shipito/fr/imgs/navigation/email.svg" HEIGHT = "20" WIDTH = "20" CLASS = "hide-sm"><IMG SRC = "shipito/fr/imgs/navigation/email_m.svg" HEIGHT = "20" WIDTH = "20" CLASS = "hide-lg"> support@shipito.com</A></DIV>
-    <DIV CLASS = "contact"><I CLASS = "icon-live-chat"></I> Chat en direct (Heure du Pacifique):<BR>En semaine: 6h à 18h<BR>Samedi: 6h à 15h<BR>Dimanche: Fermé</DIV>
-     </DIV>
-    </LI>
-   </UL>
-  <DIV CLASS = "row hide-lg">
-   <DIV CLASS = "col-xs-12 text-center sm-icons sm-icons-fr">
-     <A HREF = "#" TARGET = "_blank"><I CLASS = "icon-facebook"></I></A>
-     <A HREF = "#" TARGET = "_blank"><I CLASS = "icon-twitter"></I></A>
-     <A HREF = "#" TARGET = "_blank"><I CLASS = "icon-youtube"></I></A>
-     <A HREF = "#" TARGET = "_blank"><I CLASS = "icon-instagram"></I></A>
-   </DIV>
-  </DIV>
- </DIV>
-</DIV>
-</NAV>
+@include('layouts.header-guest')
 <DIV CLASS = "main-body">
 
 <STYLE TYPE = "text/css">
@@ -435,10 +280,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <DIV CLASS = "hide-lg plans">
  <DIV CLASS = "row">
   <DIV CLASS = "col-xs-12 text-center">
-   <A HREF = "shipito-rewards.html" CLASS = "btn btn-secondary">Lynia Delivery Pour Mois</A>
+   <A href="#" CLASS = "btn btn-secondary">Lynia Delivery Pour Mois</A>
   </DIV>
   <DIV CLASS = "col-xs-12 text-center">
-   <A HREF = "shipito-for-business.html" CLASS = "btn btn-primary">Lynia Delivery Pour les Entreprises</A>
+   <A href="#" CLASS = "btn btn-primary">Lynia Delivery Pour les Entreprises</A>
   </DIV>
  </DIV>
  <P>
@@ -455,7 +300,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <DIV>Obtenez une adresse gratuite en France!</DIV>
    </DIV>
    <DIV CLASS = "text-center">
-   <DIV><A HREF = "signup.html" CLASS = "btn">Inscription gratuite</A></DIV>
+   <DIV><A href="#" CLASS = "btn">Inscription gratuite</A></DIV>
   </DIV>
  </DIV>
 </DIV>
@@ -737,7 +582,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <SPAN CLASS="caption">Nous offrons un service d‘expédition de colis, courriers et marchandises rapide, fiable et efficace vers plus de 220 pays.</SPAN>
       <DIV CLASS="fast-consol"><A HREF="#">Rien de plus facile que de regrouper ses colis!</A></DIV>
     </DIV>
-    <DIV CLASS = "flex-col col-sm-6 col-xs-12" STYLE = "background-image: url('shipito/fr/imgs/home/ShipitoAssociate.jpg'); background-repeat: no-repeat; background-size: cover;"></DIV>
+    <DIV CLASS = "flex-col col-sm-6 col-xs-12" STYLE = "background-image: url('shipito/fr/imgs/home/Lynia Delivery ExpressAssociate.jpg'); background-repeat: no-repeat; background-size: cover;"></DIV>
   </DIV>
   <DIV CLASS = "row flex-row">
     <DIV CLASS = "flex-col col-sm-6 col-xs-12 fast-mailout"><IMG SRC = "shipito/fr/imgs/fast-mailout/French.svg" CLASS = "img-fast-mailout img-responsive"/></DIV>
@@ -1189,7 +1034,7 @@ thanks, shipito"</SPAN>
     <DIV>Obtenez une adresse gratuite en France!</DIV>
    </DIV>
    <DIV CLASS = "text-center">
-   <DIV><A HREF = "signup.html" CLASS = "btn">Inscription gratuite</A></DIV>
+   <DIV><A href="#" CLASS = "btn">Inscription gratuite</A></DIV>
   </DIV>
  </DIV>
 </DIV>
@@ -1299,7 +1144,7 @@ thanks, shipito"</SPAN>
    </DIV>
    <DIV CLASS = "col-md-3 col-xs-6">
     <LABEL>Prenez Contact Avec Nous</LABEL>
-    <DIV CLASS = "contact"><A HREF = "contact.html"><I CLASS = "icon-contact-us"></I> Prenez Contact Avec Nous</A></DIV>
+    <DIV CLASS = "contact"><A href="#"><I CLASS = "icon-contact-us"></I> Prenez Contact Avec Nous</A></DIV>
     <DIV CLASS = "contact"><A HREF = "mailto:support@shipito.com"><IMG SRC = "shipito/fr/imgs/navigation/email.svg" HEIGHT = "20" WIDTH = "20" CLASS = "hide-sm"><IMG SRC = "shipito/fr/imgs/navigation/email_m.svg" HEIGHT = "20" WIDTH = "20" CLASS = "hide-lg"> support@shipito.com</A></DIV>
     <DIV CLASS = "contact"><I CLASS = "icon-live-chat"></I> Chat en direct (Heure du Pacifique):<BR>En semaine: 6h à 18h<BR>Samedi: 6h à 15h<BR>Dimanche: Fermé</DIV>
    </DIV>

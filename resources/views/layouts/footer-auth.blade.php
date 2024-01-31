@@ -15,32 +15,32 @@
       <div class="row hide-sm">
         <div class="col-md-3 col-xs-6">
           <label>Nos services</label>
-          <a href="https://www.shipito.com/fr/shipito-rewards" target="_blank">Shipito Pour Mois</a>
-          <a href="https://www.shipito.com/fr/shipito-for-business" target="_blank">Shipito Pour les Entreprises</a>
+          <a href="#" target="_blank">Lynia Delivery Express Pour Mois</a>
+          <a href="#" target="_blank">Lynia Delivery Express Pour les Entreprises</a>
         </div>
         <div class="col-md-3 col-xs-6">
           <label>Débuter</label>
-          <a href="https://www.shipito.com/fr/shipito-forwarding-service" target="_blank">Comment ça Marche</a>
-          <a href="https://www.shipito.com/fr/shipito-pricing" target="_blank">Tarifs et Options</a>
-          <a href="https://www.shipito.com/fr/help/faq" target="_blank">FAQs</a>
-          <a href="https://www.shipito.com/fr/help/postage" target="_blank">Modes de livraison</a>
-          <a href="https://www.shipito.com/fr/help/tutorials/prohibited-items" target="_blank">Que puis-je expédier ?</a>
+          <a href="#" target="_blank">Comment ça Marche</a>
+          <a href="#" target="_blank">Tarifs et Options</a>
+          <a href="#" target="_blank">FAQs</a>
+          <a href="#" target="_blank">Modes de livraison</a>
+          <a href="#" target="_blank">Que puis-je expédier ?</a>
         </div>
         <div class="col-md-3 col-xs-6">
           <label>À Propos de Nous</label>
-          <a href="https://www.shipito.com/fr/services/what-is-shipito" target="_blank">Qu'est-ce que Shipito</a>
-          <a href="https://www.shipito.com/fr/help/locations" target="_blank">Emplacements des entrepôts</a>
-          <a href="https://www.shipito.com/fr/blog" target="_blank">Blog</a>
-          <a href="https://www.shipito.com/fr/newsroom/" target="_blank">Actualités</a>
-          <a href="https://www.shipito.com/fr/shipito-reviews" target="_blank">Commentaires des clients</a>
-          <a href="https://www.shipito.com/fr/shipito-affiliates" target="_blank">Programme d’Affiliation</a>
-          <a href="https://www.shipito.com/fr/shipito-for-direct-sales" target="_blank">Vendeurs directs</a>
-          <a href="https://www.shipito.com/fr/us-unlocked" target="_blank">US Unlocked</a>
+          <a href="#" target="_blank">Qu'est-ce que Lynia Delivery Express</a>
+          <a href="#" target="_blank">Emplacements des entrepôts</a>
+          <a href="#" target="_blank">Blog</a>
+          <a href="#" target="_blank">Actualités</a>
+          <a href="#" target="_blank">Commentaires des clients</a>
+          <a href="#" target="_blank">Programme d’Affiliation</a>
+          <a href="#" target="_blank">Vendeurs directs</a>
+          <a href="#" target="_blank">US Unlocked</a>
         </div>
         <div class="col-md-3 col-xs-6">
           <label>Prenez Contact Avec Nous</label>
           <div class="contact">
-            <a href="https://www.shipito.com/fr/contact">
+            <a href="#">
               <i class="icon-contact-us"></i> Prenez Contact Avec Nous </a>
           </div>
           <div class="contact">
@@ -54,17 +54,17 @@
       </div>
       <div class="row">
         <div class="col-xs-12 text-center privacy">
-          <a href="https://www.shipito.com/fr/privacy-policy" target="_blank">Règles de confidentialité</a> &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://www.shipito.com/fr/shipito-terms" target="_blank">Conditions Générales</a>
-          <br> Copyright © 2024 Shipito. All rights reserved.
+          <a href="#" target="_blank">Conditions Générales</a>
+          <br> Copyright © 2024 Lynia Delivery Express. All rights reserved.
         </div>
       </div>
     </div>
-  </footer>
-  <a href="https://www.shipito.com/fr/account/incoming-packages/no-packages#page-top" class="back-to-top-link" title="Retour Vers le Haut">
+</footer>
+  <a href="#" class="back-to-top-link" title="Retour Vers le Haut">
     <img src="files/BackToTop.svg">
   </a>
   <div data-id="PP9Nh3EYw-7" class="livechat_button desktop">
-    <a href="https://www.shipito.com/fr/account/incoming-packages/no-packages#" onclick="LiveChatWidget.call(&#39;maximize&#39;);return false;" title="Logiciel de discussion en direct">
+    <a href="#" onclick="LiveChatWidget.call(&#39;maximize&#39;);return false;" title="Logiciel de discussion en direct">
       <img src="files/saved_resource" alt="LiveChat" title="LiveChat">
     </a>
   </div>
@@ -105,7 +105,7 @@
     }(window, document, [].slice))
   </script>
   <noscript>
-    <a href="https://www.livechat.com/chat-with/3392252/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a>
+    <a href="#" rel="noopener nofollow" target="_blank">LiveChat</a>
   </noscript>
   <!-- End of LiveChat code -->
   <script>
@@ -135,7 +135,7 @@
       formvalidator.initializeForms();
     });
   </script>
-  
+
   <script type="text/javascript" id="">
     (function(d, b, a) {
       (b[a] = b[a] || []).push(function() {

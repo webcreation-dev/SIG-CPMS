@@ -36,22 +36,22 @@
       <div class="container my-packages">
         <div class="row">
           <div class="col-sm-3 col-xs-3">
-            <a href="https://www.shipito.com/fr/account/incoming-packages/action-required">
+            <a href="#">
               <i class="icon-packages-in-warehouse"></i>
               <br class="hide-lg"> Colis dans l'entrepôt </a>
           </div>
           <div class="col-sm-3 col-xs-3">
-            <a href="https://www.shipito.com/fr/account/sent-packages">
+            <a href="#">
               <i class="icon-sent-packages"></i>
               <br class="hide-lg"> Colis Expédiés </a>
           </div>
           <div class="col-sm-3 col-xs-3">
-            <a href="https://www.shipito.com/fr/account/expected-packages">
+            <a href="#">
               <i class="icon-expected-package"></i>
               <br class="hide-lg"> Colis attendus </a>
           </div>
           <div class="col-sm-3 col-xs-3">
-            <a href="https://www.shipito.com/fr/account/assisted-purchase">
+            <a href="#">
               <i class="icon-assisted-purchase"></i>
               <br class="hide-lg"> Achat Assisté </a>
           </div>
@@ -80,7 +80,7 @@
             <div class="container">
               <div id="start-shopping" class="row">
                 <div class="text-center col-sm-12 col-xs-12">
-                  <p style="font-size:larger; margin-bottom:50px;">Commencez à magasiner et expédiez à votre adresse Shipito!</p>
+                  <p style="font-size:larger; margin-bottom:50px;">Commencez à magasiner et expédiez à votre adresse Lynia Delivery Express!</p>
                 </div>
               </div>
               <div class="row">
@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-sm-4 col-xs-12">
                   <img class="step-number" src="files/circle2.svg">
-                  <div class="step-text">Utilisez votre adresse Shipito au moment de la commande</div>
+                  <div class="step-text">Utilisez votre adresse Lynia Delivery Express au moment de la commande</div>
                   <div class="hide-lg">
                     <img id="step2" src="files/GettingStarted_MobileStep2.svg">
                   </div>
@@ -107,14 +107,14 @@
                     <i class="icon-lightbulb bulb"></i> Vous pouvez copier l'adresse dans votre presse-papiers en appuyant sur chaque ligne.
                   </div>
                   <div id="copy-address-btn">
-                    <a href="https://www.shipito.com/fr/account/copy-address" id="btn-copy-address" class="btn btn-lg btn-secondary" onclick="return gaPopUpDisplay(this);"> Copier Mon Adresse</a>
+                    <a href="#" id="btn-copy-address" class="btn btn-lg btn-secondary" onclick="return gaPopUpDisplay(this);"> Copier Mon Adresse</a>
                   </div>
                 </div>
               </div>
               <div class="row" id="getting-started-bottom">
                 <div class="col-sm-12 col-xs-12 text-center">
                   <hr class="hide-lg vbar getting-started">
-                  <a href="https://www.shipito.com/fr/account/help/getting-started" id="btn-getting-started" class="btn btn-lg btn-secondary"> Comment commencer</a>
+                  <a href="#" id="btn-getting-started" class="btn btn-lg btn-secondary"> Comment commencer</a>
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@
             <div class="col-sm-4 col-xs-12"> Cette vidéo vous aidera à commencer vos achats <div class="amazon-help">
                 <div class="amazon-img videothumbs not-mobile">
                   <div class="play-btn">
-                    <a href="https://www.shipito.com/fr/account/newuservideo" onclick="return gaPopUpDisplay(this);">
+                    <a href="#" onclick="return gaPopUpDisplay(this);">
                       <img src="files/play.svg">
                     </a>
                   </div>
@@ -179,19 +179,19 @@
                 <tr>
                   <td class="brand-cell-left brand-odd">
                     <div>
-                      <a class="brand-link" href="https://www.adidas.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Adidas.svg" border="0" class="brand-image">
                         <span class="brand-name">Adidas</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.guess.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Guess.svg" border="0" class="brand-image">
                         <span class="brand-name">Guess</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.funko.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Funco.svg" border="0" class="brand-image">
                         <span class="brand-name">Funko</span>
                       </a>
@@ -199,19 +199,19 @@
                   </td>
                   <td class="brand-cell brand-even">
                     <div>
-                      <a class="brand-link" href="https://www.amazon.com/?&amp;_encoding=UTF8&amp;tag=shipitocom-20&amp;linkCode=ur2&amp;linkId=736098cc6fdeb17752e43810887585d2&amp;camp=1789&amp;creative=9325" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Amazon.svg" border="0" class="brand-image-top">
                         <span class="brand-name">Amazon</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.calvinklein.us/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/CalvinKlein.svg" border="0" class="brand-image">
                         <span class="brand-name">Calvin Klein</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.newegg.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Newegg.svg" border="0" class="brand-image">
                         <span class="brand-name">Newegg</span>
                       </a>
@@ -219,19 +219,19 @@
                   </td>
                   <td class="brand-cell brand-odd">
                     <div>
-                      <a class="brand-link" href="https://www.boxycharm.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/BoxyCharm.svg" border="0" class="brand-image-top">
                         <span class="brand-name">BoxyCharm</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.nordstrom.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Nordstrom.svg" border="0" class="brand-image">
                         <span class="brand-name">Nordstrom</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.guitarcenter.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/GuitarCenter.svg" border="0" class="brand-image">
                         <span class="brand-name">Guitar Center</span>
                       </a>
@@ -245,13 +245,13 @@
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.carters.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Carters.svg" border="0" class="brand-image">
                         <span class="brand-name">Carter’s</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.timberland.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Timberland.svg" border="0" class="brand-image">
                         <span class="brand-name">Timberland</span>
                       </a>
@@ -259,19 +259,19 @@
                   </td>
                   <td class="brand-cell brand-odd">
                     <div>
-                      <a class="brand-link" href="https://www.ebay.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/eBay.svg" border="0" class="brand-image-top">
                         <span class="brand-name">eBay</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.crocs.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Crocs.svg" border="0" class="brand-image">
                         <span class="brand-name">Crocs</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.overstock.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Overstock.svg" border="0" class="brand-image">
                         <span class="brand-name">Overstock.com</span>
                       </a>
@@ -279,19 +279,19 @@
                   </td>
                   <td class="brand-cell brand-even">
                     <div>
-                      <a class="brand-link" href="https://www.nike.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Nike.svg" border="0" class="brand-image-top">
                         <span class="brand-name">Nike</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://stores.advanceautoparts.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/AdvanceAutoParts.svg" border="0" class="brand-image">
                         <span class="brand-name">Advance Auto Parts</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://bcbg.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/BCBG.svg" border="0" class="brand-image">
                         <span class="brand-name">BCBG</span>
                       </a>
@@ -299,19 +299,19 @@
                   </td>
                   <td class="brand-cell brand-odd">
                     <div>
-                      <a class="brand-link" href="https://www.macys.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Macy&#39;s.svg" border="0" class="brand-image-top">
                         <span class="brand-name">Macy's</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.zara.com/us/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Zara.svg" border="0" class="brand-image">
                         <span class="brand-name">Zara</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.abercrombie.com/shop/us" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/A&amp;F.svg" border="0" class="brand-image">
                         <span class="brand-name">Abercrombie &amp; Fitch</span>
                       </a>
@@ -319,19 +319,19 @@
                   </td>
                   <td class="brand-cell brand-even">
                     <div>
-                      <a class="brand-link" href="https://www.zulily.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Zulily.svg" border="0" class="brand-image-top">
                         <span class="brand-name">Zulily</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.bathandbodyworks.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Bath&amp;BodyWorks.svg" border="0" class="brand-image">
                         <span class="brand-name">Bath &amp; Body Works</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.michaelkors.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/MichaelKors.svg" border="0" class="brand-image">
                         <span class="brand-name">Michael Kors</span>
                       </a>
@@ -339,19 +339,19 @@
                   </td>
                   <td class="brand-cell brand-odd">
                     <div>
-                      <a class="brand-link" href="https://colourpop.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Colourpop.svg" border="0" class="brand-image-top">
                         <span class="brand-name">ColourPop</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.backcountry.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Backcountry.svg" border="0" class="brand-image">
                         <span class="brand-name">Backcountry</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.carparts.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/CarParts.svg" border="0" class="brand-image">
                         <span class="brand-name">CarParts.com</span>
                       </a>
@@ -359,19 +359,19 @@
                   </td>
                   <td class="brand-cell-right brand-even">
                     <div>
-                      <a class="brand-link" href="https://www.aeropostale.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Aeropostale.svg" border="0" class="brand-image-top">
                         <span class="brand-name">Aéropostale</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://bananarepublic.gap.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/BananaRepublic.svg" border="0" class="brand-image">
                         <span class="brand-name">Banana Republic</span>
                       </a>
                     </div>
                     <div>
-                      <a class="brand-link" href="https://www.wayfair.com/" target="_blank">
+                      <a class="brand-link" href="#" target="_blank">
                         <img src="files/Wayfair.svg" border="0" class="brand-image">
                         <span class="brand-name">Wayfair</span>
                       </a>
