@@ -94,6 +94,7 @@
     <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/icons.css" TYPE = "text/css"/>
     <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/ststyles.css" TYPE = "text/css"/>
     <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/flags.css" TYPE = "text/css"/>
+    <link rel="shortcut icon" type="image/jpg" href="shipito/fr/imgs/favicon.png" />
 
      {{-- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/landingpage.css" TYPE = "text/css"/>
      <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/calculator.css" TYPE = "text/css"/>
