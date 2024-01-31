@@ -1,7 +1,84 @@
 <!DOCTYPE HTML>
 <HTML dir="ltr" lang="fr">
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  @include('layouts.head-guest')
+  <HEAD>
+    <META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" />
+    <META NAME="Keywords" CONTENT="Lynia Delivery Express, réexpédition de colis, achat en ligne, articles interdits ou faisant l’objet de restrictions, liste des articles interdits" />
+    <META NAME="Description" CONTENT="Les lois diffèrent d’un pays à l’autre, certains articles sont soumis à des restrictions, d’autres sont interdits. Lynia Delivery Express vous permet d’identifier ce que vous pouvez ou ne pouvez pas expédier à l’international." />
+    <script>
+      var GOOGLE_ANALYTICS_CLIENT_ID = 'xxx';
+    </script>
+    <LINK rel="canonical" href="#" />
+    <LINK rel="alternate" hreflang="x-default" href="#" />
+    <LINK rel="alternate" hreflang="en" href="#" />
+    <LINK rel="alternate" hreflang="ar" href="#" />
+    <LINK rel="alternate" hreflang="zh-Hans" href="#" />
+    <LINK rel="alternate" hreflang="zh-Hant" href="#" />
+    <LINK rel="alternate" hreflang="cs" href="#" />
+    <LINK rel="alternate" hreflang="fr" href="#" />
+    <LINK rel="alternate" hreflang="de" href="#" />
+    <LINK rel="alternate" hreflang="he" href="#" />
+    <LINK rel="alternate" hreflang="ja" href="#" />
+    <LINK rel="alternate" hreflang="pt" href="#" />
+    <LINK rel="alternate" hreflang="ru" href="#" />
+    <LINK rel="alternate" hreflang="es" href="#" />
+    <LINK rel="alternate" hreflang="tr" href="#" />
+    <LINK REL="manifest" href="#" />
+    <TITLE>Articles interdits et faisant l’objet de restrictions limitant leur expédition</TITLE>
+    <LINK REL="stylesheet" HREF="shipito/cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <LINK REL="stylesheet" HREF="shipito/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <SCRIPT SRC="shipito/ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></SCRIPT>
+    <SCRIPT SRC="shipito/cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></SCRIPT>
+    <META CHARSET="UTF-8">
+    <META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'shipito/www.googletagmanager.com/gtm5445.html?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-5NGCCHV');
+    </script>
+    <!-- End Google Tag Manager -->
+    <SCRIPT SRC="shipito/scripts/v2/countrypicker.js"></SCRIPT>
+    <SCRIPT SRC="shipito/scripts/publicscripts.js"></SCRIPT>
+    <LINK REL="StyleSheet" href="#" TYPE="text/css" />
+    <LINK REL="StyleSheet" HREF="shipito/styles/v2/common.css" TYPE="text/css" />
+    <LINK REL="StyleSheet" HREF="shipito/styles/v2/icons.css" TYPE="text/css" />
+    <LINK REL="StyleSheet" HREF="shipito/styles/v2/ststyles.css" TYPE="text/css" />
+    <LINK REL="StyleSheet" HREF="shipito/styles/v2/flags.css" TYPE="text/css" />
+    <LINK REL="StyleSheet" HREF="shipito/styles/v2/prohibited-items.css" TYPE="text/css" />
+
+    <style>
+        @media (min-width:1025px) {
+           .slide-position {
+           transform: translateY(-20px);
+       }
+       .logo-mobile {
+           display: none;
+       }
+       }
+       @media (max-width:767px)
+       {
+           .slide-position {
+           transform: translateY(-25px);
+       }
+       .logo-desktop {
+           display: none;
+       }
+       }
+    </style>
+    
+  </HEAD>
 
   <BODY CLASS="light">
     <DIV ID="menu-filler"></DIV>
