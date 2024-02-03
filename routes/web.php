@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +29,9 @@ Route::get('/signup', function () {
     return view('auth.forms.signup');
 });
 
-Route::get('/account', function () {
-    return view('account');
+Route::post('/account', function (Request $request) {
+    dd($request->all());
+    // return view('account');
 });
 
 // PACKAGES EXPECTED
