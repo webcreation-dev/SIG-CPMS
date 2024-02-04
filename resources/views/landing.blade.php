@@ -220,8 +220,8 @@
    			   </DIV>
   		  	  </DIV>
   		  	  <DIV CLASS = "top-banner-btns hide-sm">
-  		  	   <A HREF = "#" CLASS = "btn btn-secondary">Lynia Delivery Pour Mois</A>
-  		  	   <A HREF = "#" CLASS = "btn btn-primary">Lynia Delivery Pour les Entreprises</A>
+  		  	   <A HREF = "#" CLASS = "btn btn-secondary">Lynia pour moi </A>
+  		  	   <A HREF = "#" CLASS = "btn btn-primary">Lynia pour Entreprises</A>
   		  	  </DIV>
              </DIV>
           </div>
@@ -1124,7 +1124,7 @@ thanks, shipito"</SPAN>
     <LABEL>Nos services</LABEL>
     <DIV CLASS = "contact"><I CLASS = "icon-live-chat"></I> Chat en direct (Heure du Pacifique):<BR>En semaine: 6h à 18h<BR>Samedi: 6h à 15h<BR>Dimanche: Fermé</DIV>
     <A HREF = "#">Lynia Delivery Pour Mois</A>
-    <A HREF = "#">Lynia Delivery Pour les Entreprises</A>
+    <A HREF = "#">Lynia Delivery Entreprises</A>
    </DIV>
    <DIV CLASS = "col-md-3 col-xs-6">
     <LABEL>Débuter</LABEL>
