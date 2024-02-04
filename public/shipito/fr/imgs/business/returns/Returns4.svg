@@ -13,7 +13,7 @@
 	.st7{fill:#BCBECC;}
 	.st8{fill:#E5E6EB;}
 	.st9{fill:#373A47;}
-	.st10{fill:#00A9CE;stroke:#00A9CE;stroke-miterlimit:10;}
+	.st10{fill:#20284D;stroke:#20284D;stroke-miterlimit:10;}
 	.st11{fill:#B2CC46;}
 </style>
 <rect class="st0" width="574" height="381"/>
@@ -391,7 +391,7 @@
 			<path class="st3" d="M250.5,153.9l-0.2,0.1l0.1,0l-1.2,0.7C249.6,154.4,250.1,154.2,250.5,153.9z"/>
 		</g>
 		<g>
-			<polygon class="st3" points="258.8,167.4 258.4,167.7 258.5,167.8 258.6,167.7 258.6,167.8 258.6,167.9 258.6,168 259,167.7 
+			<polygon class="st3" points="258.8,167.4 258.4,167.7 258.5,167.8 258.6,167.7 258.6,167.8 258.6,167.9 258.6,168 259,167.7
 				258.8,167.6 259,167.5 			"/>
 		</g>
 		<g>

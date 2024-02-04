@@ -72,7 +72,7 @@
         }
 
         div.whs-overview {
-          color: #00A9CE;
+          color: #20284D;
           font-size: 18pt;
           text-align: center;
           margin-bottom: 50px;
@@ -471,7 +471,7 @@
         }
 
         div.save-today .btn:hover {
-          color: #008EAD !important;
+          color: #BE0026 !important;
           background-color: #fff;
         }
 
@@ -643,8 +643,8 @@
           }
 
           #mobile-whs-select-ca {
-            border: 1px solid #00A9CE;
-            color: #00A9CE;
+            border: 1px solid #20284D;
+            color: #20284D;
           }
 
           .whs-csl-image {
@@ -1444,8 +1444,8 @@
               'border': '1px solid #D7D7D7'
             });
             $(selectid).css({
-              'color': '#00A9CE',
-              'border': '1px solid #00A9CE'
+              'color': '#20284D',
+              'border': '1px solid #20284D'
             });
             $('.mobile-whs-csl').hide();
             $('.mobile-whs-title').hide();

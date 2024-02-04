@@ -11,7 +11,7 @@
 	.st5{fill:#EEEFEF;}
 	.st6{fill:#DCDCDC;}
 	.st7{fill:#65A6DE;}
-	.st8{fill:#00A9CE;}
+	.st8{fill:#20284D;}
 	.st9{enable-background:new    ;}
 	.st10{fill:#919090;}
 	.st11{fill:#96CDE6;stroke:#3A6080;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
@@ -225,7 +225,7 @@
 			<g>
 				<path class="st15" d="M220.5,214.2c0,1-1,2-2,2s-2-0.7-2-2c0-1,1-2,2-2C219.8,212.5,220.5,213.2,220.5,214.2z"/>
 				<path class="st1" d="M220.1,214.2c0,1-0.7,1.7-1.7,1.7s-1.7-0.7-1.7-1.7s0.7-1.7,1.7-1.7S220.1,213.5,220.1,214.2z"/>
-				<polygon class="st16" points="218.5,212.8 219.1,213.8 219.8,213.8 219.5,214.5 219.5,215.5 218.5,214.8 217.8,215.5 
+				<polygon class="st16" points="218.5,212.8 219.1,213.8 219.8,213.8 219.5,214.5 219.5,215.5 218.5,214.8 217.8,215.5
 					217.8,214.5 217.1,213.8 218.1,213.8 				"/>
 			</g>
 		</g>

@@ -24,7 +24,7 @@
        top: 100px;
        background-color: #fff;
    }
-  .blue-text { color: #00A9CE; }
+  .blue-text { color: #20284D; }
   .top-banner-outer {
     background-image: url("shipito/fr/imgs/pricing/SpecialServiceBannerPhoto.jpg");
     background-color: #000000;

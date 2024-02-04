@@ -14,7 +14,7 @@
     <DIV CLASS="main-body">
       <STYLE>
         .top-banner-outer {
-          background: linear-gradient(#3781BE, #00A9CE);
+          background: linear-gradient(#3781BE, #20284D);
         }
 
         .top-banner-inner {
@@ -47,7 +47,7 @@
         }
 
         .btn-secondary {
-          border: solid 1px #00A9CE;
+          border: solid 1px #20284D;
         }
 
         .mobile-only {
@@ -55,7 +55,7 @@
         }
 
         .top-container {
-          background: linear-gradient(#3781BE, #00A9CE);
+          background: linear-gradient(#3781BE, #20284D);
           padding: 0px;
           margin: 0px 0px 30px 0px;
         }
@@ -137,7 +137,7 @@
 
         .flow-chart-grid .chart-title STRONG {
           font-weight: normal;
-          color: #00A9CE;
+          color: #20284D;
         }
 
         .flow-chart-grid .text1 {
@@ -186,7 +186,7 @@
 
         .mobile-flow-chart H3 STRONG {
           font-weight: normal;
-          color: #00A9CE;
+          color: #20284D;
         }
 
         .our-affiliates {
@@ -279,7 +279,7 @@
         }
 
         .why-join A {
-          color: #00A9CE;
+          color: #20284D;
         }
 
         .why-join UL {

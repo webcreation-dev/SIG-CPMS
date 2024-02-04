@@ -89,7 +89,7 @@
         }
 
         .scroll-wrapper {
-          border-bottom: solid 1px #00A9CE;
+          border-bottom: solid 1px #20284D;
           width: 100%;
           max-width: 100%;
           overflow-x: auto;
@@ -109,8 +109,8 @@
         }
 
         TABLE.my-tabs TD.active {
-          border-bottom: solid 2px #00A9CE;
-          color: #00A9CE;
+          border-bottom: solid 2px #20284D;
+          color: #20284D;
         }
 
         .video-link {

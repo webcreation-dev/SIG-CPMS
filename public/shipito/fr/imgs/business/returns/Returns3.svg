@@ -5,7 +5,7 @@
 <style type="text/css">
 	.st0{fill:#F9F9F9;}
 	.st1{fill:#E2E2E2;}
-	.st2{opacity:0.5;fill:#00A9CE;}
+	.st2{opacity:0.5;fill:#20284D;}
 	.st3{fill:#FFFFFF;}
 	.st4{fill:#535353;}
 </style>
@@ -15,7 +15,7 @@
 <rect x="0.4" y="209.7" class="st1" width="573.6" height="1"/>
 <rect x="0.4" y="266.8" class="st1" width="573.6" height="1"/>
 <rect x="0.4" y="323.9" class="st1" width="573.6" height="1"/>
-<polygon class="st2" points="501.6,280 453.4,309.2 353.3,227.5 318.1,262.1 244.6,277.5 187.2,253.7 92.4,249.3 23.9,150.1 
+<polygon class="st2" points="501.6,280 453.4,309.2 353.3,227.5 318.1,262.1 244.6,277.5 187.2,253.7 92.4,249.3 23.9,150.1
 	0.4,164.4 0.4,381.5 572,381.5 572,337.4 "/>
 <g>
 	<circle class="st3" cx="23.9" cy="150" r="5"/>

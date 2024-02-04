@@ -164,14 +164,14 @@ DIV.dk-grey {
 
 }
 .blue {
-  background-color: #00A9CE;
+  background-color: #20284D;
   color: #FFFFFF;
   text-align: center;
   padding: 60px 0px 60px 0px;
 }
 .blue-bottom {
   margin-bottom: 0px;
-  background-color: #00A9CE;
+  background-color: #20284D;
   color: #FFFFFF;
   padding: 30px;
 }
@@ -229,13 +229,13 @@ TABLE.bullets TH{
 }
 
 TABLE.bullets TD STRONG {
-  color: #00A9CE;
+  color: #20284D;
 }
 TABLE.bullets TH DIV {
   display: inline-block;
   height: 30px;
   width: 30px;
-  background-color: #00A9CE;
+  background-color: #20284D;
   color: #FFFFFF;
   font-size: 18px;
   text-align: center;

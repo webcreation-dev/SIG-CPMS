@@ -86,11 +86,11 @@
         }
 
         .speech-bubble SPAN.stars {
-          color: #00A9CE;
+          color: #20284D;
         }
 
         .card-header SPAN.stars {
-          color: #00A9CE;
+          color: #20284D;
         }
 
         UL.big-checks {
@@ -108,7 +108,7 @@
 
         .table-images>TBODY>TR>TD {
           padding: 0px;
-          background-color: #00A9CE;
+          background-color: #20284D;
           border: none;
           width: 33%;
         }

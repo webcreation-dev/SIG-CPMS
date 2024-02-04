@@ -118,7 +118,7 @@ HTML[dir="rtl"] .check-box-wrapper SPAN.caption, HTML[dir="rtl"] .check-box-wrap
   margin-right: 10px;
   top: 4px;
   background-color: transparent;
-  border: 1px solid #00A9CE;
+  border: 1px solid #20284D;
   border-radius: 5px;
   position: relative;
   display: inline-block;
@@ -155,7 +155,7 @@ html[dir="rtl"] .check-box.left {
   position: absolute;
   height: 0;
   width: 2px;
-  background-color: #00A9CE; 
+  background-color: #20284D; 
   display: inline-block;
   -moz-transform-origin: left top;
   -ms-transform-origin: left top;
@@ -196,7 +196,7 @@ html[dir="rtl"] .check-box.left {
 
 input[type=checkbox]:checked + .check-box, .check-box-wrapper input[type=checkbox]:checked + .custom-check-box, input[type=radio]:checked + .check-box,
 .check-box.checked  {
-  border-color: #00A9CE;
+  border-color: #20284D;
 }
 
 input[type=checkbox]:disabled + .check-box, .check-box-wrapper input[type=checkbox]:disabled + .custom-check-box, input[type=radio]:disabled + .check-box {
@@ -319,7 +319,7 @@ HR { margin-top:20px; margin-bottom:20px; }
 }
 
 #header-content-action-required { 
-	border: 1px solid #00A9CE;
+	border: 1px solid #20284D;
 	font-size: 16px;
 	padding: 20px;
 	margin-bottom: 20px;
@@ -352,7 +352,7 @@ html[dir="rtl"] .subtabs > .container > DIV > DIV > A {
 }
 
 .subtabs > .container >  DIV > DIV > A.active-ajax-link {
-	color: #00A9CE;
+	color: #20284D;
 }
 .subtabs > .container > DIV > DIV >  A.border-left {
 	border-left: solid 1px #DFE1E7;
@@ -523,8 +523,8 @@ H3 {
 	letter-spacing: 1px;
 }
 .btn-blue {
-	background-color: #00A9CE;
-	border-color: #00A9CE;
+	background-color: #20284D;
+	border-color: #20284D;
 	border-radius: 2px;
 	letter-spacing: 1px;
 	text-decoration: none;
@@ -625,7 +625,7 @@ H3 {
 .throbbercontainer .throbberbody I, I.fa-spinner {
 	font-size: 40px;
 	margin-right: 15px;
-	color: #00A9CE;
+	color: #20284D;
 }
 
 I.fa-spinner.yellow {
@@ -655,7 +655,7 @@ I.fa-spinner.yellow {
   border-top: 1.1em solid rgba(0, 169, 206, 0.2);
   border-right: 1.1em solid rgba(0, 169, 206, 0.2);
   border-bottom: 1.1em solid rgba(0, 169, 206, 0.2);
-  border-left: 1.1em solid #00A9CE;
+  border-left: 1.1em solid #20284D;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
@@ -702,7 +702,7 @@ I.fa-spinner.yellow {
 .modal-body .campaign-pop-subheader H3 { margin: 0px 0px 8px 0px; font-size: 20px; }
 .modal-body .campaign-pop-content { line-height: 25px; }
 .modal-body STRONG {
-	color: #00A9CE;
+	color: #20284D;
 	font-weight: 300;
 }
 .st-alert {
@@ -724,7 +724,7 @@ I.fa-spinner.yellow {
 	margin-bottom: 20px;
 }
 .st-alert .modal-body I {
-	color: #00A9CE;
+	color: #20284D;
 	font-size: 40px;
 	margin-right: 20px;
 }
@@ -754,7 +754,7 @@ BODY.login {
 .login .languages {
 	background-color: #FFFFFF;
 	padding: 5px 10px 5px 10px;
-	border: solid 1px #00A9CE;
+	border: solid 1px #20284D;
 	border-radius: 5px;
 }
 .login .languages A {
@@ -770,14 +770,14 @@ BODY.login {
 }
 .login-panel .panel-body {
 	background-color: #FFFFFF;
-	border-top: solid 6px #00A9CE;
+	border-top: solid 6px #20284D;
 	border-left: solid 1px #D2D3D5;
 	border-right: solid 1px #D2D3D5;
 	border-bottom: solid 1px #D2D3D5;
 	color: #868B98;
 }
 .login-panel .panel-body H2 {
-	color: #00A9CE;
+	color: #20284D;
 	font-size: 16px;
 	font-weight: 700;
 	text-align: center;
@@ -843,7 +843,7 @@ BODY.login {
 	padding: 0px;
 }
 .input-group.ga-large INPUT {
-	border: solid 1px #00A9CE;
+	border: solid 1px #20284D;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	line-height: 20px;
@@ -864,8 +864,8 @@ BODY.login {
 	text-transform: uppercase;
 }
 .panel-primary .panel-heading {
-	border-color: #00A9CE;
-	background-color: #00A9CE;
+	border-color: #20284D;
+	background-color: #20284D;
 }
 .modal {
 	background-color: rgba(255,255,255,0.1); 
@@ -913,7 +913,7 @@ BODY.login {
 	margin-top: 0px;
 }
 .my-account-main STRONG {
-	color: #00A9CE;
+	color: #20284D;
 }
 
 .modal-header H2 {
@@ -1360,7 +1360,7 @@ HTML[dir="rtl"] .cost-overview H2 {
 	font-size: 16px;
 	font-weight: 400;
 	height: 42px;
-	color: #00A9CE;
+	color: #20284D;
 }
 .packing-options IMG {
 	margin: 0px 30px 18px 30px;
@@ -1398,8 +1398,8 @@ table.package-table TH LABEL SPAN.check-box {
 	color: #000000;
 }
 .notification-shipped {
-	border-color: #00A9CE;
-	color: #00A9CE;
+	border-color: #20284D;
+	color: #20284D;
 }
 .notification-confirmation {
 	border-color: #9DDE56;
@@ -1583,7 +1583,7 @@ table.package-table TH LABEL SPAN.check-box {
   font-size: 14px
 }
 .customer-address A:HOVER, .customer-address A:ACTIVE {
-  color: #00A9CE;
+  color: #20284D;
 }
 .customer-address DIV.btns {
 	padding: 15px 0px 15px 15px;
@@ -1684,12 +1684,12 @@ HTML[dir="rtl"] .btn.edit-address-link I {
     font-size: 12px;
     font-weight: 700;
     padding: 0px 5px 20px 5px;
-    border-bottom: solid 3px #00A9CE;
-    color: #00A9CE;	
+    border-bottom: solid 3px #20284D;
+    color: #20284D;	
     position: relative;
 }
 .circle-breadcrumbs LI A {
-    color: #00A9CE;	
+    color: #20284D;	
 	text-decoration: none;
 }
 .circle-breadcrumbs LI:AFTER
@@ -1703,7 +1703,7 @@ HTML[dir="rtl"] .btn.edit-address-link I {
 	margin-left: -7px;
 	bottom:-8px;
 	border-radius: 8px;
-	background-color:#00A9CE;
+	background-color:#20284D;
 }
 .circle-breadcrumbs LI.current-step 
 {
@@ -1723,7 +1723,7 @@ HTML[dir="rtl"] .btn.edit-address-link I {
 	height:3px;
 	left: 0;
 	bottom: -3px;
-	background-color:#00A9CE;
+	background-color:#20284D;
 }
 .circle-breadcrumbs LI.future-step:AFTER
 {
@@ -1853,7 +1853,7 @@ html[dir="rtl"] .my-account-left-menu {
 }
 
 .my-account-left-menu A:HOVER, .my-account-left-menu A.current-link {
-	color: #00A9CE;
+	color: #20284D;
 	background-color: #F2F2F2;
 }
 
@@ -1975,12 +1975,12 @@ html[dir="rtl"] .my-account-left-menu {
 	transition: left 0.3s;
 }
 .slider-yes {
-  border-color: #00A9CE;
-  background-color: #00A9CE;
+  border-color: #20284D;
+  background-color: #20284D;
  }
 .slider-disabled {
-  border-color: #008EAD;
-  background-color: #008EAD;
+  border-color: #BE0026;
+  background-color: #BE0026;
  }
  .slider-yes .slider-ball {
    left: 32px;
@@ -2109,7 +2109,7 @@ DIV.security-notice {
 A[data-toggle = "tooltip"] {
 	position: relative;
 	top: -7px;
-	color: #00A9CE;
+	color: #20284D;
 	font-size: 12px;
 	text-shadow: 2px 2px #DDDDDD;
 }
@@ -2160,14 +2160,14 @@ P.padded {
 	border-top: solid 10px #FFFFFF;;
 	border-left: none;
 	border-right: none;
-	border-bottom: solid 1px #00A9CE;
+	border-bottom: solid 1px #20284D;
 	margin-top: 0px;
 	height: 45px;
 	font-size: 14px;
-	caret-color: #00A9CE;
+	caret-color: #20284D;
 }
 #packagesearchform .btn {
-	color:	#00A9CE;
+	color:	#20284D;
 	background-color: transparent;
 	font-size: 22px;
 	padding: 5px 5px 5px 0px;
@@ -2343,7 +2343,7 @@ HTML[dir="rtl"] .payment-icon {
 }
 
 .my-account-menu A:HOVER {
-	color: #00A9CE;
+	color: #20284D;
 }
 
 .st-navbar .my-account-menu A {
@@ -2376,7 +2376,7 @@ HTML[dir="rtl"] .payment-icon {
 }
 
 .my-account-balance .positive-balance {
-	color: #00A9CE;
+	color: #20284D;
 }
 
 .my-account-balance .btn {
@@ -2418,7 +2418,7 @@ html[dir="rtl"] .my-us-address .address-fields SPAN.caption, html[dir="rtl"] .my
 	display: block;
 	text-align: center;
 	text-transform: uppercase;
-	color: #00A9CE;
+	color: #20284D;
 }
 
 .my-packages-wrapper {
@@ -2454,7 +2454,7 @@ A.dropdown-toggle.s4b.ACTIVE { line-height: normal;}
 }
 
 .my-packages A:HOVER, .my-packages A:ACTIVE, .my-packages A.ACTIVE, .my-packages A:FOCUS, .my-packages A:HOVER I, .my-packages A:ACTIVE I, .my-packages A.ACTIVE I, .my-packages A:FOCUS I  {
-   color: #00A9CE !important;
+   color: #20284D !important;
    outline: none;
 }
 
@@ -2509,7 +2509,7 @@ html[dir="rtl"] .container DIV.rewards-icon, html[dir="rtl"] .rewards-icon {
 }
 
 .rewards-icon.free {
-	background-color: #00A9CE;
+	background-color: #20284D;
 }
 .rewards-icon.premium-monthly {
 	background-color: #3882AD;
@@ -2562,9 +2562,9 @@ P {
 }
 
 DIV.rewards-bar {
-  border-left: solid 1px #00A9CE;
-  border-top: solid 1px #00A9CE;
-  border-bottom: solid 1px #00A9CE;
+  border-left: solid 1px #20284D;
+  border-top: solid 1px #20284D;
+  border-bottom: solid 1px #20284D;
   height: 10px;
   position: relative;
   margin-left: 0;
@@ -2574,7 +2574,7 @@ DIV.rewards-bar {
 }
 html[dir="rtl"] DIV.rewards-bar {
   border-left: none;
-  border-right: solid 1px #00A9CE;
+  border-right: solid 1px #20284D;
   margin-left: 10%;
   margin-right: 0;
 }
@@ -2605,7 +2605,7 @@ DIV.rewards-bar SPAN.level SPAN.level-points SPAN.number {
 }
 DIV.rewards-bar SPAN.level SPAN.tick-mark {
   display: inline-block;
-  background-color: #00A9CE;
+  background-color: #20284D;
   width: 1px;
   height: 30px;
 }
@@ -2657,7 +2657,7 @@ html[dir="rtl"] DIV.rewards-bar SPAN.growth{
 SPAN.level-achieved {
   float: left;
   height: 8px;
-  background-color: #00A9CE;
+  background-color: #20284D;
   max-width: 100%;
 }
 html[dir="rtl"] SPAN.level-achieved {
@@ -2680,7 +2680,7 @@ UL.bullets {
 }
 SPAN.bullet-text { color: #000; }
 SPAN.bullet-text.grey { color: #808080; }
-SPAN.bullet-text.blue { color: #00A9CE; }
+SPAN.bullet-text.blue { color: #20284D; }
 SPAN.bullet-text.red { color: #F1570C; }
 
 UL.bullets LI::before {
@@ -2697,7 +2697,7 @@ UL.bullets LI.bullet-grey::before {
 	color: #808080;
 }
 UL.bullets LI.bullet-blue::before {
-	color: #00A9CE;;
+	color: #20284D;;
 }
 UL.bullets LI.bullet-red::before {
 	color: #F1570C;
@@ -2737,12 +2737,12 @@ A.more-info {
    margin-top: -5px;
 }
 .popover {
-  border-color: #00A9CE;
+  border-color: #20284D;
   font-family: Montserrat, sans-serif;
   min-width: 400px;
 }
 .popover.bottom > .arrow {
-  border-bottom-color: #00A9CE !important;
+  border-bottom-color: #20284D !important;
   top: -12px;
 }
 
@@ -2844,7 +2844,7 @@ TABLE.mo-breadcrumbs TD SPAN {
 }
 
 TABLE.mo-breadcrumbs TD.current, TABLE.mo-breadcrumbs TD.complete {
-  color: #00A9CE;
+  color: #20284D;
 }
   
 TABLE.mo-breadcrumbs TD SPAN.step {
@@ -2859,7 +2859,7 @@ TABLE.mo-breadcrumbs TD SPAN.bc-left, TABLE.mo-breadcrumbs TD SPAN.bc-right  {
   z-index: 100; 
 }
 TABLE.mo-breadcrumbs TD.current SPAN.bc-left, TABLE.mo-breadcrumbs TD.complete SPAN.bc-left, TABLE.mo-breadcrumbs TD.complete SPAN.bc-right  {
-  border-bottom: solid 2px #00A9CE;
+  border-bottom: solid 2px #20284D;
 }
 TABLE.mo-breadcrumbs TD SPAN.bc-left {
   float: left;
@@ -2895,8 +2895,8 @@ TABLE.mo-breadcrumbs TD.current SPAN.circle:BEFORE, TABLE.mo-breadcrumbs TD.comp
   content: "\e90B";
 }
 TABLE.mo-breadcrumbs TD.current SPAN.circle, TABLE.mo-breadcrumbs TD.complete SPAN.circle {
-  background-color: #00A9CE;
-  border: solid 1px #00A9CE;
+  background-color: #20284D;
+  border: solid 1px #20284D;
 }
   
 TABLE.mo-breadcrumbs TD SPAN.description {
@@ -2944,7 +2944,7 @@ TABLE.shipping-method-list THEAD TR TD H4.table-caption {
   display: block;
   text-align: center;
   text-transform: none;
-  color: #00A9CE;
+  color: #20284D;
   font-size: 14px;
   margin: 30px 0px 10px 0px;
 }
@@ -3002,7 +3002,7 @@ TABLE.unavailable-list {
 }
 SPAN.sr-price {
   font-weight: normal;
-  color: #00A9CE;
+  color: #20284D;
 }
 TABLE.payment-methods {
 	margin-left: 30px;
@@ -3079,7 +3079,7 @@ LABEL.custom-file-input I, DIV.custom-file-edit I {
    font-size: 30px;
    position: relative;
    top: 5px;
-   color: #00A9CE;
+   color: #20284D;
 }
 DIV.custom-file-edit A {
   text-decoration: none;
@@ -3122,7 +3122,7 @@ TABLE.order-by-link TD A {
   text-decoration: none;
 }
 TABLE.order-by-link:HOVER TH, TABLE.order-by-link TD A:HOVER {
-  color: #00A9CE;
+  color: #20284D;
 }
 TABLE.order-by-link TD.order-by-asc A {
   line-height: 10px;
@@ -3134,13 +3134,13 @@ TABLE.order-by-link TD.order-by-asc{
   vertical-align: bottom;
 }
 TABLE.order-by-link.order-by-active-asc TH, TABLE.order-by-link.order-by-active-desc TH, TABLE.order-by-link.order-by-active-asc TD.order-by-asc A, TABLE.order-by-link.order-by-active-desc TD.order-by-desc A {
-  color: #00A9CE;
+  color: #20284D;
 }
 
 .note {
     padding: 0px 15px 25px 15px;
     margin-bottom: 30px;
-	border: solid 1px #00A9CE;
+	border: solid 1px #20284D;
 } 
 .note LABEL, .note:first-line {
     line-height: 50px;
@@ -3265,7 +3265,7 @@ I.customer-country-flag {
 
 /* "Getting Started" CSS */
 
-	#getting-started .st-page-header { background-color: #00A9CE; background-image: none;}
+	#getting-started .st-page-header { background-color: #20284D; background-image: none;}
 	#getting-started #customer-name { margin-bottom: 5px;}
 	#getting-started DIV.help-header H1 { line-height: 200px; }
 	#getting-started DIV.help-header { 
@@ -3300,7 +3300,7 @@ I.customer-country-flag {
 	#getting-started DIV#customer-info { margin-top: 30px;}
 	#getting-started DIV#address-copy { margin-top: 30px;}
 	
-	#getting-started I.bulb { float: left; margin-bottom: 50px; margin-left: 5px; font-size: 30px; color: #00A9CE; }
+	#getting-started I.bulb { float: left; margin-bottom: 50px; margin-left: 5px; font-size: 30px; color: #20284D; }
 	HTML[dir="rtl"] #getting-started I.bulb { float: right; margin-right: -55px; margin-left: 0px;  margin-top: -5px;  }
 	
 	#getting-started hr.vbar { border-top: 1px solid #D7D7D7; margin-top: 5px; margin-bottom: 5px;}
@@ -3364,7 +3364,7 @@ I.customer-country-flag {
 	#getting-started td.brand-odd { vertical-align: top;}
 
 	#getting-started A.brand-link:LINK, #getting-started A.brand-link:ACTIVE, #getting-started A.brand-link:VISITED { color:#535353; text-decoration: none; }
-	#getting-started .landing-page A.brand-link:HOVER { color:#00A9CE; text-decoration: none; }
+	#getting-started .landing-page A.brand-link:HOVER { color:#20284D; text-decoration: none; }
 	#getting-started .brand-image-top {margin-bottom:6px; width:110px;}
 	#getting-started .brand-image {width:110px; margin-bottom:6px; }
 	#getting-started .brand-name { display: block; margin-left: auto; margin-right: auto; margin-bottom: 38px; white-space: normal;  }

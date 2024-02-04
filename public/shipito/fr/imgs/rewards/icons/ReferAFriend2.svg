@@ -46,7 +46,7 @@
 <style
    type="text/css"
    id="style2">
-	.st0{fill:#00A9CE;}
+	.st0{fill:#20284D;}
 	.st1{fill:#FFFFFF;}
 	.st2{fill:#F2D03D;}
 	.st3{font-family:'Montserrat-Regular';}
@@ -70,7 +70,7 @@
    width="94"
    height="56.799999"
    id="rect6"
-   style="fill:#00a9ce" />
+   style="fill:#20284D" />
 <g
    id="g12"
    transform="translate(-14.121951,-11.548781)">
@@ -80,7 +80,7 @@
    cy="48.299999"
    r="16.5"
    id="circle8"
-   style="fill:#00a9ce" />
+   style="fill:#20284D" />
 	<path
    class="st1"
    d="m 54.1,65.3 c -9.4,0 -17,-7.6 -17,-17 0,-9.4 7.6,-17 17,-17 9.4,0 17,7.6 17,17 0,9.4 -7.7,17 -17,17 z m 0,-33 c -8.8,0 -16,7.2 -16,16 0,8.8 7.2,16 16,16 8.8,0 16,-7.2 16,-16 0,-8.8 -7.2,-16 -16,-16 z"
@@ -152,7 +152,7 @@
    d="m 81.1,50.6 c 0,2.2 -1.8,4 -4,4 H 31.8 c -2.2,0 -4,-1.8 -4,-4 v -4.7 c 0,-2.2 1.8,-4 4,-4 h 45.3 c 2.2,0 4,1.8 4,4 z"
    id="path32"
    inkscape:connector-curvature="0"
-   style="fill:#00a9ce" />
+   style="fill:#20284D" />
 	</g>
 	<path
    class="st1"

@@ -9,7 +9,7 @@
 	.st3{fill:#403C3A;}
 	.st4{fill:#F6F6F6;}
 	.st5{fill:#888888;}
-	.st6{fill:#00A9CE;}
+	.st6{fill:#20284D;}
 </style>
 <g>
 	<g>
@@ -20,8 +20,8 @@
 		</g>
 		<rect x="0.6" y="54" class="st1" width="66.9" height="2.6"/>
 		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="8.21" y1="33.6969" x2="60.0138" y2="33.6969">
-			<stop  offset="0" style="stop-color:#00A9CE"/>
-			<stop  offset="1" style="stop-color:#00A9CE"/>
+			<stop  offset="0" style="stop-color:#20284D"/>
+			<stop  offset="1" style="stop-color:#20284D"/>
 		</linearGradient>
 		<rect x="8.2" y="16.4" class="st2" width="51.8" height="34.5"/>
 		<path class="st0" d="M39.5,55.9H28.6c0,0-0.1,0-0.1-0.1v-0.5c0,0,0-0.1,0.1-0.1h10.9c0,0,0.1,0,0.1,0.1L39.5,55.9

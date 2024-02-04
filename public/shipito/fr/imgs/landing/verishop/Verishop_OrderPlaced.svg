@@ -18,8 +18,8 @@
 				<path class="st1" d="M91.7,59.5H18.8V15.9h72.9V59.5z M19.8,58.5h70.9V16.9H19.8V58.5z"/>
 			</g>
 			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="27.4207" y1="24.1996" x2="34.392" y2="24.1996">
-				<stop  offset="0" style="stop-color:#00A9CE"/>
-				<stop  offset="1" style="stop-color:#00A9CE"/>
+				<stop  offset="0" style="stop-color:#20284D"/>
+				<stop  offset="1" style="stop-color:#20284D"/>
 			</linearGradient>
 			<circle class="st2" cx="30.9" cy="24.2" r="3.5"/>
 			<rect x="37.8" y="22.4" class="st3" width="24.7" height="2.3"/>
@@ -34,8 +34,8 @@
 			<g>
 				<circle class="st0" cx="90.7" cy="58.6" r="15"/>
 				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="75.1944" y1="58.5785" x2="106.1944" y2="58.5785">
-					<stop  offset="0" style="stop-color:#00A9CE"/>
-					<stop  offset="1" style="stop-color:#00A9CE"/>
+					<stop  offset="0" style="stop-color:#20284D"/>
+					<stop  offset="1" style="stop-color:#20284D"/>
 				</linearGradient>
 				<path class="st4" d="M90.7,74.1c-8.5,0-15.5-7-15.5-15.5s7-15.5,15.5-15.5s15.5,7,15.5,15.5S99.2,74.1,90.7,74.1z M90.7,44.1
 					c-8,0-14.5,6.5-14.5,14.5s6.5,14.5,14.5,14.5s14.5-6.5,14.5-14.5S98.7,44.1,90.7,44.1z"/>
@@ -43,8 +43,8 @@
 			<g>
 				<polyline class="st0" points="83,58.7 88.4,64.1 98.4,53.1 				"/>
 				<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="82.6544" y1="58.7728" x2="98.752" y2="58.7728">
-					<stop  offset="0" style="stop-color:#00A9CE"/>
-					<stop  offset="1" style="stop-color:#00A9CE"/>
+					<stop  offset="0" style="stop-color:#20284D"/>
+					<stop  offset="1" style="stop-color:#20284D"/>
 				</linearGradient>
 				<polygon class="st5" points="88.4,64.8 82.7,59.1 83.4,58.4 88.4,63.4 98,52.7 98.8,53.4 				"/>
 			</g>

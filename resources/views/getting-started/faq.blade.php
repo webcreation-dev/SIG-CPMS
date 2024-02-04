@@ -65,8 +65,8 @@
 }
 
 .topics A.square:HOVER {
-  border: solid 1px #00A9CE;
-  color: #00A9CE;
+  border: solid 1px #20284D;
+  color: #20284D;
   text-decoration: none;
 }
 .topics A.square:HOVER IMG {

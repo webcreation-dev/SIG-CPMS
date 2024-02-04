@@ -75,7 +75,7 @@
         }
 
         .global-access {
-          background-color: #00A9CE;
+          background-color: #20284D;
           color: #FFFFFF;
           padding: 40px 40px 100px 40px;
           background-image: url("shipito/fr/imgs/directsales/Partners_Globe.svg");
@@ -116,7 +116,7 @@
         }
 
         OL.blue-numbers LI STRONG {
-          color: #00A9CE;
+          color: #20284D;
         }
 
         OL.blue-numbers LI::before {
@@ -127,7 +127,7 @@
           color: #FFFFFF;
           border-radius: 50%;
           font-weight: 500;
-          background-color: #00A9CE;
+          background-color: #20284D;
           display: inline-block;
           height: 30px;
           width: 30px;

@@ -19,7 +19,7 @@
   #top-banner3 { background-image: url("shipito/fr/imgs/home/TopBanner3.jpg"); }
 
   #top-banner0 {
-     background: linear-gradient(#3781BE, #00A9CE);
+     background: linear-gradient(#20284D, #be0026);
      height:492px;
      padding: 0px;
      margin: 0px;
@@ -582,10 +582,13 @@
       <SPAN CLASS="caption">Nous offrons un service d‘expédition de colis, courriers et marchandises rapide, fiable et efficace vers plus de 220 pays.</SPAN>
       <DIV CLASS="fast-consol"><A HREF="#">Rien de plus facile que de regrouper ses colis!</A></DIV>
     </DIV>
-    <DIV CLASS = "flex-col col-sm-6 col-xs-12" STYLE = "background-image: url('shipito/fr/imgs/home/Lynia Delivery ExpressAssociate.jpg'); background-repeat: no-repeat; background-size: cover;"></DIV>
+    {{-- <DIV CLASS = "flex-col col-sm-6 col-xs-12" STYLE = "background-image: url('shipito/fr/imgs/asssistedpurchase/download-1.jpg'); background-repeat: no-repeat; background-size: cover;"></DIV> --}}
+    <div class="flex-col col-sm-6 col-xs-12" style="background-image: url('shipito/fr/imgs/ShipitoAssociate.jpg'); background-repeat: no-repeat; background-size: cover;"></div>
   </DIV>
   <DIV CLASS = "row flex-row">
-    <DIV CLASS = "flex-col col-sm-6 col-xs-12 fast-mailout"><IMG SRC = "shipito/fr/imgs/fast-mailout/French.svg" CLASS = "img-fast-mailout img-responsive"/></DIV>
+    <DIV CLASS = "flex-col col-sm-6 col-xs-12 fast-mailout">
+        <IMG SRC = "shipito/fr/imgs/fast-mailout/French.svg" CLASS = "img-fast-mailout img-responsive"/>
+    </DIV>
     <DIV CLASS = "flex-col col-sm-6 col-xs-12 flex-caption">
       <SPAN CLASS="caption">Qui ne souhaiterait pas que ça aille plus vite ?! Voici le Fast Mailout ™ de Lynia Delivery. </SPAN>
       <DIV CLASS="fast-consol"><A HREF="#">Créez votre profil d'Envoi Rapide dès aujourd'hui!</A></DIV>

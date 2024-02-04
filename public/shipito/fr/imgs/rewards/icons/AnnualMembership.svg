@@ -45,7 +45,7 @@
 <style
    type="text/css"
    id="style2">
-	.st0{fill:#00A9CE;}
+	.st0{fill:#20284D;}
 	.st1{fill:#F2D03D;}
 	.st2{fill:#FFFFFF;}
 </style>
@@ -60,7 +60,7 @@
    cy="49.700001"
    r="32.900002"
    id="circle6"
-   style="fill:#00a9ce" />
+   style="fill:#20284D" />
 	<polygon
    class="st1"
    points="74.4,20.7 72.2,22.9 72.7,25.9 69.9,24.5 67.2,25.9 67.7,22.9 65.5,20.7 68.6,20.3 69.9,17.5 71.3,20.3 "
@@ -116,7 +116,7 @@
    d="m 109.7,58.2 c 0,2.2 -1.8,4 -4,4 h -70 c -2.2,0 -4,-1.8 -4,-4 V 40.9 c 0,-2.2 1.8,-4 4,-4 h 70 c 2.2,0 4,1.8 4,4 z"
    id="path26"
    inkscape:connector-curvature="0"
-   style="fill:#00a9ce" />
+   style="fill:#20284D" />
 		</g>
 		<path
    class="st2"

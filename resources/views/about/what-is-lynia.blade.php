@@ -63,7 +63,7 @@
         .blue-dot,
         .blue-text,
         .col-desc STRONG {
-          color: #00A9CE;
+          color: #20284D;
           font-weight: 300;
         }
 
@@ -88,7 +88,7 @@
           background-position: top center;
           background-size: auto 368px;
           background-repeat: no-repeat;
-          color: #00A9CE;
+          color: #20284D;
           font-size: 22px;
           text-align: center;
           padding-top: 30px;

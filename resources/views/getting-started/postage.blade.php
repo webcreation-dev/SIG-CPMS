@@ -84,7 +84,7 @@ P.allpackages {
 }
 
 .shipmethod-header LABEL {
-  color: #00A9CE;
+  color: #20284D;
   display: block;
   margin-bottom: 5px;
   font-weight: 300;
@@ -140,7 +140,7 @@ A.more-info {
 }
 
 .popover {
-  border-color: #00A9CE;
+  border-color: #20284D;
   font-family: Montserrat, sans-serif;
   width: 280px;
   height: 200px;
@@ -150,7 +150,7 @@ A.more-info {
   background-repeat: no-repeat;
 }
 .popover.top > .arrow {
-  border-top-color: #00A9CE !important;
+  border-top-color: #20284D !important;
 }
 
 .popover-content {

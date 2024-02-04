@@ -20,7 +20,7 @@
 	.st12{fill:#683325;}
 	.st13{fill:#8A4A28;}
 	.st14{fill:#7C8884;}
-	.st15{fill:#00A9CE;}
+	.st15{fill:#20284D;}
 	.st16{fill:#7F7F7E;}
 </style>
 <g>
@@ -59,22 +59,22 @@
 	<rect x="45.5" y="3.9" class="st6" width="36.4" height="1.9"/>
 	<g>
 		<rect x="48.2" y="28.9" class="st7" width="5.8" height="3.8"/>
-		
+
 			<rect x="49.7" y="28.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 81.84 -20.2859)" class="st8" width="2.7" height="4.7"/>
 	</g>
 	<g>
 		<rect x="56.6" y="28.9" class="st7" width="5.8" height="3.8"/>
-		
+
 			<rect x="58.1" y="28.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 90.279 -28.725)" class="st8" width="2.7" height="4.7"/>
 	</g>
 	<g>
 		<rect x="65" y="28.9" class="st7" width="5.8" height="3.8"/>
-		
+
 			<rect x="66.6" y="28.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 98.7178 -37.1638)" class="st8" width="2.7" height="4.7"/>
 	</g>
 	<g>
 		<rect x="73.5" y="28.9" class="st7" width="5.8" height="3.8"/>
-		
+
 			<rect x="75" y="28.4" transform="matrix(-1.836970e-16 1 -1 -1.836970e-16 107.1569 -45.6029)" class="st8" width="2.7" height="4.7"/>
 	</g>
 	<g>
@@ -146,21 +146,21 @@
 				<rect x="54.2" y="48.3" class="st14" width="0.6" height="0.4"/>
 			</g>
 			<g>
-				
+
 					<rect x="49.9" y="48.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 100.4966 96.9269)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="49.3" y="47.1" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 99.315 94.5637)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="49.2" y="44.9" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 99.0595 90.2844)" class="st14" width="0.6" height="0.4"/>
 			</g>
 			<g>
-				
+
 					<rect x="52.3" y="49" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 105.2869 98.5397)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="52.2" y="46.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 105.0056 93.7653)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="51.5" y="44.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 103.5685 88.975)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="52.2" y="42.2" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 105.0056 84.9351)" class="st14" width="0.6" height="0.4"/>
 			</g>
 		</g>
@@ -238,21 +238,21 @@
 				<rect x="71.1" y="48.4" class="st14" width="0.6" height="0.4"/>
 			</g>
 			<g>
-				
+
 					<rect x="66.8" y="48.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 134.2309 97.0609)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="66.2" y="47.1" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 133.0493 94.6976)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="66.1" y="45" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 132.7939 90.4183)" class="st14" width="0.6" height="0.4"/>
 			</g>
 			<g>
-				
+
 					<rect x="69.2" y="49.1" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 139.0212 98.6736)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="69.1" y="46.7" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 138.7399 93.8992)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="68.3" y="44.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 137.3028 89.1089)" class="st14" width="0.6" height="0.4"/>
-				
+
 					<rect x="69.1" y="42.3" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 138.7399 85.0691)" class="st14" width="0.6" height="0.4"/>
 			</g>
 		</g>
