@@ -14,7 +14,8 @@
     <DIV CLASS="main-body">
       <STYLE>
         .top-banner-outer {
-          background: linear-gradient(#3781BE, #20284D);
+          /* background: linear-gradient(#3781BE, #20284D); */
+          background: linear-gradient(#20284D, #be0026);
         }
 
         .top-banner-inner {
@@ -55,7 +56,8 @@
         }
 
         .top-container {
-          background: linear-gradient(#3781BE, #20284D);
+          /* background: linear-gradient(#3781BE, #20284D); */
+          background: linear-gradient(#20284D, #be0026);
           padding: 0px;
           margin: 0px 0px 30px 0px;
         }
