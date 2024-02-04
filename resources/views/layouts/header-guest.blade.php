@@ -69,7 +69,7 @@
        <LI><A HREF="/lynia_for_direct_sales">Vendeurs directs</A></LI>
      </UL>
    </LI>
-       <LI CLASS = "hide-sm"><A HREF = "/account" CLASS = "btn btn-secondary btn-login">Connexion</A></LI>
+       <LI CLASS = "hide-sm"><A HREF = "/signin" CLASS = "btn btn-secondary btn-login">Connexion</A></LI>
        <LI CLASS = "hide-sm"><A HREF = "/signup" CLASS = "btn btn-primary">INSCRIPTION</A></LI>
        <LI CLASS = "dropdown hide-lg">
         <A CLASS = "dropdown-toggle contact-sm-link" data-toggle = "dropdown" HREF = "#"><I CLASS = "icon-contact-us"></I> Service clientèle <SPAN CLASS = "ga-caret"></SPAN></A>

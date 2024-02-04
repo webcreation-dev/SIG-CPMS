@@ -183,7 +183,7 @@
           }
         }
       </STYLE>
-      <FORM METHOD="POST" ACTION="/account" NAME="registerform" >
+      <FORM METHOD="POST" action="{{ route('register') }}" NAME="registerform" >
         @csrf
         <INPUT TYPE="HIDDEN" NAME="act" VALUE="Customer.finalizeRegistration" />
         <INPUT TYPE="HIDDEN" NAME="cmscountry" VALUE="us" />

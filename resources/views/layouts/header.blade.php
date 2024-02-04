@@ -128,6 +128,28 @@
             </ul>
           </li>
 
+            <LI class="dropdown no-mega-dropdown">
+                {{-- <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <A HREF = "{{route('logout')}}" style="margin: 10px 40px 40px 10px;"
+                    onclick="event.preventDefault(); this.closest('form').submit();"
+                    CLASS = "btn btn-lg btn-secondary btn-login">Déconnexion</A>
+                </form> --}}
+
+                {{-- <li class="hide-sm"> --}}
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                            <a href="{{route('logout')}}" style="margin: 13px 15px 10px 50px;"
+                            onclick="event.preventDefault(); this.closest('form').submit();"
+                            class="btn btn-secondary">Fermer la session</a>
+                    </form>
+                  {{-- </li> --}}
+
+            </LI>
+            {{-- <LI class="dropdown no-mega-dropdown">
+                <A HREF = "#" CLASS = "btn btn-lg btn-primary">INSCRIPTION</A>
+            </LI> --}}
+
           <li class="dropdown mega-dropdown hide-lg">
             <a href="#" data-toggle="dropdown">
               <i class="icon-my-account"></i> Mon compte <span class="ga-caret"></span>
@@ -189,7 +211,7 @@
 
           <li class="dropdown mega-dropdown no-menu hide-sm">
             <a href="#">
-              <span class="customer-name">Bonjour, Julian</span>
+              <span class="customer-name">Bonjour, {{Auth::user()->name}} </span>
               <i class="icon-my-account"></i> Mon compte </a>
           </li>
 
