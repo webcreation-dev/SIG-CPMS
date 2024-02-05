@@ -140,7 +140,7 @@
                 <input type="TEXT" name="customer.email" class="ga-form-control" maxlength="100" onchange="return formvalidator.formUpdated(this.form, this);" onkeypress="return formvalidator.checkFormat(this, event);" required="REQUIRED">
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label for="customer.email">adresse mail</label>
+                <label for="customer.email">Adresse mail</label>
               </div>
             </div>
           </div>

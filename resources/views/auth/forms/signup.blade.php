@@ -944,7 +944,7 @@
                 <INPUT TYPE="TEXT" NAME="customer.email" CLASS="ga-form-control" MAXLENGTH="100" onChange="return formvalidator.formUpdated(this.form, this);" onKeyPress="return formvalidator.checkFormat(this, event);" required="REQUIRED" />
                 <SPAN CLASS="highlight"></SPAN>
                 <SPAN CLASS="bar"></SPAN>
-                <LABEL FOR="customer.email">adresse mail</LABEL>
+                <LABEL FOR="customer.email">Adresse mail</LABEL>
               </DIV>
             </DIV>
           </DIV>
@@ -968,17 +968,7 @@
               </DIV>
             </DIV>
           </DIV>
-          {{-- <DIV CLASS="row">
-            <DIV CLASS="col-xs-12">
-              <LABEL CLASS="static-label">Entrez Votre Code de Référence (Optionnel)</LABEL>
-              <DIV CLASS="ga-form-group">
-                <INPUT TYPE="TEXT" NAME="customer.referringcustomerboxnumber" CLASS="ga-form-control" MAXLENGTH="10" onChange="return formvalidator.formUpdated(this.form, this);" onKeyPress="return formvalidator.checkFormat(this, event);" />
-                <SPAN CLASS="highlight"></SPAN>
-                <SPAN CLASS="bar"></SPAN>
-                <LABEL FOR="customer.referringcustomerboxnumber">Referrer's Suite Number</LABEL>
-              </DIV>
-            </DIV>
-          </DIV> --}}
+
           <STYLE TYPE="text/css">
             .extra-tall DIV.row {
               padding: 20px 0px 20px 0px;
@@ -1012,22 +1002,7 @@
                 <BUTTON TYPE="SUBMIT" CLASS="btn btn-primary btn-lg"  TITLE="Créez votre compte">Créez votre compte</BUTTON>
               </DIV>
             </DIV>
-            {{-- <TABLE CLASS="or">
-              <TR>
-                <TH>
-                  <DIV></DIV>
-                </TH>
-                <TD>Ou</TD>
-                <TH>
-                  <DIV></DIV>
-                </TH>
-              </TR>
-            </TABLE>
-            <DIV CLASS="row">
-              <DIV CLASS="col-xs-12 text-center">
-                <fb:login-button data-size="large" data-scope="email, public_profile" onlogin="checkLoginState();" id="btn-facebook-signup">S'enregistrer via Facebook</fb:login-button>
-              </DIV>
-            </DIV> --}}
+
             <DIV CLASS="row">
               <DIV CLASS="col-xs-12">
                 <P CLASS="terms"> En créant un compte, vous acceptez les <A HREF="#">conditions générales d’utilisation</A> et la <A HREF="#">politique de confidentialité</A> de Lynia Delivery Express. </P>

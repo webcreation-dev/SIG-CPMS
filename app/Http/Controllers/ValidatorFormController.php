@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ValidatorFormController extends Controller
 {
@@ -19,8 +20,16 @@ class ValidatorFormController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        $isCredentialsValid = ($credentials['email'] == "admin@sirh.bj" ) ? true : false;
+        $user = User::where('email', $credentials['email'])->first();
 
-        return response()->json(['isCredentialsValid' => $isCredentialsValid]);
+        if ($user) {
+
+            if (Hash::check($credentials['password'], $user->password)) {
+
+                return response()->json(['isCredentialsValid' => true]);
+            }
+        }
+
+        return response()->json(['isCredentialsValid' => false]);
     }
 }
