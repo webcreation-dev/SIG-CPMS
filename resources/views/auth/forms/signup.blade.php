@@ -1089,34 +1089,33 @@
             return formvalidator.error('Les Mots de Passe entrés ne correspondent pas. Veuillez vérifier les informations renseignées et réessayer.', f.elements['customer.password_confirm']);
           }
 
-        // Validation email
-        var email = f.elements['customer.email'].value;
-        var isEmailUnique = checkEmailUniqueness(email);
-        if (!isEmailUnique) {
-            return formvalidator.error('Cet email est déjà utilisé. Veuillez en choisir un autre.', f.elements['customer.email']);
-        }
+            // Validation email
+            var email = f.elements['customer.email'].value;
+            var isEmailUnique = checkEmailUniqueness(email);
+            if (!isEmailUnique) {
+                return formvalidator.error('Cet email est déjà utilisé. Veuillez en choisir un autre.', f.elements['customer.email']);
+            }
 
-          return true;
+            return true;
         });
         formvalidator.setThrobberMessage(document.forms['registerform'], 'Création d‘un nouveau compte . . .');
         $('FORM').submit(bsValidateForm);
         $('.submitbutton').click(bsSubmitForm);
         formvalidator.initializeForms();
 
-
         function checkEmailUniqueness(email) {
-            var isUnique = true;
-            $.ajax({
-                type: 'GET',
-                url: '/check-email-unique/' + encodeURIComponent(email),
-                async: false,
-                success: function(response) {
-                    isUnique = response.isUnique;
-                }
-        });
+                var isUnique = true;
+                $.ajax({
+                    type: 'GET',
+                    url: '/check-email-unique/' + encodeURIComponent(email),
+                    async: false,
+                    success: function(response) {
+                        isUnique = response.isUnique;
+                    }
+            });
 
-        return isUnique;
-    }
+            return isUnique;
+        }
       });
     </SCRIPT>
   </BODY>

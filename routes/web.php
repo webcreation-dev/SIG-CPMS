@@ -220,6 +220,7 @@ Route::get('/lynia-rewards', function () {
 
 Route::get('/check-email-unique/{email}', [ValidatorFormController::class, 'checkEmailUnique']);
 
+Route::post('check-login-credentials', [ValidatorFormController::class, 'checkLoginCredentials'])->name('check.login.credentials');
 // ********** END VALIDATOR FORMS **********
 
 

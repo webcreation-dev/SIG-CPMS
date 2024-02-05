@@ -10,6 +10,7 @@
     <HEAD>
       <META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
       <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" />
+      <meta  name ="csrf-token" content ="{{ csrf_token() }}" />
       <script>
         var GOOGLE_ANALYTICS_CLIENT_ID = 'xxx';
       </script>
@@ -58,25 +59,7 @@
       <META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
       <SCRIPT SRC="shipito/bitpay.com/bitpay.min.js"></SCRIPT>
       <SCRIPT SRC="shipito/scripts/popups.js"></SCRIPT>
-      <SCRIPT>
-        window.alert = function(msg) {
-          warningDialog('Mise en garde', msg, 'D\'ACCORD');
-        }
 
-        function setAlert(msg) {
-          successDialog('C’est réussi!', msg, 0);
-        }
-
-        function setError(msg, target) {
-          if ((target) && (document.getElementById(target))) {
-            var contents = $('#' + target);
-            $(contents).html(msg);
-            $(contents).show();
-            return;
-          }
-          errorDialog('Erreur', msg, 'D\'ACCORD');
-        }
-      </SCRIPT>
       <SCRIPT SRC="shipito/scripts/signupscripts.js"></SCRIPT>
       <SCRIPT SRC="shipito/scripts/v2/countrypicker.js"></SCRIPT>
       <LINK REL="StyleSheet" HREF="#" TYPE="text/css" />
@@ -164,7 +147,7 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="ga-form-group">
-                <input type="PASSWORD" name="customer.password" class="ga-form-control" maxlength="100" onchange="return formvalidator.formUpdated(this.form, this);" onkeypress="return formvalidator.checkFormat(this, event);" required="REQUIRED">
+                <input type="password" name="customer.password" class="ga-form-control" maxlength="100" onchange="return formvalidator.formUpdated(this.form, this);" onkeypress="return formvalidator.checkFormat(this, event);" required="REQUIRED">
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label for="customer.password">Mot de passe</label>
@@ -201,32 +184,43 @@
         formvalidator.makeRequired(document.forms['loginform'], 'customer.password');
 
         formvalidator.addValidationHandler(document.forms['loginform'], function(f) {
-        //   formvalidator.setAJAXTarget(f, 'post-div');
-        //   var email = f.elements['customer.email'].value;
-        //   var isEmailUnique = checkEmailUniqueness(email);
-        //   if (!isEmailUnique) {
-        //     return formvalidator.error('Cet email est déjà utilisé. Veuillez en choisir un autre.', f.elements['customer.email']);
-        //   }
+
+            var email = f.elements['customer.email'].value;
+            var password = f.elements['customer.password'].value;
+
+            var isCredentialsValid = checkCredentials(email, password);
+            if (!isCredentialsValid) {
+                return formvalidator.error('Les accès sont erronés.', f.elements['customer.email']);
+            }
+
           return true;
         });
-
-        function checkEmailUniqueness(email) {
-          var isUnique = true;
-          $.ajax({
-            type: 'GET',
-            url: '/check-email-unique/' + encodeURIComponent(email),
-            async: false,
-            success: function(response) {
-              isUnique = response.isUnique;
-            }
-          });
-          return isUnique;
-        }
 
         formvalidator.setThrobberMessage(document.forms['loginform'], 'Connexion En Cours . . .');
         $('FORM').submit(bsValidateForm);
         $('.submitbutton').click(bsSubmitForm);
         formvalidator.initializeForms();
+
+        function checkCredentials(email, password) {
+
+            var isCredentialsValid = false;
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type:'POST',
+                url:"{{ route('check.login.credentials') }}",
+                async: false,
+                data:{email: email, password: password},
+                success: function(data){
+                        isCredentialsValid = data.isCredentialsValid;
+                }
+            });
+            return isCredentialsValid;
+        }
+
       });
     </script>
 
