@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ValidatorFormController;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('landing');
 });
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -216,5 +213,14 @@ Route::get('/lynia-rewards', function () {
 });
 
 // ********** END SERVICES PAGES **********
+
+
+
+// ********** VALIDATOR FORMS **********
+
+Route::get('/check-email-unique/{email}', [ValidatorFormController::class, 'checkEmailUnique']);
+
+// ********** END VALIDATOR FORMS **********
+
 
 

@@ -58,7 +58,7 @@
       <META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
       <SCRIPT SRC="shipito/bitpay.com/bitpay.min.js"></SCRIPT>
       <SCRIPT SRC="shipito/scripts/popups.js"></SCRIPT>
-      {{-- <SCRIPT>
+      <SCRIPT>
         window.alert = function(msg) {
           warningDialog('Mise en garde', msg, 'D\'ACCORD');
         }
@@ -77,7 +77,7 @@
           errorDialog('Erreur', msg, 'D\'ACCORD');
         }
       </SCRIPT>
-      <SCRIPT SRC="shipito/scripts/signupscripts.js"></SCRIPT> --}}
+      <SCRIPT SRC="shipito/scripts/signupscripts.js"></SCRIPT>
       <SCRIPT SRC="shipito/scripts/v2/countrypicker.js"></SCRIPT>
       <LINK REL="StyleSheet" HREF="#" TYPE="text/css" />
       <LINK REL="StyleSheet" HREF="shipito/styles/account/styles.css" TYPE="text/css" />
@@ -108,8 +108,8 @@
         }
       </style>
     </HEAD>
-    <body class="narrow" cz-shortcut-listen="true">
-      <div class="container language-container">
+  <body class="narrow" cz-shortcut-listen="true">
+    <div class="container language-container">
         <div class="dropdown languages">
           <a class="dropdown-toggle" data-toggle="dropdown">
             <img src="shipito/fr/imgs/navigation/Language%20icon.svg"> Français
@@ -139,99 +139,96 @@
           }
         </style>
         <div>
-          <h1>Connexion</h1>
-          <form method="POST" action="{{route('login')}}"
-          {{-- name="loginform" --}}
-          >
+
+        <h1>Connexion</h1>
+        <form method="POST" action="{{route('login')}}" name="loginform">
             @csrf
-            {{-- <input type="HIDDEN" name="act" value="Customer.login">
-            <input type="HIDDEN" name="cmscountry" value="us">
-            <input type="HIDDEN" name="nextpage" value="https://www.shipito.com/fr/account/">
-            <input type="HIDDEN" name="cmslanguage" value="fr">
-            <input type="HIDDEN" name="postingpageurl" value="/fr/account/login?nextpage=https%3A%2F%2Fwww.shipito.com%2Ffr%2Faccount%2F">
-            <div id="loginerror" class="errormessage"></div>
-            <div id="alert" class="alertmessage"></div> --}}
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="ga-form-group">
-                  <input type="TEXT" name="email" class="ga-form-control" maxlength="100" onchange="return formvalidator.formUpdated(this.form, this);" onkeypress="return formvalidator.checkFormat(this, event);" required="REQUIRED">
-                  <span class="highlight"></span>
-                  <span class="bar"></span>
-                  <label for="customer.email">adresse mail</label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="ga-form-group">
-                  <input type="PASSWORD" name="password" class="ga-form-control" maxlength="100" onchange="return formvalidator.formUpdated(this.form, this);" onkeypress="return formvalidator.checkFormat(this, event);" required="REQUIRED">
-                  <span class="highlight"></span>
-                  <span class="bar"></span>
-                  <label for="customer.password">Mot de passe</label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 text-center">
-                <button type="SUBMIT" class="btn btn-primary btn-login" title="Connexion">Connexion</button>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col-xs-12 text-center">
-
-                <br> Vous n'avez pas encore de compte? Enregistrez-vous maintenant <a href="/signup">Enregistrez-vous maintenant</a>
+          <input type="HIDDEN" name="act" value="Customer.login">
+          <input type="HIDDEN" name="cmscountry" value="us">
+          <input type="HIDDEN" name="nextpage" value="https://www.shipito.com/fr/account/">
+          <input type="HIDDEN" name="cmslanguage" value="fr">
+          <input type="HIDDEN" name="postingpageurl" value="/login">
+          <div id="loginerror" class="errormessage"></div>
+          <div id="alert" class="alertmessage"></div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="ga-form-group">
+                <input type="TEXT" name="customer.email" class="ga-form-control" maxlength="100" onchange="return formvalidator.formUpdated(this.form, this);" onkeypress="return formvalidator.checkFormat(this, event);" required="REQUIRED">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="customer.email">adresse mail</label>
               </div>
             </div>
-          </form>
-        </div>
-        <div id="post-div"></div>
-        {{-- <script>
-          function setError(msg, target) {
-            if ((target) && (document.getElementById(target))) {
-              var contents = $('#' + target);
-              $(contents).html(msg);
-              $(contents).show();
-              return;
-            }
-          }
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="ga-form-group">
+                <input type="PASSWORD" name="customer.password" class="ga-form-control" maxlength="100" onchange="return formvalidator.formUpdated(this.form, this);" onkeypress="return formvalidator.checkFormat(this, event);" required="REQUIRED">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label for="customer.password">Mot de passe</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <button type="SUBMIT" class="btn btn-primary btn-login" title="Connexion">Connexion</button>
+            </div>
+          </div>
 
-          function setAlert(msg) {
-            $('#alert').html(msg);
-            $('#alert').show();
-            return;
-          }
-          $('label').click(function() {
-            var field = $(this).attr('FOR');
-            if (field) {
-              var f = document.forms['loginform'];
-              if (f.elements[field]) f.elements[field].focus();
-            }
-          });
-        </script> --}}
-        <div id="status"></div>
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <br>
+              <br>
+              <a href="#">J'ai oublié mon mot de passe</a>
+              <br>
+              <br>
+              <br> Vous n'avez pas encore de compte? Enregistrez-vous maintenant <a href="signup">Enregistrez-vous maintenant</a>
+            </div>
+          </div>
+        </form>
       </div>
-      <footer> Copyright © Shipito 2024. All rights reserved </footer>
 
+    </div>
+    <footer> Copyright © Lynia Express 2024. All rights reserved </footer>
 
-      {{-- <script>
-        var $ = jQuery.noConflict();
-        $(document).ready(function() {
-          formvalidator.makeRequired(document.forms['loginform'], 'customer.email');
-          formvalidator.makeRequired(document.forms['loginform'], 'customer.password');
-          formvalidator.addValidationHandler(document.forms['loginform'], function(f) {
-            formvalidator.setAJAXTarget(f, 'post-div');
-            return true;
-          });
-          formvalidator.setThrobberMessage(document.forms['loginform'], 'Connexion En Cours . . .');
-          $('FORM').submit(bsValidateForm);
-          $('.submitbutton').click(bsSubmitForm);
-          formvalidator.initializeForms();
+    <script>
+      var $ = jQuery.noConflict();
+      $(document).ready(function() {
+
+        formvalidator.makeRequired(document.forms['loginform'], 'customer.email');
+        formvalidator.makeRequired(document.forms['loginform'], 'customer.password');
+
+        formvalidator.addValidationHandler(document.forms['loginform'], function(f) {
+        //   formvalidator.setAJAXTarget(f, 'post-div');
+        //   var email = f.elements['customer.email'].value;
+        //   var isEmailUnique = checkEmailUniqueness(email);
+        //   if (!isEmailUnique) {
+        //     return formvalidator.error('Cet email est déjà utilisé. Veuillez en choisir un autre.', f.elements['customer.email']);
+        //   }
+          return true;
         });
-      </script> --}}
-      <div id="chat-widget-container" style="opacity: 0; visibility: hidden; z-index: -1; position: fixed; bottom: 0px; width: 84px; height: 84px; max-width: 100%; max-height: calc(100% + 0px); min-height: 0px; min-width: 0px; background-color: transparent; border: 0px; overflow: hidden; right: 0px; transition: none 0s ease 0s !important;">
-        <iframe allow="clipboard-read; clipboard-write; autoplay; microphone *; camera *; display-capture *; picture-in-picture *; fullscreen *;" src="./Connexion_files/open_chat.html" allowtransparency="true" id="chat-widget" name="chat-widget" title="LiveChat chat widget" scrolling="no" style="width: 100%; height: 100%; min-height: 0px; min-width: 0px; margin: 0px; padding: 0px; background-image: none; background-position: 0% 0%; background-size: initial; background-attachment: scroll; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); border-width: 0px; float: none; color-scheme: normal; position: absolute; inset: 0px; transition: none 0s ease 0s !important; display: none; visibility: hidden;"></iframe>
-        <iframe allowtransparency="true" id="chat-widget-minimized" name="chat-widget-minimized" title="LiveChat chat widget" scrolling="no" style="width: 100%; height: 100%; min-height: 0px; min-width: 0px; margin: 0px; padding: 0px; background-image: none; background-position: 0% 0%; background-size: initial; background-attachment: scroll; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); border-width: 0px; float: none; color-scheme: normal; display: block;" src="./Connexion_files/saved_resource.html"></iframe>
-      </div>
-    </body>
-  </html>
+
+        function checkEmailUniqueness(email) {
+          var isUnique = true;
+          $.ajax({
+            type: 'GET',
+            url: '/check-email-unique/' + encodeURIComponent(email),
+            async: false,
+            success: function(response) {
+              isUnique = response.isUnique;
+            }
+          });
+          return isUnique;
+        }
+
+        formvalidator.setThrobberMessage(document.forms['loginform'], 'Connexion En Cours . . .');
+        $('FORM').submit(bsValidateForm);
+        $('.submitbutton').click(bsSubmitForm);
+        formvalidator.initializeForms();
+      });
+    </script>
+
+  </body>
+</html>

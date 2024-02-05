@@ -1088,16 +1088,37 @@
           if (pass1 != pass2) {
             return formvalidator.error('Les Mots de Passe entrés ne correspondent pas. Veuillez vérifier les informations renseignées et réessayer.', f.elements['customer.password_confirm']);
           }
+
+        // Validation email
+        var email = f.elements['customer.email'].value;
+        var isEmailUnique = checkEmailUniqueness(email);
+        if (!isEmailUnique) {
+            return formvalidator.error('Cet email est déjà utilisé. Veuillez en choisir un autre.', f.elements['customer.email']);
+        }
+
           return true;
         });
         formvalidator.setThrobberMessage(document.forms['registerform'], 'Création d‘un nouveau compte . . .');
         $('FORM').submit(bsValidateForm);
         $('.submitbutton').click(bsSubmitForm);
         formvalidator.initializeForms();
+
+
+        function checkEmailUniqueness(email) {
+            var isUnique = true;
+            $.ajax({
+                type: 'GET',
+                url: '/check-email-unique/' + encodeURIComponent(email),
+                async: false,
+                success: function(response) {
+                    isUnique = response.isUnique;
+                }
+        });
+
+        return isUnique;
+    }
       });
     </SCRIPT>
   </BODY>
-  <!-- Mirrored from www.shipito.com/fr/signup-form?customer.registrationcustomertype=10 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Jan 2024 13:47:43 GMT -->
+
 </HTML>
-<!--- Copyright 2024 GlobalAccess All Rights Reserved -->
-<!--- Web Server 3088 -->

@@ -1,0 +1,559 @@
+/*****************************************************************************************************
+ GLOBAL
+*****************************************************************************************************/
+BODY {
+	font-family: Montserrat,sans-serif;
+	font-weight: 300;
+	font-size: 16px;
+	color: #535353;
+	background-color: #F6F6F6;
+}
+
+BODY.narrow .container {
+	max-width: 450px;
+}
+
+A {
+	color: #00A9CE;
+}
+A:HOVER {
+	text-decoration: none;
+}
+H1 {
+	font-weight: 300;
+	font-size: 30px;
+	color: #535353;
+	margin: 40px 0px 40px 0px;
+}
+BODY.narrow H1 {
+	font-size: 18px;
+}
+H3 {
+	font-weight: 300;
+	font-size: 16px;
+	color: #535353;
+}
+.language-container {
+  background-color: #F6F6F6;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 50px;
+}
+BODY.narrow DIV.logo {
+	text-align: center;
+}
+BODY.narrow H1 {
+	text-align: center;
+	margin: 30px 0px 30px 0px;
+}
+DIV.logo I {
+	font-size: 40px;
+}
+DIV.logo A, DIV.logo A:HOVER, DIV.logo A:ACTIVE {
+	color: #00A9CE;
+	text-decoration: none;
+	outline: none;
+}
+P {
+	margin: 20px 0px 20px 0px;
+}
+
+/*****************************************************************************************************
+ Header
+*****************************************************************************************************/
+.languages {
+	z-index: 1000;
+	text-align: right;
+	text-transform: uppercase;
+}
+.languages IMG {
+	height: 15px;
+	margin-top: -3px;
+	margin-right: 3px;
+}
+.languages A, .languages A:focus, .languages A:hover {
+	color: #808080;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/*****************************************************************************************************
+ Forms
+*****************************************************************************************************/
+.static-label {
+	font-weight: 300;
+	margin-bottom: 15px;
+}
+.radio-selector {
+	cursor: pointer;
+}
+
+/********************
+ Animated Labels, bar
+*********************/
+.ga-form-group {
+   position:relative; 
+   margin-bottom:30px;
+}
+.ga-form-group SELECT {
+   -webkit-appearance: none;
+   border-radius: 0;
+}
+.ga-form-group INPUT, .ga-form-group TEXTAREA {
+	border:none; 
+   border-bottom:1px solid #D7D7D7;
+   -webkit-appearance: none;
+   border-radius: 0;
+   padding:15px 5px 10px 5px; 
+   display:block; 
+   width:100%;
+   caret-color: #00A9CE;
+}
+.ga-form-group SELECT {
+   display:block; 
+   width:100%;
+   caret-color: #00A9CE;
+}
+.ga-form-group TEXTAREA {
+   height: 250px;
+}
+.ga-form-group INPUT:FOCUS, .ga-form-group TEXTAREA:FOCUS {
+   outline:none;
+}
+.ga-form-group INPUT.not-required:VALID ~LABEL {
+   top:12px; 
+   font-size:14px; 
+   color:#808080;
+}
+
+.ga-form-group INPUT:FOCUS ~LABEL, .ga-form-group INPUT.not-required:FOCUS ~LABEL, .ga-form-group INPUT:VALID ~LABEL, .ga-form-group TEXTAREA:FOCUS ~LABEL, .ga-form-group TEXTAREA:VALID ~LABEL {
+   top:-8px; 
+   font-size:12px; 
+   color:#3399cc;
+}
+
+.ga-form-group LABEL {
+   position:absolute; 
+   color:#808080; 
+   top:12px; 
+   left:0; 
+   transition:0.2s ease all;
+   font-weight: 300;
+   font-size: 14px;
+}
+html[dir="rtl"] .ga-form-group LABEL {
+   left:auto;
+   right: 0; 
+}
+.ga-form-group .bar {
+  position:relative; 
+  display:block; 
+  width:100%;
+}
+.ga-form-group .ga-fa-error ~ .bar {
+  margin-top: -21px;
+}
+
+.ga-form-group .bar:before {
+ content:""; 
+ position:absolute;  
+ left: 50%; 
+ right: 50%; 
+ bottom:0; 
+ background:#00A9CE; 
+ height:4px; 
+ transition:left 0.2s ease-out, right 0.2s ease-out;
+}
+.ga-form-group .has-error INPUT, .ga-form-group .has-error TEXTAREA {
+ border-bottom: solid 2px #AA0824; 
+}
+.ga-form-group .has-error INPUT:FOCUS, .ga-form-group .has-error TEXTAREA:FOCUS   {
+ border-bottom: none; 
+}
+.has-error LABEL, .has-error .ga-fa-error, .has-error INPUT:FOCUS ~LABEL, .has-error INPUT:VALID ~LABEL, .has-error TEXTAREA:FOCUS ~LABEL, .has-error TEXTAREA:VALID ~LABEL {
+   color:#AA0824;
+   font-weight: 400;
+}
+.ga-form-group INPUT:focus ~.bar:before, .ga-form-group TEXTAREA:focus ~.bar:before
+{
+   left:0; 
+   right:0;
+}
+.ga-form-group .ga-errormessage {
+   font-family: Montserrat, sans-serif;
+   font-weight: 300;
+   font-size: 14px;
+   color: #AA0824;
+   background-color: #FFFFFF;
+   text-align: center;
+}
+.has-error .bar:before {
+ background:#AA0824; 
+}
+
+/*****************************************************************************************************
+ FOOTER
+*****************************************************************************************************/
+FOOTER {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	text-align: center;
+	font-size: 12px;
+}
+
+/*****************************************************************************************************
+ Country Pick List
+*****************************************************************************************************/
+.country-label {
+   color:#808080; 
+   font-weight: 300;
+   font-size: 14px;
+}
+ UL.st-countries-container {
+    padding: 0px;
+    margin-bottom: 10px;
+  }
+
+/*****************************************************************************************************
+ COUNTRY PICKERS
+*****************************************************************************************************/
+UL.st-country-pick-list {
+   padding: 0px 0px 0px 10px;
+   border-radius: 0px;
+}
+
+UL.st-country-pick-list LI {
+	list-style: none;
+	margin-left: 0px;
+	padding-left: 0px;
+}
+
+UL.st-country-pick-list .dropdown-menu {
+    margin-top: -3px;
+    margin-left: -10px;
+    border-radius: 0px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+UL.st-country-pick-list A {
+  padding-left: 40px;
+  display: block;
+  background-position: 5px center;
+  background-repeat: no-repeat;
+  background-size: 27px 20px;
+  line-height: 32px;
+  text-decoration: none;
+  color: #808080;
+  font-size: 14px;
+  cursor: pointer;
+}
+UL.st-country-pick-list A::before {
+	content: "";
+	border: solid 1px #D7D7D7;
+	display: inline-block;
+	width: 29px;
+	height: 22px;
+	position: relative;
+	top: 6px;
+	left: -36px;
+	margin-right: -29px;
+}
+UL.st-country-pick-list A.st-country-none {
+	padding-left: 10px;
+}
+UL.st-country-pick-list A.st-country-none::before {
+	border: none;
+}
+UL.st-country-pick-list SPAN.st-caret {
+	float: right;
+	font-size: 20px;
+	margin-right: 10px;
+}
+UL.st-country-pick-list .dropdown-menu {
+	padding: 10px;
+}
+
+html[dir="rtl"] .st-countries > UL.dropdown-menu > LI > A::before, html[dir="rtl"] LI.st-countries.open > UL.country-list > LI > A::before {
+	right: calc(100% + 36px);
+}
+
+UL.st-country-pick-list .st-country SPAN.ga-caret {
+	float: right;
+	margin-top: 12px;
+	margin-right: 10px;
+}
+
+.st-white {
+	background-color: #FFFFFF;
+	min-height: 400px;
+	position: relative;
+}
+
+.st-white .background {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    background-color: #00A9CE;
+    background-image: url("../../imgs/signup/background.svg");
+    background-position: right top;
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+}
+BODY.narrow .st-white {
+    padding: 30px 30px 30px 30px;
+    min-height: 450px;
+}
+
+
+/*****************************************************************************************************
+ RESPONSIVE TWEAKS
+*****************************************************************************************************/
+@media (min-width:1200px) {
+	.st-white {
+	  padding: 30px 450px 30px 50px;
+  	  min-height: calc(100vh - 200px);
+	}
+	.no-background  .st-white {
+	  padding-right: 30px;
+	}
+	.st-white .background {
+	    width: 400px;
+	} 
+   .background .cost-overview {
+     	margin: 140px 50px 50px 50px;	
+    }
+}
+
+@media (min-width:992px) and (max-width:1199px) {
+	.st-white {
+	  padding: 30px 350px 30px 50px;
+	  position: relative;
+	}
+	.no-background  .st-white {
+	  padding-right: 30px;
+	}
+	.st-white .background {
+	  width: 300px;
+	}
+   .background .cost-overview {
+     	margin: 80px 25px 25px 25px;	
+    }
+}
+	
+
+@media (min-width:768px) and (max-width:991px) {
+	.st-white {
+	  padding: 30px 30px 30px 50px;
+	  position: relative;
+	}
+	.st-white .background {
+	  position: relative;
+	  width: auto;
+	  height: auto;
+	}
+	.st-white .background {
+	  margin: 0px -30px -30px -50px;
+	}
+}
+	
+@media (max-width:991px) {
+	.st-white .background {
+	  position: relative;
+	  width: auto;
+	  height: auto;
+	  background-image: url("../../imgs/signup/backgroundm.svg");
+	  background-position: center bottom;
+	  background-repeat: no-repeat;
+	  background-size: auto 150px;
+	  padding: 30px 20px 150px 20px;
+	}
+   .background .cost-overview {
+     	margin: 15px;	
+    }
+}
+@media (min-width:768) {
+	.hide-lg {
+	  display: none !important;
+    }
+}
+
+@media (max-width:767px) {
+    BODY.narrow DIV.logo {
+      margin: -30px -30px 30px -30px;
+   }
+   H1 {
+	   display: block;
+	   text-align: center;
+	   font-size: 24px;
+	   margin: 40px 0px 40px 0px;
+	}
+    .language-container {
+      padding-bottom: 5px;
+    }
+	DIV.logo {
+	  text-align: center;
+	  background-color: #F6F6F6;
+	  margin-left: -15px;
+	  margin-right: -15px;
+	  padding-bottom: 20px;
+	}
+	DIV.logo I {
+	  font-size: 30px;
+	}
+    FOOTER {
+      margin-top: 20px;
+	  margin-bottom: 20px;
+    }
+    .hide-sm {
+      display: none !important;
+    }
+	.st-white .background {
+	  margin: 0px -15px 0px -15px;
+	}
+}
+/*****************************************************************************************************
+ Plan Table (Activate Account page) 
+*****************************************************************************************************/
+.plans-table {
+	width: 100%;
+	border: solid 1px #000000;
+}
+.plans-table > THEAD > TR > TH {
+  text-align: center;
+  vertical-align: top;
+  font-weight: 500;
+  border: solid 1px #DDDDDD;
+}
+.plans-table > THEAD > TR > TH > DIV > .btn {
+	width: calc(100% - 30px);
+}
+.plans-table THEAD TH DIV.plan-type {
+  color: #FFFFFF;
+}
+.plans-table THEAD TH.standard DIV.plan-type {
+  background-color: #75C2D0;
+}
+.plans-table THEAD TH.premium DIV.plan-type {
+  background-color: #6598CC;
+}
+.plans-table THEAD TH.business  DIV.plan-type{
+  background-color: #6AAF1B;
+}
+
+.plans-table .plan-type {
+  font-size: 18px;
+  line-height: 30px;
+  height: 60px;
+  vertical-align: middle;
+  padding-top: 15px; 
+}
+.plans-table .plan-description {
+  height: 80px;
+  padding: 20px 50px 20px 50px;
+}
+.plans-table .plan-details {
+  padding: 20px 30px 40px 30px;
+}
+
+.plans-table .plan-price {
+  font-size: 50px;
+  font-weight: 500;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  min-height: 150px;
+  height: 150px;
+}
+.plans-table .plan-price SMALL {
+  font-size: 20px;
+  font-weight: 300;
+}
+.plans-table .plan-price SPAN.annual {
+    display: block;
+}
+.plans-table .plan-price SPAN.monthly {
+    display: none;
+}
+.plans-table .plan-price.monthly SPAN.annual {
+    display: none;
+}
+.plans-table .plan-price.monthly SPAN.monthly {
+    display: block;
+}
+.plans-table .plan-paymentterm {
+  text-align: center;
+  height: 80px;
+}
+.plans-table .plan-paymentterm > DIV {
+	display: inline-block;
+	min-width: 100px;
+}
+
+.plans-table .plan-button .btn {
+  border: solid 1px #00A9CE;
+  background-color: #FFFFFF;
+  color: #00A9CE;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+  margin: 15px 30px 15px 30px;
+  padding: 14px 5px 14px 5px;
+  width: calc(100% - 70px);
+  box-sizing: border-box; 
+}
+.plans-table .plan-button .btn.selected {
+  background-color: #00A9CE;
+  color: #FFFFFF;
+}
+
+@media (max-width:767px) {
+  .plans-table {
+    margin-left: -15px;
+    margin-right: -15px;
+    width: calc(100% + 30px);
+  }
+  .plans-table .plan-type {
+    height: 80px;
+    line-height: 20px;
+    padding: 10px;
+  }
+  .plans-table .plan-description {
+    height: 100px;
+    padding: 20px 10px 20px 10px;
+  }
+  .plans-table .plan-price {
+    font-size: 24px;
+    min-height: 85px;
+    height: 85px;
+  }
+  .plans-table .plan-price SMALL {
+    font-size: 16px;
+  }
+  .plans-table .plan-details {
+    padding: 20px 10px 20px 10px;
+  }
+
+ .plans-table .plan-button .btn {
+   border: solid 1px #00A9CE;
+   background-color: transparent;
+   color: #00A9CE;
+   text-transform: uppercase;
+   font-size: 14px;
+   font-weight: 500;
+   display: inline-block;
+   border-radius: 40px !important;
+   width: 70px;
+   height: 70px;
+   line-height: 70px;
+   vertical-align: middle;
+   padding: 0px;
+   margin: 0px;
+ }
+ .auto-pay LABEL {
+    text-indent: -35px;
+	margin-left: 40px;
+ }
+}
+
