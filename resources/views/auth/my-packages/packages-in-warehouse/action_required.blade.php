@@ -100,7 +100,7 @@
       </style>
 
       <div class="main-body">
-        <div class="container package-list">
+        {{-- <div class="container package-list">
           <h2>Action Requise (0)</h2>
           <div class="row">
             <div class="col-xs-12">
@@ -117,7 +117,192 @@
               <div class="panel-group"></div>
             </strong>
           </strong>
-        </div>
+        </div> --}}
+        <div class="container package-list">
+            <h2>Action Requise (1)</h2>
+            <div class="row">
+             <div class="col-xs-12">
+              <div id="header-content-action-required">
+               <p>
+                <strong> Veuillez noter : <strong> Si vous avez été informé par un transporteur qu'un colis a été livré à Shipito et que vous ne voyez pas votre colis listé ici, veuillez prévoir 1 à 2 jours ouvrables pour l'enregistrement du colis et la mise à jour du système.
+               </strong></strong></p><strong><strong>
+              </strong></strong></div><strong><strong>
+             </strong></strong></div><strong><strong>
+            </strong></strong></div><strong><strong>
+
+            <div class="panel-group">
+
+
+              <div class="panel panel-packages">
+
+               <div class="panel-heading" data-toggle="collapse" href="#arpanel1">
+                <div class="row">
+
+           <!-- Title -->
+                 <div class="col-sm-3 col-xs-12 package-id-panel">
+                  <div class="icons"><i class="if-collapsed fa fa-fw fa-plus plusminus"></i><i class="if-not-collapsed fa fa-fw fa-minus plusminus"></i></div>
+
+                  <label>Mise à Niveau de l'Abonnement</label>
+                  <div class="package-id">
+
+
+                   Facture N° MB6755182
+
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                 </div>
+
+           <!-- Date -->
+                 <div class="col-sm-2 col-xs-4">
+
+
+
+
+
+
+
+
+                  06 February, 2024
+
+
+
+
+
+
+
+                 </div>
+
+           <!-- Details -->
+                 <div class="col-sm-2 col-xs-4">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 </div>
+
+           <!-- Required Action -->
+                 <div class="col-sm-2 col-xs-4">
+                  <label>Action Requise</label>
+                  <span class="action-required">
+
+
+
+
+                   Paiement requis
+
+
+
+
+
+
+
+
+
+
+                  </span>
+                 </div>
+
+           <!-- Buttons-->
+                 <div class="col-sm-3 col-xs-12">
+
+
+
+
+
+
+
+               <a href="https://www.shipito.com/servlet/Account?act=Order.retryPayment&amp;orders.orderid=6755182&amp;gasv=8520567932776907776" class="btn btn-primary btn-lg" data-id="6755182"><i class="fa fa-money fa-fw"></i> Effectuer un paiement</a>
+
+
+
+
+
+
+
+
+
+
+                 </div>
+
+                </div>
+               </div> <!--  Heading -->
+
+               <div class="package-details panel-collapse in" id="arpanel1">
+                <div class="panel-body">
+
+                 <!-- Heading and Buttons -->
+                 <div class="row">
+
+
+
+
+
+
+
+
+
+
+                 </div>
+
+           <!-- Details  -->
+                <div class="row">
+
+
+
+
+
+
+
+                </div> <!-- Details  -->
+
+           <!-- Text Links -->
+                <div class="row">
+                 <div class="col-xs-12 text-right">
+
+                   <a href="https://www.shipito.com/fr/account/invoice?orders.orderid=6755182" onclick="return gaPopUpDisplay(this);" data-id="6755182">Afficher la facture<i class="fa fa-angle-double-right fa-fw"></i></a><br>
+                   <a href="https://www.shipito.com/fr/account/support-tickets/open-new?crmticket.tickettype=500&amp;crmticket.orderid=6755182" onclick="return gaPopUpDisplay(this);">Signaler un problème<i class="fa fa-angle-double-right fa-fw"></i></a>
+
+
+
+
+
+                 </div>
+                </div> <!-- Text Links -->
+               </div>
+
+               </div> <!--  Collapsible-->
+              </div>
+
+
+
+                <div class="page-links">
+                 <div class="text-center ga-pagination">1  Enregistrement(s) trouvé(s)</div>
+
+                </div>
+
+
+            </div>
+           </strong></strong></div>
         <strong>
           <strong>
             <div id="getting-started">

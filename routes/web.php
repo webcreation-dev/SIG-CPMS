@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidatorFormController;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+})->name('dashboard');
+
 Route::get('/', function () {
     return view('landing');
 });
+
+Route::resource('users', UserController::class);
+
+Route::resource('package', PackageController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,6 +48,10 @@ Route::get('/signup', function () {
 
 Route::get('/signin', function () {
     return view('auth.forms.signin');
+});
+
+Route::get('/account_v1', function () {
+    return view('account');
 });
 
 Route::middleware(['auth'])->group(function () {
