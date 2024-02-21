@@ -64,24 +64,28 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($packages as $package)
+                        @foreach ($packages as $key => $package)
                             <tr>
                                 <td>
-                                    <img width="30" height="30" src="{{asset('assets/images/pages/product/box1.png')}}" alt="">
+                                    <img width="30" height="30" src="{{asset('assets/images/pages/product/box' . (($key % 3) + 1) . '.png')}}" alt="">
                                 </td>
                                 <td>{{$package->name_package}}</td>
                                 <td>{{$package->weight}} KG</td>
                                 <td>{{$package->price}} CFA</td>
-                                <td>{{$package->date}}</td>
+                                <td>{{ Carbon\Carbon::parse($package->date)->format('d F Y') }}</td>
                                 <td>
-                                    <span class="badge badge-info">Action </span>
+
+                                    <span class="badge badge-{{ App\Models\Package::LEVEL_BADGE[$package->level->id] }}">{{$package->level->name}} </span>
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-danger" type="button">Non Livré</button>
+                                    <button class="btn btn-sm btn-outline-danger" type="button">{{$package->status}}</button>
                                 </td>
                                 <td>
+                                    {{-- <button class="btn btn-primary" >confirm dialog</button> --}}
+
                                     <a href="#" title="Modifier un colis" data-bs-toggle="modal" data-bs-target="#ViewModal"
                                         view-package-name="{{$package->name_package}}"
+                                        view-user-name="{{ App\Models\User::getUserName($package->user_id)}}"
                                         view-package-weight="{{$package->weight}}"
                                         view-package-price="{{$package->price}}"
                                         view-package-date="{{$package->date}}"
@@ -92,6 +96,7 @@
                                     </a>
                                     <a href="#" title="Modifier un colis" data-bs-toggle="modal" data-bs-target="#EditModal"
                                         data-package-name="{{$package->name_package}}"
+                                        edit-user-name="{{ App\Models\User::getUserName($package->user_id)}}"
                                         data-package-weight="{{$package->weight}}"
                                         data-package-price="{{$package->price}}"
                                         data-package-date="{{$package->date}}"
@@ -100,7 +105,21 @@
                                         data-package-description="{{$package->description}}">
                                         <span class="badge badge-warning"></i> <i class="ti-pencil"></i> </span>
                                     </a>
-                                    <span class="badge badge-danger"></i> <i class="ti-trash"></i> </span>
+                                    <a href="{{ route('package.destroy', $package->id) }}"
+                                    title="Supprimer un colis"
+                                    class="delete-link"
+                                    data-id="{{ $package->id }}">
+                                        <span class="badge badge-danger"><i class="ti-trash"></i></span>
+                                    </a>
+
+                                    <!-- Ajoutez le formulaire de suppression caché pour chaque élément dans la boucle -->
+                                    <form id="delete-form-{{ $package->id }}"
+                                        action="{{ route('package.destroy', $package->id) }}"
+                                        method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -128,24 +147,33 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="form-label">Nom</label>
-                      <input name="name_package" class="form-control" type="text" placeholder="Nom du colis">
+                      <input name="name_package" required class="form-control" type="text" placeholder="Nom du colis">
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label">Poids</label>
-                        <input name="weight" class="form-control" type="number" placeholder="Poids du colis">
+                        <input name="weight" required class="form-control" type="number" placeholder="Poids du colis">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Prix</label>
-                    <input name="price" class="form-control" type="number" placeholder="Prix du colis">
+                    <input name="price" required class="form-control" type="number" placeholder="Prix du colis">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Utilisateur</label>
+                        <select class="form-control basic-select" required name="user_id" style="width: 100%;" >
+                            <option>Choisir un utilsateur...</option>
+                            @foreach ($users as $user)
+                            <option value="{{$user->id}}">{{$user->lastname}} {{$user->name}}</option>
+                            @endforeach
+                        </select>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Date de réception</label>
-                    <input name="date" class="form-control" type="date" required value="2023-03-13">
+                    <input name="date" class="form-control"  type="date" required value="2023-03-13">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Description</label>
-                    <textarea name="description" class="form-control" rows="4" cols="5" placeholder="Entrez la description">                   </textarea>
+                    <textarea name="description" class="form-control" required rows="4" cols="5" placeholder="Entrez la description"></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-success btn-md">ENREGISTRER</button>
@@ -171,31 +199,66 @@
 
                 <input type="hidden" name="edit_user_id">
                 <input type="hidden" name="edit_package_id">
+                <input type="hidden" value="1" name="by_user">
+
+                <div class="form-group">
+                    <label class="form-label">Nom de l'expéditeur</label>
+                    <input disabled name="edit_user_name" required class="form-control" type="text">
+                </div>
 
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="form-label">Nom</label>
-                      <input name="edit_name_package" class="form-control" type="text" placeholder="Nom du colis">
+                      <input name="edit_name_package" required class="form-control" type="text" placeholder="Nom du colis">
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label">Poids</label>
-                        <input name="edit_weight" class="form-control" type="number" placeholder="Poids du colis">
+                        <input name="edit_weight" required class="form-control" type="number" placeholder="Poids du colis">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Prix</label>
-                    <input name="edit_price" class="form-control" type="number" placeholder="Prix du colis">
+                    <input name="edit_price" required class="form-control" type="number" placeholder="Prix du colis">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Date de réception</label>
-                    <input name="edit_date" class="form-control" type="date" required value="2023-03-13">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea name="edit_description" class="form-control" rows="4" cols="5" placeholder="Entrez la description">                   </textarea>
+                    <input name="edit_date" required class="form-control" type="date" required value="2023-03-13">
                 </div>
 
-                <button type="submit" class="btn btn-success btn-md">ENREGISTRER</button>
+                <div class="form-group">
+                    <label class="form-label">Niveau de l'expédition</label>
+                    <div class="card-body">
+                        <div class="form-check custom-chek form-check-inline check-warning">
+                        <input class="form-check-input" type="radio" value="1" id="inlineDefaultradio" name="level_id">
+                        <span class="badge badge-warning">Action requise </span>
+                        </div>
+                        <div class="form-check custom-chek form-check-inline check-secondary">
+                            <input class="form-check-input" type="radio" value="2" id="inlinesecondaryradio" name="level_id">
+                            <span class="badge badge-secondary">En cours </span>
+                        </div>
+                        <div class="form-check custom-chek form-check-inline check-primary">
+                            <input class="form-check-input" type="radio" value="3" id="inlinesuccessradio" name="level_id">
+                            <span class="badge badge-primary">Prêt à envoyer</span>
+                        </div>
+                        <div class="form-check custom-chek form-check-inline check-info mt-10">
+                            <input class="form-check-input" type="radio" value="4" id="inlineDefaultradio" name="level_id">
+                            <span class="badge badge-info">En transit</span>
+                        </div>
+
+                        <div class="form-check custom-chek form-check-inline check-sucess mt-10" style="margin-left: 30px;">
+
+                            <input class="form-check-input" type="radio" value="5" id="inlineinforadio" name="level_id">
+                            <span class="badge badge-success">Livré</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="edit_description" required class="form-control" rows="4" cols="5" placeholder="Décrivez le contenu"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-md">MODIFIER</button>
 
               </form>
             </div>
@@ -205,41 +268,45 @@
       <!-- Edit Modal end-->
 
 
-    <div class="modal fade" id="ViewModal">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">IFORMATIONS DU COLIS</h5><a href="javascript:void(0);" data-bs-dismiss="modal"><i class="ti-close"></i></a>
-            </div>
-            <div class="modal-body">
-
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="form-label">Nom</label>
-                      <input disabled name="view_name_package" class="form-control" type="text" placeholder="Nom du colis">
+        <div class="modal fade" id="ViewModal">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">IFORMATIONS DU COLIS</h5><a href="javascript:void(0);" data-bs-dismiss="modal"><i class="ti-close"></i></a>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Nom de l'expéditeur</label>
+                        <input disabled name="view_user_name" class="form-control" type="text" placeholder="Nom du colis">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label class="form-label">Poids</label>
-                        <input disabled name="view_weight" class="form-control" type="number" placeholder="Poids du colis">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Prix</label>
-                    <input disabled name="view_price" class="form-control" type="number" placeholder="Prix du colis">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Date de réception</label>
-                    <input disabled name="view_date" class="form-control" type="date" required value="2023-03-13">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea disabled name="view_description" class="form-control" rows="4" cols="5" placeholder="Entrez la description">                   </textarea>
-                </div>
 
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Nom</label>
+                            <input disabled name="view_name_package" class="form-control" type="text" placeholder="Nom du colis">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Poids</label>
+                            <input disabled name="view_weight" class="form-control" type="number" placeholder="Poids du colis">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Prix</label>
+                        <input disabled name="view_price" class="form-control" type="number" placeholder="Prix du colis">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date de réception</label>
+                        <input disabled name="view_date" class="form-control" type="date" required value="2023-03-13">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea disabled name="view_description" class="form-control" rows="4" cols="5" placeholder="Entrez la description"></textarea>
+                    </div>
+
+                </div>
             </div>
-          </div>
+            </div>
         </div>
-    </div>
 
       <!-- theme body end-->
     </div>
@@ -264,6 +331,7 @@
                     var packageDescription = button.getAttribute('data-package-description');
                     var packageId = button.getAttribute('data-package-id');
                     var userId = button.getAttribute('data-user-id');
+                    var editUserName = button.getAttribute('edit-user-name');
 
                     // Mettez à jour l'attribut action du formulaire avec l'identifiant du colis
                     var editForm = document.getElementById('edit-package-form');
@@ -273,12 +341,37 @@
 
                     // Remplissez les champs du formulaire dans le modal avec ces données
                     document.querySelector('input[name="edit_name_package"]').value = packageName;
+                    document.querySelector('input[name="edit_user_name"]').value = editUserName;
                     document.querySelector('input[name="edit_weight"]').value = packageWeight;
                     document.querySelector('input[name="edit_price"]').value = packagePrice;
                     document.querySelector('input[name="edit_date"]').value = packageDate;
                     document.querySelector('input[name="edit_package_id"]').value = packageId;
                     document.querySelector('input[name="edit_user_id"]').value = userId;
                     document.querySelector('textarea[name="edit_description"]').value = packageDescription;
+                });
+            });
+
+            var deleteLinks = document.querySelectorAll('.delete-link');
+
+            deleteLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var packageId = link.getAttribute('data-id');
+
+                    Swal.fire({
+                        title: 'Êtes-vous sûr?',
+                        text: 'Vous ne pourrez pas revenir en arrière!',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Oui, supprimer!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Soumettez le formulaire de suppression
+                            document.getElementById('delete-form-' + packageId).submit();
+                        }
+                    });
                 });
             });
 
@@ -291,6 +384,7 @@
                 button.addEventListener('click', function() {
                     // Récupérez les données du produit associées à ce bouton
                     var viewPackageName = button.getAttribute('view-package-name');
+                    var viewUserName = button.getAttribute('view-user-name');
                     var viewPackageWeight = button.getAttribute('view-package-weight');
                     var viewPackagePrice = button.getAttribute('view-package-price');
                     var viewPackageDate = button.getAttribute('view-package-date');
@@ -300,6 +394,7 @@
 
                     // Remplissez les champs du formulaire dans le modal avec ces données
                     document.querySelector('input[name="view_name_package"]').value = viewPackageName;
+                    document.querySelector('input[name="view_user_name"]').value = viewUserName;
                     document.querySelector('input[name="view_weight"]').value = viewPackageWeight;
                     document.querySelector('input[name="view_price"]').value = viewPackagePrice;
                     document.querySelector('input[name="view_date"]').value = viewPackageDate;
@@ -311,8 +406,5 @@
 
         });
     </script>
-
-
-
 </body>
 </html>

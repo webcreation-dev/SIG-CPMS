@@ -10,7 +10,7 @@
       @include('layouts.admin.header')
 
       @include('layouts.admin.sidebar')
-
+    
     <div class="themebody-wrap">
       <!-- breadcrumb start-->
       <div class="codex-breadcrumb">

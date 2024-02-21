@@ -16,7 +16,29 @@ class LevelTableSeeder extends Seeder
     public function run()
     {
         Level::create([
-            'name' => 'Action Requise',
+            'name' => ' Action Requise',
+            'badge' => 'warning',
         ]);
+
+        Level::create([
+            'name' => 'En Cours',
+            'badge' => 'secondary',
+        ]);
+
+        Level::create([
+            'name' => 'Prêt À Envoyer',
+            'badge' => 'primary',
+        ]);
+
+        Level::create([
+            'name' => 'En Transit',
+            'badge' => 'info',
+        ]);
+
+        Level::create([
+            'name' => 'Livré',
+            'badge' => 'success',
+        ]);
+
     }
 }

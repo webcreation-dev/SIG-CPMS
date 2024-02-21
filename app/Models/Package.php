@@ -20,4 +20,15 @@ class Package extends Model
         'user_id',
     ];
 
+    const LEVEL_BADGE = [
+        1 => 'warning',
+        2 => 'secondary',
+        3 => 'primary',
+        4 => 'info',
+        5 => 'success',
+    ];
+
+    public function level() {
+        return $this->belongsTo(Level::class, 'level_id');
+    }
 }

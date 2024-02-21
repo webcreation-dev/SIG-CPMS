@@ -983,7 +983,7 @@
             }
           </STYLE>
           <DIV CLASS="extra-tall">
-            <DIV CLASS="row">
+            {{-- <DIV CLASS="row">
               <DIV CLASS="col-xs-12">
                 <TABLE CLASS="checkbox-selector check-box-wrapper">
                   <TR>
@@ -996,7 +996,7 @@
                   </TR>
                 </TABLE>
               </DIV>
-            </DIV>
+            </DIV> --}}
             <DIV CLASS="row">
               <DIV CLASS="col-xs-12 text-center">
                 <BUTTON TYPE="SUBMIT" CLASS="btn btn-primary btn-lg"  TITLE="Créez votre compte">Créez votre compte</BUTTON>

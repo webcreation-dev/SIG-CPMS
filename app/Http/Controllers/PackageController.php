@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +16,18 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::all();
-        return view('admin.packages.packages_list', compact('packages'));
+        $packages = Package::with('level')->get();
+        $users = User::all();
+        return view('admin.packages.packages_list', compact('packages', 'users'));
     }
+
+    public function byUser($user_id)
+    {
+        $packages = Package::where('user_id', $user_id)->with('level')->get();
+        $users = User::all();
+        return view('admin.packages.packages_list', compact('packages', 'users'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,6 +54,7 @@ class PackageController extends Controller
             'weight' => ['required', 'numeric'],
             'price' => ['required', 'numeric'],
             'date' => ['required', 'date'],
+            'user_id' => ['required', 'numeric'],
         ]);
 
         Package::create([
@@ -52,10 +63,14 @@ class PackageController extends Controller
             'weight' => $request->weight,
             'price' => $request->price,
             'date' => $request->date,
-            'user_id' => Auth::user()->id,
+            'user_id' => $request->user_id,
         ]);
 
-        return redirect(route('package.index'))->with('message','Colis ajouté avec succès');;
+        if ($request->by_user == 0) {
+            return redirect(route('packages.by.user'))->with('message','Colis ajouté avec succès');
+        }else {
+            return redirect(route('package.index'))->with('message','Colis ajouté avec succès');
+        }
     }
 
     /**
@@ -97,6 +112,7 @@ class PackageController extends Controller
             'edit_date' => ['required', 'date'],
             'edit_package_id' => ['required', 'numeric'],
             'edit_user_id' => ['required', 'numeric'],
+            'level_id' => ['required', 'numeric'],
         ]);
 
         $package = Package::find($request->edit_package_id);
@@ -108,6 +124,7 @@ class PackageController extends Controller
             'price' => $request->edit_price,
             'date' => $request->edit_date,
             'user_id' => $request->edit_user_id,
+            'level_id' => $request->level_id,
         ]);
 
         return redirect(route('package.index'))->with('message','Colis mis à jour avec succès');
@@ -122,6 +139,7 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        $package->delete();
+        return redirect(route('package.index'))->with('message','Colis supprimé avec succès');
     }
 }

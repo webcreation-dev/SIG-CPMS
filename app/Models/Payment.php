@@ -11,7 +11,11 @@ class Payment extends Model
 
     protected $fillable = [
         'package_id',
-        'price',
+        'payment_id',
         'payment_status',
     ];
+
+    public function package() {
+        return $this->belongsTo(Package::class, 'package_id');
+    }
 }

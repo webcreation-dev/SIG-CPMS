@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('package_id');
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
 
-            $table->string('price');
+            $table->string('payment_id');
             $table->string('payment_status');
 
             $table->timestamps();

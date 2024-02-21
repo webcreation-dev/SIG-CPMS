@@ -36,6 +36,13 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
+    public static function getUserName($userId)  {
+
+        $user = User::find($userId);
+        return $user->name;
+    }
+
     /**
      * The attributes that should be cast.
      *

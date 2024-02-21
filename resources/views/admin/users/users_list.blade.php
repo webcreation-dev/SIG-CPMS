@@ -72,8 +72,13 @@
                                 </td>
                                 <td><span class="badge badge-success">ACTIF </span></td>
                                 <td>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#DataModal" title="Ajouter un colis"><span class="badge badge-info"></i> <i class="ti-plus"></i> </span></a>
-                                    <a href="#" title="Voir les colis"><span class="badge badge-warning"><i class="ti-eye"></i> </span></a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#DataModal"
+                                    data-user-id="{{$user->id}}"
+
+                                    title="Ajouter un colis">
+
+                                        <span class="badge badge-info"></i> <i class="ti-plus"></i> </span></a>
+                                    <a href="{{route('packages.by.user', ['user_id' => $user->id ])}}" target="_blank" title="Voir les colis"><span class="badge badge-warning"><i class="ti-eye"></i> </span></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -94,31 +99,38 @@
               <h5 class="modal-title">AJOUTER UN NOUVEAU COLIS</h5><a href="javascript:void(0);" data-bs-dismiss="modal"><i class="ti-close"></i></a>
             </div>
             <div class="modal-body">
-              <form action="#">
+              <form action="{{route('package.store')}}" method="POST" >
+                @csrf
+
+                <input type="hidden" name="user_id">
+                <input type="hidden" value="0" name="by_user">
+
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="form-label">Nom</label>
-                      <input name="name_package" class="form-control" type="text" placeholder="Nom du colis">
+                      <input name="name_package" required class="form-control" type="text" placeholder="Nom du colis">
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label">Poids</label>
-                        <input name="weight" class="form-control" type="number" placeholder="Poids du colis">
+                        <input name="weight" required class="form-control" type="number" placeholder="Poids du colis">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Prix</label>
-                    <input name="price" class="form-control" type="number" placeholder="Prix du colis">
+                    <input name="price" required class="form-control" type="number" placeholder="Prix du colis">
                 </div>
+
                 <div class="form-group">
                     <label class="form-label">Date de réception</label>
-                    <input name="date" class="form-control" type="date" value="2023-03-13">
+                    <input name="date" class="form-control"  type="date" required value="2023-03-13">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Description</label>
-                    <textarea name="description" class="form-control" rows="4" cols="5" placeholder="Entrez la description">                   </textarea>
+                    <textarea name="description" class="form-control" required rows="4" cols="5" placeholder="Entrez la description"></textarea>
                 </div>
 
-                <a class="btn btn-success btn-md" href="javascript:void(0)"> Soumettre</a>
+                <button type="submit" class="btn btn-success btn-md">ENREGISTRER</button>
+
               </form>
             </div>
           </div>
@@ -139,5 +151,28 @@
     </UL>
 
     @include("layouts.admin.footer")
+
+
+
+    <script>
+        // Attendez que le document soit chargé
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var addButtons = document.querySelectorAll('[data-bs-target="#DataModal"]');
+
+            // Bouclez sur chaque bouton d'édition
+            addButtons.forEach(function(button) {
+                // Ajoutez un écouteur d'événements pour le clic
+                button.addEventListener('click', function() {
+
+                    var userId = button.getAttribute('data-user-id');
+                    document.querySelector('input[name="user_id"]').value = userId;
+                });
+            });
+
+        });
+    </script>
+
+
   </body>
 </html>

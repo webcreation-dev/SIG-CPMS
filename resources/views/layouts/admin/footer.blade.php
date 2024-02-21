@@ -48,6 +48,10 @@
   <script src="{{asset('assets/js/vendors/range-slider/ion-rangeslider.js')}}"></script>
   <script src="{{asset('assets/js/vendors/range-slider/custom-rangeslider.js')}}"></script>
 
+  <!-- sweetalert js-->
+  <script src="{{asset('assets/js/vendors/sweetalert/sweetalert2.js')}}"></script>
+  <script src="{{asset('assets/js/vendors/sweetalert/custom-sweetalert2.js')}}"></script>
+
   <script>
     ClassicEditor
       .create( document.querySelector( '#crowenkeditor' ), {

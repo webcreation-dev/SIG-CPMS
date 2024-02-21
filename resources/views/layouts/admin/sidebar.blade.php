@@ -23,6 +23,10 @@
             <div class="icon-item"><i data-feather="shopping-bag"></i></div><span>Gestion Colis</span></a>
         </li>
 
+        <li class="menu-item"><a href="{{route('payment.index')}}">
+            <div class="icon-item"><i data-feather="gift"></i></div><span>Paiements</span></a>
+        </li>
+
         </ul>
     </div>
   </aside>

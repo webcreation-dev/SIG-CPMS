@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidatorFormController;
@@ -18,17 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-})->name('dashboard');
+
 
 Route::get('/', function () {
     return view('landing');
 });
-
-Route::resource('users', UserController::class);
-
-Route::resource('package', PackageController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -55,6 +50,20 @@ Route::get('/account_v1', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
+    // ADMINISTRATION
+
+    Route::get('/admin', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    Route::resource('users', UserController::class);
+
+    Route::resource('payment', PaymentController::class);
+
+    Route::resource('package', PackageController::class);
+    Route::get('/packages_by_user/{user_id}', [PackageController::class, 'byUser'])->name('packages.by.user');
+
 
     Route::get('/account', function () {
         return view('account');

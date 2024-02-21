@@ -14,7 +14,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments = Payment::with('package')->get();
+        return view('admin.payments', compact('payments'));
     }
 
     /**

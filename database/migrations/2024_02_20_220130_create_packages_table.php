@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('weight');
             $table->string('price');
             $table->string('date');
-            $table->string('status')->default('Non livré');
+            $table->string('status')->default('En cours livraison');
 
             $table->unsignedBigInteger('level_id')->default(1);
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
