@@ -153,7 +153,7 @@
                                 </div>
 
                                 <div class="col-sm-3 col-xs-12">
-                                <a href="#" class="btn btn-primary" ><i class="fa fa-money fa-fw"></i> Payez maintenant </a>
+                                <a href="#" class="btn btn-primary" style="pointer-events: none; opacity: 0.5;" ><i class="fa fa-money fa-fw"></i> Payez maintenant </a>
 
                                     <form id="delete-form-{{ $package->id }}"
                                         action="{{ route('edit.package.level', ['package_id' => $package->id ]) }}"
