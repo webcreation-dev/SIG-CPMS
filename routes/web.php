@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('package', PackageController::class);
     Route::get('/packages_by_user/{user_id}', [PackageController::class, 'byUser'])->name('packages.by.user');
+    Route::post('/edit_package_level/{package_id}', [PackageController::class, 'editPackageLevel'])->name('edit.package.level');
 
 
     Route::get('/account', function () {
@@ -95,7 +96,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/packages-in-progress', function () {
         return view('auth.my-packages.packages-in-warehouse.in-progress');
-    });
+    })->name('packages.in.progress');
 
     Route::get('/packages-ready-to-ship', function () {
         return view('auth.my-packages.packages-in-warehouse.ready-to-ship');

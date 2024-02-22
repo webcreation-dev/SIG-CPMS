@@ -50,11 +50,9 @@
       </div>
     </div>
     <div id="page-content" class="page-content">
-
         <?php
-            $packages = App\Models\Package::with('level')->get();
+            $packages = App\Models\Package::where('user_id', Auth::user()->id)->where('level_id', 1)->with('level')->get();
         ?>
-
 
       <div class="subtabs">
         <div class="container">
@@ -96,7 +94,7 @@
       </style>
       <div class="main-body">
         <div class="container package-list">
-            <h2>Action Requise (1)</h2>
+            <h2>Action Requise ({{App\Models\Package::countActionRequise(Auth::user()->id ) }})</h2>
             <div class="row">
                 <div class="col-xs-12">
                 <div id="header-content-action-required">
@@ -121,40 +119,8 @@
                 <strong>
 
                 <div class="panel-group">
-                    {{-- <div class="panel panel-packages">
-                        <div class="panel-heading" data-toggle="collapse" href="#arpanel1">
-                            <div class="row">
-                            <!-- Title -->
-                            <div class="col-sm-3 col-xs-12 package-id-panel">
-                                <div class="icons">
-                                <i class="if-collapsed fa fa-fw fa-plus plusminus"></i>
-                                <i class="if-not-collapsed fa fa-fw fa-minus plusminus"></i>
-                                </div>
-                                <label>Nouveau colis dans l'entrepot</label>
-                                <div class="package-id"> Facture N° MB6755182 </div>
-                            </div>
-                            <!-- Date -->
-                            <div class="col-sm-2 col-xs-4"> 06 February, 2024 </div>
-                            <!-- Details -->
-                            <div class="col-sm-2 col-xs-4"></div>
-                            <!-- Required Action -->
-                            <div class="col-sm-2 col-xs-4">
-                                <label>Action Requise</label>
-                                <span class="action-required"> Paiement requis </span>
-                            </div>
-                            <!-- Buttons-->
-                            <div class="col-sm-3 col-xs-12">
-                                <a href="#" class="btn btn-primary btn-lg">
-                                <i class="fa fa-money fa-fw"></i> Effectuer un paiement </a>
 
-                                <button class="btn btn-secondary" title="Supprimer le Colis">Paiement à la livraison</button>
-                            </div>
-
-                            </div>
-                        </div>
-                    </div> --}}
-
-                    @foreach ($packages as $package )
+                    @foreach ($packages as $key => $package )
 
                         <div class="panel panel-packages">
                             <div class="panel-heading">
@@ -162,7 +128,8 @@
                             <div class="row">
                                 <div class="col-sm-3 col-xs-12 package-id-panel">
                                     <div class="icons">
-                                    <i class="if-collapsed fa fa-fw fa-plus plusminus"></i>
+                                    {{-- <i class="if-collapsed fa fa-fw fa-plus plusminus"></i> --}}
+                                    <img width="40" height="40" src="{{asset('assets/images/pages/product/box' . (($key % 3) + 1) . '.png')}}" alt="">
                                     </div>
                                     <label>Nouveau colis dans l'entrepot</label>
                                     <div class="package-id"> {{$package->name_package}} </div>
@@ -182,7 +149,16 @@
 
                                 <div class="col-sm-3 col-xs-12">
                                 <a href="#" class="btn btn-primary" ><i class="fa fa-money fa-fw"></i> Payez maintenant </a>
-                                <button class="btn btn-secondary" title="Supprimer le Colis">Paiement à la livraison</button>
+
+                                    <form id="delete-form-{{ $package->id }}"
+                                        action="{{ route('edit.package.level', ['package_id' => $package->id ]) }}"
+                                        method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+
+                                    <button class="btn btn-secondary delete-link" data-id="{{ $package->id }}" title="Supprimer le Colis">Paiement à la livraison</button>
+
                                 </div>
                             </div>
                             <div class="row">
@@ -276,5 +252,40 @@
       <iframe allow="clipboard-read; clipboard-write; autoplay; microphone *; camera *; display-capture *; picture-in-picture *; fullscreen *;" src="files/open_chat.html" allowtransparency="true" id="chat-widget" name="chat-widget" title="LiveChat chat widget" scrolling="no" style="width: 100%; height: 100%; min-height: 0px; min-width: 0px; margin: 0px; padding: 0px; background-image: none; background-position: 0% 0%; background-size: initial; background-attachment: scroll; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); border-width: 0px; float: none; color-scheme: normal; position: absolute; inset: 0px; transition: none 0s ease 0s !important; display: none; visibility: hidden;"></iframe>
       <iframe allowtransparency="true" id="chat-widget-minimized" name="chat-widget-minimized" title="LiveChat chat widget" scrolling="no" style="width: 100%; height: 100%; min-height: 0px; min-width: 0px; margin: 0px; padding: 0px; background-image: none; background-position: 0% 0%; background-size: initial; background-attachment: scroll; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); border-width: 0px; float: none; color-scheme: normal; display: block;" src="files/saved_resource.html"></iframe>
     </div>
+
+
+
+    <script>
+        // Attendez que le document soit chargé
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var deleteLinks = document.querySelectorAll('.delete-link');
+
+            deleteLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var packageId = link.getAttribute('data-id');
+
+                    Swal.fire({
+                        title: 'Passez à l\'étape suivante',
+                        text: 'Vous ne pourrez pas revenir en arrière!',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Oui, je le veux!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Soumettez le formulaire de suppression
+                            document.getElementById('delete-form-' + packageId).submit();
+                        }
+                    });
+                });
+            });
+
+        });
+    </script>
+
+
   </body>
 </html>

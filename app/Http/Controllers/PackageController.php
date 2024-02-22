@@ -28,6 +28,15 @@ class PackageController extends Controller
         return view('admin.packages.packages_list', compact('packages', 'users'));
     }
 
+    public function editPackageLevel($package_id)
+    {
+        $package = Package::find($package_id);
+        $package->update([
+            'level_id' => 2,
+        ]);
+        return redirect(route('packages.in.progress'))->with('message','Colis en cours de traitement');
+    }
+
 
     /**
      * Show the form for creating a new resource.

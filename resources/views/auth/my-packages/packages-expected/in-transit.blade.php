@@ -60,6 +60,10 @@
       </div>
 
     <div id="page-content" class="page-content">
+        <?php
+            $packages = App\Models\Package::where('user_id', Auth::user()->id)->where('level_id', 4)->with('level')->get();
+        ?>
+
         <div class="subtabs">
             <div class="container">
               <div class="subtabs-wrapper">
@@ -102,7 +106,56 @@
 
       <div class="main-body">
         <div class="container package-list">
-          <h2>Colis En Cours d'Acheminement  (0)</h2>
+          <h2>Colis En Cours d'Acheminement  ({{App\Models\Package::countEnTransit(Auth::user()->id ) }})</h2>
+
+          @foreach ($packages as $key => $package )
+
+            <div class="panel panel-packages">
+                <div class="icons">
+                    <img width="40" height="40" src="{{asset('assets/images/pages/product/box' . (($key % 3) + 1) . '.png')}}" alt="">
+                </div>
+                <div class="panel-heading">
+
+                <div class="package-id">
+
+                    {{$package->name_package}} </div>
+                <div class="row">
+                    <div class="col-sm-1 col-xs-12">
+                        <label>Numéro de Suivi 24567</label>
+                    </div>
+
+                    <div class="col-sm-2 col-xs-3">
+                        <label>Recu le</label> {{ Carbon\Carbon::parse($package->date)->format('d F Y') }}
+                    </div>
+
+                    <div class="col-sm-2 col-xs-3">
+                        <label>Poids</label> {{$package->weight}} KG
+                    </div>
+
+                    <div class="col-sm-1 col-xs-3">
+                        <label>Prix</label> {{$package->price}} CFA
+                    </div>
+
+                    <div class="col-sm-1 col-xs-3">
+                        <label>Destinataire</label> Julian ADJIBI
+                    </div>
+
+                    <div class="col-sm-4 col-xs-12">
+                    <a href="#" class="btn btn-{{ App\Models\Package::LEVEL_BADGE[$package->level->id] }}" >{{$package->level->name}}</a>
+                    <button class="btn btn-secondary" title="Supprimer le Colis">{{$package->status}}</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                    <div class="edit-label">
+                        <div class="static"> <label>Détail</label> {{$package->description}}</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+          @endforeach
+
         </div>
       </div>
 

@@ -60,6 +60,10 @@
 
 
     <div id="page-content" class="page-content">
+        <?php
+            $packages = App\Models\Package::where('user_id', Auth::user()->id)->where('level_id', 3)->with('level')->get();
+        ?>
+
       <div class="subtabs">
         <div class="container">
           <div class="subtabs-wrapper">
@@ -94,100 +98,59 @@
       </div>
       <div class="main-body">
         <div class="container package-list">
-          {{-- <h2>Vos colis actuellement au sein de l’entrepôt de Lynia Delivery Express sont prêts pour l’envoi</h2>
-          <div class="row action-blocks">
-            <div class="col-sm-4 col-xs-12 action-block">
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="heading">UN COLIS</div>
-                  <div class="service">Envoyer un colis</div>
-                </div>
-                <div class="col-xs-5">
-                  <div class="image">
-                    <img src="files/OnePKG.svg" border="0" class="img-responsive">
-                  </div>
-                </div>
-                <div class="col-xs-7">
-                  <div class="description">Envoyer un seul colis à une seule adresse. La plus simple des options!</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 text-center select-button">
-                  <form method="POST" action="https://www.shipito.com/servlet/Account" name="shipsingleform">
-                    <input type="HIDDEN" name="act" value="MailOut.startMailOut">
-                    <input type="HIDDEN" name="cmscountry" value="us">
-                    <input type="HIDDEN" name="cmslanguage" value="fr">
-                    <input type="HIDDEN" name="gasv" value="2924807557820894208">
-                    <input type="HIDDEN" name="postingpageurl" value="/fr/account/incoming-packages/ready-to-ship">
-                    <input type="HIDDEN" name="mailout.shipmenttype" value="10">
-                    <button type="SUBMIT" class="btn btn-primary btn-lg" title="Sélectionner un colis">Sélectionner un colis</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 col-xs-12 action-block">
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="heading">MULTIPLES COLIS</div>
-                  <div class="service">Envoyer plusieurs colis à la même adresse en même temps</div>
-                </div>
-                <div class="col-xs-5">
-                  <div class="image">
-                    <img src="files/MultiplePKG.svg" border="0" class="img-responsive">
-                  </div>
-                </div>
-                <div class="col-xs-7">
-                  <div class="description visible-sm">Regrouper le contenu des cartons mais pas les cartons. Economisez sur les frais de livraison du transporteur. Disponible uniquement avec les transporteurs sélectionnés.</div>
-                  <div class="description hidden-sm">Regrouper le contenu des cartons mais pas les cartons. Disponible uniquement avec les transporteurs sélectionnés.</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 text-center select-button">
-                  <form method="POST" action="https://www.shipito.com/servlet/Account" name="shipmpsform">
-                    <input type="HIDDEN" name="act" value="MailOut.startMailOut">
-                    <input type="HIDDEN" name="cmscountry" value="us">
-                    <input type="HIDDEN" name="cmslanguage" value="fr">
-                    <input type="HIDDEN" name="gasv" value="2924807557820894208">
-                    <input type="HIDDEN" name="postingpageurl" value="/fr/account/incoming-packages/ready-to-ship">
-                    <input type="HIDDEN" name="mailout.shipmenttype" value="20">
-                    <button type="SUBMIT" class="btn btn-primary btn-lg" title="Sélectionner plusieurs colis">Sélectionner plusieurs colis</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 col-xs-12 action-block">
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="heading">Regroupement</div>
-                  <div class="service">Réalisez d'importantes économies en regroupant plusieurs colis en un!</div>
-                </div>
-                <div class="col-xs-5">
-                  <div class="image">
-                    <img src="files/Consolidation.svg" border="0" class="img-responsive">
-                  </div>
-                </div>
-                <div class="col-xs-7">
-                  <div class="description">Demandez le regroupement de vos colis et économisez jusqu'à 80% sur les frais d'envoi!</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 text-center select-button">
-                  <form method="POST" action="https://www.shipito.com/servlet/Account" name="consolform">
-                    <input type="HIDDEN" name="act" value="Consolidation.startConsolidation">
-                    <input type="HIDDEN" name="cmscountry" value="us">
-                    <input type="HIDDEN" name="cmslanguage" value="fr">
-                    <input type="HIDDEN" name="gasv" value="2924807557820894208">
-                    <input type="HIDDEN" name="postingpageurl" value="/fr/account/incoming-packages/ready-to-ship">
-                    <button type="SUBMIT" class="btn btn-primary btn-lg" title="Commencer le regroupement">Commencer le regroupement</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br> --}}
+
           <div class="panel-group">
-            <h2>Colis prêt pour l’envoi (0)</h2>
+            <h2>Colis prêt pour l’envoi ({{App\Models\Package::countPretEnvoi(Auth::user()->id ) }})</h2>
           </div>
+
+          @foreach ($packages as $key => $package )
+
+            <div class="panel panel-packages">
+                <div class="icons">
+                    <img width="40" height="40" src="{{asset('assets/images/pages/product/box' . (($key % 3) + 1) . '.png')}}" alt="">
+                </div>
+                <div class="panel-heading">
+
+                <div class="package-id">
+
+                    {{$package->name_package}} </div>
+                <div class="row">
+                    <div class="col-sm-1 col-xs-12">
+                        <label>Numéro de Suivi 24567</label>
+                    </div>
+
+                    <div class="col-sm-2 col-xs-3">
+                        <label>Recu le</label> {{ Carbon\Carbon::parse($package->date)->format('d F Y') }}
+                    </div>
+
+                    <div class="col-sm-2 col-xs-3">
+                        <label>Poids</label> {{$package->weight}} KG
+                    </div>
+
+                    <div class="col-sm-1 col-xs-3">
+                        <label>Prix</label> {{$package->price}} CFA
+                    </div>
+
+                    <div class="col-sm-1 col-xs-3">
+                        <label>Destinataire</label> Julian ADJIBI
+                    </div>
+
+                    <div class="col-sm-4 col-xs-12">
+                    <a href="#" class="btn btn-{{ App\Models\Package::LEVEL_BADGE[$package->level->id] }}" >{{$package->level->name}}</a>
+                    <button class="btn btn-secondary" title="Supprimer le Colis">{{$package->status}}</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                    <div class="edit-label">
+                        <div class="static"> <label>Détail</label> {{$package->description}}</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+          @endforeach
+
         </div>
       </div>
     </div>

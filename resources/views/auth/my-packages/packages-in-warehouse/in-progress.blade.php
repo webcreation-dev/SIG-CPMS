@@ -61,7 +61,7 @@
     <div id="page-content" class="page-content">
 
         <?php
-            $packages = App\Models\Package::with('level')->get();
+            $packages = App\Models\Package::where('user_id', Auth::user()->id)->where('level_id', 2)->with('level')->get();
         ?>
 
 
@@ -73,7 +73,7 @@
               </a>
             </div>
             <div>
-              <a href="/packages-in-progress" class="active-ajax-link">En cours <span class="badge">{{$packages->count()}}</span>
+              <a href="/packages-in-progress" class="active-ajax-link">En cours <span class="badge">{{App\Models\Package::countEnCours(Auth::user()->id ) }}</span>
               </a>
             </div>
             <div>
@@ -100,16 +100,22 @@
 
       <div class="main-body">
         <div class="container package-list">
-          <h2>Demandes en cours de traitement ({{$packages->count()}})</h2>
+          <h2>Demandes en cours de traitement ({{App\Models\Package::countEnCours(Auth::user()->id ) }})</h2>
 
 
-          @foreach ($packages as $package )
+          @foreach ($packages as $key => $package )
 
             <div class="panel panel-packages">
+                <div class="icons">
+                    <img width="40" height="40" src="{{asset('assets/images/pages/product/box' . (($key % 3) + 1) . '.png')}}" alt="">
+                </div>
                 <div class="panel-heading">
-                <div class="package-id"> {{$package->name_package}} </div>
+
+                <div class="package-id">
+
+                    {{$package->name_package}} </div>
                 <div class="row">
-                    <div class="col-sm-2 col-xs-12">
+                    <div class="col-sm-1 col-xs-12">
                         <label>Numéro de Suivi 24567</label>
                     </div>
 
@@ -130,7 +136,7 @@
                     </div>
 
                     <div class="col-sm-4 col-xs-12">
-                    <a href="#" class="btn btn-primary" >{{$package->level->name}}</a>
+                    <a href="#" class="btn btn-{{ App\Models\Package::LEVEL_BADGE[$package->level->id] }}" >{{$package->level->name}}</a>
                     <button class="btn btn-secondary" title="Supprimer le Colis">{{$package->status}}</button>
                     </div>
                 </div>
