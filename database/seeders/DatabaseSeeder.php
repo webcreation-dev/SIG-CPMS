@@ -23,9 +23,6 @@ class DatabaseSeeder extends Seeder
             LevelTableSeeder::class,
         ]);
 
-        User::factory(3)->create();
-        Package::factory(20)->create();
-
         User::create([
             'name' => 'Lazarre',
             'lastname' => 'CHOUBIYI',
@@ -36,5 +33,10 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'role_id' => 1,
         ]);
+
+        User::factory(3)->create();
+        Package::factory(20)->create();
+
+
     }
 }

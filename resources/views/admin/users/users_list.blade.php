@@ -68,7 +68,7 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>
-                                    {{App\Models\User::STATUS_FROM[$user->country]}}
+                                    {{App\Models\User::STATUS_FROM[$user->country] ?? $user->country }}
                                 </td>
                                 <td><span class="badge badge-success">ACTIF </span></td>
                                 <td>
