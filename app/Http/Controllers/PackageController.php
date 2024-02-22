@@ -64,6 +64,7 @@ class PackageController extends Controller
             'price' => ['required', 'numeric'],
             'date' => ['required', 'date'],
             'user_id' => ['required', 'numeric'],
+            'address' => ['required', 'string'],
         ]);
 
         Package::create([
@@ -73,6 +74,7 @@ class PackageController extends Controller
             'price' => $request->price,
             'date' => $request->date,
             'user_id' => $request->user_id,
+            'address' => $request->address,
         ]);
 
         if ($request->by_user == 0) {
@@ -122,6 +124,7 @@ class PackageController extends Controller
             'edit_package_id' => ['required', 'numeric'],
             'edit_user_id' => ['required', 'numeric'],
             'level_id' => ['required', 'numeric'],
+            'address' => 'required|string|max:255',
         ]);
 
         $package = Package::find($request->edit_package_id);
@@ -134,10 +137,10 @@ class PackageController extends Controller
             'date' => $request->edit_date,
             'user_id' => $request->edit_user_id,
             'level_id' => $request->level_id,
+            'address' => $request->address,
         ]);
 
         return redirect(route('package.index'))->with('message','Colis mis à jour avec succès');
-        ;
     }
 
     /**

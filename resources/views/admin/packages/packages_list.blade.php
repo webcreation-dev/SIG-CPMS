@@ -57,7 +57,7 @@
                         <th>Nom du colis</th>
                         <th>Poids</th>
                         <th>Prix</th>
-                        <th>Date de réception</th>
+                        <th>Adresse de livraison</th>
                         <th>Niveau</th>
                         <th>Statut</th>
                         <th>Actions</th>
@@ -72,7 +72,7 @@
                                 <td>{{$package->name_package}}</td>
                                 <td>{{$package->weight}} KG</td>
                                 <td>{{$package->price}} CFA</td>
-                                <td>{{ Carbon\Carbon::parse($package->date)->format('d F Y') }}</td>
+                                <td>{{ $package->address }}</td>
                                 <td>
 
                                     <span class="badge badge-{{ App\Models\Package::LEVEL_BADGE[$package->level->id] }}">{{$package->level->name}} </span>
@@ -89,6 +89,7 @@
                                         view-package-weight="{{$package->weight}}"
                                         view-package-price="{{$package->price}}"
                                         view-package-date="{{$package->date}}"
+                                        view-package-address="{{$package->address}}"
                                         view-user-id="{{$package->user_id}}"
                                         view-package-id="{{$package->id}}"
                                         view-package-description="{{$package->description}}">
@@ -100,6 +101,8 @@
                                         data-package-weight="{{$package->weight}}"
                                         data-package-price="{{$package->price}}"
                                         data-package-date="{{$package->date}}"
+                                        data-package-address="{{$package->address}}"
+                                        data-level-id="{{$package->level_id}}"
                                         data-user-id="{{$package->user_id}}"
                                         data-package-id="{{$package->id}}"
                                         data-package-description="{{$package->description}}">
@@ -168,6 +171,10 @@
                         </select>
                 </div>
                 <div class="form-group">
+                    <label class="form-label">Adresse</label>
+                    <input name="address" required class="form-control" type="text" placeholder="Adresse de livraison">
+                </div>
+                <div class="form-group">
                     <label class="form-label">Date de réception</label>
                     <input name="date" class="form-control"  type="date" required value="2023-03-13">
                 </div>
@@ -219,6 +226,10 @@
                 <div class="form-group">
                     <label class="form-label">Prix</label>
                     <input name="edit_price" required class="form-control" type="number" placeholder="Prix du colis">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Adresse</label>
+                    <input name="edit_address" required class="form-control" type="text" placeholder="Adresse de livraison">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Date de réception</label>
@@ -295,6 +306,10 @@
                         <input disabled name="view_price" class="form-control" type="number" placeholder="Prix du colis">
                     </div>
                     <div class="form-group">
+                        <label class="form-label">Adresse</label>
+                        <input disabled name="view_address" required class="form-control" type="text" placeholder="Adresse de livraison">
+                    </div>
+                    <div class="form-group">
                         <label class="form-label">Date de réception</label>
                         <input disabled name="view_date" class="form-control" type="date" required value="2023-03-13">
                     </div>
@@ -330,7 +345,9 @@
                     var packageDate = button.getAttribute('data-package-date');
                     var packageDescription = button.getAttribute('data-package-description');
                     var packageId = button.getAttribute('data-package-id');
+                    var levelId = button.getAttribute('data-level-id');
                     var userId = button.getAttribute('data-user-id');
+                    var packageAddress = button.getAttribute('data-package-address');
                     var editUserName = button.getAttribute('edit-user-name');
 
                     // Mettez à jour l'attribut action du formulaire avec l'identifiant du colis
@@ -347,7 +364,12 @@
                     document.querySelector('input[name="edit_date"]').value = packageDate;
                     document.querySelector('input[name="edit_package_id"]').value = packageId;
                     document.querySelector('input[name="edit_user_id"]').value = userId;
+                    document.querySelector('input[name="edit_address"]').value = packageAddress;
                     document.querySelector('textarea[name="edit_description"]').value = packageDescription;
+
+                    var radioToSelect = document.querySelector('input[name="level_id"][value="' + levelId + '"]');
+                    radioToSelect.checked = true;
+
                 });
             });
 
@@ -388,6 +410,7 @@
                     var viewPackageWeight = button.getAttribute('view-package-weight');
                     var viewPackagePrice = button.getAttribute('view-package-price');
                     var viewPackageDate = button.getAttribute('view-package-date');
+                    var viewPackageAddress = button.getAttribute('view-package-address');
                     var viewPackageDescription = button.getAttribute('view-package-description');
                     var viewPackageId = button.getAttribute('view-package-id');
                     var viewUserId = button.getAttribute('view-user-id');
@@ -398,6 +421,7 @@
                     document.querySelector('input[name="view_weight"]').value = viewPackageWeight;
                     document.querySelector('input[name="view_price"]').value = viewPackagePrice;
                     document.querySelector('input[name="view_date"]').value = viewPackageDate;
+                    document.querySelector('input[name="view_address"]').value = viewPackageAddress;
                     document.querySelector('input[name="view_package_id"]').value = viewPackageId;
                     document.querySelector('input[name="view_user_id"]').value = viewUserId;
                     document.querySelector('textarea[name="view_description"]').value = viewPackageDescription;

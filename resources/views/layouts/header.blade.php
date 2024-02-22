@@ -211,7 +211,7 @@
 
           <li class="dropdown mega-dropdown no-menu hide-sm">
             <a href="#">
-              <span class="customer-name">Bonjour, {{Auth::user()->name}} </span>
+              <span class="customer-name">Bonjour, {{Auth::user()->lastname}} </span>
               <i class="icon-my-account"></i> Mon compte </a>
           </li>
 

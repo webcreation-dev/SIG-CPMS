@@ -503,7 +503,7 @@
                   <label>de</label> Amazon
                 </div>
                 <div class="col-sm-1 col-xs-3">
-                  <label>Destinataire</label> Julian ADJIBI
+                  <label>Destinataire</label> {{$package->address}}
                 </div>
                 <div class="col-sm-4 col-xs-12">
                   <a href="https://www.shipito.com/fr/account/expected-packages/edit?incomingpackage.incomingpackageid=12026424" class="btn btn-primary" onclick="return gaPopUpDisplay(this);" data-id="12026424">Modifier le Colis</a>
@@ -570,7 +570,7 @@
                   <label>de</label> Amazon
                 </div>
                 <div class="col-sm-1 col-xs-3">
-                  <label>Destinataire</label> Julian ADJIBI
+                  <label>Destinataire</label> {{$package->address}}
                 </div>
                 <div class="col-sm-4 col-xs-12">
                   <a href="https://www.shipito.com/fr/account/expected-packages/edit?incomingpackage.incomingpackageid=12026423" class="btn btn-primary" onclick="return gaPopUpDisplay(this);" data-id="12026423">Modifier le Colis</a>

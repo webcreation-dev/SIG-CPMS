@@ -137,7 +137,7 @@
                     </div>
 
                     <div class="col-sm-1 col-xs-3">
-                        <label>Destinataire</label> Julian ADJIBI
+                        <label>Destinataire</label> {{$package->address}}
                     </div>
 
                     <div class="col-sm-4 col-xs-12">

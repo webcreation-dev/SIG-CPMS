@@ -121,6 +121,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label">Adresse</label>
+                    <input name="address" required class="form-control" type="text" placeholder="Adresse de livraison">
+                </div>
+
+                <div class="form-group">
                     <label class="form-label">Date de réception</label>
                     <input name="date" class="form-control"  type="date" required value="2023-03-13">
                 </div>

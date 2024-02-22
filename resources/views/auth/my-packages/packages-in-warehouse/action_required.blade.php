@@ -93,19 +93,24 @@
         }
       </style>
       <div class="main-body">
-        <div class="container package-list">
+
+        <div class="container package-list" >
             <h2>Action Requise ({{App\Models\Package::countActionRequise(Auth::user()->id ) }})</h2>
+            <div id="header-content-action-required">
+                <p>
+                <strong> Veuillez noter : <strong> Si vous avez été informé par un transporteur qu'un colis a été livré à Shipito et que vous ne voyez pas votre colis listé ici, veuillez prévoir 1 à 2 jours ouvrables pour l'enregistrement du colis et la mise à jour du système. </strong>
+                </strong>
+                </p>
+                <strong>
+                <strong></strong>
+                </strong>
+            </div>
+        </div>
+
+        @if(App\Models\Package::countActionRequise(Auth::user()->id) > 0 )
+        <div class="container package-list">
             <div class="row">
                 <div class="col-xs-12">
-                <div id="header-content-action-required">
-                    <p>
-                    <strong> Veuillez noter : <strong> Si vous avez été informé par un transporteur qu'un colis a été livré à Shipito et que vous ne voyez pas votre colis listé ici, veuillez prévoir 1 à 2 jours ouvrables pour l'enregistrement du colis et la mise à jour du système. </strong>
-                    </strong>
-                    </p>
-                    <strong>
-                    <strong></strong>
-                    </strong>
-                </div>
                 <strong>
                     <strong></strong>
                 </strong>
@@ -144,7 +149,7 @@
                                 </div>
 
                                 <div class="col-sm-2 col-xs-4">
-                                    <label>Destinataire</label> Julian ADJIBI
+                                    <label>Destinataire</label> {{$package->address}}
                                 </div>
 
                                 <div class="col-sm-3 col-xs-12">
@@ -178,7 +183,7 @@
             </strong>
         </div>
 
-
+        @else
 
         <strong>
           <strong>
@@ -246,7 +251,12 @@
             </script>
           </strong>
         </strong>
-      </div> @include('layouts.footer-auth')
+
+        @endif
+
+      </div>
+
+      @include('layouts.footer-auth')
     </div>
     <div id="chat-widget-container" style="opacity: 0; visibility: hidden; z-index: -1; position: fixed; bottom: 0px; width: 84px; height: 84px; max-width: 100%; max-height: calc(100% + 0px); min-height: 0px; min-width: 0px; background-color: transparent; border: 0px; overflow: hidden; right: 0px; transition: none 0s ease 0s !important;">
       <iframe allow="clipboard-read; clipboard-write; autoplay; microphone *; camera *; display-capture *; picture-in-picture *; fullscreen *;" src="files/open_chat.html" allowtransparency="true" id="chat-widget" name="chat-widget" title="LiveChat chat widget" scrolling="no" style="width: 100%; height: 100%; min-height: 0px; min-width: 0px; margin: 0px; padding: 0px; background-image: none; background-position: 0% 0%; background-size: initial; background-attachment: scroll; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); border-width: 0px; float: none; color-scheme: normal; position: absolute; inset: 0px; transition: none 0s ease 0s !important; display: none; visibility: hidden;"></iframe>

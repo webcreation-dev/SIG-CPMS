@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('description');
             $table->string('weight');
             $table->string('price');
-            $table->string('date');
+            $table->string('address');
+            $table->date('date');
             $table->string('status')->default('En cours livraison');
 
             $table->unsignedBigInteger('level_id')->default(1);

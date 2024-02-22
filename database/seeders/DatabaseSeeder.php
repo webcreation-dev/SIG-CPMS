@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Package;
+use App\Models\User;
+use Database\Factories\PackageFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,5 +21,8 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             LevelTableSeeder::class,
         ]);
+
+        User::factory(3)->create();
+        Package::factory(20)->create();
     }
 }

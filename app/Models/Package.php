@@ -14,6 +14,7 @@ class Package extends Model
         'description',
         'weight',
         'price',
+        'address',
         'date',
         'status',
         'level_id',
