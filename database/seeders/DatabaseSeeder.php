@@ -37,6 +37,5 @@ class DatabaseSeeder extends Seeder
         User::factory(3)->create();
         Package::factory(20)->create();
 
-
     }
 }

@@ -125,7 +125,7 @@
             <LI class="dropdown no-mega-dropdown">
                 <form method="GET" action="/admin">
                     @csrf
-                        <a href="#" style="margin: 13px 15px 10px 50px;"
+                        <a href="#" target="_blank" style="margin: 13px 15px 10px 50px;"
                         onclick="event.preventDefault(); this.closest('form').submit();"
                         class="btn btn-primary">Administration Colis</a>
                 </form>
