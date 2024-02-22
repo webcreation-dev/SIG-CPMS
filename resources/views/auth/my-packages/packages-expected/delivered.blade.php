@@ -138,7 +138,7 @@
 
                     <div class="col-sm-4 col-xs-12">
                     <a href="#" class="btn btn-{{ App\Models\Package::LEVEL_BADGE[$package->level->id] }}" >{{$package->level->name}}</a>
-                    <button class="btn btn-secondary" title="Supprimer le Colis">{{$package->status}}</button>
+                    {{-- <button class="btn btn-secondary" title="Supprimer le Colis">{{$package->status}}</button> --}}
                     </div>
                 </div>
                 <div class="row">
