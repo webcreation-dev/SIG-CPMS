@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'lynia-shop@gmail.com',
             'country' => 'France',
             'email_verified_at' => now(),
-            'password' => bcrypt('lynia@2024'),
+            'password' => bcrypt('lynia@2024*'),
             'remember_token' => Str::random(10),
             'role_id' => 1,
         ]);
