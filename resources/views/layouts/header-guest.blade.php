@@ -69,8 +69,31 @@
        <LI><A HREF="/lynia_for_direct_sales">Vendeurs directs</A></LI>
      </UL>
    </LI>
+
+    @auth
+
+        <LI class="dropdown no-mega-dropdown">
+                <form method="GET" action="/packages-action-required">
+                    @csrf
+                        <a href="#" style="margin: 13px 15px 10px 50px;"
+                        onclick="event.preventDefault(); this.closest('form').submit();"
+                        class="btn btn-secondary">Tableau de bord</a>
+                </form>
+        </LI>
+
+        <li class="dropdown mega-dropdown no-menu hide-sm">
+            <a href="#">
+              <span class="customer-name">Bonjour, {{Auth::user()->lastname}} </span>
+              <i class="icon-my-account"></i> Mon compte </a>
+          </li>
+
+    @else
+
        <LI CLASS = "hide-sm"><A HREF = "/signin" CLASS = "btn btn-secondary btn-login">Connexion</A></LI>
        <LI CLASS = "hide-sm"><A HREF = "/signup" CLASS = "btn btn-primary">INSCRIPTION</A></LI>
+
+    @endauth
+
        <LI CLASS = "dropdown hide-lg">
         <A CLASS = "dropdown-toggle contact-sm-link" data-toggle = "dropdown" HREF = "#"><I CLASS = "icon-contact-us"></I> Service clientèle <SPAN CLASS = "ga-caret"></SPAN></A>
         <DIV CLASS = "dropdown-menu contact-sm">

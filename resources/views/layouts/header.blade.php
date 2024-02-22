@@ -108,7 +108,7 @@
             </div>
           </li>
 
-          <li class="dropdown no-mega-dropdown">
+          {{-- <li class="dropdown no-mega-dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <i class="icon-help"></i> Aide Lynia Delivery Express <span class="ga-caret hide-lg"></span>
             </a>
@@ -116,39 +116,30 @@
               <li>
                 <a href="/help-getting-started">Débuter</a>
               </li>
-              {{-- <li>
-                <a target="_blank" href="#">Articles interdits et faisant l’objet de restrictions</a>
-              </li>
-              <li>
-                <a target="_blank" href="#">Calculateur de frais d’expédition</a>
-              </li> --}}
               <li>
                 <a href="/lynia-university">Académie Lynia Delivery Express </a>
               </li>
             </ul>
-          </li>
+          </li> --}}
 
             <LI class="dropdown no-mega-dropdown">
-                {{-- <form method="POST" action="{{ route('logout') }}">
+                <form method="GET" action="/admin">
                     @csrf
-                    <A HREF = "{{route('logout')}}" style="margin: 10px 40px 40px 10px;"
-                    onclick="event.preventDefault(); this.closest('form').submit();"
-                    CLASS = "btn btn-lg btn-secondary btn-login">Déconnexion</A>
-                </form> --}}
+                        <a href="#" style="margin: 13px 15px 10px 50px;"
+                        onclick="event.preventDefault(); this.closest('form').submit();"
+                        class="btn btn-primary">Administration Colis</a>
+                </form>
+            </LI>
 
-                {{-- <li class="hide-sm"> --}}
+            <LI class="dropdown no-mega-dropdown">
+
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                             <a href="{{route('logout')}}" style="margin: 13px 15px 10px 50px;"
                             onclick="event.preventDefault(); this.closest('form').submit();"
                             class="btn btn-secondary">Fermer la session</a>
                     </form>
-                  {{-- </li> --}}
-
             </LI>
-            {{-- <LI class="dropdown no-mega-dropdown">
-                <A HREF = "#" CLASS = "btn btn-lg btn-primary">INSCRIPTION</A>
-            </LI> --}}
 
           <li class="dropdown mega-dropdown hide-lg">
             <a href="#" data-toggle="dropdown">
