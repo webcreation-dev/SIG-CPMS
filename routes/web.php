@@ -89,6 +89,10 @@ Route::middleware(['auth'])->group(function () {
         return view('auth.my-packages.packages-in-warehouse.action_required');
     });
 
+    Route::get('/test-listing', function () {
+        return view('auth.my-packages.packages-in-warehouse.test');
+    });
+
     Route::get('/packages-in-progress', function () {
         return view('auth.my-packages.packages-in-warehouse.in-progress');
     });

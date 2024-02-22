@@ -1,20 +1,12 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="fr">
-    @include('layouts.head-auth')
-
-    <body cz-shortcut-listen="true">
+<html dir="ltr" lang="fr"> @include('layouts.head-auth') <body cz-shortcut-listen="true">
     <!-- Google Tag Manager (noscript) -->
     <noscript>
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NGCCHV" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="menu-filler" class="with-tabs with-sub-tabs"></div>
-    <a name="page-top" id="page-top" class="with-tabs with-sub-tabs"></a>
-
-    @include('layouts.header')
-
-
-    <div id="responsive-package-search-wrapper" class="hide-lg collapsed">
+    <a name="page-top" id="page-top" class="with-tabs with-sub-tabs"></a> @include('layouts.header') <div id="responsive-package-search-wrapper" class="hide-lg collapsed">
       <form method="POST" action="https://www.shipito.com/fr/account/incoming-packages/search" name="responsivepackagesearchform" id="responsivepackagesearchform" class="form-inline">
         <div class="form-group">
           <div class="input-group input-group-lg">
@@ -31,48 +23,52 @@
         </div>
       </form>
     </div>
-
     <div class="my-packages-wrapper">
-        <div class="container my-packages">
-          <div class="row">
-            <div class="col-sm-3 col-xs-3">
-              <a href="/packages-action-required" class="ACTIVE">
-                <i class="icon-packages-in-warehouse"></i>
-                <br class="hide-lg"> Colis dans l'entrepôt </a>
-            </div>
-            <div class="col-sm-3 col-xs-3">
-              <a href="/packages-in-transit" >
-                <i class="icon-sent-packages"></i>
-                <br class="hide-lg"> Colis Expédiés </a>
-            </div>
-            <div class="col-sm-3 col-xs-3">
-              <a href="/packages-add-ship">
-                <i class="icon-expected-package"></i>
-                <br class="hide-lg"> Colis attendus </a>
-            </div>
-            <div class="col-sm-3 col-xs-3">
-              <a href="/purchase-add-articles">
-                <i class="icon-assisted-purchase"></i>
-                <br class="hide-lg"> Achat Assisté </a>
-            </div>
+      <div class="container my-packages">
+        <div class="row">
+          <div class="col-sm-4 col-xs-4">
+            <a href="/packages-action-required" class="ACTIVE">
+              <i class="icon-packages-in-warehouse"></i>
+              <br class="hide-lg"> Colis dans l'entrepôt </a>
+          </div>
+          <div class="col-sm-4 col-xs-4">
+            <a href="/packages-in-transit">
+              <i class="icon-sent-packages"></i>
+              <br class="hide-lg"> Colis Expédiés </a>
+          </div>
+          {{-- <div class="col-sm-3 col-xs-3">
+            <a href="/packages-add-ship">
+              <i class="icon-expected-package"></i>
+              <br class="hide-lg"> Colis attendus </a>
+          </div> --}}
+          <div class="col-sm-4 col-xs-4">
+            <a href="/purchase-add-articles">
+              <i class="icon-assisted-purchase"></i>
+              <br class="hide-lg"> Achat Assisté </a>
           </div>
         </div>
+      </div>
     </div>
-
     <div id="page-content" class="page-content">
+
+        <?php
+            $packages = App\Models\Package::with('level')->get();
+        ?>
+
+
       <div class="subtabs">
         <div class="container">
           <div class="subtabs-wrapper">
             <div>
-              <a href="/packages-action-required" class="active-ajax-link">Action Requise <span class="badge">0</span>
+              <a href="/packages-action-required" class="active-ajax-link">Action Requise <span class="badge">{{App\Models\Package::countActionRequise(Auth::user()->id ) }}</span>
               </a>
             </div>
             <div>
-              <a href="/packages-in-progress">En cours <span class="badge">0</span>
+              <a href="/packages-in-progress">En cours <span class="badge">{{App\Models\Package::countEnCours(Auth::user()->id ) }}</span>
               </a>
             </div>
             <div>
-              <a href="/packages-ready-to-ship">Prêt Pour l’Envoi <span class="badge">0</span>
+              <a href="/packages-ready-to-ship">Prêt Pour l’Envoi <span class="badge">{{App\Models\Package::countPretEnvoi(Auth::user()->id ) }}</span>
               </a>
             </div>
             <div class="search-bar hide-sm">
@@ -98,211 +94,116 @@
           font-weight: 600;
         }
       </style>
-
       <div class="main-body">
-        {{-- <div class="container package-list">
-          <h2>Action Requise (0)</h2>
-          <div class="row">
-            <div class="col-xs-12">
-              <div id="header-content-action-required">
-                <p>
-                  <strong> Veuillez noter : <strong> Si vous avez été informé par un transporteur qu'un colis a été livré à Lynia Delivery Express et que vous ne voyez pas votre colis listé ici, veuillez prévoir 1 à 2 jours ouvrables pour l'enregistrement du colis et la mise à jour du système. </strong>
-                  </strong>
-                </p>
-              </div>
-            </div>
-          </div>
-          <strong>
-            <strong>
-              <div class="panel-group"></div>
-            </strong>
-          </strong>
-        </div> --}}
         <div class="container package-list">
             <h2>Action Requise (1)</h2>
             <div class="row">
-             <div class="col-xs-12">
-              <div id="header-content-action-required">
-               <p>
-                <strong> Veuillez noter : <strong> Si vous avez été informé par un transporteur qu'un colis a été livré à Shipito et que vous ne voyez pas votre colis listé ici, veuillez prévoir 1 à 2 jours ouvrables pour l'enregistrement du colis et la mise à jour du système.
-               </strong></strong></p><strong><strong>
-              </strong></strong></div><strong><strong>
-             </strong></strong></div><strong><strong>
-            </strong></strong></div><strong><strong>
-
-            <div class="panel-group">
-
-
-              <div class="panel panel-packages">
-
-               <div class="panel-heading" data-toggle="collapse" href="#arpanel1">
-                <div class="row">
-
-           <!-- Title -->
-                 <div class="col-sm-3 col-xs-12 package-id-panel">
-                  <div class="icons"><i class="if-collapsed fa fa-fw fa-plus plusminus"></i><i class="if-not-collapsed fa fa-fw fa-minus plusminus"></i></div>
-
-                  <label>Mise à Niveau de l'Abonnement</label>
-                  <div class="package-id">
-
-
-                   Facture N° MB6755182
-
-                  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                 </div>
-
-           <!-- Date -->
-                 <div class="col-sm-2 col-xs-4">
-
-
-
-
-
-
-
-
-                  06 February, 2024
-
-
-
-
-
-
-
-                 </div>
-
-           <!-- Details -->
-                 <div class="col-sm-2 col-xs-4">
-
-
-
-
-
-
-
-
-
-
-
-
-
-                 </div>
-
-           <!-- Required Action -->
-                 <div class="col-sm-2 col-xs-4">
-                  <label>Action Requise</label>
-                  <span class="action-required">
-
-
-
-
-                   Paiement requis
-
-
-
-
-
-
-
-
-
-
-                  </span>
-                 </div>
-
-           <!-- Buttons-->
-                 <div class="col-sm-3 col-xs-12">
-
-
-
-
-
-
-
-               <a href="https://www.shipito.com/servlet/Account?act=Order.retryPayment&amp;orders.orderid=6755182&amp;gasv=8520567932776907776" class="btn btn-primary btn-lg" data-id="6755182"><i class="fa fa-money fa-fw"></i> Effectuer un paiement</a>
-
-
-
-
-
-
-
-
-
-
-                 </div>
-
+                <div class="col-xs-12">
+                <div id="header-content-action-required">
+                    <p>
+                    <strong> Veuillez noter : <strong> Si vous avez été informé par un transporteur qu'un colis a été livré à Shipito et que vous ne voyez pas votre colis listé ici, veuillez prévoir 1 à 2 jours ouvrables pour l'enregistrement du colis et la mise à jour du système. </strong>
+                    </strong>
+                    </p>
+                    <strong>
+                    <strong></strong>
+                    </strong>
                 </div>
-               </div> <!--  Heading -->
-
-               <div class="package-details panel-collapse in" id="arpanel1">
-                <div class="panel-body">
-
-                 <!-- Heading and Buttons -->
-                 <div class="row">
-
-
-
-
-
-
-
-
-
-
-                 </div>
-
-           <!-- Details  -->
-                <div class="row">
-
-
-
-
-
-
-
-                </div> <!-- Details  -->
-
-           <!-- Text Links -->
-                <div class="row">
-                 <div class="col-xs-12 text-right">
-
-                   <a href="https://www.shipito.com/fr/account/invoice?orders.orderid=6755182" onclick="return gaPopUpDisplay(this);" data-id="6755182">Afficher la facture<i class="fa fa-angle-double-right fa-fw"></i></a><br>
-                   <a href="https://www.shipito.com/fr/account/support-tickets/open-new?crmticket.tickettype=500&amp;crmticket.orderid=6755182" onclick="return gaPopUpDisplay(this);">Signaler un problème<i class="fa fa-angle-double-right fa-fw"></i></a>
-
-
-
-
-
-                 </div>
-                </div> <!-- Text Links -->
-               </div>
-
-               </div> <!--  Collapsible-->
-              </div>
-
-
-
-                <div class="page-links">
-                 <div class="text-center ga-pagination">1  Enregistrement(s) trouvé(s)</div>
-
+                <strong>
+                    <strong></strong>
+                </strong>
                 </div>
-
-
+                <strong>
+                <strong></strong>
+                </strong>
             </div>
-           </strong></strong></div>
+
+            <strong>
+                <strong>
+
+                <div class="panel-group">
+                    {{-- <div class="panel panel-packages">
+                        <div class="panel-heading" data-toggle="collapse" href="#arpanel1">
+                            <div class="row">
+                            <!-- Title -->
+                            <div class="col-sm-3 col-xs-12 package-id-panel">
+                                <div class="icons">
+                                <i class="if-collapsed fa fa-fw fa-plus plusminus"></i>
+                                <i class="if-not-collapsed fa fa-fw fa-minus plusminus"></i>
+                                </div>
+                                <label>Nouveau colis dans l'entrepot</label>
+                                <div class="package-id"> Facture N° MB6755182 </div>
+                            </div>
+                            <!-- Date -->
+                            <div class="col-sm-2 col-xs-4"> 06 February, 2024 </div>
+                            <!-- Details -->
+                            <div class="col-sm-2 col-xs-4"></div>
+                            <!-- Required Action -->
+                            <div class="col-sm-2 col-xs-4">
+                                <label>Action Requise</label>
+                                <span class="action-required"> Paiement requis </span>
+                            </div>
+                            <!-- Buttons-->
+                            <div class="col-sm-3 col-xs-12">
+                                <a href="#" class="btn btn-primary btn-lg">
+                                <i class="fa fa-money fa-fw"></i> Effectuer un paiement </a>
+
+                                <button class="btn btn-secondary" title="Supprimer le Colis">Paiement à la livraison</button>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div> --}}
+
+                    @foreach ($packages as $package )
+
+                        <div class="panel panel-packages">
+                            <div class="panel-heading">
+
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-12 package-id-panel">
+                                    <div class="icons">
+                                    <i class="if-collapsed fa fa-fw fa-plus plusminus"></i>
+                                    </div>
+                                    <label>Nouveau colis dans l'entrepot</label>
+                                    <div class="package-id"> {{$package->name_package}} </div>
+                                </div>
+
+                                <div class="col-sm-2 col-xs-4">
+                                    <label>Poids</label> {{$package->weight}} KG
+                                </div>
+
+                                <div class="col-sm-2 col-xs-4">
+                                    <label>Prix</label> {{$package->price}} CFA
+                                </div>
+
+                                <div class="col-sm-2 col-xs-4">
+                                    <label>Destinataire</label> Julian ADJIBI
+                                </div>
+
+                                <div class="col-sm-3 col-xs-12">
+                                <a href="#" class="btn btn-primary" ><i class="fa fa-money fa-fw"></i> Payez maintenant </a>
+                                <button class="btn btn-secondary" title="Supprimer le Colis">Paiement à la livraison</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                <div class="edit-label">
+                                    <div class="static"> <label>Détail</label> {{$package->description}}</div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+
+                </strong>
+            </strong>
+        </div>
+
+
+
         <strong>
           <strong>
             <div id="getting-started">
@@ -369,12 +270,8 @@
             </script>
           </strong>
         </strong>
-      </div>
-
-      @include('layouts.footer-auth')
+      </div> @include('layouts.footer-auth')
     </div>
-
-
     <div id="chat-widget-container" style="opacity: 0; visibility: hidden; z-index: -1; position: fixed; bottom: 0px; width: 84px; height: 84px; max-width: 100%; max-height: calc(100% + 0px); min-height: 0px; min-width: 0px; background-color: transparent; border: 0px; overflow: hidden; right: 0px; transition: none 0s ease 0s !important;">
       <iframe allow="clipboard-read; clipboard-write; autoplay; microphone *; camera *; display-capture *; picture-in-picture *; fullscreen *;" src="files/open_chat.html" allowtransparency="true" id="chat-widget" name="chat-widget" title="LiveChat chat widget" scrolling="no" style="width: 100%; height: 100%; min-height: 0px; min-width: 0px; margin: 0px; padding: 0px; background-image: none; background-position: 0% 0%; background-size: initial; background-attachment: scroll; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); border-width: 0px; float: none; color-scheme: normal; position: absolute; inset: 0px; transition: none 0s ease 0s !important; display: none; visibility: hidden;"></iframe>
       <iframe allowtransparency="true" id="chat-widget-minimized" name="chat-widget-minimized" title="LiveChat chat widget" scrolling="no" style="width: 100%; height: 100%; min-height: 0px; min-width: 0px; margin: 0px; padding: 0px; background-image: none; background-position: 0% 0%; background-size: initial; background-attachment: scroll; background-origin: initial; background-clip: initial; background-color: rgba(0, 0, 0, 0); border-width: 0px; float: none; color-scheme: normal; display: block;" src="files/saved_resource.html"></iframe>

@@ -34,22 +34,22 @@
     <div class="my-packages-wrapper">
         <div class="container my-packages">
           <div class="row">
-            <div class="col-sm-3 col-xs-3">
+            <div class="col-sm-4 col-xs-4">
               <a href="/packages-action-required" class="ACTIVE">
                 <i class="icon-packages-in-warehouse"></i>
                 <br class="hide-lg"> Colis dans l'entrepôt </a>
             </div>
-            <div class="col-sm-3 col-xs-3">
+            <div class="col-sm-4 col-xs-4">
               <a href="/packages-in-transit" >
                 <i class="icon-sent-packages"></i>
                 <br class="hide-lg"> Colis Expédiés </a>
             </div>
-            <div class="col-sm-3 col-xs-3">
+            {{-- <div class="col-sm-3 col-xs-3">
               <a href="/packages-add-ship">
                 <i class="icon-expected-package"></i>
                 <br class="hide-lg"> Colis attendus </a>
-            </div>
-            <div class="col-sm-3 col-xs-3">
+            </div> --}}
+            <div class="col-sm-4 col-xs-4">
               <a href="/purchase-add-articles">
                 <i class="icon-assisted-purchase"></i>
                 <br class="hide-lg"> Achat Assisté </a>
@@ -64,15 +64,15 @@
         <div class="container">
           <div class="subtabs-wrapper">
             <div>
-              <a href="/packages-action-required">Action Requise <span class="badge">0</span>
+              <a href="/packages-action-required">Action Requise <span class="badge">{{App\Models\Package::countActionRequise(Auth::user()->id ) }}</span>
               </a>
             </div>
             <div>
-              <a href="/packages-in-progress">En cours <span class="badge">0</span>
+              <a href="/packages-in-progress">En cours <span class="badge">{{App\Models\Package::countEnCours(Auth::user()->id ) }}</span>
               </a>
             </div>
             <div>
-              <a href="/packages-ready-to-ship" class="active-ajax-link">Prêt Pour l’Envoi <span class="badge">0</span>
+              <a href="/packages-ready-to-ship" class="active-ajax-link">Prêt Pour l’Envoi <span class="badge">{{App\Models\Package::countPretEnvoi(Auth::user()->id ) }}</span>
               </a>
             </div>
             <div class="search-bar hide-sm">
@@ -94,7 +94,7 @@
       </div>
       <div class="main-body">
         <div class="container package-list">
-          <h2>Vos colis actuellement au sein de l’entrepôt de Lynia Delivery Express sont prêts pour l’envoi</h2>
+          {{-- <h2>Vos colis actuellement au sein de l’entrepôt de Lynia Delivery Express sont prêts pour l’envoi</h2>
           <div class="row action-blocks">
             <div class="col-sm-4 col-xs-12 action-block">
               <div class="row">
@@ -184,9 +184,9 @@
               </div>
             </div>
           </div>
-          <br>
+          <br> --}}
           <div class="panel-group">
-            <h2>Vous n'avez actuellement aucun colis prêt pour l’envoi</h2>
+            <h2>Colis prêt pour l’envoi (0)</h2>
           </div>
         </div>
       </div>

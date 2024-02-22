@@ -1,6 +1,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
     <script async="" src="files/roundtrip.js.téléchargement"></script>
     <script async="" src="files/fbevents.js.téléchargement"></script>
     <script async="" src="files/analytics.js.téléchargement"></script>
@@ -13,6 +15,7 @@
     <script>
       var GOOGLE_ANALYTICS_CLIENT_ID = 'xxx';
     </script>
+
     <link rel="canonical" href="https://www.shipito.com/fr/account/incoming-packages/no-packages">
     <link rel="alternate" hreflang="x-default" href="https://www.shipito.com/en/account/incoming-packages/no-packages">
     <link rel="alternate" hreflang="en" href="https://www.shipito.com/en/account/incoming-packages/no-packages">
@@ -40,6 +43,9 @@
       })(window, document, 'script', 'dataLayer', 'GTM-5NGCCHV');
     </script>
     <!-- End Google Tag Manager -->
+
+
+
     <link rel="stylesheet" href="files/bootstrap-datepicker.min.css">
     <script src="files/bootstrap3-typeahead.min.js.téléchargement"></script>
     <script src="files/bootstrap-datepicker.min.js.téléchargement"></script>
@@ -95,10 +101,6 @@
     <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/ststyles.css" TYPE = "text/css"/>
     <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/flags.css" TYPE = "text/css"/>
     <link rel="shortcut icon" type="image/jpg" href="shipito/fr/imgs/favicon.png" />
-
-     {{-- <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/landingpage.css" TYPE = "text/css"/>
-     <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/calculator.css" TYPE = "text/css"/>
-     <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/landingpage.css" TYPE = "text/css"/> --}}
 
      <LINK REL = "StyleSheet" HREF = "shipito/styles/v2/aos.css" TYPE = "text/css"/>
 

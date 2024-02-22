@@ -31,4 +31,24 @@ class Package extends Model
     public function level() {
         return $this->belongsTo(Level::class, 'level_id');
     }
+
+    public static function countActionRequise($userId) {
+        return Package::where('user_id', $userId)->where('level_id', 1)->count();
+    }
+
+    public static function countEnCours($userId) {
+        return Package::where('user_id', $userId)->where('level_id', 2)->count();
+    }
+
+    public static function countPretEnvoi($userId) {
+        return Package::where('user_id', $userId)->where('level_id', 3)->count();
+    }
+
+    public static function countEnTransit($userId) {
+        return Package::where('user_id', $userId)->where('level_id', 4)->count();
+    }
+
+    public static function countLivre($userId) {
+        return Package::where('user_id', $userId)->where('level_id', 5)->count();
+    }
 }

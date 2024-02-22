@@ -34,22 +34,22 @@
     <div class="my-packages-wrapper">
         <div class="container my-packages">
           <div class="row">
-            <div class="col-sm-3 col-xs-3">
+            <div class="col-sm-4 col-xs-4">
               <a href="/packages-action-required" >
                 <i class="icon-packages-in-warehouse" class="ACTIVE"></i>
                 <br class="hide-lg"> Colis dans l'entrepôt </a>
             </div>
-            <div class="col-sm-3 col-xs-3">
+            <div class="col-sm-4 col-xs-4">
               <a href="/packages-in-transit" class="ACTIVE">
                 <i class="icon-sent-packages"></i>
                 <br class="hide-lg"> Colis Expédiés </a>
             </div>
-            <div class="col-sm-3 col-xs-3">
+            {{-- <div class="col-sm-3 col-xs-3">
               <a href="/packages-add-ship">
                 <i class="icon-expected-package"></i>
                 <br class="hide-lg"> Colis attendus </a>
-            </div>
-            <div class="col-sm-3 col-xs-3">
+            </div> --}}
+            <div class="col-sm-4 col-xs-4">
               <a href="/purchase-add-articles">
                 <i class="icon-assisted-purchase"></i>
                 <br class="hide-lg"> Achat Assisté </a>
@@ -64,11 +64,11 @@
             <div class="container">
               <div class="subtabs-wrapper">
                 <div>
-                  <a href="/packages-in-transit">En transit<span class="badge">0</span>
+                  <a href="/packages-in-transit">En transit<span class="badge">{{App\Models\Package::countEnTransit(Auth::user()->id ) }}</span>
                   </a>
                 </div>
                 <div>
-                  <a href="/packages-delivered" >Livré <span class="badge">0</span>
+                  <a href="/packages-delivered" >Livré <span class="badge">{{App\Models\Package::countLivre(Auth::user()->id ) }}</span>
                   </a>
                 </div>
                 <div>

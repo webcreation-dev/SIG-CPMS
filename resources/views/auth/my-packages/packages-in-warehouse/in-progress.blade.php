@@ -11,6 +11,8 @@
     <div id="menu-filler" class="with-tabs with-sub-tabs"></div>
     <a name="page-top" id="page-top" class="with-tabs with-sub-tabs"></a>
     @include('layouts.header')
+
+
     <div id="responsive-package-search-wrapper" class="hide-lg collapsed">
       <form method="POST" action="https://www.shipito.com/fr/account/incoming-packages/search" name="responsivepackagesearchform" id="responsivepackagesearchform" class="form-inline">
         <div class="form-group">
@@ -32,22 +34,22 @@
     <div class="my-packages-wrapper">
         <div class="container my-packages">
           <div class="row">
-            <div class="col-sm-3 col-xs-3">
+            <div class="col-sm-4 col-xs-4">
               <a href="/packages-action-required" class="ACTIVE">
                 <i class="icon-packages-in-warehouse"></i>
                 <br class="hide-lg"> Colis dans l'entrepôt </a>
             </div>
-            <div class="col-sm-3 col-xs-3">
+            <div class="col-sm-4 col-xs-4">
               <a href="/packages-in-transit" >
                 <i class="icon-sent-packages"></i>
                 <br class="hide-lg"> Colis Expédiés </a>
             </div>
-            <div class="col-sm-3 col-xs-3">
+            {{-- <div class="col-sm-3 col-xs-3">
               <a href="/packages-add-ship">
                 <i class="icon-expected-package"></i>
                 <br class="hide-lg"> Colis attendus </a>
-            </div>
-            <div class="col-sm-3 col-xs-3">
+            </div> --}}
+            <div class="col-sm-4 col-xs-4">
               <a href="/purchase-add-articles">
                 <i class="icon-assisted-purchase"></i>
                 <br class="hide-lg"> Achat Assisté </a>
@@ -57,19 +59,25 @@
     </div>
 
     <div id="page-content" class="page-content">
+
+        <?php
+            $packages = App\Models\Package::with('level')->get();
+        ?>
+
+
       <div class="subtabs">
         <div class="container">
           <div class="subtabs-wrapper">
             <div>
-              <a href="/packages-action-required">Action Requise <span class="badge">0</span>
+              <a href="/packages-action-required">Action Requise <span class="badge">{{App\Models\Package::countActionRequise(Auth::user()->id ) }}</span>
               </a>
             </div>
             <div>
-              <a href="/packages-in-progress" class="active-ajax-link">En cours <span class="badge">0</span>
+              <a href="/packages-in-progress" class="active-ajax-link">En cours <span class="badge">{{$packages->count()}}</span>
               </a>
             </div>
             <div>
-              <a href="/packages-ready-to-ship">Prêt Pour l’Envoi <span class="badge">0</span>
+              <a href="/packages-ready-to-ship">Prêt Pour l’Envoi <span class="badge">{{App\Models\Package::countPretEnvoi(Auth::user()->id ) }}</span>
               </a>
             </div>
             <div class="search-bar hide-sm">
@@ -92,7 +100,51 @@
 
       <div class="main-body">
         <div class="container package-list">
-          <h2>Demandes en cours de traitement (0)</h2>
+          <h2>Demandes en cours de traitement ({{$packages->count()}})</h2>
+
+
+          @foreach ($packages as $package )
+
+            <div class="panel panel-packages">
+                <div class="panel-heading">
+                <div class="package-id"> {{$package->name_package}} </div>
+                <div class="row">
+                    <div class="col-sm-2 col-xs-12">
+                        <label>Numéro de Suivi 24567</label>
+                    </div>
+
+                    <div class="col-sm-2 col-xs-3">
+                        <label>Recu le</label> {{ Carbon\Carbon::parse($package->date)->format('d F Y') }}
+                    </div>
+
+                    <div class="col-sm-2 col-xs-3">
+                        <label>Poids</label> {{$package->weight}} KG
+                    </div>
+
+                    <div class="col-sm-1 col-xs-3">
+                        <label>Prix</label> {{$package->price}} CFA
+                    </div>
+
+                    <div class="col-sm-1 col-xs-3">
+                        <label>Destinataire</label> Julian ADJIBI
+                    </div>
+
+                    <div class="col-sm-4 col-xs-12">
+                    <a href="#" class="btn btn-primary" >{{$package->level->name}}</a>
+                    <button class="btn btn-secondary" title="Supprimer le Colis">{{$package->status}}</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                    <div class="edit-label">
+                        <div class="static"> <label>Détail</label> {{$package->description}}</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+          @endforeach
+
         </div>
       </div>
     </div>
