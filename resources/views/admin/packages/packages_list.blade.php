@@ -59,7 +59,7 @@
                         <th>Prix</th>
                         <th>Adresse de livraison</th>
                         <th>Niveau</th>
-                        <th>Statut</th>
+                        {{-- <th>Statut</th> --}}
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -77,9 +77,9 @@
 
                                     <span class="badge badge-{{ App\Models\Package::LEVEL_BADGE[$package->level->id] }}">{{$package->level->name}} </span>
                                 </td>
-                                <td>
+                                {{-- <td>
                                     <button class="btn btn-sm btn-outline-danger" type="button">{{$package->status}}</button>
-                                </td>
+                                </td> --}}
                                 <td>
                                     {{-- <button class="btn btn-primary" >confirm dialog</button> --}}
 
