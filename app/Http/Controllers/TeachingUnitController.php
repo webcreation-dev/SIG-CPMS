@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
 use App\Models\TeachingUnit;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,22 @@ class TeachingUnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teaching_units = TeachingUnit::all();
-        return view('admin.teaching_units.teaching_units_list', compact('teaching_units'));
+        if($request->has('classroom_id')){
+
+            $classroom_id = $request->classroom_id;
+            $classroom = Classroom::find($classroom_id);
+            $teaching_units = TeachingUnit::where('classroom_id',  $classroom_id)->with('classroom')->get();
+
+            return view('admin.teaching_units.teaching_units_list', compact('teaching_units','classroom'));
+        }else{
+
+            $teaching_units = TeachingUnit::all();
+            return view('admin.teaching_units.teaching_units_list', compact('teaching_units'));
+        }
+
+
     }
 
     /**
@@ -82,17 +95,41 @@ class TeachingUnitController extends Controller
      */
     public function update(Request $request, TeachingUnit $teachingUnit)
     {
-        $request->validate([
-            'edit_name' => ['required', 'string', 'max:255'],
-            'edit_credit' => ['required', 'numeric'],
-        ]);
+        if($request->has('type')){
+            $request->validate([
+                'classroom_id' => ['required', 'numeric'],
+                'ues' => ['array'],
+            ]);
 
-        $teachingUnit->update([
-            'name' => $request->edit_name,
-            'credit' => $request->edit_credit,
-        ]);
+            if($request->has('ues')) {
+                $classroom_by_ues = TeachingUnit::where('classroom_id', $request->classroom_id)->get();
+                foreach($classroom_by_ues as $item){
+                    $item->classroom_id = null;
+                    $item->save();
+                }
 
-        return redirect()->route('teaching_units.index')->with('message','UE mis à jour avec succès');
+                $ues_by_classroom = TeachingUnit::whereIn('id', $request->ues)->get();
+                foreach($ues_by_classroom as $item){
+                    $item->classroom_id = $request->classroom_id;
+                    $item->save();
+                }
+            }
+
+            return back()->with('message','Les UE ont été ajoutés avec succès');
+
+        }else {
+            $request->validate([
+                'edit_name' => ['required', 'string', 'max:255'],
+                'edit_credit' => ['required', 'numeric'],
+            ]);
+
+            $teachingUnit->update([
+                'name' => $request->edit_name,
+                'credit' => $request->edit_credit,
+            ]);
+
+            return redirect()->route('teaching_units.index')->with('message','UE mis à jour avec succès');
+        }
     }
 
     /**

@@ -143,6 +143,7 @@
                     <label class="form-label">Nom UE</label>
                     <input name="name" required class="form-control" type="text" placeholder="Nom UE">
                 </div>
+                
                 <div class="form-group">
                     <label class="form-label">Credit UE</label>
                     <input name="credit" required class="form-control" type="number" placeholder="Credit UE">

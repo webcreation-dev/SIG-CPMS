@@ -19,8 +19,15 @@
             <div class="left-breadcrumb">
               <ul class="breadcrumb mb-0">
                 <li class="breadcrumb-item"><a href="index.html">
-                    <h1>Tableau de bord</h1></a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Liste des classes</a></li>
+                    <h1>
+                        @if (isset($classroom))
+                            <strong>{{$classroom->name}}</strong>
+                        @else
+                            Tableau de bord
+                        @endif
+
+                    </h1></a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Liste des UE</a></li>
               </ul>
             </div>
             <div class="right-breadcrumb">
@@ -44,7 +51,7 @@
                 <div class="row">
                     <div class="col-md-8"></div>
                     <div class="col-md-4">
-                        <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter une classe</button>
+                        <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter UE</button>
                     </div>
                 </div>
 
@@ -54,10 +61,13 @@
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>Nom UE</th>
+                        @if (!isset($classroom))
+                            <th>Classe</th>
+                        @endif
+                        <th>Nom</th>
                         <th>Crédit</th>
                         <th>Type</th>
-                        <th>Classe</th>
+                        <th>ECUE</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -67,15 +77,43 @@
                                 <td>
                                     <img width="30" height="30" src="{{asset('assets/images/pages/product/box' . (($key % 3) + 1) . '.png')}}" alt="">
                                 </td>
+                                @if (!isset($classroom))
+                                <td>
+                                    @if ($teaching_unit->classroom_id != null)
+                                        {{$teaching_unit->classroom->name}}
+                                        @else
+                                        <strong>AUCUNE CLASSE</strong>
+                                    @endif
+                                </td>
+                                @endif
+
+
                                 <td>{{$teaching_unit->name}}</td>
                                 <td>{{$teaching_unit->credit}}</td>
-                                <td>{{$teaching_unit->status}}</td>
-                                <td>A préciser</td>
+                                <td>
+                                    @if($teaching_unit->status == 'singular')
+                                        <span class="badge badge-success">Unique</span>
+                                    @else
+                                        <span class="badge badge-warning">Multiple</span>
+                                    @endif
+
+                                </td>
 
                                 <td>
-                                    <a href="{{route('element_teaching_units.index', ['teaching_unit_id' => $teaching_unit->id ])}}" title="Voir les ECUE">
-                                        <span class="badge badge-info"><i class="fa fa-user"></i> </span>
-                                    </a>
+
+                                    @if($teaching_unit->status == 'multiple')
+                                        <a href="{{route('element_teaching_units.index', ['teaching_unit_id' => $teaching_unit->id ])}}" title="Voir les ECUE">
+                                            <span class="badge badge-info"><i class="fa fa-qrcode"></i> Voir les ECUE </span>
+                                        </a>
+                                    @else
+                                        <strong>AUCUN ECUE</strong>
+                                    @endif
+
+
+                                </td>
+
+                                <td>
+
 
                                     <a href="#" title="Voir UE" data-bs-toggle="modal" data-bs-target="#ViewModal"
                                         view-teaching-units-name="{{$teaching_unit->name}}"
@@ -216,6 +254,7 @@
     <script>
         // Attendez que le document soit chargé
         document.addEventListener('DOMContentLoaded', function() {
+
             // Sélectionnez tous les boutons d'édition
             var editButtons = document.querySelectorAll('[data-bs-target="#EditModal"]');
 

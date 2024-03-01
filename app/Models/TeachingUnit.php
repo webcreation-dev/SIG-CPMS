@@ -15,6 +15,7 @@ class TeachingUnit extends Model
         'status',
         'classroom_id',
     ];
+    
 
     public function classroom()
     {
@@ -23,5 +24,14 @@ class TeachingUnit extends Model
 
     public static function list() {
         return self::all();
+    }
+
+    public static function getLinkTeachingUnit($classroomId) {
+
+        $teachingUnits = self::whereNull('classroom_id')
+                        ->orWhere('classroom_id', $classroomId)
+                        ->get();
+        return $teachingUnits;
+
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classroom;
+use App\Models\TeachingUnit;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -23,9 +24,11 @@ class ClassroomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $classroomId = $request->classroomId;
+        $ues = TeachingUnit::getLinkTeachingUnit($classroomId);
+        return view('admin.classrooms.update_ue', compact('classroomId','ues'));
     }
 
     /**

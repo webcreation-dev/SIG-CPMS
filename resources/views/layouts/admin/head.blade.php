@@ -49,7 +49,5 @@
 
     <!-- select 2 css-->
     <link href="{{asset('assets/css/vendor/sweetalert/sweetalert2.min.css')}}" rel="stylesheet">
-
-
-
+    @livewireStyles()
   </head>
