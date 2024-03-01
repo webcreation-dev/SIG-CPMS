@@ -62,7 +62,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        {{-- @foreach ($users as $user)
                             <tr>
                                 <td>{{$user->lastname}}</td>
                                 <td>{{$user->name}}</td>
@@ -81,7 +81,7 @@
                                     <a href="{{route('packages.by.user', ['user_id' => $user->id ])}}" target="_blank" title="Voir les colis"><span class="badge badge-warning"><i class="ti-eye"></i> </span></a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                   </table>
                 </div>
@@ -92,7 +92,7 @@
       </div>
 
       <!-- Data Modal Start-->
-      <div class="modal fade" id="DataModal">
+      {{-- <div class="modal fade" id="DataModal">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -140,7 +140,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
       <!-- Data Modal end-->
 
       <!-- theme body end-->

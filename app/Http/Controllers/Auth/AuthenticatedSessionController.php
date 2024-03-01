@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.forms.signin');
+        return view('auth.login');
     }
 
     /**
@@ -25,9 +25,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request['email'] = $request['customer_email'];
-        $request['password'] = $request['customer_password'];
-
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -38,8 +35,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request)
-    : RedirectResponse
+    public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 

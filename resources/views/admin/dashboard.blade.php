@@ -39,18 +39,129 @@
       <div class="theme-body common-dash" data-simplebar>
         <div class="custom-container">
           <div class="row">
+
             <div class="col-xl-4 cdx-xl-50">
               <div class="card welcome-card overflow-hidden">
                 <div class="card-header"></div>
                 <div class="card-body">
-                  <div class="img-wrap"><img class="img-fluid" src="{{asset('files/user.png')}}" alt="image"></div>
-                  <h3>Bienvenue cher Administrateur</h3>
-                  <p class="mb-10">Congratulations! Your account has been Setup and  you are ready to configure your dashboard now.Configuration only take a couple of seconds.</p>
-                  <p>If you have any query for Configuration so contact ***** !!!</p>
+                  <div class="img-wrap"><img class="img-fluid" src="{{asset('avatar.png')}}" alt="image"></div>
+                  <h3>Bienvenue cher Directrice</h3>
+                  <p class="mb-6" style="text-align: justify;">De l'administration des étudiants aux finances, des cours aux ressources matérielles, gérer votre université depuis votre espace.</p>
                 </div>
               </div>
             </div>
-            <div class="col-xl-4 cdx-xl-50">
+            <div class="col-xl-8 cdx-xl-100">
+                <div class="row">
+                  <div class="col-xxl-12">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="card project-status">
+                          <div class="card-header">
+                            <h4>Nombre d'étudiants</h4>
+                            <div class="setting-card action-menu"><a class="action-toggle" href="javascript:void(0)"><i class="codeCopy" data-feather="more-horizontal"></i></a>
+                              <ul class="action-dropdown">
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i>weekly</a></li>
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar-check-o"></i>monthly</a></li>
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar"></i>yearly</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="card-body progressCounter">
+                            <div class="media">
+                              <div>
+                                <h2><span class="count">50</span></h2>
+                              </div>
+                              <div class="media-body">                             <span class="badge badge-success">25.7%<i class="fa fa-angle-up"></i></span></div>
+                            </div>
+                            <div class="progress progress-primary">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">             </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="card project-status">
+                          <div class="card-header">
+                            <h4>Filières</h4>
+                            <div class="setting-card action-menu"><a class="action-toggle" href="javascript:void(0)"><i class="codeCopy" data-feather="more-horizontal"></i></a>
+                              <ul class="action-dropdown">
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i>weekly</a></li>
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar-check-o"></i>monthly</a></li>
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar"></i>yearly                                          </a></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="card-body progressCounter">
+                            <div class="media">
+                              <div>
+                                <h2><span class="count">8</span></h2>
+                              </div>
+                              <div class="media-body">                             <span class="badge badge-secondary">25.7%<i class="fa fa-angle-down"></i></span></div>
+                            </div>
+                            <div class="progress progress-secondary">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">     </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="card project-status">
+                          <div class="card-header">
+                            <h4>Professeurs</h4>
+                            <div class="setting-card action-menu"><a class="action-toggle" href="javascript:void(0)"><i class="codeCopy" data-feather="more-horizontal"></i></a>
+                              <ul class="action-dropdown">
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i>weekly</a></li>
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar-check-o"></i>monthly</a></li>
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar"></i>yearly</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="card-body progressCounter">
+                            <div class="media">
+                              <div>
+                                <h2><span class="count">25</span></h2>
+                              </div>
+                              <div class="media-body"><span class="badge badge-danger">20.5%<i class="fa fa-angle-down"></i></span></div>
+                            </div>
+                            <div class="progress progress-info">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="card project-status">
+                          <div class="card-header">
+                            <h4>Personnel</h4>
+                            <div class="setting-card action-menu"><a class="action-toggle" href="javascript:void(0)"><i class="codeCopy" data-feather="more-horizontal"></i></a>
+                              <ul class="action-dropdown">
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i>weekly</a></li>
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar-check-o"></i>monthly</a></li>
+                                <li><a href="javascript:void(0);"><i class="fa fa-calendar"></i>yearly</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="card-body progressCounter">
+                            <div class="media">
+                              <div>
+                                <h2><span class="count">10</span></h2>
+                              </div>
+                              <div class="media-body"><span class="badge badge-success">15.2%<i class="fa fa-angle-up"></i></span></div>
+                            </div>
+                            <div class="progress progress-warning">
+                              <div class="progress-bar" role="progressbar" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-xl-6 cdx-xl-50">
               <div class="card earning-chart">
                 <div class="card-header">
                   <h4>Statistiques des visites</h4>
@@ -72,7 +183,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-4 cdx-xl-50 cdxorder-xl-1">
+            <div class="col-xl-6 cdx-xl-50 cdxorder-xl-1">
               <div class="card countri-tbl">
                 <div class="card-header">
                   <h4>Pays d'expédition</h4>
@@ -186,114 +297,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-6 cdx-xl-100">
-              <div class="row">
-                <div class="col-xxl-12">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="card project-status">
-                        <div class="card-header">
-                          <h4>Revenus</h4>
-                          <div class="setting-card action-menu"><a class="action-toggle" href="javascript:void(0)"><i class="codeCopy" data-feather="more-horizontal"></i></a>
-                            <ul class="action-dropdown">
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i>weekly</a></li>
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar-check-o"></i>monthly</a></li>
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar"></i>yearly</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="card-body progressCounter">
-                          <div class="media">
-                            <div>
-                              <h2><span class="count">3238</span></h2>
-                            </div>
-                            <div class="media-body">                             <span class="badge badge-success">25.7%<i class="fa fa-angle-up"></i></span></div>
-                          </div>
-                          <div class="progress progress-primary">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="card project-status">
-                        <div class="card-header">
-                          <h4>Utilisateurs</h4>
-                          <div class="setting-card action-menu"><a class="action-toggle" href="javascript:void(0)"><i class="codeCopy" data-feather="more-horizontal"></i></a>
-                            <ul class="action-dropdown">
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i>weekly</a></li>
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar-check-o"></i>monthly</a></li>
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar"></i>yearly                                          </a></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="card-body progressCounter">
-                          <div class="media">
-                            <div>
-                              <h2><span class="count">4850</span></h2>
-                            </div>
-                            <div class="media-body">                             <span class="badge badge-secondary">25.7%<i class="fa fa-angle-down"></i></span></div>
-                          </div>
-                          <div class="progress progress-secondary">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">     </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="card project-status">
-                        <div class="card-header">
-                          <h4>Expéditions</h4>
-                          <div class="setting-card action-menu"><a class="action-toggle" href="javascript:void(0)"><i class="codeCopy" data-feather="more-horizontal"></i></a>
-                            <ul class="action-dropdown">
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i>weekly</a></li>
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar-check-o"></i>monthly</a></li>
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar"></i>yearly</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="card-body progressCounter">
-                          <div class="media">
-                            <div>
-                              <h2><span class="count">4198</span></h2>
-                            </div>
-                            <div class="media-body"><span class="badge badge-danger">20.5%<i class="fa fa-angle-down"></i></span></div>
-                          </div>
-                          <div class="progress progress-info">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="card project-status">
-                        <div class="card-header">
-                          <h4>Personnel</h4>
-                          <div class="setting-card action-menu"><a class="action-toggle" href="javascript:void(0)"><i class="codeCopy" data-feather="more-horizontal"></i></a>
-                            <ul class="action-dropdown">
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i>weekly</a></li>
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar-check-o"></i>monthly</a></li>
-                              <li><a href="javascript:void(0);"><i class="fa fa-calendar"></i>yearly</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="card-body progressCounter">
-                          <div class="media">
-                            <div>
-                              <h2><span class="count">1899</span></h2>
-                            </div>
-                            <div class="media-body"><span class="badge badge-success">15.2%<i class="fa fa-angle-up"></i></span></div>
-                          </div>
-                          <div class="progress progress-warning">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+            
+
             <div class="col-xl-6 cdx-xl-50">
               <div class="card project-summarytbl">
                 <div class="card-header">

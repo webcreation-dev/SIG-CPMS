@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
     <meta name="keywords" content="admin template,html 5 admin template , dmeki admin , dashboard template, bootstrap 5 admin template, responsive admin template">
-    <title>Admin Lynia Delivery Express | Dashboard
+    <title>CPMS | Cycle Préparatoire Marie Stella
     </title>
     <!-- shortcut icon-->
-    <link rel="icon" href="{{asset('shipito/fr/imgs/favicon.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('shipito/fr/imgs/favicon.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{asset('favicon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('favicon.png')}}" type="image/x-icon">
     <!-- Fonts css-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

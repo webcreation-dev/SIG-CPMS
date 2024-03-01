@@ -1,0 +1,43 @@
+<?php
+
+use App\Models\Note;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('notes', function (Blueprint $table) {
+            $table->id();
+            $table->string('points');
+            $table->enum('control_type', Note::CONTROL_TYPES);
+
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+
+            $table->unsignedBigInteger('element_teaching_unit_id');
+            $table->foreign('element_teaching_unit_id')->references('id')->on('element_teaching_units')->onDelete('cascade')->nullable();
+
+            $table->unsignedBigInteger('teaching_unit_id');
+            $table->foreign('teaching_unit_id')->references('id')->on('teaching_units')->onDelete('cascade')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('notes');
+    }
+};
