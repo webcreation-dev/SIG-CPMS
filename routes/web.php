@@ -46,11 +46,6 @@ require __DIR__.'/auth.php';
         return view('admin.dashboard');
     })->name('dashboard');
 
-
-    Route::get('/notes', function () {
-        return view('admin.notes');
-    })->name('notes');
-
     // ROUTE RESOURCE
 
     Route::resource('classrooms', ClassroomController::class);

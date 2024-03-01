@@ -23,9 +23,9 @@
                 <span>Utilisateurs</span>
             </a>
         </li>
-        <li class="menu-item"><a href="{{route('notes.index')}}">
+        {{-- <li class="menu-item"><a href="{{route('notes.index')}}">
             <div class="icon-item"><i data-feather="shopping-bag"></i></div><span>Gestion des notes</span></a>
-        </li>
+        </li> --}}
 
         <li class="menu-item"><a href="javascript:void(0);">
             <div class="icon-item"><i class="fa fa-mortar-board"></i></div><span>Configurations</span><i class="fa fa-angle-down"></i></a>

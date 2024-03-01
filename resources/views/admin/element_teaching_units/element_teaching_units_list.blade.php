@@ -69,6 +69,7 @@
                         @endif
                         <th>Nom</th>
                         <th>Credit</th>
+                        <th>Notations</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -84,6 +85,12 @@
 
                                 <td>{{$element_teaching_unit->name}}</td>
                                 <td>{{$element_teaching_unit->credit}}</td>
+                                <td>
+                                    <a  href="{{route('notes.create',['classroom_id' => $element_teaching_unit->teachingUnit->classroom_id,'ue_id' => $element_teaching_unit->id,'type' => 'ecue'])}}"
+                                        title="Ajouter les notes" >
+                                        <span class="badge badge-warning"><i class="fa fa-plus"></i>  </span>
+                                    </a>
+                                </td>
 
                                 <td>
                                     <a href="#" title="Voir l'ECUE" data-bs-toggle="modal" data-bs-target="#ViewModal"
@@ -143,7 +150,7 @@
                     <label class="form-label">Nom UE</label>
                     <input name="name" required class="form-control" type="text" placeholder="Nom UE">
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">Credit UE</label>
                     <input name="credit" required class="form-control" type="number" placeholder="Credit UE">

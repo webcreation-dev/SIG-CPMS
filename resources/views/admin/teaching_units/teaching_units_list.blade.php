@@ -67,7 +67,7 @@
                         <th>Nom</th>
                         <th>Crédit</th>
                         <th>Type</th>
-                        <th>ECUE</th>
+                        <th>Notations / ECUE</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -106,7 +106,10 @@
                                             <span class="badge badge-info"><i class="fa fa-qrcode"></i> Voir les ECUE </span>
                                         </a>
                                     @else
-                                        <strong>AUCUN ECUE</strong>
+                                        <a  href="{{route('notes.create',['classroom_id' => $teaching_unit->classroom_id,'ue_id' => $teaching_unit->id,'type' => 'ue'])}}"
+                                                title="Ajouter les notes" >
+                                            <span class="badge badge-warning"><i class="fa fa-plus"></i>  </span>
+                                        </a>
                                     @endif
 
 

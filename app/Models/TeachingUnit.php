@@ -15,7 +15,7 @@ class TeachingUnit extends Model
         'status',
         'classroom_id',
     ];
-    
+
 
     public function classroom()
     {
@@ -32,6 +32,6 @@ class TeachingUnit extends Model
                         ->orWhere('classroom_id', $classroomId)
                         ->get();
         return $teachingUnits;
-
     }
+
 }

@@ -16,17 +16,23 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('points');
-            $table->enum('control_type', Note::CONTROL_TYPES);
+            $table->integer('i1_points')->nullable();
+            $table->integer('i2_points')->nullable();
+
+            $table->integer('d1_points')->nullable();
+            $table->integer('d2_points')->nullable();
+
+            $table->integer('e_points')->nullable();
+
 
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
 
-            $table->unsignedBigInteger('element_teaching_unit_id');
-            $table->foreign('element_teaching_unit_id')->references('id')->on('element_teaching_units')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('element_teaching_unit_id')->nullable();
+            $table->foreign('element_teaching_unit_id')->references('id')->on('element_teaching_units')->onDelete('cascade');
 
-            $table->unsignedBigInteger('teaching_unit_id');
-            $table->foreign('teaching_unit_id')->references('id')->on('teaching_units')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('teaching_unit_id')->nullable();
+            $table->foreign('teaching_unit_id')->references('id')->on('teaching_units')->onDelete('cascade');
             $table->timestamps();
         });
     }

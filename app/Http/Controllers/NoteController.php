@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
+use App\Models\ElementTeachingUnit;
 use App\Models\Note;
+use App\Models\Student;
+use App\Models\TeachingUnit;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -22,9 +26,19 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $classroom = Classroom::find($request->classroom_id);
+
+        if($request->type == 'ue') {
+            $ue = TeachingUnit::find($request->ue_id);
+        }else{
+            $ue = ElementTeachingUnit::find($request->ue_id);
+        }
+
+        $type = $request->type;
+
+        return view('admin.notes.notes', compact('classroom', 'ue', 'type'));
     }
 
     /**
@@ -35,7 +49,59 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $classroom = Classroom::find($request->classroom_id);
+
+        $type = $request->type;
+
+        if($request->type == 'ue') {
+            $ue = TeachingUnit::find($request->ue_id);
+        }else{
+            $ue = ElementTeachingUnit::find($request->ue_id);
+        }
+
+
+        $students = Student::whereIn('id', $request->student_id)->get();
+
+        $i1_points = $request->i1_points;
+        $i2_points = $request->i2_points;
+        $d1_points = $request->d1_points;
+        $d2_points = $request->d2_points;
+        $e_points = $request->e_points;
+
+
+        if($request->type == 'ue') {
+
+            foreach($students as $key => $student) {
+
+                $note = Note::where('student_id', $student->id)
+                    ->where('teaching_unit_id', $request->ue_id)
+                    ->first();
+
+                if ($note) {
+                    $note->i1_points = ($i1_points[$key] == null ? 0.1 : $i1_points[$key]);
+                    $note->i2_points = ($i2_points[$key] == null ? 0.1 : $i2_points[$key]);
+                    $note->d1_points = ($d1_points[$key] == null ? 0.1 : $d1_points[$key]);
+                    $note->d2_points = ($d2_points[$key] == null ? 0.1 : $d2_points[$key]);
+                    $note->e_points = ($e_points[$key] == null ? 0.1 : $e_points[$key]);
+
+                    $note->save();
+                }
+            }
+        }else {
+            foreach($students as $key => $student) {
+
+                $note = Note::where('student_id', $student)->where('element_teaching_unit_id', $request->ue_id)->first();
+                $note->i1_points = ($i1_points[$key] == null ? 0.1 : $i1_points[$key]);
+                $note->i2_points = ($i2_points[$key] == null ? 0.1 : $i2_points[$key]);
+                $note->d1_points = ($d1_points[$key] == null ? 0.1 : $d1_points[$key]);
+                $note->d2_points = ($d2_points[$key] == null ? 0.1 : $d2_points[$key]);
+                $note->e_points = ($e_points[$key] == null ? 0.1 : $e_points[$key]);
+                $note->save();
+            }
+        }
+
+        return redirect(route('notes.create',['classroom_id' => $classroom->id,'ue_id' => $ue->id,'type' => $type]))->with('message','Notes ajouté avec succès');
     }
 
     /**
