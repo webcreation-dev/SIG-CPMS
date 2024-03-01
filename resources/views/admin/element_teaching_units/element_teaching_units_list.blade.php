@@ -77,7 +77,7 @@
                         @foreach ($element_teaching_units as $key => $element_teaching_unit)
                             <tr>
                                 <td>
-                                    <img width="30" height="30" src="{{asset('assets/images/pages/product/box' . (($key % 3) + 1) . '.png')}}" alt="">
+                                    <img width="40" height="40" src="{{asset('assets/images/ue.png')}}" alt="">
                                 </td>
                                 @if (!isset($teaching_unit_id))
                                     <th>{{$element_teaching_unit->teachingUnit->name}}</th>
@@ -86,10 +86,15 @@
                                 <td>{{$element_teaching_unit->name}}</td>
                                 <td>{{$element_teaching_unit->credit}}</td>
                                 <td>
-                                    <a  href="{{route('notes.create',['classroom_id' => $element_teaching_unit->teachingUnit->classroom_id,'ue_id' => $element_teaching_unit->id,'type' => 'ecue'])}}"
-                                        title="Ajouter les notes" >
-                                        <span class="badge badge-warning"><i class="fa fa-plus"></i>  </span>
-                                    </a>
+
+                                    @if ($element_teaching_unit->teachingUnit->classroom_id != null)
+                                        <a  href="{{route('notes.create',['classroom_id' => $element_teaching_unit->teachingUnit->classroom_id,'ue_id' => $element_teaching_unit->id,'type' => 'ecue'])}}"
+                                            title="Ajouter les notes" >
+                                            <span class="badge badge-warning"><i class="fa fa-plus"></i>  </span>
+                                        </a>
+                                    @else
+                                        <strong>INDISPONIBLE</strong>
+                                    @endif
                                 </td>
 
                                 <td>

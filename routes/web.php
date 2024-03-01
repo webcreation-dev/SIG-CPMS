@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     // ADMINISTRATION
 
@@ -61,7 +61,7 @@ require __DIR__.'/auth.php';
 
 
     Route::resource('users', UserController::class);
-// });
+});
 
 
 

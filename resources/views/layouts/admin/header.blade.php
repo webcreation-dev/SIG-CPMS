@@ -150,10 +150,17 @@
                 </div>
                 <div class="hover-dropdown navprofile-drop">
                   <ul>
-                    <li><a href="profile.html"><i class="ti-user"></i>profile</a></li>
+                    {{-- <li><a href="profile.html"><i class="ti-user"></i>profile</a></li>
                     <li><a href="email-inbox.html"><i class="ti-email"></i>inbox</a></li>
-                    <li><a href="user-edit.html"><i class="ti-settings"></i>setting</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out"></i>log out</a></li>
+                    <li><a href="user-edit.html"><i class="ti-settings"></i>setting</a></li> --}}
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                                <a href="{{route('logout')}}"
+                                onclick="event.preventDefault(); this.closest('form').submit();"
+                                ><i class="fa fa-sign-out"></i> Déconnexion</a>
+                        </form>
+                    </li>
                   </ul>
                 </div>
               </li>

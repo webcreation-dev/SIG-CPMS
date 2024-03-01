@@ -113,6 +113,12 @@ class TeachingUnitController extends Controller
                     $item->classroom_id = $request->classroom_id;
                     $item->save();
                 }
+            }else {
+                $classroom_by_ues = TeachingUnit::where('classroom_id', $request->classroom_id)->get();
+                foreach($classroom_by_ues as $item){
+                    $item->classroom_id = null;
+                    $item->save();
+                }
             }
 
             return back()->with('message','Les UE ont été ajoutés avec succès');

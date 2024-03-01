@@ -62,7 +62,7 @@
                                     <input name="student_id[]" value={{$note->student_id}}  class="form-control" type="hidden" placeholder="student">
                                 </td>
 
-                                <td><input name="i1_points[]" @if(($note->i1_points == 0.1) || ($note->i1_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->i1_points ?? 0}}  class="form-control" type="number" placeholder="I1"></td>
+                                <td><input name="i1_points[]" @if(($note->i1_points == 0.1) || ($note->i1_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->i1_points ?? 0.1}} min="0.0" step="0.1" class="form-control" type="number" placeholder="I1"></td>
                                 <td><input name="i2_points[]" @if(($note->i2_points == 0.1) || ($note->i2_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->i2_points ?? 0.1}}  class="form-control" min="0.0" step="0.1" type="number" placeholder="I2"></td>
                                 <td>14</td>
                                 <td><input name="d1_points[]" @if(($note->d1_points == 0.1) || ($note->d1_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->d1_points ?? 0.1}} min="0.0" step="0.1" class="form-control" type="number" placeholder="D1"></td>

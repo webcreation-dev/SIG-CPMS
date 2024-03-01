@@ -54,34 +54,18 @@
                     <thead>
                       <tr>
                         <th>Nom</th>
-                        <th>Prénom</th>
                         <th>Email</th>
-                        <th>Pays</th>
-                        <th>Statut</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($users as $user)
+                        @foreach ($users as $user)
                             <tr>
-                                <td>{{$user->lastname}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>
-                                    {{App\Models\User::STATUS_FROM[$user->country] ?? $user->country }}
-                                </td>
-                                <td><span class="badge badge-success">ACTIF </span></td>
-                                <td>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#DataModal"
-                                    data-user-id="{{$user->id}}"
-
-                                    title="Ajouter un colis">
-
-                                        <span class="badge badge-info"></i> <i class="ti-plus"></i> </span></a>
-                                    <a href="{{route('packages.by.user', ['user_id' => $user->id ])}}" target="_blank" title="Voir les colis"><span class="badge badge-warning"><i class="ti-eye"></i> </span></a>
-                                </td>
+                                <td></td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                   </table>
                 </div>
@@ -145,15 +129,6 @@
 
       <!-- theme body end-->
     </div>
-
-    <UL CLASS="dropdown-menu">
-        <LI>
-          <INPUT TYPE="TEXT" CLASS="form-control st-country-filter">
-        </LI>
-        <LI>
-          <A CLASS="st-country-option st-country-AF" data-country-code="AF" data-country-name="Afghanistan" data-country-name-local="Afghanistan" data-country-id="121">Afghanistan</A>
-        </LI>
-    </UL>
 
     @include("layouts.admin.footer")
 

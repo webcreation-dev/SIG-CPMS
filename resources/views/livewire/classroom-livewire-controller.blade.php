@@ -55,7 +55,7 @@
                       @foreach ($classrooms as $key => $classroom)
                           <tr>
                               <td>
-                                  <img width="30" height="30" src="{{asset('assets/images/pages/product/box' . (($key % 3) + 1) . '.png')}}" alt="">
+                                  <img width="50" height="50" src="{{asset('assets/images/classroom.png')}}" alt="">
                               </td>
                               <td>{{$classroom->name}}</td>
                               <td>{{$classroom->total_students}}</td>

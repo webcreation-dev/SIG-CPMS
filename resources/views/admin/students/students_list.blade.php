@@ -78,7 +78,7 @@
                         @foreach ($students as $key => $student)
                             <tr>
                                 <td>
-                                    <img width="30" height="30" src="{{asset('assets/images/pages/product/box' . (($key % 3) + 1) . '.png')}}" alt="">
+                                    <img width="40" height="40" src="{{asset('assets/images/student.png')}}" alt="">
                                 </td>
                                 @if (!isset($classroom_id))
                                     <th>{{$student->classroom->name}}</th>
