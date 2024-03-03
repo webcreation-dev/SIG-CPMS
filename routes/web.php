@@ -10,6 +10,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeachingUnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidatorFormController;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/pdf', function () {
+
+    $data = [
+        [
+            'quantity' => 1,
+            'description' => '1 Year Subscription',
+            'price' => '129.00'
+        ]
+    ];
+
+    $pdf = Pdf::loadView('fiche_de_calcul', ['data' => $data]);
+
+    return $pdf->stream();
+});
+Route::get('/pdf1', function () {
+
+    $pdf = Pdf::loadView('releve_de_notes');
+    return $pdf->stream();
 });
 
 Route::middleware('auth')->group(function () {

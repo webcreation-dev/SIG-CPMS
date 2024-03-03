@@ -58,7 +58,7 @@
 
                         @foreach ($notes as $note)
                             <tr>
-                                <td>Tiger Nixon
+                                <td>{{$note->student->lastname}} {{$note->student->firstname}}
                                     <input name="student_id[]" value={{$note->student_id}}  class="form-control" type="hidden" placeholder="student">
                                 </td>
 

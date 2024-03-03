@@ -1,0 +1,91 @@
+
+.column {
+float: left;
+}
+
+/* Set width length for the left, right and middle columns */
+.left {
+width: 20%;
+}
+
+.middle {
+width: 60%;
+}
+
+.right {
+width: 20%;
+}
+
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1dvh solid black;
+    padding: 5px;
+  }
+
+  th {
+    background-color: #ccc;
+    text-align: center;
+  }
+
+  td:nth-child(8) {
+    text-align: left;
+  }
+
+  td:nth-child(9) {
+    text-align: right;
+    border-right: 1px solid black;
+  }
+
+
+tfoot {
+    font-weight: bold;
+}
+
+
+
+header {
+    text-align: center;
+}
+
+.informations {
+    float: left;
+    width: 50%;
+}
+
+.appreciation {
+    float: right;
+    width: 40%;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+#moyenne, #credits-valides, #credits-non-valides, #appreciation-texte, #date, #directeur-academique {
+    font-weight: bold;
+}
+
+.signatures {
+    clear: both;
+    text-align: right;
+}
+

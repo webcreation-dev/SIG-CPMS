@@ -59,13 +59,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        {{-- @foreach ($users as $user)
                             <tr>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td></td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                   </table>
                 </div>

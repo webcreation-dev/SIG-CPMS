@@ -61,7 +61,7 @@ class NoteController extends Controller
         }
 
 
-        $students = Student::whereIn('id', $request->student_id)->get();
+        $students = $request->student_id;
 
         $i1_points = $request->i1_points;
         $i2_points = $request->i2_points;
@@ -74,29 +74,33 @@ class NoteController extends Controller
 
             foreach($students as $key => $student) {
 
+                $student = Student::find($student);
+
                 $note = Note::where('student_id', $student->id)
                     ->where('teaching_unit_id', $request->ue_id)
                     ->first();
 
-                if ($note) {
-                    $note->i1_points = ($i1_points[$key] == null ? 0.1 : $i1_points[$key]);
-                    $note->i2_points = ($i2_points[$key] == null ? 0.1 : $i2_points[$key]);
-                    $note->d1_points = ($d1_points[$key] == null ? 0.1 : $d1_points[$key]);
-                    $note->d2_points = ($d2_points[$key] == null ? 0.1 : $d2_points[$key]);
-                    $note->e_points = ($e_points[$key] == null ? 0.1 : $e_points[$key]);
-
-                    $note->save();
-                }
-            }
-        }else {
-            foreach($students as $key => $student) {
-
-                $note = Note::where('student_id', $student)->where('element_teaching_unit_id', $request->ue_id)->first();
                 $note->i1_points = ($i1_points[$key] == null ? 0.1 : $i1_points[$key]);
                 $note->i2_points = ($i2_points[$key] == null ? 0.1 : $i2_points[$key]);
                 $note->d1_points = ($d1_points[$key] == null ? 0.1 : $d1_points[$key]);
                 $note->d2_points = ($d2_points[$key] == null ? 0.1 : $d2_points[$key]);
                 $note->e_points = ($e_points[$key] == null ? 0.1 : $e_points[$key]);
+
+                $note->save();
+            }
+        }else {
+            foreach($students as $key => $student) {
+
+                $student = Student::find($student);
+
+                $note = Note::where('student_id', $student->id)->where('element_teaching_unit_id', $request->ue_id)->first();
+
+                $note->i1_points = ($i1_points[$key] == null ? 0.1 : $i1_points[$key]);
+                $note->i2_points = ($i2_points[$key] == null ? 0.1 : $i2_points[$key]);
+                $note->d1_points = ($d1_points[$key] == null ? 0.1 : $d1_points[$key]);
+                $note->d2_points = ($d2_points[$key] == null ? 0.1 : $d2_points[$key]);
+                $note->e_points = ($e_points[$key] == null ? 0.1 : $e_points[$key]);
+
                 $note->save();
             }
         }
