@@ -79,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('students', StudentController::class);
 
     Route::resource('notes', NoteController::class);
+    Route::get('/releve_de_notes', [NoteController::class, 'releveNotes'])->name('releve.notes');
 
 
 

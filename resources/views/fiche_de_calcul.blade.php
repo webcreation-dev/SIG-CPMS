@@ -50,6 +50,71 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $ues = App\Models\TeachingUnit::all();
+                @endphp
+
+                @php
+                $ues = App\Models\TeachingUnit::all();
+            @endphp
+
+            @foreach ($ues as $ue)
+                @if($ue->status == 'singular')
+                    <tr>
+                        <td><strong>{{$ue->name}}</strong></td>
+                        <td>{{$ue->credit}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @else
+                    @php
+                        $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
+
+                        $ecue_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->first();
+
+                        $ecues_without_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get()->except($ecue_first->id);
+                    @endphp
+
+                    <tr>
+                        <td><strong>{{$ue->name}}</strong></td>
+                        <td>{{$ue->credit}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td rowspan="{{$ecues_count}}"></td>
+                        <td rowspan="{{$ecues_count}}"></td>
+                    </tr>
+                    @foreach ($ecues_without_first as $ecue)
+                        <tr>
+                            <td>{{$ecue->name}}</td>
+                            <td>{{$ecue->credit}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    @endforeach
+
+                @endif
+            @endforeach
+
                 {{-- Unique --}}
                 <tr>
                     <td><strong>Algèbre 1</strong></td>

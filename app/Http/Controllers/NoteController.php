@@ -7,6 +7,7 @@ use App\Models\ElementTeachingUnit;
 use App\Models\Note;
 use App\Models\Student;
 use App\Models\TeachingUnit;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -19,6 +20,16 @@ class NoteController extends Controller
     public function index()
     {
         //
+    }
+
+    public function releveNotes(Request $request)
+    {
+
+        $studentd = $request->student_id;
+        // $notes = Note::where('student_id', $studentd)->get();
+        $pdf = Pdf::loadView('releve_de_notes', ['student_id' => $studentd]);
+        return $pdf->stream();
+
     }
 
     /**
@@ -50,6 +61,8 @@ class NoteController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request->all());
+        
         $classroom = Classroom::find($request->classroom_id);
 
         $type = $request->type;
@@ -80,11 +93,11 @@ class NoteController extends Controller
                     ->where('teaching_unit_id', $request->ue_id)
                     ->first();
 
-                $note->i1_points = ($i1_points[$key] == null ? 0.1 : $i1_points[$key]);
-                $note->i2_points = ($i2_points[$key] == null ? 0.1 : $i2_points[$key]);
-                $note->d1_points = ($d1_points[$key] == null ? 0.1 : $d1_points[$key]);
-                $note->d2_points = ($d2_points[$key] == null ? 0.1 : $d2_points[$key]);
-                $note->e_points = ($e_points[$key] == null ? 0.1 : $e_points[$key]);
+                $note->i1_points = $i1_points[$key] ?? null;
+                $note->i2_points = $i2_points[$key] ?? null;
+                $note->d1_points = $d1_points[$key] ?? null;
+                $note->d2_points = $d2_points[$key] ?? null;
+                $note->e_points = $e_points[$key] ?? null;
 
                 $note->save();
             }
@@ -95,11 +108,11 @@ class NoteController extends Controller
 
                 $note = Note::where('student_id', $student->id)->where('element_teaching_unit_id', $request->ue_id)->first();
 
-                $note->i1_points = ($i1_points[$key] == null ? 0.1 : $i1_points[$key]);
-                $note->i2_points = ($i2_points[$key] == null ? 0.1 : $i2_points[$key]);
-                $note->d1_points = ($d1_points[$key] == null ? 0.1 : $d1_points[$key]);
-                $note->d2_points = ($d2_points[$key] == null ? 0.1 : $d2_points[$key]);
-                $note->e_points = ($e_points[$key] == null ? 0.1 : $e_points[$key]);
+                $note->i1_points = $i1_points[$key] ?? null;
+                $note->i2_points = $i2_points[$key] ?? null;
+                $note->d1_points = $d1_points[$key] ?? null;
+                $note->d2_points = $d2_points[$key] ?? null;
+                $note->e_points = $e_points[$key] ?? null;
 
                 $note->save();
             }

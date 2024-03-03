@@ -13,6 +13,7 @@
 
     @livewire('notes-livewire-controller', ['classroom' => $classroom, 'ue' => $ue, 'type' => $type])
 
+    
     @include("layouts.admin.footer")
 </body>
 </html>

@@ -55,9 +55,57 @@
                 </tr>
             </thead>
             <tbody>
+
+                @php
+                    $ues = App\Models\TeachingUnit::all();
+                @endphp
+
+                @foreach ($ues as $ue)
+                    @if($ue->status == 'singular')
+                        <tr>
+                            <td>{{$ue->name}}</td>
+                            <td>{{$ue->credit}}</td>
+                            <td>{{$ue->name}}</td>
+                            <td>{{$ue->credit}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    @else
+                        @php
+                            $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
+
+                            $ecue_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->first();
+
+                            $ecues_without_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get()->except($ecue_first->id);
+                        @endphp
+
+                        <tr>
+                            <td rowspan="{{$ecues_count}}" >{{$ue->name}}</td>
+                            <td rowspan="{{$ecues_count}}" >{{$ue->credit}}</td>
+                            <td>{{$ecue_first->name}}</td>
+                            <td>{{$ecue_first->credit}}</td>
+                            <td></td>
+                            <td rowspan="{{$ecues_count}}"></td>
+                            <td></td>
+                            <td rowspan="{{$ecues_count}}"></td>
+                        </tr>
+                        @foreach ($ecues_without_first as $ecue)
+                            <tr>
+                                <td>{{$ecue->name}}</td>
+                                <td>{{$ecue->credit}}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        @endforeach
+                    @endif
+                @endforeach
+
+                {{-- -------------------------------------------------------- --}}
                 {{-- Unique --}}
-                <tr>
-                    <td>Algèbre 1</td>
+                {{-- <tr>
+                    <td>{{$student->lastname}}</td>
                     <td>6</td>
                     <td>Algèbre</td>
                     <td>6</td>
@@ -65,9 +113,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr> --}}
                 {{-- Unique --}}
-                <tr>
+                {{-- <tr>
                     <td>Analyse 1</td>
                     <td>6</td>
                     <td>Analyse</td>
@@ -76,9 +124,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr> --}}
                 {{-- Double --}}
-                <tr>
+                {{-- <tr>
                     <td rowspan="2" >Sciences Numériques et Informatique 1</td>
                     <td rowspan="2" >6</td>
                     <td>Probabilité 1</td>
@@ -93,9 +141,9 @@
                     <td>3</td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr>  --}}
                 {{-- Unique --}}
-                <tr>
+                {{-- <tr>
                     <td>Physique 1A</td>
                     <td>6</td>
                     <td>Physique 1A</td>
@@ -104,9 +152,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr> --}}
                 {{-- Double --}}
-                <tr>
+                {{-- <tr>
                     <td rowspan="2" >Physique 1B</td>
                     <td rowspan="2" >7</td>
                     <td>Physique</td>
@@ -121,9 +169,9 @@
                     <td>3</td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr> --}}
                 {{-- Double --}}
-                <tr>
+                {{-- <tr>
                     <td rowspan="2" >Chimie 1</td>
                     <td rowspan="2" >5</td>
                     <td>Chimie</td>
@@ -138,9 +186,9 @@
                     <td>2</td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr> --}}
                 {{-- Double --}}
-                <tr>
+                {{-- <tr>
                     <td rowspan="2" >Sciences Industrielles de l'Ingénieur 1</td>
                     <td rowspan="2" >6</td>
                     <td>Sciences Industrielles de l'Ingénieur</td>
@@ -155,9 +203,9 @@
                     <td>2</td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr> --}}
                 {{-- Triple --}}
-                <tr>
+                {{-- <tr>
                     <td rowspan="3" >Humanité 1A</td>
                     <td rowspan="3" >7</td>
                     <td>Anglais écrit</td>
@@ -178,7 +226,7 @@
                     <td>2</td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr> --}}
 
                 {{-- Triple --}}
                 {{-- <tr>
@@ -205,7 +253,7 @@
                 </tr> --}}
 
                 {{-- Unique --}}
-                <tr>
+                {{-- <tr>
                     <td>Humanité 1C (Formation Humaine et Sociale)</td>
                     <td>5</td>
                     <td>Humanité 1C (Formation Humaine et Sociale)</td>
@@ -214,7 +262,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr> --}}
 
             </tbody>
         </table>
