@@ -61,8 +61,8 @@
       <title>CPMS |Connexion
       </title>
       <!-- shortcut icon-->
-      <link rel="icon" href="{{asset('assets/images/logo/icon-logo.png')}}" type="image/x-icon">
-      <link rel="shortcut icon" href="{{asset('assets/images/logo/icon-logo.png')}}" type="image/x-icon">
+      <link rel="icon" href="{{asset('favicon.png')}}" type="image/x-icon">
+      <link rel="shortcut icon" href="{{asset('favicon.png')}}" type="image/x-icon">
       <!-- Fonts css-->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
