@@ -81,20 +81,26 @@
                         $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
 
                         $ecues = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get();
+
+                        $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
+                        $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
+                        $moy_ecu_sum = $notes->sum('moy_ecu');
                     @endphp
 
                     <tr>
                         <td><strong>{{$ue->name}}</strong></td>
                         <td>{{$ue->credit}}</td>
+
+                        <td colspan="8"></td>
+                        {{-- <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td rowspan="{{$ecues_count + 1}}"></td>
+                        <td></td> --}}
+
+                        <td rowspan="{{$ecues_count + 1}}">{{$moy_ecu_sum}}</td>
                         <td rowspan="{{$ecues_count + 1}}"></td>
                     </tr>
                     @foreach ($ecues as $ecue)
@@ -116,7 +122,7 @@
             @endforeach
 
             <tr>
-                <td colspan="12"><strong> Moyenne générale</strong></td>
+                <td colspan="12"><strong> Moyenne générale : </strong></td>
             </tr>
 
             </tbody>

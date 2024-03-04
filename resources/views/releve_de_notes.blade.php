@@ -87,7 +87,6 @@
 
                             $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
                             $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
-                            // get sum column moy_ecu
                             $moy_ecu_sum = $notes->sum('moy_ecu');
 
                         @endphp
