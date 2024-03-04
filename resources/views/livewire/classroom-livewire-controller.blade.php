@@ -58,8 +58,8 @@
                                   <img width="50" height="50" src="{{asset('assets/images/classroom.png')}}" alt="">
                               </td>
                               <td>{{$classroom->name}}</td>
-                              <td>{{$classroom->total_students}}</td>
                               <td>{{$classroom->total_teaching_units}}</td>
+                              <td>{{$classroom->total_students}}</td>
                               <td>
 
                                 <a  href="{{route('classrooms.create',['classroomId' => $classroom->id])}}" target="_blank" title="Ajouter les UE" >
@@ -77,9 +77,6 @@
                               </td>
 
                               <td>
-
-
-
 
                                   <a href="#" title="Voir une classe" data-bs-toggle="modal" data-bs-target="#ViewModal"
                                       view-classroom-name="{{$classroom->name}}"

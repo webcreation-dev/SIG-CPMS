@@ -33,7 +33,6 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('cpms@2024*'),
             'remember_token' => Str::random(10),
-            // 'role_id' => 1,
         ]);
 
         User::create([
@@ -42,22 +41,201 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('cpms@2024*'),
             'remember_token' => Str::random(10),
-            // 'role_id' => 1,
         ]);
-
-        // User::factory(3)->create();
 
         Classroom::create([
                 'name' => '1ère Année',
                 'total_students' => 32,
+                'total_teaching_units' => 18,
         ]);
 
-        // Classroom::factory(2)->create();
-        TeachingUnit::factory(7)->create();
-        ElementTeachingUnit::factory(10)->create();
-        // Student::factory(2)->create();
+        $uesData = [
 
-        // \App\Models\Note::factory(2)->create();
+            1 => [
+                'ue' => [
+                    [
+                        'name' => 'Algèbre 1',
+                        'credit' => 6,
+                    ],
+                ],
+                'ecue' => [],
+            ],
+
+            2 => [
+                'ue' => [
+                    [
+                        'name' => 'Analyse 1',
+                        'credit' => 6,
+                    ],
+                ],
+                'ecue' => [],
+            ],
+
+            3 => [
+                'ue' => [
+                    [
+                        'name' => 'SIN 1',
+                        'credit' => 6,
+                    ],
+                ],
+                'ecue' => [
+                    [
+                        'name' => 'Probabilité 1',
+                        'credit' => 3,
+                    ],
+                    [
+                        'name' => 'Informatique 1',
+                        'credit' => 3,
+                    ],
+                ],
+            ],
+            4 => [
+                'ue' => [
+                    [
+                        'name' => 'Physique 1A',
+                        'credit' => 6,
+                    ],
+                ],
+                'ecue' => [],
+            ],
+            5 => [
+                'ue' => [
+                    [
+                        'name' => 'Physique 1B',
+                        'credit' => 7,
+                    ],
+                ],
+                'ecue' => [
+                    [
+                        'name' => 'Physique',
+                        'credit' => 4,
+                    ],
+                    [
+                        'name' => 'TP Physique',
+                        'credit' => 3,
+                    ],
+                ],
+            ],
+            6 => [
+                'ue' => [
+                    [
+                        'name' => 'Chimie 1',
+                        'credit' => 5,
+                    ],
+                ],
+                'ecue' => [
+                    [
+                        'name' => 'Chimie',
+                        'credit' => 3,
+                    ],
+                    [
+                        'name' => 'TP Chimie',
+                        'credit' => 2,
+                    ],
+                ],
+            ],
+            7 => [
+                'ue' => [
+                    [
+                        'name' => 'SII 1',
+                        'credit' => 6,
+                    ],
+                ],
+                'ecue' => [
+                    [
+                        'name' => 'SII (Analyse)',
+                        'credit' => 4,
+                    ],
+                    [
+                        'name' => 'TP SII',
+                        'credit' => 2,
+                    ],
+                ],
+            ],
+            8 => [
+                'ue' => [
+                    [
+                        'name' => 'Humanité 1A',
+                        'credit' => 7,
+                    ],
+                ],
+                'ecue' => [
+                    [
+                        'name' => 'EPS',
+                        'credit' => 2,
+                    ],
+                    [
+                        'name' => 'Anglais écrit',
+                        'credit' => 3,
+                    ],
+                    [
+                        'name' => 'Espagnol écrit',
+                        'credit' => 2,
+                    ],
+                ],
+            ],
+            9 => [
+                'ue' => [
+                    [
+                        'name' => 'Humanité 1B',
+                        'credit' => 6,
+                    ],
+                ],
+                'ecue' => [
+                    [
+                        'name' => 'Oral Anglais',
+                        'credit' => 2,
+                    ],
+                    [
+                        'name' => 'Oral Espagnol',
+                        'credit' => 2,
+                    ],
+                    [
+                        'name' => 'Projets',
+                        'credit' => 2,
+                    ],
+                ],
+            ],
+            10 => [
+                'ue' => [
+                    [
+                        'name' => 'Humanité 1C (FHS)',
+                        'credit' => 5,
+                    ],
+                ],
+                'ecue' => [],
+            ],
+        ];
+
+        foreach($uesData as $key => $ueData) {
+
+            if(count($ueData['ecue']) == 0) {
+
+                TeachingUnit::create([
+                    'name' => $ueData['ue'][0]['name'],
+                    'credit' => $ueData['ue'][0]['credit'],
+                    'status' => 'singular',
+                    'classroom_id' => 1,
+                ]);
+            }else {
+
+                $ue = TeachingUnit::create([
+                    'name' => $ueData['ue'][0]['name'],
+                    'credit' => $ueData['ue'][0]['credit'],
+                    'status' => 'multiple',
+                    'classroom_id' => 1,
+                ]);
+
+                foreach($ueData['ecue'] as $ecueData) {
+                    ElementTeachingUnit::create([
+                        'name' => $ecueData['name'],
+                        'credit' => $ecueData['credit'],
+                        'teaching_unit_id' => $ue->id,
+                    ]);
+                }
+
+            }
+        }
 
         $studentsData = [
             [
