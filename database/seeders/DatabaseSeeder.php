@@ -39,8 +39,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(3)->create();
 
         Classroom::factory(2)->create();
-        TeachingUnit::factory(2)->create();
-        ElementTeachingUnit::factory(4)->create();
+        TeachingUnit::factory(7)->create();
+        ElementTeachingUnit::factory(10)->create();
         Student::factory(2)->create();
 
         // \App\Models\Note::factory(2)->create();

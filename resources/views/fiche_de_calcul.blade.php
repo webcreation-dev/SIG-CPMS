@@ -54,33 +54,33 @@
                     $ues = App\Models\TeachingUnit::all();
                 @endphp
 
-                @php
-                $ues = App\Models\TeachingUnit::all();
-            @endphp
-
             @foreach ($ues as $ue)
                 @if($ue->status == 'singular')
+
+                    @php
+                        $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
+                    @endphp
+
+
                     <tr>
                         <td><strong>{{$ue->name}}</strong></td>
                         <td>{{$ue->credit}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{$note->i1_points}}</td>
+                        <td>{{$note->i2_points}}</td>
+                        <td>{{$note->moy_inter}}</td>
+                        <td>{{$note->d1_points}}</td>
+                        <td>{{$note->d2_points}}</td>
+                        <td>{{$note->moy_dev}}</td>
+                        <td>{{$note->e_points}}</td>
+                        <td>{{$note->moy_ecu}}</td>
+                        <td>{{$note->moy_ecu}}</td>
                         <td></td>
                     </tr>
                 @else
                     @php
                         $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
 
-                        $ecue_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->first();
-
-                        $ecues_without_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get()->except($ecue_first->id);
+                        $ecues = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get();
                     @endphp
 
                     <tr>
@@ -94,349 +94,26 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td rowspan="{{$ecues_count}}"></td>
-                        <td rowspan="{{$ecues_count}}"></td>
+                        <td rowspan="{{$ecues_count + 1}}"></td>
+                        <td rowspan="{{$ecues_count + 1}}"></td>
                     </tr>
-                    @foreach ($ecues_without_first as $ecue)
+                    @foreach ($ecues as $ecue)
                         <tr>
                             <td>{{$ecue->name}}</td>
                             <td>{{$ecue->credit}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$note->i1_points}}</td>
+                            <td>{{$note->i2_points}}</td>
+                            <td>{{$note->moy_inter}}</td>
+                            <td>{{$note->d1_points}}</td>
+                            <td>{{$note->d2_points}}</td>
+                            <td>{{$note->moy_dev}}</td>
+                            <td>{{$note->e_points}}</td>
+                            <td>{{$note->moy_ecu}}</td>
                         </tr>
                     @endforeach
 
                 @endif
             @endforeach
-
-                {{-- Unique --}}
-                <tr>
-                    <td><strong>Algèbre 1</strong></td>
-                    <td>6</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-               {{-- Unique --}}
-               <tr>
-                    <td><strong>Analyse 1</strong></td>
-                    <td>6</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                {{-- Triple --}}
-               <tr>
-                <td><strong>SIN 1</strong></td>
-                <td>6</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td rowspan="3"></td>
-                <td rowspan="3"></td>
-            </tr>
-            <tr>
-                <td>Probabilité 1</td>
-                <td>3</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Informatique 1</td>
-                <td>3</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            {{-- Unique --}}
-            <tr>
-                <td><strong>Physique 1A</strong></td>
-                <td>6</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            {{-- Triple --}}
-            <tr>
-                <td><strong>Physique 1B</strong></td>
-                <td>7</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td rowspan="3"></td>
-                <td rowspan="3"></td>
-            </tr>
-            <tr>
-                <td>Physique</td>
-                <td>4</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>TP Physique</td>
-                <td>3</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            {{-- Triple --}}
-            <tr>
-                <td><strong>Chimie 1</strong></td>
-                <td>5</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td rowspan="3"></td>
-                <td rowspan="3"></td>
-            </tr>
-            <tr>
-                <td>Chimie</td>
-                <td>3</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>TP Chimie</td>
-                <td>2</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            {{-- Triple --}}
-            <tr>
-                <td><strong>SII 1</strong></td>
-                <td>6</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td rowspan="3"></td>
-                <td rowspan="3"></td>
-            </tr>
-            <tr>
-                <td>SII (Analyse)</td>
-                <td>4</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>TP SII</td>
-                <td>2</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            {{-- Quadruple --}}
-            <tr>
-                <td><strong>Humanité 1A</strong></td>
-                <td>7</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td rowspan="4"></td>
-                <td rowspan="3"></td>
-            </tr>
-            <tr>
-                <td>EPS</td>
-                <td>2</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Anglais écrit</td>
-                <td>3</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Espagnol écrit</td>
-                <td>2</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-
-            {{-- Quadruple --}}
-            <tr>
-                <td><strong>Humanité 1B</strong></td>
-                <td>6</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td rowspan="4"></td>
-                <td rowspan="4"></td>
-            </tr>
-            <tr>
-                <td>Oral Anglais</td>
-                <td>2</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Oral Espagnol</td>
-                <td>2</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Projets</td>
-                <td>2</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            {{-- Unique --}}
-            <tr>
-                <td><strong>Humanité 1C (FHS)</strong></td>
-                <td>5</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
 
             <tr>
                 <td colspan="12"><strong> Moyenne générale</strong></td>
