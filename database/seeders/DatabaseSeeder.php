@@ -36,6 +36,15 @@ class DatabaseSeeder extends Seeder
             // 'role_id' => 1,
         ]);
 
+        User::create([
+            'name' => 'John DOE',
+            'email' => 'visiteur@cpms.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('cpms@2024*'),
+            'remember_token' => Str::random(10),
+            // 'role_id' => 1,
+        ]);
+
         // User::factory(3)->create();
 
         Classroom::factory(2)->create();

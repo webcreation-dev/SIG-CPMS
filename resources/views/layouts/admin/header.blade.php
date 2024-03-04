@@ -16,7 +16,7 @@
               <li>
                 <div class="navicon-wrap action-dark"><i class="fa fa-moon-o icon-dark"></i><i class="fa fa-sun-o icon-light" style="display:none;"></i></div>
               </li>
-              <li>
+              {{-- <li>
                 <div class="navicon-wrap"><i data-feather="bell"></i>
                   <div class="noti-count">04</div>
                 </div>
@@ -137,7 +137,8 @@
                   </ul>
                   <div class="drop-footer"><a href="checkout.html">Toutes les livraisons</a></div>
                 </div>
-              </li>
+              </li> --}}
+
               <li>
                 <div class="navicon-wrap btn-windowfull"><i data-feather="maximize"></i></div>
               </li>
