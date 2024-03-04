@@ -92,9 +92,9 @@
                                 <td>{{$teaching_unit->credit}}</td>
                                 <td>
                                     @if($teaching_unit->status == 'singular')
-                                        <span class="badge badge-success">Unique</span>
+                                        <span class="badge badge-success">UE</span>
                                     @else
-                                        <span class="badge badge-warning">Multiple</span>
+                                        <span class="badge badge-warning">ECUES</span>
                                     @endif
 
                                 </td>
