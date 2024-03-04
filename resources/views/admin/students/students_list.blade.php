@@ -71,6 +71,7 @@
                         <th>Prénom</th>
                         <th>Sexe</th>
                         <th>Date de naissance</th>
+                        <th>Relevé de notes</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -88,6 +89,11 @@
                                 <td>{{$student->firstname}}</td>
                                 <td>{{$student->sexe}}</td>
                                 <td>{{$student->birthday}}</td>
+                                <td>
+                                    <a href="{{route('releve.notes', ['student_id' => $student->id ])}}" target="_blank" title="Voir le Relevé de Notes">
+                                        <span class="badge badge-info"><i class="fa fa-eye"></i> Relevé de notes </span>
+                                    </a>
+                                </td>
 
                                 <td>
                                     <a href="#" title="Voir l'étudiant" data-bs-toggle="modal" data-bs-target="#ViewModal"

@@ -62,13 +62,18 @@
 
                 @foreach ($ues as $ue)
                     @if($ue->status == 'singular')
+
+                        @php
+                            $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
+                        @endphp
+
                         <tr>
                             <td>{{$ue->name}}</td>
                             <td>{{$ue->credit}}</td>
                             <td>{{$ue->name}}</td>
                             <td>{{$ue->credit}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$note->moy_ecu}}</td>
+                            <td>{{$note->moy_ecu}}</td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -79,6 +84,12 @@
                             $ecue_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->first();
 
                             $ecues_without_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get()->except($ecue_first->id);
+
+                            $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
+                            $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
+                            // get sum column moy_ecu
+                            $moy_ecu_sum = $notes->sum('moy_ecu');
+
                         @endphp
 
                         <tr>
@@ -86,16 +97,20 @@
                             <td rowspan="{{$ecues_count}}" >{{$ue->credit}}</td>
                             <td>{{$ecue_first->name}}</td>
                             <td>{{$ecue_first->credit}}</td>
-                            <td></td>
-                            <td rowspan="{{$ecues_count}}"></td>
+                            <td>{{App\Models\ElementTeachingUnit::getNote($ecue_first->id)->moy_ecu}}</td>
+                            <td rowspan="{{$ecues_count}}">{{$moy_ecu_sum}}</td>
                             <td></td>
                             <td rowspan="{{$ecues_count}}"></td>
                         </tr>
                         @foreach ($ecues_without_first as $ecue)
                             <tr>
+                                @php
+                                    $note = App\Models\Note::where('student_id', $studentId)->where('element_teaching_unit_id', $ecue->id)->first();
+                                @endphp
+
                                 <td>{{$ecue->name}}</td>
                                 <td>{{$ecue->credit}}</td>
-                                <td></td>
+                                <td>{{$note->moy_ecu}}</td>
                                 <td></td>
                             </tr>
                         @endforeach

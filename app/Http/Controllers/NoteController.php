@@ -25,10 +25,12 @@ class NoteController extends Controller
     public function releveNotes(Request $request)
     {
 
-        $studentd = $request->student_id;
-        // $notes = Note::where('student_id', $studentd)->get();
-        $pdf = Pdf::loadView('releve_de_notes', ['student_id' => $studentd]);
+        $studentId = $request->student_id;
+
+        $pdf = Pdf::loadView('releve_de_notes', ['studentId' => $studentId]);
         return $pdf->stream();
+
+        // return view('releve_de_notes', compact('studentId'));
 
     }
 
@@ -62,7 +64,7 @@ class NoteController extends Controller
     {
 
         // dd($request->all());
-        
+
         $classroom = Classroom::find($request->classroom_id);
 
         $type = $request->type;
@@ -81,6 +83,11 @@ class NoteController extends Controller
         $d1_points = $request->d1_points;
         $d2_points = $request->d2_points;
         $e_points = $request->e_points;
+        $moy_inter = $request->moy_inter;
+        $moy_dev = $request->moy_dev;
+        $moy_ecu = $request->moy_ecu;
+
+
 
 
         if($request->type == 'ue') {
@@ -98,6 +105,9 @@ class NoteController extends Controller
                 $note->d1_points = $d1_points[$key] ?? null;
                 $note->d2_points = $d2_points[$key] ?? null;
                 $note->e_points = $e_points[$key] ?? null;
+                $note->moy_inter = $moy_inter[$key] ?? null;
+                $note->moy_dev = $moy_dev[$key] ?? null;
+                $note->moy_ecu = $moy_ecu[$key] ?? null;
 
                 $note->save();
             }
@@ -113,6 +123,9 @@ class NoteController extends Controller
                 $note->d1_points = $d1_points[$key] ?? null;
                 $note->d2_points = $d2_points[$key] ?? null;
                 $note->e_points = $e_points[$key] ?? null;
+                $note->moy_inter = $moy_inter[$key] ?? null;
+                $note->moy_dev = $moy_dev[$key] ?? null;
+                $note->moy_ecu = $moy_ecu[$key] ?? null;
 
                 $note->save();
             }

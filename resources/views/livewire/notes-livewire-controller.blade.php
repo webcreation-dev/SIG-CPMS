@@ -64,12 +64,26 @@
 
                                 <td><input name="i1_points[]" oninput="updateAverage(this)"  @if(($note->i1_points == 0.1) || ($note->i1_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->i1_points}} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="I1"></td>
                                 <td><input name="i2_points[]" oninput="updateAverage(this)"  @if(($note->i2_points == 0.1) || ($note->i2_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->i2_points}} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="I2"></td>
-                                <td class="moyenne" ></td>
+                                <td class="moyenne" >
+                                    <input step="0.5" min="0" max="20" class="form-control" type="number">
+                                </td>
+
+                                <td style="display: none;">
+                                    <input name="moy_inter[]" step="0.1" min="0" max="20" class="form-control" type="number">
+                                </td>
+
                                 <td><input name="d1_points[]" oninput="updateAverage(this)" @if(($note->d1_points == 0.1) || ($note->d1_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->d1_points }} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="D1"></td>
                                 <td><input name="d2_points[]" oninput="updateAverage(this)" @if(($note->d2_points == 0.1) || ($note->d2_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->d2_points}} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="D2"></td>
                                 <td class="moyenned"></td>
+                                <td style="display: none;">
+                                    <input name="moy_dev[]" step="0.1" min="0" max="20" class="form-control" type="number">
+                                </td>
+
                                 <td><input name="e_points[]" oninput="updateAverage(this)" @if(($note->e_points == 0.1) || ($note->e_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->e_points }}  step="0.5" min="0" max="20" class="form-control" type="number" placeholder="Exam"></td>
                                 <td class="moy_ecu"></td>
+                                <td >
+                                    <input name="moy_ecu[]" step="0.1" min="0" max="20" class="form-control" type="number">
+                                </td>
                             </tr>
                         @endforeach
 
@@ -141,6 +155,10 @@
             var eInput = row.querySelector('[name="e_points[]"]');
             var moyenneECU = row.querySelector('.moy_ecu');
 
+            var moyInter = row.querySelector('[name="moy_inter[]"]');
+            var moyDev = row.querySelector('[name="moy_dev[]"]');
+            var moyEcu = row.querySelector('[name="moy_ecu[]"]');
+
             // Get values from input fields
             var i1 = parseFloat(i1Input.value) || 0;
             var i2 = parseFloat(i2Input.value) || 0;
@@ -163,6 +181,10 @@
             moyenneDCell.textContent = averaged.toFixed(2); // Display average with 2 decimal places
 
             moyenneECU.textContent = moy.toFixed(2); // Display average with 2 decimal places
+
+            moyInter.value = average.toFixed(2);
+            moyDev.value = averaged.toFixed(2);
+            moyEcu.value = moy.toFixed(2);
         }
 
     document.addEventListener('DOMContentLoaded', function() {

@@ -25,9 +25,9 @@ class NoteFactory extends Factory
             'd1_points' => $this->faker->numberBetween(10, 20),
             'd2_points' => $this->faker->numberBetween(10, 20),
             'e_points' => $this->faker->numberBetween(10, 20),
-            // 'student_id' => Student::factory(),
-            // 'element_teaching_unit_id' => ElementTeachingUnit::factory(),
-            // 'teaching_unit_id' => TeachingUnit::factory(),
+            'moy_inter' => $this->faker->numberBetween(10, 20),
+            'moy_dev' => $this->faker->numberBetween(10, 20),
+            'moy_ecu' => $this->faker->numberBetween(10, 20),
         ];
     }
 }

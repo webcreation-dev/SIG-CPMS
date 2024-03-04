@@ -24,6 +24,10 @@ return new class extends Migration
 
             $table->integer('e_points')->nullable();
 
+            $table->string('moy_inter')->nullable();
+            $table->string('moy_dev')->nullable();
+            $table->string('moy_ecu')->nullable();
+
 
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
