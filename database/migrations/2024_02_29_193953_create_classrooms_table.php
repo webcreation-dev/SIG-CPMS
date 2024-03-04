@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('total_students');
-            $table->string('total_teaching_units');
+            $table->string('total_teaching_units')->nullable();
             $table->timestamps();
         });
     }

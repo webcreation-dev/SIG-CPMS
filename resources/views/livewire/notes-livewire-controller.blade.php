@@ -30,10 +30,10 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"> Enregistrer les notes <i class="fa fa-cloud-download"></i></button>
 
                 <form action="{{route('notes.store')}}" method="POST">
                     @csrf
+                    <button class="btn btn-md btn-primary mb-15 float-end">Enregistrer les notes <i class="fa fa-cloud-download"></i></button>
 
                     <input type="hidden" name="classroom_id" value="{{$classroom->id}}" >
                     <input type="hidden" name="ue_id" value="{{$ue->id}}" >
@@ -58,7 +58,10 @@
 
                         @foreach ($notes as $note)
                             <tr>
-                                <td>{{$note->student->lastname}} {{$note->student->firstname}}
+                                @php
+                                    $firstname = explode(' ', $note->student->firstname);
+                                @endphp
+                                <td>{{$note->student->lastname}} {{$firstname[0]}}
                                     <input name="student_id[]" value={{$note->student_id}}  class="form-control" type="hidden" placeholder="student">
                                 </td>
 
@@ -69,20 +72,20 @@
                                 </td>
 
                                 <td style="display: none;">
-                                    <input name="moy_inter[]" step="0.1" min="0" max="20" class="form-control" type="number">
+                                    <input name="moy_inter[]" step="0.1" class="form-control" type="number">
                                 </td>
 
                                 <td><input name="d1_points[]" oninput="updateAverage(this)" @if(($note->d1_points == 0.1) || ($note->d1_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->d1_points }} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="D1"></td>
                                 <td><input name="d2_points[]" oninput="updateAverage(this)" @if(($note->d2_points == 0.1) || ($note->d2_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->d2_points}} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="D2"></td>
                                 <td class="moyenned"></td>
                                 <td style="display: none;">
-                                    <input name="moy_dev[]" step="0.1" min="0" max="20" class="form-control" type="number">
+                                    <input name="moy_dev[]" step="0.1" class="form-control" type="number">
                                 </td>
 
                                 <td><input name="e_points[]" oninput="updateAverage(this)" @if(($note->e_points == 0.1) || ($note->e_points != null) ) style="color:black; border: solid 0.5px green;" @endif value={{$note->e_points }}  step="0.5" min="0" max="20" class="form-control" type="number" placeholder="Exam"></td>
                                 <td class="moy_ecu"></td>
-                                <td >
-                                    <input name="moy_ecu[]" step="0.1" min="0" max="20" class="form-control" type="number">
+                                <td style="display: none;">
+                                    <input name="moy_ecu[]" step="0.1" class="form-control" type="number">
                                 </td>
                             </tr>
                         @endforeach

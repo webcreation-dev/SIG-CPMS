@@ -21,7 +21,8 @@ class TeachingUnitFactory extends Factory
             'name' => $this->faker->word,
             'credit' => $this->faker->numberBetween(3, 6),
             'status' => $this->faker->randomElement(['singular', 'multiple']),
-            'classroom_id' => $this->faker->randomElement(Classroom::pluck('id')),
+            'classroom_id' => 1,
+            // 'classroom_id' => $this->faker->randomElement(Classroom::pluck('id')),
         ];
     }
 }

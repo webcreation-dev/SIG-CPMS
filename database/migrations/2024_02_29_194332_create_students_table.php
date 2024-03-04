@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('lastname');
             $table->string('firstname');
             $table->string('sexe');
-            $table->string('birthday');
+            $table->string('birthday')->nullable();
             $table->unsignedBigInteger('classroom_id');
             $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
 
