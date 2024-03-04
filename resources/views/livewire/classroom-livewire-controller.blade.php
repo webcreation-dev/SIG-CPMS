@@ -81,14 +81,14 @@
 
 
 
-                                  <a href="#" title="Modifier une classe" data-bs-toggle="modal" data-bs-target="#ViewModal"
+                                  <a href="#" title="Voir une classe" data-bs-toggle="modal" data-bs-target="#ViewModal"
                                       view-classroom-name="{{$classroom->name}}"
                                       view-classroom-total-students="{{$classroom->total_students}}"
                                       view-classroom-total-teaching-units="{{$classroom->total_teaching_units}}">
 
                                       <span class="badge badge-info"></i> <i class="ti-eye"></i> </span>
                                   </a>
-                                  <a href="#" title="Modifier un classe" data-bs-toggle="modal" data-bs-target="#EditModal"
+                                  <a href="#" title="Modifier une classe" data-bs-toggle="modal" data-bs-target="#EditModal"
                                       data-classroom-name="{{$classroom->name}}"
                                       data-classroom-total-students="{{$classroom->total_students}}"
                                       data-classroom-total-teaching-units="{{$classroom->total_teaching_units}}"
@@ -96,7 +96,7 @@
                                       <span class="badge badge-warning"></i> <i class="ti-pencil"></i> </span>
                                   </a>
                                   <a href="{{ route('classrooms.destroy', $classroom->id) }}"
-                                  title="Supprimer un classe"
+                                  title="Supprimer une classe"
                                   class="delete-link"
                                   data-id="{{ $classroom->id }}">
                                       <span class="badge badge-danger"><i class="ti-trash"></i></span>

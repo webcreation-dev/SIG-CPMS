@@ -28,7 +28,7 @@
         </li> --}}
 
         <li class="menu-item"><a href="javascript:void(0);">
-            <div class="icon-item"><i class="fa fa-mortar-board"></i></div><span>Configurations</span><i class="fa fa-angle-down"></i></a>
+            <div class="icon-item"><i class="fa fa-mortar-board"></i></div><span>Gestion Etudiants</span><i class="fa fa-angle-down"></i></a>
           <ul class="submenu-list">
             <li><a href="{{route('classrooms.index')}}">Classes</a></li>
             <li><a href="{{route('students.index')}}">Etudiants</a></li>

@@ -71,6 +71,7 @@
                         <th>Prénom</th>
                         <th>Sexe</th>
                         <th>Date de naissance</th>
+                        <th>Fiche de calcul</th>
                         <th>Relevé de notes</th>
                         <th>Actions</th>
                       </tr>
@@ -89,9 +90,15 @@
                                 <td>{{$student->firstname}}</td>
                                 <td>{{$student->sexe}}</td>
                                 <td>{{$student->birthday}}</td>
+
+                                <td>
+                                    <a href="{{route('fiche.calcul', ['student_id' => $student->id ])}}" target="_blank" title="Voir la fiche de calcul">
+                                        <span class="badge badge-info"><i class="fa fa-file-word-o"></i> Voir la fiche </span>
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="{{route('releve.notes', ['student_id' => $student->id ])}}" target="_blank" title="Voir le Relevé de Notes">
-                                        <span class="badge badge-info"><i class="fa fa-eye"></i> Relevé de notes </span>
+                                        <span class="badge badge-info"><i class="fa fa-file-text"></i> Voir le relevé </span>
                                     </a>
                                 </td>
 
@@ -115,7 +122,7 @@
                                         <span class="badge badge-warning"></i> <i class="ti-pencil"></i> </span>
                                     </a>
                                     <a href="{{ route('students.destroy', $student->id) }}"
-                                    title="Supprimer un classe"
+                                    title="Supprimer un etudiant"
                                     class="delete-link"
                                     data-id="{{ $student->id }}">
                                         <span class="badge badge-danger"><i class="ti-trash"></i></span>

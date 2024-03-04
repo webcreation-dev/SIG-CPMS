@@ -80,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('notes', NoteController::class);
     Route::get('/releve_de_notes', [NoteController::class, 'releveNotes'])->name('releve.notes');
+    Route::get('/fiche_de_calcul', [NoteController::class, 'ficheCalcul'])->name('fiche.calcul');
 
 
 

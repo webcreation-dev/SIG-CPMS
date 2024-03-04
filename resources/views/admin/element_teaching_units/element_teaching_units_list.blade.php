@@ -104,7 +104,7 @@
 
                                         <span class="badge badge-info"></i> <i class="ti-eye"></i> </span>
                                     </a>
-                                    <a href="#" title="Modifier ECUE" data-bs-toggle="modal" data-bs-target="#EditModal"
+                                    <a href="#" title="Modifier l'ECUE" data-bs-toggle="modal" data-bs-target="#EditModal"
                                         data-element-teaching-units-name="{{$element_teaching_unit->name}}"
                                         data-element-teaching-units-credit="{{$element_teaching_unit->credit}}"
                                         data-element-teaching-units-id="{{$element_teaching_unit->id}}"
@@ -113,7 +113,7 @@
                                         <span class="badge badge-warning"></i> <i class="ti-pencil"></i> </span>
                                     </a>
                                     <a href="{{ route('element_teaching_units.destroy', $element_teaching_unit->id) }}"
-                                    title="Supprimer un classe"
+                                    title="Supprimer l'ECUE "
                                     class="delete-link"
                                     data-id="{{ $element_teaching_unit->id }}">
                                         <span class="badge badge-danger"><i class="ti-trash"></i></span>

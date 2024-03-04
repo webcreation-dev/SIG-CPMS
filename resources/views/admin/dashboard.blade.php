@@ -39,6 +39,16 @@
       <div class="theme-body common-dash" data-simplebar>
         <div class="custom-container">
           <div class="row">
+            @php
+                $ues_count = App\Models\TeachingUnit::where('status','singular')->count();
+                $ues_multiple = App\Models\TeachingUnit::where('status','multiple')->pluck('id')->toArray();
+
+                $ecues_count = App\Models\ElementTeachingUnit::whereIn('teaching_unit_id', $ues_multiple)->count();
+
+                $student_count = count(App\Models\Student::all());
+
+
+            @endphp
 
             <div class="col-xl-4 cdx-xl-50">
               <div class="card welcome-card overflow-hidden">
@@ -69,7 +79,7 @@
                           <div class="card-body progressCounter">
                             <div class="media">
                               <div>
-                                <h2><span class="count">50</span></h2>
+                                <h2><span class="count">{{$student_count}}</span></h2>
                               </div>
                               <div class="media-body">                             <span class="badge badge-success">25.7%<i class="fa fa-angle-up"></i></span></div>
                             </div>
@@ -94,7 +104,7 @@
                           <div class="card-body progressCounter">
                             <div class="media">
                               <div>
-                                <h2><span class="count">8</span></h2>
+                                <h2><span class="count">{{$ues_count + $ecues_count}}</span></h2>
                               </div>
                               <div class="media-body">                             <span class="badge badge-secondary">25.7%<i class="fa fa-angle-down"></i></span></div>
                             </div>
@@ -119,9 +129,9 @@
                           <div class="card-body progressCounter">
                             <div class="media">
                               <div>
-                                <h2><span class="count">25</span></h2>
+                                <h2><span class="count">0</span></h2>
                               </div>
-                              <div class="media-body"><span class="badge badge-danger">20.5%<i class="fa fa-angle-down"></i></span></div>
+                              <div class="media-body"><span class="badge badge-danger">0.0%<i class="fa fa-angle-down"></i></span></div>
                             </div>
                             <div class="progress progress-info">
                               <div class="progress-bar" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
@@ -144,9 +154,9 @@
                           <div class="card-body progressCounter">
                             <div class="media">
                               <div>
-                                <h2><span class="count">10</span></h2>
+                                <h2><span class="count">0</span></h2>
                               </div>
-                              <div class="media-body"><span class="badge badge-success">15.2%<i class="fa fa-angle-up"></i></span></div>
+                              <div class="media-body"><span class="badge badge-success">0.0%<i class="fa fa-angle-up"></i></span></div>
                             </div>
                             <div class="progress progress-warning">
                               <div class="progress-bar" role="progressbar" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100"></div>
@@ -161,7 +171,7 @@
 
 
 
-            <div class="col-xl-6 cdx-xl-50">
+            {{-- <div class="col-xl-6 cdx-xl-50">
               <div class="card earning-chart">
                 <div class="card-header">
                   <h4>Statistiques des visites</h4>
@@ -297,8 +307,6 @@
                 </div>
               </div>
             </div>
-
-            
 
             <div class="col-xl-6 cdx-xl-50">
               <div class="card project-summarytbl">
@@ -675,7 +683,8 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
+
           </div>
         </div>
       </div>

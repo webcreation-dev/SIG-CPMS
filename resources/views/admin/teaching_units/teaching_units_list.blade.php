@@ -122,20 +122,20 @@
                                 <td>
 
 
-                                    <a href="#" title="Voir UE" data-bs-toggle="modal" data-bs-target="#ViewModal"
+                                    <a href="#" title="Voir l'UE" data-bs-toggle="modal" data-bs-target="#ViewModal"
                                         view-teaching-units-name="{{$teaching_unit->name}}"
                                         view-teaching-units-credit="{{$teaching_unit->credit}}">
 
                                         <span class="badge badge-info"></i> <i class="ti-eye"></i> </span>
                                     </a>
-                                    <a href="#" title="Modifier UE" data-bs-toggle="modal" data-bs-target="#EditModal"
+                                    <a href="#" title="Modifier l'UE" data-bs-toggle="modal" data-bs-target="#EditModal"
                                         data-teaching-units-name="{{$teaching_unit->name}}"
                                         data-teaching-units-credit="{{$teaching_unit->credit}}"
                                         data-teaching-units-id="{{$teaching_unit->id}}">
                                         <span class="badge badge-warning"></i> <i class="ti-pencil"></i> </span>
                                     </a>
                                     <a href="{{ route('teaching_units.destroy', $teaching_unit->id) }}"
-                                    title="Supprimer un classe"
+                                    title="Supprimer l'UE"
                                     class="delete-link"
                                     data-id="{{ $teaching_unit->id }}">
                                         <span class="badge badge-danger"><i class="ti-trash"></i></span>
