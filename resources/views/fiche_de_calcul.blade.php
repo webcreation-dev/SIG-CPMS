@@ -27,8 +27,11 @@
     <main>
         <table>
             <thead>
+                @php
+                    $student = App\Models\Student::find($studentId);
+                @endphp
                 <tr>
-                    <th colspan="12">Nom & Prénoms</th>
+                    <th colspan="12"> {{$student->lastname}} {{$student->firstname}}</th>
                 </tr>
                 <tr>
                     <th rowspan="2">Unités d'Enseignement UE </th>
