@@ -28,35 +28,35 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/pdf', function () {
+// Route::get('/pdf', function () {
 
-    $data = [
-        [
-            'quantity' => 1,
-            'description' => '1 Year Subscription',
-            'price' => '129.00'
-        ]
-    ];
+//     $data = [
+//         [
+//             'quantity' => 1,
+//             'description' => '1 Year Subscription',
+//             'price' => '129.00'
+//         ]
+//     ];
 
-    $pdf = Pdf::loadView('fiche_de_calcul', ['data' => $data]);
+//     $pdf = Pdf::loadView('fiche_de_calcul', ['data' => $data]);
 
-    return $pdf->stream();
-});
-Route::get('/pdf1', function () {
+//     return $pdf->stream();
+// });
+// Route::get('/pdf1', function () {
 
-    $pdf = Pdf::loadView('releve_de_notes');
-    return $pdf->stream();
-});
+//     $pdf = Pdf::loadView('releve_de_notes');
+//     return $pdf->stream();
+// });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';
 
@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
 
     // ADMINISTRATION
 
-    Route::get('/admin', function () {
+    Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
 
