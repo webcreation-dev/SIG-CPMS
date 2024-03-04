@@ -105,6 +105,9 @@
                         <td rowspan="{{$ecues_count + 1}}"></td>
                     </tr>
                     @foreach ($ecues as $ecue)
+                                @php
+                                    $note = App\Models\Note::where('student_id', $studentId)->where('element_teaching_unit_id', $ecue->id)->first();
+                                @endphp
                         <tr>
                             <td>{{$ecue->name}}</td>
                             <td>{{$ecue->credit}}</td>
