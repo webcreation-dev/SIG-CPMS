@@ -109,7 +109,7 @@
                                         @if ($teaching_unit->classroom_id != null)
                                             <a  href="{{route('notes.create',['classroom_id' => $teaching_unit->classroom_id,'ue_id' => $teaching_unit->id,'type' => 'ue'])}}"
                                                     title="Ajouter les notes" >
-                                                <span class="badge badge-warning"><i class="fa fa-plus"></i>  </span>
+                                                <span class="badge badge-warning"><i class="fa fa-pencil"></i> Noter l'UE  </span>
                                             </a>
                                         @else
                                             <strong>INDISPONIBLE</strong>
