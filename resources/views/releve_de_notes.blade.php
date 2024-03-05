@@ -66,6 +66,10 @@
                     $count_ues = count($ues);
 
                     $moy_generale = 0;
+
+                    $credit_validés = 0;
+                    $credit_non_validés = 0;
+
                 @endphp
 
                 @foreach ($ues as $ue)
@@ -74,6 +78,12 @@
                         @php
                             $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
                             $moy_generale += $note->moy_ecu;
+
+                            if($note->moy_ecu >= 12){
+                                $credit_validés += $ue->credit;
+                            }else{
+                                $credit_non_validés += $ue->credit;
+                            }
                         @endphp
 
                         <tr>
@@ -99,6 +109,15 @@
                             $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
 
                             $moy_generale += $moy_ue;
+
+                            foreach ($notes as $note) {
+                                if(($notes->sum('moy_ecu') / $ecues_count) >= 12){
+
+                                    $credit_validés += $ue->credit;
+                                }else{
+                                    $credit_non_validés += $ue->credit;
+                                }
+                            }
 
                         @endphp
 
@@ -139,14 +158,14 @@
         <section class="informations">
             <ul>
                 <li id="credits-valides" >Moyenne générale : <strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong> </li>
-                <li id="moyenne">Nombre de crédits validés : </li>
-                <li id="credits-non-valides">Nombre de crédits non validés : </li>
+                <li id="moyenne">Nombre de crédits validés : <strong>{{$credit_validés}}</strong> </li>
+                <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li>
                 <br>
-                <li>Appréciation : <span id="credits-non-valides"></span></li>
+                <li>Appréciation : <span id="credits-non-valides"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></span></li>
             </ul>
         </section>
         <section class="appreciation">
-            <p>Cotonou, le</p>
+            <p>Cotonou, le <strong>{{ date("j-m-y") }}</strong></p>
             <p id="appreciation-texte"></p>
         </section>
         <section class="signatures">
