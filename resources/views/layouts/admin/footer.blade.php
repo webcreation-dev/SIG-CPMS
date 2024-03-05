@@ -1,6 +1,6 @@
 <!-- footer start-->
 <footer class="codex-footer">
-    <p>Copyright 2024 © Lynia Express Delivery | Réalisé par <a target="_blank" href="https://webcreation-dev.github.io/">WEBCREATION</a></p>
+    <p>Copyright 2024 © SIG - Cycle Préparatoire Ste Marie-Stella | Réalisé par <a target="_blank" href="https://webcreation-dev.github.io/">WEBCREATION</a></p>
   </footer>
 <!-- footer end-->
 <!-- back to top start //-->
