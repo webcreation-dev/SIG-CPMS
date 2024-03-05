@@ -108,7 +108,7 @@
 
                         <td colspan="8"></td>
 
-                        <td rowspan="{{$ecues_count + 1}}"><strong>{{$moy_ue}}</strong></td>
+                        <td rowspan="{{$ecues_count + 1}}"><strong> {{ number_format($moy_ue, 2, '.', '');  }} </strong></td>
                         <td rowspan="{{$ecues_count + 1}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong></td>
                     </tr>
                     @foreach ($ecues as $ecue)
