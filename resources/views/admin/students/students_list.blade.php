@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3">
-                        <a href="{{route('fiche.calcul.global')}}" target="_blank"><button class="btn btn-md btn-warning mb-15 float-end" type="button" ><i class="fa fa-file-word-o"></i> Fiche de calcul global</button></a>
+                        <a href="{{route('fiche.calcul.global')}}" style="pointer-events: none; opacity:0.4;" target="_blank"><button class="btn btn-md btn-warning mb-15 float-end" type="button" ><i class="fa fa-file-word-o"></i> Fiche de calcul global</button></a>
                     </div>
 
                 </div>
