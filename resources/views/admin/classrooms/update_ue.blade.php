@@ -116,7 +116,7 @@
                         var classroomId = link.getAttribute('data-id');
 
                         Swal.fire({
-                            title: 'Êtes-vous sûr?',
+                            title: 'Êtes-vous sûr ?',
                             text: 'Vous ne pourrez pas revenir en arrière!',
                             icon: 'warning',
                             showCancelButton: true,
