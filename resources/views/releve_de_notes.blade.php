@@ -45,7 +45,7 @@
 
     <br><br>
     <main>
-        <table>
+        <table style="text-align: center;">
             <thead>
                 <tr>
                     <th>Unités d'Enseignement UE </th>
