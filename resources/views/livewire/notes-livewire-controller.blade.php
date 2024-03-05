@@ -193,7 +193,7 @@
                 moyenneECU.textContent = '';
             } else {
                 var averaged = ((d1 + d2) * 0.3)/2;
-                moyenneDCell.textContent = average.toFixed(2); // Update the moyenne cell
+                moyenneDCell.textContent = averaged.toFixed(2); // Update the moyenne cell
                 moyDev.value = averaged.toFixed(2);
             }
 
