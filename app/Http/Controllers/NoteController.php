@@ -43,7 +43,7 @@ class NoteController extends Controller
     {
 
         $pdf = Pdf::loadView('fiche_de_calcul_global');
-        return $pdf->stream();
+        return $pdf->download();
 
     }
 
