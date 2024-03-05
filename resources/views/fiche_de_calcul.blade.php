@@ -78,13 +78,13 @@
                         <td style="background-color: #ccc;">{{$ue->credit}}</td>
                         <td>{{$note->i1_points}}</td>
                         <td>{{$note->i2_points}}</td>
-                        <td>{{$note->moy_inter}}</td>
+                        <td><strong>{{$note->moy_inter}}</strong></td>
                         <td>{{$note->d1_points}}</td>
                         <td>{{$note->d2_points}}</td>
-                        <td>{{$note->moy_dev}}</td>
+                        <td><strong>{{$note->moy_dev}}</strong></td>
                         <td>{{$note->e_points}}</td>
-                        <td>{{$note->moy_ecu}}</td>
-                        <td>{{$note->moy_ecu}}</td>
+                        <td><strong>{{$note->moy_ecu}}</strong></td>
+                        <td><strong>{{$note->moy_ecu}}</strong></td>
                         <td><strong>{{App\Models\Note::getAppreciation($note->moy_ecu)}}</strong></td>
                     </tr>
 
@@ -108,7 +108,7 @@
 
                         <td colspan="8"></td>
 
-                        <td rowspan="{{$ecues_count + 1}}">{{$moy_ue}}</td>
+                        <td rowspan="{{$ecues_count + 1}}"><strong>{{$moy_ue}}</strong></td>
                         <td rowspan="{{$ecues_count + 1}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong></td>
                     </tr>
                     @foreach ($ecues as $ecue)
@@ -120,12 +120,12 @@
                             <td>{{$ecue->credit}}</td>
                             <td>{{$note->i1_points}}</td>
                             <td>{{$note->i2_points}}</td>
-                            <td>{{$note->moy_inter}}</td>
+                            <td><strong>{{$note->moy_inter}}</strong></td>
                             <td>{{$note->d1_points}}</td>
                             <td>{{$note->d2_points}}</td>
-                            <td>{{$note->moy_dev}}</td>
+                            <td><strong>{{$note->moy_dev}}</strong></td>
                             <td>{{$note->e_points}}</td>
-                            <td>{{$note->moy_ecu}}</td>
+                            <td><strong>{{$note->moy_ecu}}</strong></td>
                         </tr>
                     @endforeach
 

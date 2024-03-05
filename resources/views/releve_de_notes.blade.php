@@ -81,8 +81,8 @@
                             <td>{{$ue->credit}}</td>
                             <td>{{$ue->name}}</td>
                             <td>{{$ue->credit}}</td>
-                            <td>{{$note->moy_ecu}}</td>
-                            <td>{{$note->moy_ecu}}</td>
+                            <td><strong>{{$note->moy_ecu}}</strong></td>
+                            <td><strong>{{$note->moy_ecu}}</strong></td>
                             <td></td>
                             <td><strong>{{App\Models\Note::getAppreciation($note->moy_ecu)}}</strong></td>
                         </tr>
@@ -107,8 +107,8 @@
                             <td rowspan="{{$ecues_count}}" >{{$ue->credit}}</td>
                             <td>{{$ecue_first->name}}</td>
                             <td>{{$ecue_first->credit}}</td>
-                            <td>{{App\Models\ElementTeachingUnit::getNote($ecue_first->id)->moy_ecu}}</td>
-                            <td rowspan="{{$ecues_count}}">{{$moy_ue}}</td>
+                            <td><strong>{{App\Models\ElementTeachingUnit::getNote($ecue_first->id)->moy_ecu}}</strong></td>
+                            <td rowspan="{{$ecues_count}}"><strong>{{$moy_ue}}</strong></td>
                             <td></td>
                             <td rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td>
                         </tr>
@@ -120,7 +120,7 @@
 
                                 <td>{{$ecue->name}}</td>
                                 <td>{{$ecue->credit}}</td>
-                                <td>{{$note->moy_ecu}}</td>
+                                <td><strong>{{$note->moy_ecu}}</strong></td>
                                 <td></td>
                             </tr>
                         @endforeach
