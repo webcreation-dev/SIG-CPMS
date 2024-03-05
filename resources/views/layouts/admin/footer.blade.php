@@ -11,7 +11,7 @@
   <script src="{{asset('assets/js/jquery-3.6.0.js')}}"></script>
   <!-- Theme Customizer-->
   <script src="{{asset('assets/js/layout-storage.js')}}"></script>
-  <script src="{{asset('assets/js/customizer.js')}}"></script>
+  {{-- <script src="{{asset('assets/js/customizer.js')}}"></script> --}}
   <!-- Feather icons js-->
   <script src="{{asset('assets/js/icons/feather-icon/feather.js')}}"></script>
   <!-- Bootstrap js-->
