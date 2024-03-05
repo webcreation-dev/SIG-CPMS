@@ -21,7 +21,7 @@
             <p style="text-align: center;">Email: <span style="text-decoration: underline;">contact@cpms.education</span> - <strong>Bénin</strong> </p>
         </div>
         <div class="column right">
-            <img src="junia.png" style="width: 100px; height:150px; margin-left: 35px; transform:translateY(-25px);" alt="">
+            <img src="logo-junia.png" style="width: 160px; height:80px; margin-left: 15px; transform:translateY(11px);" alt="">
         </div>
     </div>
 
@@ -62,6 +62,10 @@
 
                 @php
                     $ues = App\Models\TeachingUnit::all();
+
+                    $count_ues = count($ues);
+
+                    $moy_generale = 0;
                 @endphp
 
                 @foreach ($ues as $ue)
@@ -69,6 +73,7 @@
 
                         @php
                             $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
+                            $moy_generale += $note->moy_ecu;
                         @endphp
 
                         <tr>
@@ -79,7 +84,7 @@
                             <td>{{$note->moy_ecu}}</td>
                             <td>{{$note->moy_ecu}}</td>
                             <td></td>
-                            <td></td>
+                            <td><strong>{{App\Models\Note::getAppreciation($note->moy_ecu)}}</strong></td>
                         </tr>
                     @else
                         @php
@@ -91,7 +96,9 @@
 
                             $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
                             $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
-                            $moy_ecu_sum = $notes->sum('moy_ecu');
+                            $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
+
+                            $moy_generale += $moy_ue;
 
                         @endphp
 
@@ -101,9 +108,9 @@
                             <td>{{$ecue_first->name}}</td>
                             <td>{{$ecue_first->credit}}</td>
                             <td>{{App\Models\ElementTeachingUnit::getNote($ecue_first->id)->moy_ecu}}</td>
-                            <td rowspan="{{$ecues_count}}">{{$moy_ecu_sum}}</td>
+                            <td rowspan="{{$ecues_count}}">{{$moy_ue}}</td>
                             <td></td>
-                            <td rowspan="{{$ecues_count}}"></td>
+                            <td rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td>
                         </tr>
                         @foreach ($ecues_without_first as $ecue)
                             <tr>
@@ -120,167 +127,6 @@
                     @endif
                 @endforeach
 
-                {{-- -------------------------------------------------------- --}}
-                {{-- Unique --}}
-                {{-- <tr>
-                    <td>{{$student->lastname}}</td>
-                    <td>6</td>
-                    <td>Algèbre</td>
-                    <td>6</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr> --}}
-                {{-- Unique --}}
-                {{-- <tr>
-                    <td>Analyse 1</td>
-                    <td>6</td>
-                    <td>Analyse</td>
-                    <td>6</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr> --}}
-                {{-- Double --}}
-                {{-- <tr>
-                    <td rowspan="2" >Sciences Numériques et Informatique 1</td>
-                    <td rowspan="2" >6</td>
-                    <td>Probabilité 1</td>
-                    <td>3</td>
-                    <td></td>
-                    <td rowspan="2"></td>
-                    <td></td>
-                    <td rowspan="2"></td>
-                </tr>
-                <tr>
-                    <td>Informatique 1</td>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                </tr>  --}}
-                {{-- Unique --}}
-                {{-- <tr>
-                    <td>Physique 1A</td>
-                    <td>6</td>
-                    <td>Physique 1A</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr> --}}
-                {{-- Double --}}
-                {{-- <tr>
-                    <td rowspan="2" >Physique 1B</td>
-                    <td rowspan="2" >7</td>
-                    <td>Physique</td>
-                    <td>4</td>
-                    <td></td>
-                    <td rowspan="2"></td>
-                    <td></td>
-                    <td rowspan="2"></td>
-                </tr>
-                <tr>
-                    <td>TP Physique</td>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                </tr> --}}
-                {{-- Double --}}
-                {{-- <tr>
-                    <td rowspan="2" >Chimie 1</td>
-                    <td rowspan="2" >5</td>
-                    <td>Chimie</td>
-                    <td>3</td>
-                    <td></td>
-                    <td rowspan="2"></td>
-                    <td></td>
-                    <td rowspan="2"></td>
-                </tr>
-                <tr>
-                    <td>TP Chimie</td>
-                    <td>2</td>
-                    <td></td>
-                    <td></td>
-                </tr> --}}
-                {{-- Double --}}
-                {{-- <tr>
-                    <td rowspan="2" >Sciences Industrielles de l'Ingénieur 1</td>
-                    <td rowspan="2" >6</td>
-                    <td>Sciences Industrielles de l'Ingénieur</td>
-                    <td>4</td>
-                    <td></td>
-                    <td rowspan="2"></td>
-                    <td></td>
-                    <td rowspan="2"></td>
-                </tr>
-                <tr>
-                    <td>TP Sciences Industrielles de l'Ingénieur</td>
-                    <td>2</td>
-                    <td></td>
-                    <td></td>
-                </tr> --}}
-                {{-- Triple --}}
-                {{-- <tr>
-                    <td rowspan="3" >Humanité 1A</td>
-                    <td rowspan="3" >7</td>
-                    <td>Anglais écrit</td>
-                    <td>3</td>
-                    <td></td>
-                    <td rowspan="3"></td>
-                    <td></td>
-                    <td rowspan="3"></td>
-                </tr>
-                <tr>
-                    <td>Espagnol écrit</td>
-                    <td>2</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>EPS</td>
-                    <td>2</td>
-                    <td></td>
-                    <td></td>
-                </tr> --}}
-
-                {{-- Triple --}}
-                {{-- <tr>
-                    <td rowspan="3" >Humanité 1B</td>
-                    <td rowspan="3" >6</td>
-                    <td>Oral Anglais</td>
-                    <td>2</td>
-                    <td></td>
-                    <td rowspan="3"></td>
-                    <td></td>
-                    <td rowspan="3"></td>
-                </tr>
-                <tr>
-                    <td>Oral Espagnol</td>
-                    <td>2</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Projets</td>
-                    <td>2</td>
-                    <td></td>
-                    <td></td>
-                </tr> --}}
-
-                {{-- Unique --}}
-                {{-- <tr>
-                    <td>Humanité 1C (Formation Humaine et Sociale)</td>
-                    <td>5</td>
-                    <td>Humanité 1C (Formation Humaine et Sociale)</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr> --}}
 
             </tbody>
         </table>
@@ -292,7 +138,7 @@
     <main>
         <section class="informations">
             <ul>
-                <li id="credits-valides" >Moyenne générale : </li>
+                <li id="credits-valides" >Moyenne générale : <strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong> </li>
                 <li id="moyenne">Nombre de crédits validés : </li>
                 <li id="credits-non-valides">Nombre de crédits non validés : </li>
                 <br>

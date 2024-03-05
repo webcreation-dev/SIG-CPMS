@@ -56,6 +56,11 @@
             <tbody>
                 @php
                     $ues = App\Models\TeachingUnit::all();
+
+                    $count_ues = count($ues);
+
+                    $moy_generale = 0;
+
                 @endphp
 
             @foreach ($ues as $ue)
@@ -63,6 +68,8 @@
 
                     @php
                         $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
+
+                        $moy_generale += $note->moy_ecu;
                     @endphp
 
 
@@ -78,8 +85,9 @@
                         <td>{{$note->e_points}}</td>
                         <td>{{$note->moy_ecu}}</td>
                         <td>{{$note->moy_ecu}}</td>
-                        <td></td>
+                        <td><strong>{{App\Models\Note::getAppreciation($note->moy_ecu)}}</strong></td>
                     </tr>
+
                 @else
                     @php
                         $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
@@ -88,7 +96,10 @@
 
                         $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
                         $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
-                        $moy_ecu_sum = $notes->sum('moy_ecu');
+                        $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
+
+                        $moy_generale += $moy_ue;
+
                     @endphp
 
                     <tr>
@@ -96,16 +107,9 @@
                         <td style="background-color: #ccc;">{{$ue->credit}}</td>
 
                         <td colspan="8"></td>
-                        {{-- <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> --}}
 
-                        <td rowspan="{{$ecues_count + 1}}">{{$moy_ecu_sum}}</td>
-                        <td rowspan="{{$ecues_count + 1}}"></td>
+                        <td rowspan="{{$ecues_count + 1}}">{{$moy_ue}}</td>
+                        <td rowspan="{{$ecues_count + 1}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong></td>
                     </tr>
                     @foreach ($ecues as $ecue)
                                 @php
@@ -129,7 +133,7 @@
             @endforeach
 
             <tr>
-                <td style="background-color: #ccc;" colspan="12"><strong> Moyenne générale : </strong></td>
+                <td style="background-color: #ccc;" colspan="12"><strong> Moyenne générale : {{ number_format(($moy_generale / $count_ues), 2, '.', '');  }} </strong></td>
             </tr>
 
             </tbody>

@@ -435,5 +435,14 @@ class DatabaseSeeder extends Seeder
             });
         });
 
+        $notes = Note::all();
+
+        $notes->each(function ($note) {
+            $note->moy_inter = (($note->i1_points + $note->i2_points) * 0.2) / 2;
+            $note->moy_dev = (($note->d1_points + $note->d2_points) * 0.3) / 2;
+            $note->moy_ecu = ((($note->i1_points + $note->i2_points) * 0.2) / 2) + ((($note->d1_points + $note->d2_points) * 0.3) / 2) + ($note->e_points * 0.5);
+            $note->save();
+        });
+
     }
 }

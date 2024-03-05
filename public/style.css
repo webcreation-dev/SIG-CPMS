@@ -80,7 +80,7 @@ li {
     margin-bottom: 5px;
 }
 
-#moyenne, #credits-valides, #credits-non-valides, #appreciation-texte, #date, #directeur-academique {
+#appreciation-texte, #date, #directeur-academique {
     font-weight: bold;
 }
 

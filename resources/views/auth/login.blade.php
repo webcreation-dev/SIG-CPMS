@@ -92,12 +92,12 @@
 
           <div class="form-group">
             <label class="form-label">Email</label>
-            <input class="form-control" type="text" name="email" required placeholder="Enter Your Email">
+            <input class="form-control" type="text" name="email" required placeholder="Entrez votre email">
           </div>
           <div class="form-group">
             <label class="form-label" for="Password">Password</label>
             <div class="input-group group-input">
-              <input class="form-control showhide-password" name="password" type="password" id="Password" placeholder="Enter Your Password" required=""><span class="input-group-text toggle-show fa fa-eye"></span>
+              <input class="form-control showhide-password" name="password" type="password" id="Password" placeholder="Entrez votre mot de passe" required=""><span class="input-group-text toggle-show fa fa-eye"></span>
             </div>
           </div>
 

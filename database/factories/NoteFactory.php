@@ -25,9 +25,6 @@ class NoteFactory extends Factory
             'd1_points' => $this->faker->numberBetween(5, 20),
             'd2_points' => $this->faker->numberBetween(5, 20),
             'e_points' => $this->faker->numberBetween(5, 20),
-            'moy_inter' => $this->faker->numberBetween(5, 20),
-            'moy_dev' => $this->faker->numberBetween(5, 20),
-            'moy_ecu' => $this->faker->numberBetween(5, 20),
         ];
     }
 }
