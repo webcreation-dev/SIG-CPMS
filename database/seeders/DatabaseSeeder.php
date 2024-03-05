@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Aline ADJIBI',
-            'email' => 'contact@cpms.com',
+            'email' => 'directrice@cpms.com',
             'email_verified_at' => now(),
             'password' => bcrypt('cpms@2024*'),
             'remember_token' => Str::random(10),

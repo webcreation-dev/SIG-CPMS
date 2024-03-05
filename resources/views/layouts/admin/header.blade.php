@@ -146,7 +146,7 @@
                 <div class="media">
                   <div class="user-icon"><img class="img-fluid rounded-50" src="{{asset('directrice.png')}}" alt="logo"></div>
                   <div class="media-body">
-                    <h6>Aline ADJIBI</h6><span class="text-light">Directrice</span>
+                    <h6>Aline ADJIBI</h6><span class="text-light">Directrice CPMS</span>
                   </div>
                 </div>
                 <div class="hover-dropdown navprofile-drop">
