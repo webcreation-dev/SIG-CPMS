@@ -133,8 +133,9 @@
             @endforeach
 
             <tr>
-                <td style="background-color: #ccc;" colspan="11"><strong> Moyenne générale : </strong></td>
+                <td style="background-color: #ccc;" colspan="10"><strong> Moyenne générale : </strong></td>
                 <td  style="background-color: #ccc;" ><strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong></td>
+                <td></td>
             </tr>
 
             </tbody>
