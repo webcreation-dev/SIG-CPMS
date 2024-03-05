@@ -127,7 +127,7 @@
                             <td>{{$ecue_first->name}}</td>
                             <td>{{$ecue_first->credit}}</td>
                             <td><strong>{{App\Models\ElementTeachingUnit::getNote($ecue_first->id)->moy_ecu}}</strong></td>
-                            <td rowspan="{{$ecues_count}}"><strong>{{$moy_ue}}</strong></td>
+                            <td rowspan="{{$ecues_count}}"><strong> {{ number_format($moy_ue, 2, '.', '');  }} </strong></td>
                             <td></td>
                             <td rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td>
                         </tr>
