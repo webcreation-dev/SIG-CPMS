@@ -56,7 +56,7 @@
                 <div class="card-body">
                   <div class="img-wrap"><img class="img-fluid" src="{{asset('directrice.png')}}" alt="image"></div>
                   <h3>Bienvenue cher Directrice</h3>
-                  <p class="mb-6" style="text-align: justify;">De l'administration des étudiants aux finances, des cours aux ressources matérielles, gérer votre université depuis votre espace.</p>
+                  <p class="mb-6" style="text-align: justify;">De l'administration des étudiants à la gestion des professeurs, des cours à la gestion du personnel, gérer votre université depuis votre espace administrateur.</p>
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@
                       <div class="col-sm-6">
                         <div class="card project-status">
                           <div class="card-header">
-                            <h4>Nombre d'étudiants</h4>
+                            <h4>Etudiants</h4>
                             <div class="setting-card action-menu"><a class="action-toggle" href="javascript:void(0)"><i class="codeCopy" data-feather="more-horizontal"></i></a>
                               <ul class="action-dropdown">
                                 <li><a href="javascript:void(0);"><i class="fa fa-calendar-o"></i>weekly</a></li>
@@ -114,7 +114,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-6">
+                      <div class="col-sm-6" style="opacity: 0.3;">
                         <div class="card project-status">
                           <div class="card-header">
                             <h4>Professeurs</h4>
@@ -139,7 +139,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-6">
+                      <div class="col-sm-6" style="opacity: 0.3;">
                         <div class="card project-status">
                           <div class="card-header">
                             <h4>Personnel</h4>

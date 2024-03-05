@@ -77,6 +77,10 @@
                     </thead>
                     <tbody>
                         @foreach ($students as $key => $student)
+
+                            @php
+                                $firstname = explode(' ', $student->firstname);
+                            @endphp
                             <tr>
                                 <td>
                                     <img width="40" height="40" src="{{asset('assets/images/student.png')}}" alt="">
@@ -86,7 +90,7 @@
                                 @endif
 
                                 <td>{{$student->lastname}}</td>
-                                <td>{{$student->firstname}}</td>
+                                <td>{{$firstname[0]}}</td>
                                 <td>{{$student->sexe}}</td>
 
                                 <td>

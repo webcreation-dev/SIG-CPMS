@@ -46,8 +46,8 @@
                       <th>Nom de la classe</th>
                       <th>Total des UE</th>
                       <th>Total des etudiants</th>
-                      <th>UE</th>
                       <th>Etudiants</th>
+                      <th>UE</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -61,20 +61,21 @@
                               <td>{{$classroom->total_teaching_units}}</td>
                               <td>{{$classroom->total_students}}</td>
                               <td>
-
-                                <a  href="{{route('classrooms.create',['classroomId' => $classroom->id])}}" target="_blank" title="Ajouter les UE" >
-                                    <span class="badge badge-warning"><i class="fa fa-plus"></i>  </span>
-                                </a>
-                                <a href="{{route('teaching_units.index', ['classroom_id' => $classroom->id ])}}" title="Voir les UE">
-                                    <span class="badge badge-success"><i class="ti-eye"></i> </span>
-                                </a>
-                              </td>
-
-                              <td>
                                 <a href="{{route('students.index', ['classroom_id' => $classroom->id ])}}" title="Voir les etudiants">
-                                    <span class="badge badge-info"><i class="fa fa-user"></i> </span>
+                                    <span class="badge badge-info"><i class="fa fa-user"></i> Voir les etudiants</span>
                                 </a>
                               </td>
+                              <td>
+
+                                {{-- <a  href="{{route('classrooms.create',['classroomId' => $classroom->id])}}" target="_blank" title="Ajouter les UE" >
+                                    <span class="badge badge-warning"><i class="fa fa-plus"></i>  </span>
+                                </a> --}}
+                                <a href="{{route('teaching_units.index', ['classroom_id' => $classroom->id ])}}" title="Voir les UE">
+                                    <span class="badge badge-warning"><i class="ti-eye"></i> Voir les UE</span>
+                                </a>
+                              </td>
+
+
 
                               <td>
 
