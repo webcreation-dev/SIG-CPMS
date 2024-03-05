@@ -40,7 +40,7 @@
                 @endphp
 
     <strong style="text-decoration: underline;text-align: start; margin-bottom:190px !important;" >Nom et Prénoms (s)</strong> <strong>:</strong> {{$student->lastname}} {{$student->firstname}} <br> <br>
-    <strong style="text-decoration: underline;text-align: start;" >Date et Lieu de naissance</strong> <strong>:</strong> {{$student->birthday}} <br> <br>
+    {{-- <strong style="text-decoration: underline;text-align: start;" >Date et Lieu de naissance</strong> <strong>:</strong> {{$student->birthday}} <br> <br> --}}
     <strong style="text-decoration: underline;text-align: start;" >Sexe</strong> <strong>:</strong> {{$student->sexe}}
 
     <br><br>

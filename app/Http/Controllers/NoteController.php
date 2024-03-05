@@ -39,6 +39,14 @@ class NoteController extends Controller
 
     }
 
+    public function ficheCalculGlobal()
+    {
+
+        $pdf = Pdf::loadView('fiche_de_calcul_global');
+        return $pdf->stream();
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

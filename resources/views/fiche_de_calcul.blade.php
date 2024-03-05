@@ -67,8 +67,8 @@
 
 
                     <tr>
-                        <td><strong>{{$ue->name}}</strong></td>
-                        <td>{{$ue->credit}}</td>
+                        <td style="background-color: #ccc;"><strong>{{$ue->name}}</strong></td>
+                        <td style="background-color: #ccc;">{{$ue->credit}}</td>
                         <td>{{$note->i1_points}}</td>
                         <td>{{$note->i2_points}}</td>
                         <td>{{$note->moy_inter}}</td>
@@ -92,8 +92,8 @@
                     @endphp
 
                     <tr>
-                        <td><strong>{{$ue->name}}</strong></td>
-                        <td>{{$ue->credit}}</td>
+                        <td style="background-color: #ccc;"><strong>{{$ue->name}}</strong></td>
+                        <td style="background-color: #ccc;">{{$ue->credit}}</td>
 
                         <td colspan="8"></td>
                         {{-- <td></td>
@@ -129,7 +129,7 @@
             @endforeach
 
             <tr>
-                <td colspan="12"><strong> Moyenne générale : </strong></td>
+                <td style="background-color: #ccc;" colspan="12"><strong> Moyenne générale : </strong></td>
             </tr>
 
             </tbody>
