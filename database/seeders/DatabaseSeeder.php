@@ -35,13 +35,13 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        User::create([
-            'name' => 'John DOE',
-            'email' => 'visiteur@cpms.com',
-            'email_verified_at' => now(),
-            'password' => bcrypt('cpms@2024*'),
-            'remember_token' => Str::random(10),
-        ]);
+        // User::create([
+        //     'name' => 'John DOE',
+        //     'email' => 'visiteur@cpms.com',
+        //     'email_verified_at' => now(),
+        //     'password' => bcrypt('cpms@2024*'),
+        //     'remember_token' => Str::random(10),
+        // ]);
 
         Classroom::create([
                 'name' => '1ère Année',
