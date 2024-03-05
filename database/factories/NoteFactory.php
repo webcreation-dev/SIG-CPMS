@@ -20,14 +20,14 @@ class NoteFactory extends Factory
     public function definition()
     {
         return [
-            'i1_points' => $this->faker->numberBetween(10, 20),
-            'i2_points' => $this->faker->numberBetween(10, 20),
-            'd1_points' => $this->faker->numberBetween(10, 20),
-            'd2_points' => $this->faker->numberBetween(10, 20),
-            'e_points' => $this->faker->numberBetween(10, 20),
-            'moy_inter' => $this->faker->numberBetween(10, 20),
-            'moy_dev' => $this->faker->numberBetween(10, 20),
-            'moy_ecu' => $this->faker->numberBetween(10, 20),
+            'i1_points' => $this->faker->numberBetween(5, 20),
+            'i2_points' => $this->faker->numberBetween(5, 20),
+            'd1_points' => $this->faker->numberBetween(5, 20),
+            'd2_points' => $this->faker->numberBetween(5, 20),
+            'e_points' => $this->faker->numberBetween(5, 20),
+            'moy_inter' => $this->faker->numberBetween(5, 20),
+            'moy_dev' => $this->faker->numberBetween(5, 20),
+            'moy_ecu' => $this->faker->numberBetween(5, 20),
         ];
     }
 }
