@@ -55,7 +55,7 @@
                     <th>Moy ECUE </th>
                     <th> Moy UE </th>
                     <th>Fréq</th>
-                    <th>App</th>
+                    <th>Appr</th>
                 </tr>
             </thead>
             <tbody>

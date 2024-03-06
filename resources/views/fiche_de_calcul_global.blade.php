@@ -24,12 +24,23 @@
 
 
     <br><br>
-    <main>
-        <table>
+    <main style="text-align: center;">
+
+        @php
+            $ues = App\Models\TeachingUnit::all();
+
+            $count_ues = count($ues);
+
+            $moy_generale = 0;
+
+            $students = App\Models\Student::all();
+        @endphp
+
+        @foreach ($students as $student)
+
+        <table style="transform:translateX(-40px);">
             <thead>
-                @php
-                    $students = App\Models\Student::all();
-                @endphp
+
 
                 <tr>
                     <th rowspan="2">Nom & Prénoms </th>
@@ -53,18 +64,15 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $ues = App\Models\TeachingUnit::all();
-
-                    $count_ues = count($ues);
-
-                    $moy_generale = 0;
-                @endphp
 
 
-                @foreach ($students as $student)
+
+
+                        @php
+                            $firstname = explode(' ', $student->firstname);
+                        @endphp
                     <tr>
-                        <td rowspan="26" style="text-align: center;"> {{$student->lastname}} {{$student->firstname}}</td>
+                        <td rowspan="25" style="text-align: center;"> {{$student->lastname}} {{$firstname[0]}}</td>
                         <td colspan="12" style="background-color: #ccc;"></td>
                     </tr>
 
@@ -137,14 +145,13 @@
                     @endforeach
 
                    <tr>
-                        <td style="background-color: #ccc;" colspan="10"><strong> Moyenne générale : </strong></td>
+                        <td style="background-color: #ccc;" colspan="11"><strong> Moyenne générale : </strong></td>
                         <td  style="background-color: #ccc;" ><strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong></td>
                         <td style="background-color: #ccc;"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></td>
                     </tr>
-                @endforeach
-
             </tbody>
         </table>
+        @endforeach
     </main>
 
 </body>
