@@ -73,9 +73,9 @@
                     @endphp
 
 
-                    <tr>
+                   <tr>
                         <td style="background-color: #ccc;"><strong>{{$ue->name}}</strong></td>
-                        <td style="background-color: #ccc;">{{$ue->credit}}</td>
+                         <td style="background-color: #ccc;">{{$ue->credit}}</td>
                         <td>{{$note->i1_points}}</td>
                         <td>{{$note->i2_points}}</td>
                         <td><strong>{{$note->moy_inter}}</strong></td>

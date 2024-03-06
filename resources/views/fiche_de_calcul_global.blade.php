@@ -55,6 +55,10 @@
             <tbody>
                 @php
                     $ues = App\Models\TeachingUnit::all();
+
+                    $count_ues = count($ues);
+
+                    $moy_generale = 0;
                 @endphp
 
 
@@ -69,6 +73,7 @@
 
                             @php
                                 $note = App\Models\Note::where('student_id', $student->id)->where('teaching_unit_id', $ue->id)->first();
+                                $moy_generale += $note->moy_ecu;
                             @endphp
 
 
@@ -77,14 +82,14 @@
                                 <td style="background-color: #ccc;">{{$ue->credit}}</td>
                                 <td>{{$note->i1_points}}</td>
                                 <td>{{$note->i2_points}}</td>
-                                <td>{{$note->moy_inter}}</td>
+                                <td><strong>{{$note->moy_inter}}</strong></td>
                                 <td>{{$note->d1_points}}</td>
                                 <td>{{$note->d2_points}}</td>
-                                <td>{{$note->moy_dev}}</td>
+                                <td><strong>{{$note->moy_dev}}</strong></td>
                                 <td>{{$note->e_points}}</td>
-                                <td>{{$note->moy_ecu}}</td>
-                                <td>{{$note->moy_ecu}}</td>
-                                <td></td>
+                                <td><strong>{{$note->moy_ecu}}</strong></td>
+                                <td><strong>{{$note->moy_ecu}}</strong></td>
+                                <td><strong>{{App\Models\Note::getAppreciation($note->moy_ecu)}}</strong></td>
                             </tr>
                         @else
                             @php
@@ -93,8 +98,11 @@
                                 $ecues = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get();
 
                                 $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
-                                $notes = App\Models\Note::where('student_id', $student->id)->whereIn('element_teaching_unit_id', $ecuesId)->get();
-                                $moy_ecu_sum = $notes->sum('moy_ecu');
+                                $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
+                                $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
+
+                                $moy_generale += $moy_ue;
+
                             @endphp
 
                             <tr>
@@ -102,32 +110,36 @@
                                 <td style="background-color: #ccc;">{{$ue->credit}}</td>
 
                                 <td colspan="8"></td>
-                                <td rowspan="{{$ecues_count + 1}}">{{$moy_ecu_sum}}</td>
-                                <td rowspan="{{$ecues_count + 1}}"></td>
+
+                                <td rowspan="{{$ecues_count + 1}}"><strong> {{ number_format($moy_ue, 2, '.', '');  }} </strong></td>
+                                <td rowspan="{{$ecues_count + 1}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong></td>
                             </tr>
                             @foreach ($ecues as $ecue)
-                                        @php
-                                            $note = App\Models\Note::where('student_id', $student->id)->where('element_teaching_unit_id', $ecue->id)->first();
-                                        @endphp
+                                @php
+                                    $note = App\Models\Note::where('student_id', $studentId)->where('element_teaching_unit_id', $ecue->id)->first();
+                                @endphp
+
                                 <tr>
                                     <td>{{$ecue->name}}</td>
                                     <td>{{$ecue->credit}}</td>
                                     <td>{{$note->i1_points}}</td>
                                     <td>{{$note->i2_points}}</td>
-                                    <td>{{$note->moy_inter}}</td>
+                                    <td><strong>{{$note->moy_inter}}</strong></td>
                                     <td>{{$note->d1_points}}</td>
                                     <td>{{$note->d2_points}}</td>
-                                    <td>{{$note->moy_dev}}</td>
+                                    <td><strong>{{$note->moy_dev}}</strong></td>
                                     <td>{{$note->e_points}}</td>
-                                    <td>{{$note->moy_ecu}}</td>
+                                    <td><strong>{{$note->moy_ecu}}</strong></td>
                                 </tr>
                             @endforeach
 
                         @endif
                     @endforeach
 
-                    <tr>
-                        <td style="background-color: #ccc;" colspan="12"><strong> Moyenne générale : </strong></td>
+                   <tr>
+                        <td style="background-color: #ccc;" colspan="10"><strong> Moyenne générale : </strong></td>
+                        <td  style="background-color: #ccc;" ><strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong></td>
+                        <td style="background-color: #ccc;"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></td>
                     </tr>
                 @endforeach
 
