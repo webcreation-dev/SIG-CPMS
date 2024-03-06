@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3">
-                        <a href="{{route('fiche.calcul.global')}}" target="_blank"><button class="btn btn-md btn-warning mb-15 float-end" type="button" ><i class="fa fa-file-word-o"></i> Fiche de calcul global</button></a>
+                        <a href="{{route('fiche.calcul.global')}}" target="_blank"><button class="btn btn-md btn-warning mb-15 float-end" type="button" ><i class="fa fa-file-pdf-o"></i> Fiche de calcul global</button></a>
                     </div>
 
                 </div>
@@ -100,7 +100,7 @@
 
                                 <td>
                                     <a href="{{route('fiche.calcul', ['student_id' => $student->id ])}}" target="_blank" title="Voir la fiche de calcul">
-                                        <span class="badge badge-primary"><i class="fa fa-file-word-o"></i> Voir la fiche </span>
+                                        <span class="badge badge-primary"><i class="fa fa-file-pdf-o"></i> Voir la fiche </span>
                                     </a>
                                 </td>
                                 <td>
