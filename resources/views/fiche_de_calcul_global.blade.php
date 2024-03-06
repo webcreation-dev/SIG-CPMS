@@ -98,7 +98,7 @@
                                 $ecues = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get();
 
                                 $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
-                                $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
+                                $notes = App\Models\Note::where('student_id', $student->id)->whereIn('element_teaching_unit_id', $ecuesId)->get();
                                 $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
 
                                 $moy_generale += $moy_ue;
@@ -116,7 +116,7 @@
                             </tr>
                             @foreach ($ecues as $ecue)
                                 @php
-                                    $note = App\Models\Note::where('student_id', $studentId)->where('element_teaching_unit_id', $ecue->id)->first();
+                                    $note = App\Models\Note::where('student_id', $student->id)->where('element_teaching_unit_id', $ecue->id)->first();
                                 @endphp
 
                                 <tr>
