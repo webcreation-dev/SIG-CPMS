@@ -42,6 +42,9 @@ class NoteController extends Controller
     public function ficheCalculGlobal()
     {
 
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit','-1');
+
         $pdf = Pdf::loadView('fiche_de_calcul_global');
         return $pdf->download();
 
