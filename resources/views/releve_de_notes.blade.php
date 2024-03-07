@@ -106,16 +106,17 @@
 
                             $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
                             $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
+
                             $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
 
                             $moy_generale += $moy_ue;
 
                             foreach ($notes as $note) {
-                                if(($notes->sum('moy_ecu') / $ecues_count) >= 12){
+                                if($note->moy_ecu >= 12){
 
-                                    $credit_validés += $ue->credit;
+                                    $credit_validés += $note->elementTeachingUnit->credit;
                                 }else{
-                                    $credit_non_validés += $ue->credit;
+                                    $credit_non_validés += $note->elementTeachingUnit->credit;
                                 }
                             }
 
@@ -126,7 +127,7 @@
                             <td rowspan="{{$ecues_count}}" >{{$ue->credit}}</td>
                             <td>{{$ecue_first->name}}</td>
                             <td>{{$ecue_first->credit}}</td>
-                            <td><strong>{{App\Models\ElementTeachingUnit::getNote($ecue_first->id)->moy_ecu}}</strong></td>
+                            <td><strong>{{App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)->moy_ecu}}</strong></td>
                             <td rowspan="{{$ecues_count}}"><strong> {{ number_format($moy_ue, 2, '.', '');  }} </strong></td>
                             <td></td>
                             <td rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td>

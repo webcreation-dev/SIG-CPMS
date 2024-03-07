@@ -29,6 +29,8 @@ class NoteController extends Controller
         $pdf = Pdf::loadView('releve_de_notes', ['studentId' => $studentId]);
         return $pdf->stream();
 
+        // return view('releve_de_notes', compact('studentId'));
+
     }
     public function ficheCalcul(Request $request)
     {

@@ -20,9 +20,9 @@ class ElementTeachingUnit extends Model
         return $this->belongsTo(TeachingUnit::class);
     }
 
-    public static function getNote($ecueId)
+    public static function getNote($ecueId,$studentId)
     {
-        return Note::where('element_teaching_unit_id', $ecueId)->first();
+        return Note::where('element_teaching_unit_id', $ecueId)->where('student_id', $studentId)->first();
     }
 
 }
