@@ -111,13 +111,11 @@
 
                             $moy_generale += $moy_ue;
 
-                            foreach ($notes as $note) {
-                                if($note->moy_ecu >= 12){
+                            if($moy_ue >= 12){
 
-                                    $credit_validés += $note->elementTeachingUnit->credit;
-                                }else{
-                                    $credit_non_validés += $note->elementTeachingUnit->credit;
-                                }
+                                $credit_validés += $note->elementTeachingUnit->credit;
+                            }else{
+                                $credit_non_validés += $note->elementTeachingUnit->credit;
                             }
 
                         @endphp
