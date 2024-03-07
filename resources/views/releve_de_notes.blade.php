@@ -113,9 +113,9 @@
 
                             if($moy_ue >= 12){
 
-                                $credit_validés += $note->elementTeachingUnit->credit;
+                                $credit_validés += $ue->credit;
                             }else{
-                                $credit_non_validés += $note->elementTeachingUnit->credit;
+                                $credit_non_validés += $ue->credit;
                             }
 
                         @endphp
