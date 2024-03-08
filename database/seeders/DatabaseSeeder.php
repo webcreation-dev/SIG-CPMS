@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Robert ABOH',
-            'email' => 'robertaboh@cpms.com',
+            'email' => 'abohrobert6@gmail.com',
             'avatar' => 'avatar.png',
             'email_verified_at' => now(),
             'password' => bcrypt('de_cpms@2024*'),
