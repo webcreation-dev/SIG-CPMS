@@ -54,8 +54,8 @@
               <div class="card welcome-card overflow-hidden">
                 <div class="card-header"></div>
                 <div class="card-body">
-                  <div class="img-wrap"><img class="img-fluid" src="{{asset('directrice.png')}}" alt="image"></div>
-                  <h3>Bienvenue chère Directrice</h3>
+                  <div class="img-wrap"><img class="img-fluid" src="{{ asset(Auth::user()->avatar) }}" alt="image"></div>
+                  {{-- <h3>Bienvenue chère Directrice</h3> --}}
                   <p class="mb-6" style="text-align: justify;">De l'administration des étudiants à la gestion des professeurs, des cours à la gestion du personnel, gérer votre université depuis votre espace administrateur.</p>
                 </div>
               </div>

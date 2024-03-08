@@ -23,25 +23,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call([
-        //     RoleTableSeeder::class,
-        // ]);
+        $this->call([
+            RoleTableSeeder::class,
+        ]);
 
         User::create([
             'name' => 'Aline ADJIBI',
             'email' => 'directrice@cpms.com',
+            'avatar' => 'directrice.png',
             'email_verified_at' => now(),
             'password' => bcrypt('cpms@2024*'),
             'remember_token' => Str::random(10),
+            'role_id' => 1,
         ]);
 
-        // User::create([
-        //     'name' => 'John DOE',
-        //     'email' => 'visiteur@cpms.com',
-        //     'email_verified_at' => now(),
-        //     'password' => bcrypt('cpms@2024*'),
-        //     'remember_token' => Str::random(10),
-        // ]);
+        User::create([
+            'name' => 'Robert ABOH',
+            'email' => 'robertaboh@cpms.com',
+            'avatar' => 'avatar.png',
+            'email_verified_at' => now(),
+            'password' => bcrypt('de_cpms@2024*'),
+            'remember_token' => Str::random(10),
+            'role_id' => 2,
+        ]);
 
         Classroom::create([
                 'name' => '1ère Année',
@@ -410,39 +414,39 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $ues = TeachingUnit::where('status', 'singular')->get();
-        $ues->each(function ($ue) {
-            $students = \App\Models\Student::all();
+        // $ues = TeachingUnit::where('status', 'singular')->get();
+        // $ues->each(function ($ue) {
+        //     $students = \App\Models\Student::all();
 
-            $students->each(function ($student) use ($ue) {
-                Note::factory()->count(1)->create([
-                    'student_id' => $student->id,
-                    'teaching_unit_id' => $ue->id,
-                ]);
-            });
-        });
+        //     $students->each(function ($student) use ($ue) {
+        //         Note::factory()->count(1)->create([
+        //             'student_id' => $student->id,
+        //             'teaching_unit_id' => $ue->id,
+        //         ]);
+        //     });
+        // });
 
 
-        $ecues = ElementTeachingUnit::all();
-        $ecues->each(function ($ecue) {
-            $students = \App\Models\Student::all();
+        // $ecues = ElementTeachingUnit::all();
+        // $ecues->each(function ($ecue) {
+        //     $students = \App\Models\Student::all();
 
-            $students->each(function ($student) use ($ecue) {
-                Note::factory()->count(1)->create([
-                    'student_id' => $student->id,
-                    'element_teaching_unit_id' => $ecue->id,
-                ]);
-            });
-        });
+        //     $students->each(function ($student) use ($ecue) {
+        //         Note::factory()->count(1)->create([
+        //             'student_id' => $student->id,
+        //             'element_teaching_unit_id' => $ecue->id,
+        //         ]);
+        //     });
+        // });
 
-        $notes = Note::all();
+        // $notes = Note::all();
 
-        $notes->each(function ($note) {
-            $note->moy_inter = (($note->i1_points + $note->i2_points) * 0.2) / 2;
-            $note->moy_dev = (($note->d1_points + $note->d2_points) * 0.3) / 2;
-            $note->moy_ecu = ((($note->i1_points + $note->i2_points) * 0.2) / 2) + ((($note->d1_points + $note->d2_points) * 0.3) / 2) + ($note->e_points * 0.5);
-            $note->save();
-        });
+        // $notes->each(function ($note) {
+        //     $note->moy_inter = (($note->i1_points + $note->i2_points) * 0.2) / 2;
+        //     $note->moy_dev = (($note->d1_points + $note->d2_points) * 0.3) / 2;
+        //     $note->moy_ecu = ((($note->i1_points + $note->i2_points) * 0.2) / 2) + ((($note->d1_points + $note->d2_points) * 0.3) / 2) + ($note->e_points * 0.5);
+        //     $note->save();
+        // });
 
     }
 }

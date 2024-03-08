@@ -77,9 +77,9 @@
 
                         @php
                             $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
-                            $moy_generale += $note->moy_ecu;
+                            $moy_generale += $note?->moy_ecu;
 
-                            if($note->moy_ecu >= 12){
+                            if($note?->moy_ecu >= 12){
                                 $credit_validés += $ue->credit;
                             }else{
                                 $credit_non_validés += $ue->credit;
@@ -91,10 +91,10 @@
                             <td>{{$ue->credit}}</td>
                             <td>{{$ue->name}}</td>
                             <td>{{$ue->credit}}</td>
-                            <td><strong>{{$note->moy_ecu}}</strong></td>
-                            <td><strong>{{$note->moy_ecu}}</strong></td>
+                            <td><strong>{{$note?->moy_ecu}}</strong></td>
+                            <td><strong>{{$note?->moy_ecu}}</strong></td>
                             <td></td>
-                            <td><strong>{{App\Models\Note::getAppreciation($note->moy_ecu)}}</strong></td>
+                            <td><strong>{{App\Models\Note::getAppreciation($note?->moy_ecu)}}</strong></td>
                         </tr>
                     @else
                         @php
@@ -125,7 +125,7 @@
                             <td rowspan="{{$ecues_count}}" >{{$ue->credit}}</td>
                             <td>{{$ecue_first->name}}</td>
                             <td>{{$ecue_first->credit}}</td>
-                            <td><strong>{{App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)->moy_ecu}}</strong></td>
+                            <td><strong>{{App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_ecu}}</strong></td>
                             <td rowspan="{{$ecues_count}}"><strong> {{ number_format($moy_ue, 2, '.', '');  }} </strong></td>
                             <td></td>
                             <td rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td>
@@ -138,7 +138,7 @@
 
                                 <td>{{$ecue->name}}</td>
                                 <td>{{$ecue->credit}}</td>
-                                <td><strong>{{$note->moy_ecu}}</strong></td>
+                                <td><strong>{{$note?->moy_ecu}}</strong></td>
                                 <td></td>
                             </tr>
                         @endforeach

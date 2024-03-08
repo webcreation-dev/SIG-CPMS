@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidatorFormController;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -65,7 +66,12 @@ Route::middleware(['auth'])->group(function () {
     // ADMINISTRATION
 
     Route::get('/', function () {
+
+        if (Gate::denies('access-admin')) {
+            return redirect()->route('classrooms.index');
+        }
         return view('admin.dashboard');
+
     })->name('dashboard');
 
     // ROUTE RESOURCE

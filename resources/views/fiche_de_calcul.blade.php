@@ -69,23 +69,23 @@
                     @php
                         $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
 
-                        $moy_generale += $note->moy_ecu;
+                        $moy_generale += $note?->moy_ecu;
                     @endphp
 
 
                    <tr>
                         <td style="background-color: #ccc;"><strong>{{$ue->name}}</strong></td>
                          <td style="background-color: #ccc;">{{$ue->credit}}</td>
-                        <td>{{$note->i1_points}}</td>
-                        <td>{{$note->i2_points}}</td>
-                        <td><strong>{{$note->moy_inter}}</strong></td>
-                        <td>{{$note->d1_points}}</td>
-                        <td>{{$note->d2_points}}</td>
-                        <td><strong>{{$note->moy_dev}}</strong></td>
-                        <td>{{$note->e_points}}</td>
-                        <td><strong>{{$note->moy_ecu}}</strong></td>
-                        <td><strong>{{$note->moy_ecu}}</strong></td>
-                        <td><strong>{{App\Models\Note::getAppreciation($note->moy_ecu)}}</strong></td>
+                        <td>{{$note?->i1_points}}</td>
+                        <td>{{$note?->i2_points}}</td>
+                        <td><strong>{{$note?->moy_inter}}</strong></td>
+                        <td>{{$note?->d1_points}}</td>
+                        <td>{{$note?->d2_points}}</td>
+                        <td><strong>{{$note?->moy_dev}}</strong></td>
+                        <td>{{$note?->e_points}}</td>
+                        <td><strong>{{$note?->moy_ecu}}</strong></td>
+                        <td><strong>{{$note?->moy_ecu}}</strong></td>
+                        <td><strong>{{App\Models\Note::getAppreciation($note?->moy_ecu)}}</strong></td>
                     </tr>
 
                 @else
@@ -118,14 +118,14 @@
                         <tr>
                             <td>{{$ecue->name}}</td>
                             <td>{{$ecue->credit}}</td>
-                            <td>{{$note->i1_points}}</td>
-                            <td>{{$note->i2_points}}</td>
-                            <td><strong>{{$note->moy_inter}}</strong></td>
-                            <td>{{$note->d1_points}}</td>
-                            <td>{{$note->d2_points}}</td>
-                            <td><strong>{{$note->moy_dev}}</strong></td>
-                            <td>{{$note->e_points}}</td>
-                            <td><strong>{{$note->moy_ecu}}</strong></td>
+                            <td>{{$note?->i1_points}}</td>
+                            <td>{{$note?->i2_points}}</td>
+                            <td><strong>{{$note?->moy_inter}}</strong></td>
+                            <td>{{$note?->d1_points}}</td>
+                            <td>{{$note?->d2_points}}</td>
+                            <td><strong>{{$note?->moy_dev}}</strong></td>
+                            <td>{{$note?->e_points}}</td>
+                            <td><strong>{{$note?->moy_ecu}}</strong></td>
                         </tr>
                     @endforeach
 

@@ -12,6 +12,7 @@
 
         <ul class="codex-menu custom-scroll" data-simplebar>
 
+            @can('access-admin')
             <li class="cdxmenu-title">
             <a style="padding: 0px 0px 0px 0px !important;" href="{{route('dashboard')}}"><h5><i class="fa fa-area-chart"></i> TABLEAU DE BORD</h5></a>
             </li>
@@ -24,6 +25,7 @@
                     <span>Utilisateurs</span>
                 </a>
             </li>
+            @endcan
 
             <li class="cdxmenu-title">
                 <a style="padding: 0px 0px 0px 0px !important;" href="#"><h5> <i class="fa fa-mortar-board"></i> GESTION ETUDIANTS</h5></a>

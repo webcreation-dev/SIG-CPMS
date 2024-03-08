@@ -16,10 +16,10 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name' => 'Administrateur',
+            'name' => 'Directrice CPMS',
         ]);
         Role::create([
-            'name' => 'Utilisateur',
+            'name' => 'Directeur des études',
         ]);
     }
 }
