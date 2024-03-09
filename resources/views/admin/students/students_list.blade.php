@@ -76,7 +76,7 @@
                         <th>Prénom</th>
                         <th>Sexe</th>
                         <th>Fiche de calcul</th>
-                        @can('access-manger')
+                        @can('access-manager')
                             <th>Relevé de notes</th>
                             <th>Actions</th>
                         @endcan
@@ -106,7 +106,7 @@
                                     </a>
                                 </td>
 
-                                @can('access-manger')
+                                @can('access-manager')
                                     <td>
                                         <a href="{{route('releve.notes', ['student_id' => $student->id ])}}" target="_blank" title="Voir le Relevé de Notes">
                                             <span class="badge badge-success"><i class="fa fa-file-text"></i> Voir le relevé </span>
