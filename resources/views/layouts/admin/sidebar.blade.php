@@ -27,42 +27,59 @@
             </li>
             @endcan
 
-            <li class="cdxmenu-title">
-                <a style="padding: 0px 0px 0px 0px !important;" href="#"><h5> <i class="fa fa-mortar-board"></i> GESTION ETUDIANTS</h5></a>
-            </li>
+            @can('access-manager')
+                <li class="cdxmenu-title">
+                    <a style="padding: 0px 0px 0px 0px !important;" href="#"><h5> <i class="fa fa-mortar-board"></i> GESTION ETUDIANTS</h5></a>
+                </li>
 
-            <li class="menu-item {{ Route::is('classrooms.index') ? 'active' : '' }}">
-                <a href="{{route('classrooms.index')}}">
-                    <div class="icon-item">
-                        <i class="ti-bookmark-alt"></i>
-                    </div>
-                    <span>Classes</span>
-                </a>
-            </li>
-            <li class="menu-item {{ Route::is('students.index') ? 'active' : '' }}">
-                <a href="{{route('students.index')}}">
-                    <div class="icon-item">
-                        <i class="ti-user"></i>
-                    </div>
-                    <span>Etudiants</span>
-                </a>
-            </li>
-            <li class="menu-item {{ Route::is('teaching_units.index') ? 'active' : '' }}">
-                <a href="{{route('teaching_units.index')}}">
-                    <div class="icon-item">
-                        <i class="ti-layers"></i>
-                    </div>
-                    <span>UE</span>
-                </a>
-            </li>
-            <li class="menu-item {{ Route::is('element_teaching_units.index') ? 'active' : '' }}">
-                <a href="{{route('element_teaching_units.index')}}">
-                    <div class="icon-item">
-                        <i class="ti-layers-alt"></i>
-                    </div>
-                    <span>ECUE</span>
-                </a>
-            </li>
+                <li class="menu-item {{ Route::is('classrooms.index') ? 'active' : '' }}">
+                    <a href="{{route('classrooms.index')}}">
+                        <div class="icon-item">
+                            <i class="ti-bookmark-alt"></i>
+                        </div>
+                        <span>Classes</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ Route::is('students.index') ? 'active' : '' }}">
+                    <a href="{{route('students.index')}}">
+                        <div class="icon-item">
+                            <i class="ti-user"></i>
+                        </div>
+                        <span>Etudiants</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ Route::is('teaching_units.index') ? 'active' : '' }}">
+                    <a href="{{route('teaching_units.index')}}">
+                        <div class="icon-item">
+                            <i class="ti-layers"></i>
+                        </div>
+                        <span>UE</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ Route::is('element_teaching_units.index') ? 'active' : '' }}">
+                    <a href="{{route('element_teaching_units.index')}}">
+                        <div class="icon-item">
+                            <i class="ti-layers-alt"></i>
+                        </div>
+                        <span>ECUE</span>
+                    </a>
+                </li>
+            @endcan
+
+            @if(Auth::user()->role->name == "Parent")
+                <li class="cdxmenu-title">
+                    <a style="padding: 0px 0px 0px 0px !important;" href="#"><h5> <i class="fa fa-mortar-board"></i> GESTION ENFANTS</h5></a>
+                </li>
+
+                <li class="menu-item {{ Route::is('students.by.parent') ? 'active' : '' }}">
+                    <a href="{{route('students.by.parent')}}">
+                        <div class="icon-item">
+                            <i class="ti-user"></i>
+                        </div>
+                        <span>Mes Enfants</span>
+                    </a>
+                </li>
+            @endif
 
             {{-- <li class="menu-item active"><a href="javascript:void(0);">
                 <div class="icon-item"><i class="fa fa-mortar-board"></i></div>

@@ -5,9 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Classroom;
 use App\Models\TeachingUnit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClassroomController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if (Gate::denies('access-admin') && Gate::denies('access-manager')) {
+                return redirect()->route('students.by.parent');
+            }
+            return $next($request);
+        });
+    }
+
+
     /**
      * Display a listing of the resource.
      *

@@ -55,7 +55,7 @@
                       <tr>
                         <th>Nom</th>
                         <th>Email</th>
-                        <th>Actions</th>
+                        <th>Type</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -63,7 +63,16 @@
                             <tr>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td><strong>NON DISPONIBLE</strong></td>
+                                <td>
+                                    @if($user->role->id == 1)
+                                        <span class="badge badge-success">{{$user->role->name}}</span>
+                                    @elseif($user->role->id == 2)
+                                        <span class="badge badge-primary">{{$user->role->name}}</span>
+                                        @else
+                                        <span class="badge badge-warning">{{$user->role->name}}</span>
+                                    @endif
+                                    
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

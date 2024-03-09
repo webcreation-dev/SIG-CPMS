@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classroom;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -25,6 +26,12 @@ class StudentController extends Controller
             $students = Student::all();
             return view('admin.students.students_list', compact('students'));
         }
+    }
+
+    public function studentsByParent() {
+            
+        $students = Student::where('parent_id', Auth::user()->id)->with('classroom')->get();
+        return view('admin.students.students_list', compact('students'));
     }
 
     /**
@@ -51,6 +58,7 @@ class StudentController extends Controller
             'sexe' => ['required', 'string', 'max:255'],
             'birthday' => ['required', 'date'],
             'classroom_id' => ['required', 'numeric'],
+            'parent_id' => ['numeric'],
         ]);
 
         Student::create([
@@ -59,6 +67,7 @@ class StudentController extends Controller
             'sexe' => $request->sexe,
             'birthday' => $request->birthday,
             'classroom_id' => $request->classroom_id,
+            'parent_id' => $request->parent_id,
         ]);
 
         return redirect()->route('students.index',['classroom_id' => $request->classroom_id])->with('message','Elève ajouté avec succès');
@@ -101,6 +110,7 @@ class StudentController extends Controller
             'edit_sexe' => ['required', 'string', 'max:255'],
             'edit_birthday' => ['required', 'date'],
             'edit_classroom_id' => ['required', 'numeric'],
+            'edit_parent_id' => ['numeric'],
         ]);
 
         $student->update([
@@ -109,6 +119,7 @@ class StudentController extends Controller
             'sexe' => $request->edit_sexe,
             'birthday' => $request->edit_birthday,
             'classroom_id' => $request->edit_classroom_id,
+            'parent_id' => $request->edit_parent_id,
         ]);
 
         return redirect()->route('students.index',['classroom_id' => $request->edit_classroom_id])->with('message','Elève modifié avec succès');

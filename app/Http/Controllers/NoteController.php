@@ -9,9 +9,22 @@ use App\Models\Student;
 use App\Models\TeachingUnit;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class NoteController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if (Gate::denies('access-admin') && Gate::denies('access-manager')) {
+                return redirect()->route('students.by.parent');
+            }
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *

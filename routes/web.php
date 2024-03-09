@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('element_teaching_units', ElementTeachingUnitController::class);
 
     Route::resource('students', StudentController::class);
+    Route::get('students_by_parent', [StudentController::class,'studentsByParent'])->name('students.by.parent');
 
     Route::resource('notes', NoteController::class);
     Route::get('/releve_de_notes', [NoteController::class, 'releveNotes'])->name('releve.notes');

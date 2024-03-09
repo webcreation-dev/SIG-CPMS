@@ -47,6 +47,16 @@ class DatabaseSeeder extends Seeder
             'role_id' => 2,
         ]);
 
+        User::create([
+            'name' => 'DOSSOU Pieree',
+            'email' => 'parent@cpms.com',
+            'avatar' => 'avatar.png',
+            'email_verified_at' => now(),
+            'password' => bcrypt('parent_cpms@2024*'),
+            'remember_token' => Str::random(10),
+            'role_id' => 3,
+        ]);
+
         Classroom::create([
                 'name' => '1ère Année',
                 'total_students' => 32,

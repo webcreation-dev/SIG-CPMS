@@ -25,12 +25,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::before(function ($user) {
+            return $user->role->name === 'Directrice CPMS' ? true : null;
+        });
+
         Gate::define('access-admin', function ($user) {
             return $user->role->name === 'Directrice CPMS';
         });
 
         Gate::define('access-manager', function ($user) {
             return $user->role->name === 'Directeur des études';
+        });
+
+        Gate::define('access-parent', function ($user) {
+            return $user->role->name === 'Parent';
         });
     }
     

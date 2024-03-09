@@ -21,5 +21,8 @@ class RoleTableSeeder extends Seeder
         Role::create([
             'name' => 'Directeur des études',
         ]);
+        Role::create([
+            'name' => 'Parent',
+        ]);
     }
 }

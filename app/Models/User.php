@@ -48,6 +48,12 @@ class User extends Authenticatable
         return $user->name;
     }
 
+    public static function listParents() {
+
+        $parents = User::where('role_id', 3)->get();
+        return $parents;
+    }
+
     /**
      * The attributes that should be cast.
      *

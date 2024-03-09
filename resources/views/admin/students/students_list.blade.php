@@ -51,17 +51,17 @@
         <div class="custom-container">
           <div class="row">
             <div class="col-12">
-                <div class="row">
-
-                    <div class="col-md-3" style="text-align: right;">
-                        <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter un étudiant</button>
+                @can('access-manger')
+                    <div class="row">
+                        <div class="col-md-3" style="text-align: right;">
+                            <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter un étudiant</button>
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-3">
+                            <a href="{{route('fiche.calcul.global')}}" target="_blank"><button class="btn btn-md btn-warning mb-15 float-end" type="button" ><i class="fa fa-file-pdf-o"></i> Fiche de calcul global</button></a>
+                        </div>
                     </div>
-                    <div class="col-md-6"></div>
-                    <div class="col-md-3">
-                        <a href="{{route('fiche.calcul.global')}}" target="_blank"><button class="btn btn-md btn-warning mb-15 float-end" type="button" ><i class="fa fa-file-pdf-o"></i> Fiche de calcul global</button></a>
-                    </div>
-
-                </div>
+                @endcan
 
               <div class="card">
                 <div class="card-body">
@@ -76,8 +76,10 @@
                         <th>Prénom</th>
                         <th>Sexe</th>
                         <th>Fiche de calcul</th>
-                        <th>Relevé de notes</th>
-                        <th>Actions</th>
+                        @can('access-manger')
+                            <th>Relevé de notes</th>
+                            <th>Actions</th>
+                        @endcan
                       </tr>
                     </thead>
                     <tbody>
@@ -103,47 +105,51 @@
                                         <span class="badge badge-primary"><i class="fa fa-file-pdf-o"></i> Voir la fiche </span>
                                     </a>
                                 </td>
-                                <td>
-                                    <a href="{{route('releve.notes', ['student_id' => $student->id ])}}" target="_blank" title="Voir le Relevé de Notes">
-                                        <span class="badge badge-success"><i class="fa fa-file-text"></i> Voir le relevé </span>
-                                    </a>
-                                </td>
 
-                                <td>
-                                    <a href="#" title="Voir l'étudiant" data-bs-toggle="modal" data-bs-target="#ViewModal"
-                                        view-student-lastname="{{$student->lastname}}"
-                                        view-student-firstname="{{$student->firstname}}"
-                                        view-student-sexe="{{$student->sexe}}"
-                                        view-student-birthday="{{$student->birthday}}">
+                                @can('access-manger')
+                                    <td>
+                                        <a href="{{route('releve.notes', ['student_id' => $student->id ])}}" target="_blank" title="Voir le Relevé de Notes">
+                                            <span class="badge badge-success"><i class="fa fa-file-text"></i> Voir le relevé </span>
+                                        </a>
+                                    </td>
 
-                                        <span class="badge badge-info"></i> <i class="ti-eye"></i> </span>
-                                    </a>
-                                    <a href="#" title="Modifier un etudiant" data-bs-toggle="modal" data-bs-target="#EditModal"
-                                        data-student-lastname="{{$student->lastname}}"
-                                        data-student-firstname="{{$student->firstname}}"
-                                        data-student-sexe="{{$student->sexe}}"
-                                        data-student-birthday="{{$student->birthday}}"
-                                        data-student-id="{{$student->id}}"
-                                        @if(isset($classroom_id)) data-classroom-id="{{$classroom_id}}" @else data-classroom-id="{{$student->classroom->id}}" @endif
-                                        >
-                                        <span class="badge badge-warning"></i> <i class="ti-pencil"></i> </span>
-                                    </a>
-                                    <a href="{{ route('students.destroy', $student->id) }}"
-                                    title="Supprimer un etudiant"
-                                    class="delete-link"
-                                    data-id="{{ $student->id }}">
-                                        <span class="badge badge-danger"><i class="ti-trash"></i></span>
-                                    </a>
+                                    <td>
+                                        <a href="#" title="Voir l'étudiant" data-bs-toggle="modal" data-bs-target="#ViewModal"
+                                            view-student-lastname="{{$student->lastname}}"
+                                            view-student-firstname="{{$student->firstname}}"
+                                            view-student-sexe="{{$student->sexe}}"
+                                            view-student-birthday="{{$student->birthday}}">
 
-                                    <!-- Ajoutez le formulaire de suppression caché pour chaque élément dans la boucle -->
-                                    <form id="delete-form-{{ $student->id }}"
-                                        action="{{ route('students.destroy', $student->id) }}"
-                                        method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </td>
+                                            <span class="badge badge-info"></i> <i class="ti-eye"></i> </span>
+                                        </a>
+                                        <a href="#" title="Modifier un etudiant" data-bs-toggle="modal" data-bs-target="#EditModal"
+                                            data-student-lastname="{{$student->lastname}}"
+                                            data-student-firstname="{{$student->firstname}}"
+                                            data-student-sexe="{{$student->sexe}}"
+                                            data-student-birthday="{{$student->birthday}}"
+                                            data-student-id="{{$student->id}}"
+                                            @if(isset($classroom_id)) data-classroom-id="{{$classroom_id}}" @else data-classroom-id="{{$student->classroom->id}}" @endif
+                                            >
+                                            <span class="badge badge-warning"></i> <i class="ti-pencil"></i> </span>
+                                        </a>
+                                        <a href="{{ route('students.destroy', $student->id) }}"
+                                        title="Supprimer un etudiant"
+                                        class="delete-link"
+                                        data-id="{{ $student->id }}">
+                                            <span class="badge badge-danger"><i class="ti-trash"></i></span>
+                                        </a>
+
+                                        <!-- Ajoutez le formulaire de suppression caché pour chaque élément dans la boucle -->
+                                        <form id="delete-form-{{ $student->id }}"
+                                            action="{{ route('students.destroy', $student->id) }}"
+                                            method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </td>
+                                @endcan
+
                             </tr>
                         @endforeach
 
@@ -192,6 +198,18 @@
                         <label class="form-label">Classe</label>
                         <select class="form-control basic-select" name="classroom_id" style="width: 100%;">
                             @foreach (App\Models\Classroom::list() as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="form-label">Parent</label>
+                        <select class="form-control basic-select" name="parent_id" style="width: 100%;">
+                            <option>Associer un parent</option>
+                            @foreach (App\Models\User::listParents() as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
