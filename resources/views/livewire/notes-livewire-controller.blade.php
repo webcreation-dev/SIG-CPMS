@@ -156,7 +156,6 @@
 
 
         // if (index < inputs.length - 1) {
-
             if (current_inputs[index].value.length === 2) {
 
                 if (nextInputName === 'i1_points[]') {

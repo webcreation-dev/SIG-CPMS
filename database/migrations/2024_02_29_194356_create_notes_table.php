@@ -16,13 +16,13 @@ return new class extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->integer('i1_points')->nullable();
-            $table->integer('i2_points')->nullable();
+            $table->string('i1_points')->nullable();
+            $table->string('i2_points')->nullable();
 
-            $table->integer('d1_points')->nullable();
-            $table->integer('d2_points')->nullable();
+            $table->string('d1_points')->nullable();
+            $table->string('d2_points')->nullable();
 
-            $table->integer('e_points')->nullable();
+            $table->string('e_points')->nullable();
 
             $table->string('moy_inter')->nullable();
             $table->string('moy_dev')->nullable();

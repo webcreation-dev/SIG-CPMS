@@ -34,4 +34,10 @@ class TeachingUnit extends Model
         return $teachingUnits;
     }
 
+    const UE_NAMES = [
+        "SIN 1" => "Sciences Numériques de l'Ingénieur 1",
+        "SII 1" => "Sciences Industrielles de l'Ingénieur 1",
+        "Humanité 1C (FHS)" => "Humanité 1C (Formation Humaine et Sociale)"
+    ];
+
 }

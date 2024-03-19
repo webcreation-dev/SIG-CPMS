@@ -87,7 +87,7 @@
                         @endphp
 
                         <tr>
-                            <td>{{$ue->name}}</td>
+                            <td>{{App\Models\TeachingUnit::UE_NAMES[$ue->name] ?? $ue->name}}</td>
                             <td>{{$ue->credit}}</td>
                             <td>{{$ue->name}}</td>
                             <td>{{$ue->credit}}</td>
@@ -121,7 +121,7 @@
                         @endphp
 
                         <tr>
-                            <td rowspan="{{$ecues_count}}" >{{$ue->name}}</td>
+                            <td rowspan="{{$ecues_count}}" >{{App\Models\TeachingUnit::UE_NAMES[$ue->name] ?? $ue->name}}</td>
                             <td rowspan="{{$ecues_count}}" >{{$ue->credit}}</td>
                             <td>{{$ecue_first->name}}</td>
                             <td>{{$ecue_first->credit}}</td>
@@ -164,12 +164,12 @@
             </ul>
         </section>
         <section class="appreciation">
-            <p>Cotonou, le <strong>{{ date("j-m-y") }}</strong></p>
+            <p>Cotonou, le <strong>{{ strftime("%e %B %Y") }}</strong></p>
             <p id="appreciation-texte"></p>
         </section>
         <section class="signatures">
-            <p style="margin-bottom: 20px;" >Le Directeur Académique <span id="date"></span></p>
-            <strong>Abdou-Rahmann</strong>
+            <p><strong>Abdou-Rahmann AGUEMON</strong></p>
+            <p style="margin-bottom: 20px;" >Directeur Académique <span id="date"></span></p>
             <p><span id="directeur-academique"></span></p>
         </section>
     </main>
