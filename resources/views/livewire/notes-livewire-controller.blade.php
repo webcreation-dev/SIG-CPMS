@@ -248,7 +248,7 @@
                 }
             }else {
                 var averaged = ((d1 + d2) * 0.3)/2;
-                if(eValue != '') {
+                if(eValue != '' && d1Value != '' && d2Value != '' && i1Value != '' && i2Value != '') {
                     var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.5)/2);
                     moyenneECU.textContent = moy.toFixed(2);
                     moyEcu.value = moy.toFixed(2);
@@ -268,7 +268,7 @@
         } else {
 
             if(i1Value != '' || i2Value != '') {
-                if(d1Value != '' || d2Value != '') {
+                if(d1Value != '' && d2Value != '' && i1Value != '' && i2Value != '') {
                     var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.3)/2);
                 }
             }else {
