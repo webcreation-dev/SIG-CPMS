@@ -196,11 +196,35 @@
 
         var e = parseFloat(eInput.value) || 0;
 
-        // Moy Inter
+
         var i1Value = i1Input.value.trim();
         var i2Value = i2Input.value.trim();
 
+        var d1Value = d1Input.value.trim();
+        var d2Value = d2Input.value.trim();
+
+        var eValue = eInput.value.trim();
+
+
+        // Moy Inter
         if (i1Value === '' || i2Value === '') {
+
+            if (d1Value === '' || d2Value === '') {
+                moyenneDCell.textContent = '';
+                moyenneECU.textContent = '';
+            } else {
+                var averaged = ((d1 + d2) * 0.5)/2;
+                moyenneDCell.textContent = averaged.toFixed(2); // Update the moyenne cell
+                moyDev.value = averaged.toFixed(2);
+
+                if(eValue != '') {
+                    var moy = (e * 0.5) + (((d1 + d2) * 0.5)/2);
+                    moyenneECU.textContent = moy.toFixed(2);
+                    moyEcu.value = moy.toFixed(2);
+                }
+
+            }
+
             moyenneCell.textContent = '';
             moyenneECU.textContent = '';
         } else {
@@ -210,25 +234,48 @@
         }
 
         // Moy Devoir
-        var d1Value = d1Input.value.trim();
-        var d2Value = d2Input.value.trim();
-
         if (d1Value === '' || d2Value === '') {
             moyenneDCell.textContent = '';
             moyenneECU.textContent = '';
         } else {
-            var averaged = ((d1 + d2) * 0.3)/2;
+            if (i1Value === '' || i2Value === '') {
+                var averaged = ((d1 + d2) * 0.5)/2;
+
+                if(eValue != '') {
+                    var moy = (e * 0.5) + (((d1 + d2) * 0.5)/2);
+                    moyenneECU.textContent = moy.toFixed(2);
+                    moyEcu.value = moy.toFixed(2);
+                }
+            }else {
+                var averaged = ((d1 + d2) * 0.3)/2;
+                if(eValue != '') {
+                    var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.5)/2);
+                    moyenneECU.textContent = moy.toFixed(2);
+                    moyEcu.value = moy.toFixed(2);
+                }
+            }
+
             moyenneDCell.textContent = averaged.toFixed(2); // Update the moyenne cell
             moyDev.value = averaged.toFixed(2);
         }
 
         // Moy ECU
-        var eValue = eInput.value.trim();
 
-        if (i1Value === '' || i2Value === '' || d1Value === '' || d2Value === '' || eValue === '') {
+        if (eValue === '') {
+
             moyenneECU.textContent = '';
+
         } else {
-            var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.3)/2);
+
+            if(i1Value != '' || i2Value != '') {
+                if(d1Value != '' || d2Value != '') {
+                    var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.3)/2);
+                }
+            }else {
+                if(d1Value != '' || d2Value != '') {
+                    var moy = (e * 0.5) + (((d1 + d2) * 0.5)/2);
+                }
+            }
             moyenneECU.textContent = moy.toFixed(2);
             moyEcu.value = moy.toFixed(2);
         }
