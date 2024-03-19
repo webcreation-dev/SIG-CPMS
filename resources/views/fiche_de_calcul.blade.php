@@ -31,7 +31,7 @@
                     $student = App\Models\Student::find($studentId);
                 @endphp
                 <tr>
-                    <th colspan="12"> {{$student->lastname}} {{$student->firstname}}</th>
+                    <th colspan="12"> @if($student->sexe =='M') Mr @else Mlle @endif {{$student->lastname}} {{$student->firstname}}</th>
                 </tr>
                 <tr>
                     <th rowspan="2">Unités d'Enseignement UE </th>

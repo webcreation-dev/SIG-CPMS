@@ -56,7 +56,7 @@
                   <tbody>
 
 
-                        @foreach ($notes as $note)
+                        @foreach ($notes as $index => $note)
                             <tr>
                                 @php
                                     $firstname = explode(' ', $note->student->firstname);
@@ -64,28 +64,32 @@
                                 <td>{{$note->student->lastname}} {{$firstname[0]}}
                                     <input name="student_id[]" value={{$note->student_id}}  class="form-control" type="hidden" placeholder="student">
                                 </td>
+                                <td>
+                                    <input name="i1_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'i1_points[]', 'i2_points[]')"
 
-                                <td><input name="i1_points[]" oninput="updateAverage(this)"  @if($note->i1_points != null) style="color:black; border: solid 0.5px green;" @endif value={{$note->i1_points}} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="I1"></td>
-                                <td><input name="i2_points[]" oninput="updateAverage(this)"  @if($note->i2_points != null) style="color:black; border: solid 0.5px green;" @endif value={{$note->i2_points}} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="I2"></td>
+                                    @if($note->i1_points != null) style="color:black; border: solid 0.5px green;" @endif
+                                    value="{{$note->i1_points}}" step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="I1">
+                                </td>
+                                <td><input name="i2_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'i2_points[]', 'd1_points[]')"  @if($note->i2_points != null) style="color:black; border: solid 0.5px green;" @endif value="{{$note->i2_points}}"" step=".25" min="0" max="20" class="form-control" type="number" placeholder="I2"></td>
                                 <td class="moyenne" >
-                                    <input step="0.5" min="0" max="20" class="form-control" type="number">
+                                    <input step="0.001" min="0" max="20" class="form-control input-number" type="number">
                                 </td>
 
                                 <td style="display: none;">
-                                    <input name="moy_inter[]" step="0.01" class="form-control" type="number">
+                                    <input name="moy_inter[]" step="0.001" class="form-control" type="number">
                                 </td>
 
-                                <td><input name="d1_points[]" oninput="updateAverage(this)" @if($note->d1_points != null) style="color:black; border: solid 0.5px green;" @endif value={{$note->d1_points }} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="D1"></td>
-                                <td><input name="d2_points[]" oninput="updateAverage(this)" @if($note->d2_points != null) style="color:black; border: solid 0.5px green;" @endif value={{$note->d2_points}} step="0.5" min="0" max="20" class="form-control" type="number" placeholder="D2"></td>
+                                <td><input name="d1_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'd1_points[]', 'd2_points[]')"@if($note->d1_points != null) style="color:black; border: solid 0.5px green;" @endif value="{{$note->d1_points }}" step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="D1"></td>
+                                <td><input name="d2_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'd2_points[]', 'e_points[]')" @if($note->d2_points != null) style="color:black; border: solid 0.5px green;" @endif value="{{$note->d2_points}}" step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="D2"></td>
                                 <td class="moyenned"></td>
                                 <td style="display: none;">
-                                    <input name="moy_dev[]" step="0.01" class="form-control" type="number">
+                                    <input name="moy_dev[]" step="0.001" class="form-control" type="number">
                                 </td>
 
-                                <td><input name="e_points[]" oninput="updateAverage(this)" @if($note->e_points != null) style="color:black; border: solid 0.5px green;" @endif value={{$note->e_points }}  step="0.5" min="0" max="20" class="form-control" type="number" placeholder="Exam"></td>
+                                <td><input name="e_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'e_points[]', 'i1_points[]')" @if($note->e_points != null) style="color:black; border: solid 0.5px green;" @endif value="{{$note->e_points }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Exam"></td>
                                 <td class="moy_ecu"></td>
                                 <td style="display: none;">
-                                    <input name="moy_ecu[]" step="0.01" class="form-control" type="number">
+                                    <input name="moy_ecu[]" step="0.001" class="form-control" type="number">
                                 </td>
                             </tr>
                         @endforeach
@@ -144,71 +148,93 @@
 
 <script>
 
-        function updateAverage(input) {
-            // Assuming the structure of your table, you can use DOM traversal to find related elements
-            var row = input.closest('tr');
-            var i1Input = row.querySelector('[name="i1_points[]"]');
-            var i2Input = row.querySelector('[name="i2_points[]"]');
-            var moyenneCell = row.querySelector('.moyenne');
+    function moveToNextInput(event, index, inputName, nextInputName) {
 
-            var d1Input = row.querySelector('[name="d1_points[]"]');
-            var d2Input = row.querySelector('[name="d2_points[]"]');
-            var moyenneDCell = row.querySelector('.moyenned');
+        var inputs = document.querySelectorAll(`input[name="${nextInputName}"]`);
 
-            var eInput = row.querySelector('[name="e_points[]"]');
-            var moyenneECU = row.querySelector('.moy_ecu');
+        var current_inputs = document.querySelectorAll(`input[name="${inputName}"]`);
 
-            var moyInter = row.querySelector('[name="moy_inter[]"]');
-            var moyDev = row.querySelector('[name="moy_dev[]"]');
-            var moyEcu = row.querySelector('[name="moy_ecu[]"]');
 
-            // Get values from input fields
-            var i1 = parseFloat(i1Input.value) || 0;
-            var i2 = parseFloat(i2Input.value) || 0;
+        // if (index < inputs.length - 1) {
 
-            var d1 = parseFloat(d1Input.value) || 0;
-            var d2 = parseFloat(d2Input.value) || 0;
+            if (current_inputs[index].value.length === 2) {
 
-            var e = parseFloat(eInput.value) || 0;
-
-            // Moy Inter
-            var i1Value = i1Input.value.trim();
-            var i2Value = i2Input.value.trim();
-
-            if (i1Value === '' || i2Value === '') {
-                moyenneCell.textContent = '';
-                moyenneECU.textContent = '';
-            } else {
-                var average = ((i1 + i2) * 0.2) / 2;
-                moyenneCell.textContent = average.toFixed(2); // Update the moyenne cell
-                moyInter.value = average.toFixed(2);
+                if (nextInputName === 'i1_points[]') {
+                    inputs[index + 1].focus();
+                }else {
+                    inputs[index].focus();
+                }
             }
+        // }
 
-            // Moy Devoir
-            var d1Value = d1Input.value.trim();
-            var d2Value = d2Input.value.trim();
+        event.preventDefault();
+    }
 
-            if (d1Value === '' || d2Value === '') {
-                moyenneDCell.textContent = '';
-                moyenneECU.textContent = '';
-            } else {
-                var averaged = ((d1 + d2) * 0.3)/2;
-                moyenneDCell.textContent = averaged.toFixed(2); // Update the moyenne cell
-                moyDev.value = averaged.toFixed(2);
-            }
+    function updateAverage(input) {
+        // Assuming the structure of your table, you can use DOM traversal to find related elements
+        var row = input.closest('tr');
+        var i1Input = row.querySelector('[name="i1_points[]"]');
+        var i2Input = row.querySelector('[name="i2_points[]"]');
+        var moyenneCell = row.querySelector('.moyenne');
 
-            // Moy ECU
-            var eValue = eInput.value.trim();
+        var d1Input = row.querySelector('[name="d1_points[]"]');
+        var d2Input = row.querySelector('[name="d2_points[]"]');
+        var moyenneDCell = row.querySelector('.moyenned');
 
-            if (i1Value === '' || i2Value === '' || d1Value === '' || d2Value === '' || eValue === '') {
-                moyenneECU.textContent = '';
-            } else {
-                var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.3)/2);
-                moyenneECU.textContent = moy.toFixed(2);
-                moyEcu.value = moy.toFixed(2);
-            }
+        var eInput = row.querySelector('[name="e_points[]"]');
+        var moyenneECU = row.querySelector('.moy_ecu');
 
+        var moyInter = row.querySelector('[name="moy_inter[]"]');
+        var moyDev = row.querySelector('[name="moy_dev[]"]');
+        var moyEcu = row.querySelector('[name="moy_ecu[]"]');
+
+        // Get values from input fields
+        var i1 = parseFloat(i1Input.value) || 0;
+        var i2 = parseFloat(i2Input.value) || 0;
+
+        var d1 = parseFloat(d1Input.value) || 0;
+        var d2 = parseFloat(d2Input.value) || 0;
+
+        var e = parseFloat(eInput.value) || 0;
+
+        // Moy Inter
+        var i1Value = i1Input.value.trim();
+        var i2Value = i2Input.value.trim();
+
+        if (i1Value === '' || i2Value === '') {
+            moyenneCell.textContent = '';
+            moyenneECU.textContent = '';
+        } else {
+            var average = ((i1 + i2) * 0.2) / 2;
+            moyenneCell.textContent = average.toFixed(2); // Update the moyenne cell
+            moyInter.value = average.toFixed(2);
         }
+
+        // Moy Devoir
+        var d1Value = d1Input.value.trim();
+        var d2Value = d2Input.value.trim();
+
+        if (d1Value === '' || d2Value === '') {
+            moyenneDCell.textContent = '';
+            moyenneECU.textContent = '';
+        } else {
+            var averaged = ((d1 + d2) * 0.3)/2;
+            moyenneDCell.textContent = averaged.toFixed(2); // Update the moyenne cell
+            moyDev.value = averaged.toFixed(2);
+        }
+
+        // Moy ECU
+        var eValue = eInput.value.trim();
+
+        if (i1Value === '' || i2Value === '' || d1Value === '' || d2Value === '' || eValue === '') {
+            moyenneECU.textContent = '';
+        } else {
+            var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.3)/2);
+            moyenneECU.textContent = moy.toFixed(2);
+            moyEcu.value = moy.toFixed(2);
+        }
+
+    }
 
     document.addEventListener('DOMContentLoaded', function() {
         var allInputs = document.querySelectorAll('[name="i1_points[]"], [name="i2_points[]"]');

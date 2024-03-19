@@ -16,7 +16,7 @@
             <img src="logo.png" alt="">
         </div>
         <div class="column middle">
-            <p style="text-align: center;"><strong>CYCLE PREPARATOIRE Ste MARIE STELLA</strong></p>
+            <p style="text-align: center;"><strong>CYCLE PREPARATOIRE Ste MARIE-STELLA</strong></p>
             <p style="text-align: center;">10 BP 1092 Cotonou Tél: 62 72 10 72</p>
             <p style="text-align: center;">Email: <span style="text-decoration: underline;">contact@cpms.education</span> - <strong>Bénin</strong> </p>
         </div>
@@ -40,7 +40,7 @@
                 @endphp
 
     <strong style="text-decoration: underline;text-align: start; margin-bottom:190px !important;" >Nom et Prénoms (s)</strong> <strong>:</strong> {{$student->lastname}} {{$student->firstname}} <br> <br>
-    {{-- <strong style="text-decoration: underline;text-align: start;" >Date et Lieu de naissance</strong> <strong>:</strong> {{$student->birthday}} <br> <br> --}}
+    <strong style="text-decoration: underline;text-align: start;" >Lieu et Date de Naissance</strong> <strong>:</strong> {{$student->birthplace}} {{$student->birthday}} <br> <br>
     <strong style="text-decoration: underline;text-align: start;" >Sexe</strong> <strong>:</strong> {{$student->sexe}}
 
     <br><br>
@@ -156,7 +156,7 @@
     <main>
         <section class="informations">
             <ul>
-                <li id="credits-valides" >Moyenne générale : <strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong> </li>
+                <li id="credits-valides" > <strong>Moyenne générale</strong> : <strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong> </li>
                 <li id="moyenne">Nombre de crédits validés : <strong>{{$credit_validés}}</strong> </li>
                 <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li>
                 <br>

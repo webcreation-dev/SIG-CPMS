@@ -104,7 +104,7 @@
                           <div class="card-body progressCounter">
                             <div class="media">
                               <div>
-                                <h2><span class="count">{{$ues_count + $ecues_count}}</span></h2>
+                                <h2><span class="count">{{$ues_count}}</span></h2>
                               </div>
                               <div class="media-body">                             <span class="badge badge-secondary">25.7%<i class="fa fa-angle-down"></i></span></div>
                             </div>

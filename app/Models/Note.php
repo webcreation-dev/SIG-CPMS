@@ -37,20 +37,10 @@ class Note extends Model
     }
 
     public static function getAppreciation($note) {
-        if ($note < 0 || $note > 20) {
-            return "Note invalide";
-        } elseif ($note >= 16) {
-            return "Très bien";
-        } elseif ($note >= 14) {
-            return "Bien";
-        } elseif ($note >= 12) {
-            return "Assez bien";
-        } elseif ($note >= 10) {
-            return "Passable";
-        } elseif ($note >= 5) {
-            return "Insuffisant";
+        if ($note < 12) {
+            return "Non Validé";
         } else {
-            return "Très insuffisant";
+            return "Validé";
         }
     }
 

@@ -118,7 +118,8 @@
                                             view-student-lastname="{{$student->lastname}}"
                                             view-student-firstname="{{$student->firstname}}"
                                             view-student-sexe="{{$student->sexe}}"
-                                            view-student-birthday="{{$student->birthday}}">
+                                            view-student-birthday="{{$student->birthday}}"
+                                            view-student-birthplace="{{$student->birthplace}}">
 
                                             <span class="badge badge-info"></i> <i class="ti-eye"></i> </span>
                                         </a>
@@ -127,6 +128,7 @@
                                             data-student-firstname="{{$student->firstname}}"
                                             data-student-sexe="{{$student->sexe}}"
                                             data-student-birthday="{{$student->birthday}}"
+                                            data-student-birthplace="{{$student->birthplace}}"
                                             data-student-id="{{$student->id}}"
                                             @if(isset($classroom_id)) data-classroom-id="{{$classroom_id}}" @else data-classroom-id="{{$student->classroom->id}}" @endif
                                             >
@@ -188,9 +190,17 @@
                     <label class="form-label">Sexe</label>
                     <input name="sexe" required class="form-control" type="text" placeholder="Sexe de l'étudiant">
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Date de naissance</label>
-                    <input name="birthday" required class="form-control" type="date" required value="2023-03-13">
+
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Lieu de naissance</label>
+                        <input name="birthplace" required class="form-control" type="text" placeholder="Porto-Novo">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Date de naissance</label>
+                        <input name="birthday" required class="form-control" type="date" required value="2023-03-13">
+                    </div>
                 </div>
 
                 <div class="row">
@@ -255,9 +265,16 @@
                     <label class="form-label">Sexe</label>
                     <input name="edit_sexe" required class="form-control" type="text" placeholder="Sexe de l'étudiant">
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Date de naissance</label>
-                    <input name="edit_birthday" required class="form-control" type="date" required value="2023-03-13">
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Lieu de naissance</label>
+                        <input name="edit_birthplace" required class="form-control" type="text" placeholder="Porto-Novo">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Date de naissance</label>
+                        <input name="edit_birthday" required class="form-control" type="date" required value="2023-03-13">
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-success btn-md">MODIFIER</button>
@@ -294,9 +311,15 @@
                         <input disabled name="view_sexe" required class="form-control" type="text" placeholder="Nom de l'étudiant">
                     </div>
                     <div class="form-group">
+                        <label class="form-label">Lieu de naissance</label>
+                        <input disabled name="view_birthplace" required class="form-control" type="text" required value="Cotonou">
+                    </div>
+                    <div class="form-group">
                         <label class="form-label">Date de naissance</label>
                         <input disabled name="view_birthday" required class="form-control" type="date" required value="2023-03-13">
                     </div>
+
+
 
                 </div>
             </div>
@@ -323,6 +346,8 @@
                     var studentFistname = button.getAttribute('data-student-firstname');
                     var studentSexe = button.getAttribute('data-student-sexe');
                     var studentBirthday = button.getAttribute('data-student-birthday');
+                    var studentBirthplace = button.getAttribute('data-student-birthplace');
+                    var studentBirthplace = button.getAttribute('data-student-birthplace');
                     var studentId = button.getAttribute('data-student-id');
                     var studentClassroomId = button.getAttribute('data-classroom-id');
 
@@ -337,6 +362,7 @@
                     document.querySelector('input[name="edit_firstname"]').value = studentFistname;
                     document.querySelector('input[name="edit_sexe"]').value = studentSexe;
                     document.querySelector('input[name="edit_birthday"]').value = studentBirthday;
+                    document.querySelector('input[name="edit_birthplace"]').value = studentBirthplace;
                     document.querySelector('input[name="edit_classroom_id"]').value = studentClassroomId;
 
                 });
@@ -378,12 +404,14 @@
                     var viewstudentFistname = button.getAttribute('view-student-firstname');
                     var viewstudentSexe = button.getAttribute('view-student-sexe');
                     var viewstudentBirthday = button.getAttribute('view-student-birthday');
+                    var viewstudentBirthplace = button.getAttribute('view-student-birthplace');
 
                     // Remplissez les champs du formulaire dans le modal avec ces données
                     document.querySelector('input[name="view_lastname"]').value = viewstudentlastName;
                     document.querySelector('input[name="view_firstname"]').value = viewstudentFistname;
                     document.querySelector('input[name="view_sexe"]').value = viewstudentSexe;
                     document.querySelector('input[name="view_birthday"]').value = viewstudentBirthday;
+                    document.querySelector('input[name="view_birthplace"]').value = viewstudentBirthplace;
                 });
             });
 

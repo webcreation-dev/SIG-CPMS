@@ -14,6 +14,7 @@ class Student extends Model
         'firstname',
         'sexe',
         'birthday',
+        'birthplace',
         'classroom_id',
         'parent_id'
     ];

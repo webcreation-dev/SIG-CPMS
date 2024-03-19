@@ -22,6 +22,7 @@ class StudentFactory extends Factory
             'firstname' => $this->faker->firstName,
             'sexe' => $this->faker->randomElement(['M', 'F']),
             'birthday' => $this->faker->date,
+            'birthplace' => $this->faker->lastName,
             'classroom_id' => $this->faker->randomElement(Classroom::pluck('id')),
         ];
     }

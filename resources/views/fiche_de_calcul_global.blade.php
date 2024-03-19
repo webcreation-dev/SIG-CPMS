@@ -15,7 +15,7 @@
         <div class="column left" style="width: 10% !important;">
         </div>
         <div class="column middle" style="width: 80% !important; text-align: left;">
-            <p style="text-align: center;"><strong> <span style="border-top: 1px solid black; padding-top: 5px;" >CPMS /</span> FICHE DE CALCUL DE MOYENNES - 1è SEMESTRE</strong></p>
+            <p style="text-align: center;"><strong> <span >CPMS /</span> FICHE DE CALCUL DE MOYENNES - 1è SEMESTRE</strong></p>
             <p style="text-align: center;">1è Année / 2023-2024</p>
         </div>
         <div class="column right" style="width: 10% !important;">
@@ -72,7 +72,7 @@
                             $firstname = explode(' ', $student->firstname);
                         @endphp
                     <tr>
-                        <td rowspan="25" style="text-align: center;"> {{$student->lastname}} {{$firstname[0]}}</td>
+                        <td rowspan="25" style="text-align: center;">@if($student->sexe =='M') Mr @else Mlle @endif  {{$student->lastname}} {{$firstname[0]}}</td>
                         <td colspan="12" style="background-color: #ccc;"></td>
                     </tr>
 

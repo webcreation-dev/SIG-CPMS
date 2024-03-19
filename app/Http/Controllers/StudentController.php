@@ -29,7 +29,7 @@ class StudentController extends Controller
     }
 
     public function studentsByParent() {
-            
+
         $students = Student::where('parent_id', Auth::user()->id)->with('classroom')->get();
         return view('admin.students.students_list', compact('students'));
     }
@@ -57,6 +57,7 @@ class StudentController extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'sexe' => ['required', 'string', 'max:255'],
             'birthday' => ['required', 'date'],
+            'birthplace' => ['required', 'string'],
             'classroom_id' => ['required', 'numeric'],
             'parent_id' => ['numeric'],
         ]);
@@ -66,6 +67,7 @@ class StudentController extends Controller
             'firstname' => $request->firstname,
             'sexe' => $request->sexe,
             'birthday' => $request->birthday,
+            'birthplace' => $request->birthplace,
             'classroom_id' => $request->classroom_id,
             'parent_id' => $request->parent_id,
         ]);
@@ -109,6 +111,7 @@ class StudentController extends Controller
             'edit_firstname' => ['required', 'string', 'max:255'],
             'edit_sexe' => ['required', 'string', 'max:255'],
             'edit_birthday' => ['required', 'date'],
+            'edit_birthplace' => ['required', 'string'],
             'edit_classroom_id' => ['required', 'numeric'],
             'edit_parent_id' => ['numeric'],
         ]);
@@ -118,6 +121,7 @@ class StudentController extends Controller
             'firstname' => $request->edit_firstname,
             'sexe' => $request->edit_sexe,
             'birthday' => $request->edit_birthday,
+            'birthplace' => $request->edit_birthplace,
             'classroom_id' => $request->edit_classroom_id,
             'parent_id' => $request->edit_parent_id,
         ]);
