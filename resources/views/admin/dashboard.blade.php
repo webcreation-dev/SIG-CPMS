@@ -40,7 +40,7 @@
         <div class="custom-container">
           <div class="row">
             @php
-                $ues_count = App\Models\TeachingUnit::where('status','singular')->count();
+                $ues_count = App\Models\TeachingUnit::get()->count();
                 $ues_multiple = App\Models\TeachingUnit::where('status','multiple')->pluck('id')->toArray();
 
                 $ecues_count = App\Models\ElementTeachingUnit::whereIn('teaching_unit_id', $ues_multiple)->count();

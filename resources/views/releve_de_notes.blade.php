@@ -164,9 +164,19 @@
             </ul>
         </section>
         <section class="appreciation">
-            <p>Cotonou, le <strong>{{ strftime("%e %B %Y") }}</strong></p>
+            @php
+            $jour = getdate();
+            $semaine = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+            $mois = array(1=>"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");
+
+            // Avec getdate()
+            $date = $jour['mday'] . " " . $mois[$jour['mon']] . " " . $jour['year'];
+            @endphp
+
+            <p>Cotonou, le <strong>{{ $date }}</strong></p>
             <p id="appreciation-texte"></p>
         </section>
+
         <section class="signatures">
             <p><strong>Abdou-Rahmann AGUEMON</strong></p>
             <p style="margin-bottom: 20px;" >Directeur Académique <span id="date"></span></p>
