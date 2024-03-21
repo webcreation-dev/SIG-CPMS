@@ -94,8 +94,6 @@ class NoteController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request->all());
-
         $classroom = Classroom::find($request->classroom_id);
 
         $type = $request->type;

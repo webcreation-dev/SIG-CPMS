@@ -74,7 +74,7 @@
                         @endif
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>Sexe</th>
+                        <th>Notations</th>
                         <th>Fiche de calcul</th>
                         @can('access-manager')
                             <th>Relevé de notes</th>
@@ -98,7 +98,12 @@
 
                                 <td>{{$student->lastname}}</td>
                                 <td>{{$firstname[0]}}</td>
-                                <td>{{$student->sexe}}</td>
+                                <td>
+                                    <a  href="{{route('students.create',['student_id' => $student->id ])}}"
+                                            title="Noter l'etudiant" >
+                                        <span class="badge badge-primary"><i class="fa fa-pencil"></i> Noter  </span>
+                                    </a>
+                                </td>
 
                                 <td>
                                     <a href="{{route('fiche.calcul', ['student_id' => $student->id ])}}" target="_blank" title="Voir la fiche de calcul">

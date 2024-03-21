@@ -15,34 +15,35 @@ class NotesLivewireController extends Component
 
     public function render()
     {
-        if ($this->type == 'ue') {
-                $note = Note::where('teaching_unit_id', $this->ue->id)->first();
+        $students = Student::all();
+
+        foreach ($students as $student) {
+
+            if ($this->type == 'ue') {
+
+                $note = Note::where('student_id', $student->id)
+                    ->where('teaching_unit_id', $this->ue->id)->first();
 
                 if(!$note) {
-
-                    $students = Student::all();
-                    foreach ($students as $student) {
-                        Note::create([
-                            'student_id' => $student->id,
-                            'teaching_unit_id' => $this->ue->id,
-                        ]);
-                    }
+                    Note::create([
+                        'student_id' => $student->id,
+                        'teaching_unit_id' => $this->ue->id,
+                    ]);
                 }
-            $notes = Note::where('teaching_unit_id', $this->ue->id)->get();
-        }else {
-            $note = Note::where('element_teaching_unit_id', $this->ue->id)->first();
+                $notes = Note::where('teaching_unit_id', $this->ue->id)->get();
+            }else {
 
-            if(!$note) {
-                $students = Student::all();
-                foreach ($students as $student) {
+                $note = Note::where('student_id', $student->id)
+                ->where('teaching_unit_id', $this->ue->id)->first();
+
+                if(!$note) {
                     Note::create([
                         'student_id' => $student->id,
                         'element_teaching_unit_id' => $this->ue->id,
                     ]);
                 }
+                $notes = Note::where('element_teaching_unit_id', $this->ue->id)->get();
             }
-
-            $notes = Note::where('element_teaching_unit_id', $this->ue->id)->get();
 
         }
 

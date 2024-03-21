@@ -84,6 +84,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('students', StudentController::class);
     Route::get('students_by_parent', [StudentController::class,'studentsByParent'])->name('students.by.parent');
+    Route::post('notes_by_student', [StudentController::class,'notesByStudent'])->name('notes.by.student');
+
 
     Route::resource('notes', NoteController::class);
     Route::get('/releve_de_notes', [NoteController::class, 'releveNotes'])->name('releve.notes');

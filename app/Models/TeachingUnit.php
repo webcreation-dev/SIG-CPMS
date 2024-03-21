@@ -40,4 +40,8 @@ class TeachingUnit extends Model
         "Humanité 1C (FHS)" => "Humanité 1C (Formation Humaine et Sociale)"
     ];
 
+    public function elementTeachingUnits() {
+        return $this->hasMany(ElementTeachingUnit::class);
+    }
+
 }

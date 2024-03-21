@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classroom;
+use App\Models\Note;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,9 +40,11 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $student = Student::find($request->student_id);
+
+        return view('admin.notes.notes_by_student', compact('student'));
     }
 
     /**
@@ -140,5 +143,52 @@ class StudentController extends Controller
         $classroom_id = $student->classroom_id;
         $student->delete();
         return redirect()->route('students.index',['classroom_id' => $classroom_id])->with('message','Elève supprimé avec succès');
+    }
+
+
+    public function notesByStudent(Request $request)
+    {
+
+        $student = Student::find($request->student_id);
+
+        $ues = $request->ues;
+        $types = $request->types;
+
+        $i1_points = $request->i1_points;
+        $i2_points = $request->i2_points;
+        $d1_points = $request->d1_points;
+        $d2_points = $request->d2_points;
+        $e_points = $request->e_points;
+        $moy_inter = $request->moy_inter;
+        $moy_dev = $request->moy_dev;
+        $moy_ecu = $request->moy_ecu;
+
+
+        foreach($ues as $key => $ue) {
+
+            if($types[$key] == 'ue') {
+                $note = Note::where('student_id', $student->id)
+                ->where('teaching_unit_id', $ue)
+                ->first();
+            }else {
+                $note = Note::where('student_id', $student->id)
+                ->where('element_teaching_unit_id', $ue)
+                ->first();
+            }
+
+            $note->i1_points = $i1_points[$key] ?? null;
+            $note->i2_points = $i2_points[$key] ?? null;
+            $note->d1_points = $d1_points[$key] ?? null;
+            $note->d2_points = $d2_points[$key] ?? null;
+            $note->e_points = $e_points[$key] ?? null;
+            $note->moy_inter = $moy_inter[$key] ?? null;
+            $note->moy_dev = $moy_dev[$key] ?? null;
+            $note->moy_ecu = $moy_ecu[$key] ?? null;
+
+            $note->save();
+        }
+
+        return redirect(route('students.create',['student_id' => $student->id]))->with('message','Notes ajouté avec succès');
+
     }
 }
