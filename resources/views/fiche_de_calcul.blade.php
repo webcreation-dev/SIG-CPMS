@@ -103,8 +103,8 @@
                     @endphp
 
                     <tr>
-                        <td style="background-color: #ccc; border-left: none !important;"><strong>{{$ue->name}}</strong></td>
-                        <td style="background-color: #ccc; border-left: none !important;">{{$ue->credit}}</td>
+                        <td style="background-color: #ccc; "><strong>{{$ue->name}}</strong></td>
+                        <td style="background-color: #ccc; ">{{$ue->credit}}</td>
 
                         <td colspan="8"></td>
 
