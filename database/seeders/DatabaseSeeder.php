@@ -57,10 +57,20 @@ class DatabaseSeeder extends Seeder
             'role_id' => 3,
         ]);
 
+        User::create([
+            'name' => 'Seeder Tester',
+            'email' => 'visiteur@cpms.com',
+            'avatar' => 'avatar.png',
+            'email_verified_at' => now(),
+            'password' => bcrypt('visiteur_cpms@2024*'),
+            'remember_token' => Str::random(10),
+            'role_id' => 2,
+        ]);
+
         Classroom::create([
-                'name' => '1ère Année',
-                'total_students' => 31,
-                'total_teaching_units' => 10,
+            'name' => '1ère Année',
+            'total_students' => 31,
+            'total_teaching_units' => 10,
         ]);
 
         $uesData = [
@@ -88,7 +98,7 @@ class DatabaseSeeder extends Seeder
             3 => [
                 'ue' => [
                     [
-                        'name' => 'SIN 1',
+                        'name' => 'SNI 1',
                         'credit' => 6,
                     ],
                 ],
