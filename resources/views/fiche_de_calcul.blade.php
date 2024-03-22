@@ -96,7 +96,10 @@
 
                         $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
                         $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
+                        // $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
+
                         $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
+                        $moy_ue_formatted = number_format($moy_ue, 3, '.', '');
 
                         $moy_generale += $moy_ue;
 
@@ -134,7 +137,7 @@
 
             <tr>
                 <td style="background-color: #ccc;" colspan="10"><strong> Moyenne générale : </strong></td>
-                <td  style="background-color: #ccc;" ><strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong></td>
+                <td  style="background-color: #ccc;" ><strong>{{ number_format(($moy_generale / $count_ues), 3, '.', '');  }}</strong></td>
                 <td style="background-color: #ccc;"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></td>
             </tr>
 
