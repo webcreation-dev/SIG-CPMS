@@ -67,10 +67,10 @@
                                 <td>
                                     <input name="i1_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'i1_points[]', 'i2_points[]')"
 
-                                    @if($note->i1_points != null) style="color:black; border: solid 0.5px green;" @endif
+                                    @if($note->i1_points != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif
                                     value="{{$note->i1_points}}" step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="I1">
                                 </td>
-                                <td><input name="i2_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'i2_points[]', 'd1_points[]')"  @if($note->i2_points != null) style="color:black; border: solid 0.5px green;" @endif value="{{$note->i2_points}}"" step=".25" min="0" max="20" class="form-control" type="number" placeholder="I2"></td>
+                                <td><input name="i2_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'i2_points[]', 'd1_points[]')"  @if($note->i2_points != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->i2_points}}" step=".25" min="0" max="20" class="form-control" type="number" placeholder="I2"></td>
                                 <td class="moyenne" >
                                     <input step="0.001" min="0" max="20" class="form-control input-number" type="number">
                                 </td>
@@ -79,14 +79,14 @@
                                     <input name="moy_inter[]" step="0.001" class="form-control" type="number">
                                 </td>
 
-                                <td><input name="d1_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'd1_points[]', 'd2_points[]')"@if($note->d1_points != null) style="color:black; border: solid 0.5px green;" @endif value="{{$note->d1_points }}" step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="D1"></td>
-                                <td><input name="d2_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'd2_points[]', 'e_points[]')" @if($note->d2_points != null) style="color:black; border: solid 0.5px green;" @endif value="{{$note->d2_points}}" step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="D2"></td>
+                                <td><input name="d1_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'd1_points[]', 'd2_points[]')"@if($note->d1_points != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->d1_points }}" step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="D1"></td>
+                                <td><input name="d2_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'd2_points[]', 'e_points[]')" @if($note->d2_points != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->d2_points}}" step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="D2"></td>
                                 <td class="moyenned"></td>
                                 <td style="display: none;">
                                     <input name="moy_dev[]" step="0.001" class="form-control" type="number">
                                 </td>
 
-                                <td><input name="e_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'e_points[]', 'i1_points[]')" @if($note->e_points != null) style="color:black; border: solid 0.5px green;" @endif value="{{$note->e_points }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Exam"></td>
+                                <td><input name="e_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'e_points[]', 'i1_points[]')" @if($note->e_points != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->e_points }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Exam"></td>
                                 <td class="moy_ecu"></td>
                                 <td style="display: none;">
                                     <input name="moy_ecu[]" step="0.001" class="form-control" type="number">
@@ -272,8 +272,10 @@
                     var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.3)/2);
                 }
             }else {
-                if(d1Value != '' || d2Value != '') {
+                if(d1Value != '' && d2Value != '') {
                     var moy = (e * 0.5) + (((d1 + d2) * 0.5)/2);
+                }else {
+                    var moy = e;
                 }
             }
             moyenneECU.textContent = moy.toFixed(2);
