@@ -96,10 +96,8 @@
 
                         $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
                         $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
-                        // $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
 
                         $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
-                        $moy_ue_formatted = number_format($moy_ue, 3, '.', '');
 
                         $moy_generale += $moy_ue;
 
