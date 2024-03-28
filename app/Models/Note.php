@@ -17,7 +17,9 @@ class Note extends Model
         'i2_points',
         'd1_points',
         'd2_points',
-        'e_points'
+        'e_points',
+        'moy_catch_up',
+        'freq_catch_up'
     ];
 
 

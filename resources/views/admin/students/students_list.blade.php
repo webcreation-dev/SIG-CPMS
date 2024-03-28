@@ -51,14 +51,14 @@
         <div class="custom-container">
           <div class="row">
             <div class="col-12">
-                @can('access-manger')
+                @can('access-manager')
                     <div class="row">
                         <div class="col-md-3" style="text-align: right;">
                             <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter un étudiant</button>
                         </div>
                         <div class="col-md-6"></div>
                         <div class="col-md-3">
-                            <a href="{{route('fiche.calcul.global')}}" target="_blank"><button class="btn btn-md btn-warning mb-15 float-end" type="button" ><i class="fa fa-file-pdf-o"></i> Fiche de calcul global</button></a>
+                            <a href="{{route('fiche.calcul.global')}}" style="pointer-events: none; opacity:0.5;" target="_blank"><button class="btn btn-md btn-warning mb-15 float-end" type="button" ><i class="fa fa-file-pdf-o"></i> Fiche de calcul global</button></a>
                         </div>
                     </div>
                 @endcan

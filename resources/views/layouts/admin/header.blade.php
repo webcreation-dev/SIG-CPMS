@@ -3,13 +3,13 @@
         <div class="header-contian d-flex justify-content-between align-items-center">
           <div class="header-left d-flex align-items-center">
             <div class="sidebar-action navicon-wrap"><i data-feather="menu"></i></div>
-            <div class="search-bar">
+            {{-- <div class="search-bar">
               <div class="form-group mb-0">
                 <div class="input-group">
                   <input class="form-control" type="text" value="" placeholder="Rechercher ici....."><span class="input-group-text"><i data-feather="search"></i></span>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
           <div class="header-right d-flex align-items-center justify-content-end">
             <ul class="nav-iconlist">

@@ -163,6 +163,9 @@ class StudentController extends Controller
         $moy_dev = $request->moy_dev;
         $moy_ecu = $request->moy_ecu;
 
+        $moy_catch_up = $request->moy_catch_up;
+        $freq_catch_up = $request->freq_catch_up;
+
 
         foreach($ues as $key => $ue) {
 
@@ -184,6 +187,9 @@ class StudentController extends Controller
             $note->moy_inter = $moy_inter[$key] ?? null;
             $note->moy_dev = $moy_dev[$key] ?? null;
             $note->moy_ecu = $moy_ecu[$key] ?? null;
+            
+            $note->moy_catch_up = $moy_catch_up[$key] ?? null;
+            $note->freq_catch_up = $freq_catch_up[$key] ?? null;
 
             $note->save();
         }

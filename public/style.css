@@ -5,6 +5,7 @@ table {
 /* Éviter les sauts de page avant le premier tableau sur la première page */
 table:first-of-type {
     page-break-before: auto;
+    margin: 0 auto;
 }
 
 .column {

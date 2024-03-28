@@ -31,7 +31,7 @@
       <div class="custom-container">
         <div class="row">
           <div class="col-12">
-            <div class="card">
+            <div class="card" style="width: 1200px;">
               <div class="card-body">
 
                 <form action="{{route('notes.by.student')}}" method="POST">
@@ -52,6 +52,8 @@
                       <th>MOY DEV</th>
                       <th>Examen</th>
                       <th>MOY ECUE</th>
+                      <th>Rattrap.</th>
+                      <th>Freq</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -93,11 +95,15 @@
                                     <input name="moy_dev[]" step="0.001" class="form-control" type="number">
                                 </td>
 
-                                <td><input name="e_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'e_points[]', 'i1_points[]')" @if($note->e_points != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->e_points }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Exam"></td>
+                                <td><input name="e_points[]" oninput="updateAverage(this); moveToNextInput(event, {{$index}}, 'e_points[]', 'i1_points[]')" @if($note->e_points != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->e_points }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Examen"></td>
                                 <td class="moy_ecu"></td>
                                 <td style="display: none;">
                                     <input name="moy_ecu[]" step="0.001" class="form-control" type="number">
                                 </td>
+
+                                <td><input name="moy_catch_up[]" @if($note->moy_catch_up != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->moy_catch_up }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Rattrapage"></td>
+                                <td><input name="freq_catch_up[]" @if($note->freq_catch_up != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->freq_catch_up }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Frequence"></td>
+
                             </tr>
                         @endforeach
 

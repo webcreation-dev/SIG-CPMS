@@ -20,6 +20,7 @@
     }
 
     function updateAverage(input) {
+
         // Assuming the structure of your table, you can use DOM traversal to find related elements
         var row = input.closest('tr');
         var i1Input = row.querySelector('[name="i1_points[]"]');
@@ -56,80 +57,60 @@
         var eValue = eInput.value.trim();
 
 
-        // Moy Inter
+
         if (i1Value === '' || i2Value === '') {
+            moyenneCell.textContent = '';
+            moyenneECU.textContent = '';
 
             if (d1Value === '' || d2Value === '') {
                 moyenneDCell.textContent = '';
                 moyenneECU.textContent = '';
+
+                if(eValue != '') {
+                    var moy = e;
+                    moyenneECU.textContent = moy.toFixed(2);
+                    moyEcu.value = moy.toFixed(3);
+                }
+
             } else {
                 var averaged = ((d1 + d2) * 0.5)/2;
-                moyenneDCell.textContent = averaged.toFixed(3); // Update the moyenne cell
+                moyenneDCell.textContent = averaged.toFixed(2);
                 moyDev.value = averaged.toFixed(3);
 
                 if(eValue != '') {
                     var moy = (e * 0.5) + (((d1 + d2) * 0.5)/2);
-                    moyenneECU.textContent = moy.toFixed(3);
+                    moyenneECU.textContent = moy.toFixed(2);
+                    moyEcu.value = moy.toFixed(3);
+                }else {
+                    var moy = ((d1 + d2)/2);
+
+                    moyenneDCell.textContent = moy.toFixed(2);
+                    moyDev.value = moy.toFixed(3);
+
+                    moyenneECU.textContent = moy.toFixed(2);
                     moyEcu.value = moy.toFixed(3);
                 }
-
             }
-
-            moyenneCell.textContent = '';
-            moyenneECU.textContent = '';
         } else {
+
             var average = ((i1 + i2) * 0.2) / 2;
-            moyenneCell.textContent = average.toFixed(3); // Update the moyenne cell
+            moyenneCell.textContent = average.toFixed(2);
             moyInter.value = average.toFixed(3);
-        }
 
-        // Moy Devoir
-        if (d1Value === '' || d2Value === '') {
-            moyenneDCell.textContent = '';
-            moyenneECU.textContent = '';
-        } else {
-            if (i1Value === '' || i2Value === '') {
-                var averaged = ((d1 + d2) * 0.5)/2;
+            if (d1Value != '' && d2Value != '') {
+
+                var averaged = ((d1 + d2) * 0.3)/2;
+                moyenneDCell.textContent = averaged.toFixed(2);
+                moyDev.value = averaged.toFixed(3);
 
                 if(eValue != '') {
-                    var moy = (e * 0.5) + (((d1 + d2) * 0.5)/2);
-                    moyenneECU.textContent = moy.toFixed(3);
-                    moyEcu.value = moy.toFixed(3);
-                }
-            }else {
-                var averaged = ((d1 + d2) * 0.3)/2;
-                if(eValue != '' && d1Value != '' && d2Value != '' && i1Value != '' && i2Value != '') {
-                    var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.5)/2);
-                    moyenneECU.textContent = moy.toFixed(3);
-                    moyEcu.value = moy.toFixed(3);
-                }
-            }
-
-            moyenneDCell.textContent = averaged.toFixed(3); // Update the moyenne cell
-            moyDev.value = averaged.toFixed(3);
-        }
-
-        // Moy ECU
-
-        if (eValue === '') {
-
-            moyenneECU.textContent = '';
-
-        } else {
-
-            if(i1Value != '' || i2Value != '') {
-                if(d1Value != '' && d2Value != '' && i1Value != '' && i2Value != '') {
                     var moy = (e * 0.5) + (((i1 + i2) * 0.2) / 2) + (((d1 + d2) * 0.3)/2);
-                }
-            }else {
-                if(d1Value != '' && d2Value != '') {
-                    var moy = (e * 0.5) + (((d1 + d2) * 0.5)/2);
+                    moyenneECU.textContent = moy.toFixed(2);
+                    moyEcu.value = moy.toFixed(3);
                 }else {
-                    var moy = e;
+                    moyenneECU.textContent = '';
                 }
             }
-            moyenneECU.textContent = moy.toFixed(3);
-            moyEcu.value = moy.toFixed(3);
         }
 
     }

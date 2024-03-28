@@ -15,7 +15,7 @@
         <div class="column left" style="width: 10% !important;">
         </div>
         <div class="column middle" style="width: 80% !important; text-align: left;">
-            <p style="text-align: center;"><strong> <span style="border-top: 1px solid black; padding-top: 5px;" >CPMS /</span> FICHE DE CALCUL DE MOYENNES - 1è SEMESTRE</strong></p>
+            <p style="text-align: center;"><strong> <span >CPMS /</span> FICHE DE CALCUL DE MOYENNES - 1è SEMESTRE</strong></p>
             <p style="text-align: center;">1è Année / 2023-2024</p>
         </div>
         <div class="column right" style="width: 10% !important;">
@@ -31,7 +31,7 @@
                     $student = App\Models\Student::find($studentId);
                 @endphp
                 <tr>
-                    <th colspan="12"> @if($student->sexe =='M') Mr @else Mlle @endif {{$student->lastname}} {{$student->firstname}}</th>
+                    <th colspan="13"> @if($student->sexe =='M') Mr @else Mlle @endif {{$student->lastname}} {{$student->firstname}}</th>
                 </tr>
                 <tr>
                     <th rowspan="2">Unités d'Enseignement UE </th>
@@ -39,7 +39,7 @@
                     <th colspan="3">Interrogations </th>
                     <th colspan="3">Devoirs Surveillés</th>
                     <th rowspan="2">Exam (50%)</th>
-                    <th colspan="2"> Moy/20 </th>
+                    <th colspan="3"> Moy/20 </th>
                     <th rowspan="2">Appr</th>
                 </tr>
                 <tr>
@@ -50,6 +50,7 @@
                     <th>D2</th>
                     <th> Moy Dev (30%) </th>
                     <th>M/ECU</th>
+                    <th>Rattrap.</th>
                     <th>M/UE</th>
                 </tr>
             </thead>
@@ -69,7 +70,7 @@
                     @php
                         $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
 
-                        $moy_generale += $note?->moy_ecu;
+                        $moy_generale += is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up;
                     @endphp
 
 
@@ -78,13 +79,14 @@
                          <td style="background-color: #ccc;">{{$ue->credit}}</td>
                         <td>{{$note?->i1_points}}</td>
                         <td>{{$note?->i2_points}}</td>
-                        <td><strong>{{$note?->moy_inter}}</strong></td>
+                        <td><strong>{{ is_null($note->moy_inter) ? '' : number_format($note?->moy_inter, 2, '.', '');  }} </strong></td>
                         <td>{{$note?->d1_points}}</td>
                         <td>{{$note?->d2_points}}</td>
-                        <td><strong>{{$note?->moy_dev}}</strong></td>
+                        <td><strong>{{ is_null($note->moy_dev) ? '' : number_format($note?->moy_dev, 2, '.', '');  }}</strong></td>
                         <td>{{$note?->e_points}}</td>
-                        <td><strong>{{$note?->moy_ecu}}</strong></td>
-                        <td><strong>{{$note?->moy_ecu}}</strong></td>
+                        <td><strong>{{ is_null($note->moy_ecu) ? '' : rtrim(rtrim(number_format($note?->moy_ecu, 3, '.', ''), '0'), '.') }}</strong></td>
+                        <td><strong>{{ is_null($note->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 3, '.', ''), '0'), '.') }}</strong></td>
+                        <td><strong>{{ rtrim(rtrim(number_format((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up), 3, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>{{App\Models\Note::getAppreciation($note?->moy_ecu)}}</strong></td>
                     </tr>
 
@@ -97,7 +99,10 @@
                         $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
                         $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
 
-                        $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
+                        // $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
+                        $moy_ue = $notes->sum(function ($note) {
+                            return $note->moy_catch_up !== null ? $note->moy_catch_up : $note->moy_ecu;
+                        }) / $ecues_count;
 
                         $moy_generale += $moy_ue;
 
@@ -107,9 +112,9 @@
                         <td style="background-color: #ccc; "><strong>{{$ue->name}}</strong></td>
                         <td style="background-color: #ccc; ">{{$ue->credit}}</td>
 
-                        <td colspan="8"></td>
+                        <td colspan="9"></td>
 
-                        <td rowspan="{{$ecues_count + 1}}" style="vertical-align: top; "><strong> {{ number_format($moy_ue, 3, '.', '');  }} </strong></td>
+                        <td rowspan="{{$ecues_count + 1}}" style="vertical-align: top; "><strong>{{ rtrim(rtrim(number_format($moy_ue, 3, '.', ''), '0'), '.') }}</strong></td>
                         <td rowspan="{{$ecues_count + 1}}" ><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong></td>
                     </tr>
                     @foreach ($ecues as $ecue)
@@ -121,12 +126,13 @@
                             <td>{{$ecue->credit}}</td>
                             <td>{{$note?->i1_points}}</td>
                             <td>{{$note?->i2_points}}</td>
-                            <td><strong>{{$note?->moy_inter}}</strong></td>
+                            <td><strong>{{ is_null($note->moy_inter) ? '' : number_format($note?->moy_inter, 2, '.', '');  }}</strong></td>
                             <td>{{$note?->d1_points}}</td>
                             <td>{{$note?->d2_points}}</td>
-                            <td><strong>{{$note?->moy_dev}}</strong></td>
+                            <td><strong>{{ is_null($note->moy_dev) ? '' : number_format($note?->moy_dev, 2, '.', '');  }}</strong></td>
                             <td>{{$note?->e_points}}</td>
-                            <td><strong>{{$note?->moy_ecu}}</strong></td>
+                            <td><strong>{{ is_null($note->moy_ecu) ? '' : rtrim(rtrim(number_format($note?->moy_ecu, 3, '.', ''), '0'), '.') }}</strong></td>
+                            <td><strong>{{ is_null($note->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 3, '.', ''), '0'), '.') }}</strong></td>
                         </tr>
                     @endforeach
 
@@ -134,7 +140,7 @@
             @endforeach
 
             <tr>
-                <td style="background-color: #ccc;" colspan="10"><strong> Moyenne générale : </strong></td>
+                <td style="background-color: #ccc;" colspan="11"><strong> Moyenne générale : </strong></td>
                 <td  style="background-color: #ccc;" ><strong>{{ number_format(($moy_generale / $count_ues), 3, '.', '');  }}</strong></td>
                 <td style="background-color: #ccc;"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></td>
             </tr>

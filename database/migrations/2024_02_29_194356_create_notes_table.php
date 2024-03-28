@@ -28,6 +28,10 @@ return new class extends Migration
             $table->string('moy_dev')->nullable();
             $table->string('moy_ecu')->nullable();
 
+            $table->string('moy_catch_up')->nullable();
+            $table->string('freq_catch_up')->nullable();
+
+
 
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
