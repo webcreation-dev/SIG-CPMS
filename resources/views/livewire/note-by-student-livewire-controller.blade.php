@@ -101,8 +101,8 @@
                                     <input name="moy_ecu[]" step="0.001" class="form-control" type="number">
                                 </td>
 
-                                <td><input name="moy_catch_up[]" @if($note->moy_catch_up != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->moy_catch_up }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Rattrapage"></td>
-                                <td><input name="freq_catch_up[]" @if($note->freq_catch_up != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->freq_catch_up }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Frequence"></td>
+                                <td><input name="moy_catch_up[]" oninput="moveToNextInput(event, {{$index}}, 'moy_catch_up[]', 'freq_catch_up[]')" @if($note->moy_catch_up != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->moy_catch_up }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Rattrapage"></td>
+                                <td><input name="freq_catch_up[]" oninput="moveToNextInput(event, {{$index}}, 'freq_catch_up[]', 'moy_catch_up[]')" @if($note->freq_catch_up != null) style="color:black; border: solid 0.5px green;" @else style="color:black;" @endif value="{{$note->freq_catch_up }}"  step=".25" min="0" max="20" class="form-control input-number" type="number" placeholder="Frequence"></td>
 
                             </tr>
                         @endforeach

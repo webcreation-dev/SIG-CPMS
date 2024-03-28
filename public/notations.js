@@ -5,16 +5,16 @@
         var current_inputs = document.querySelectorAll(`input[name="${inputName}"]`);
 
 
-        // if (index < inputs.length - 1) {
-            if (current_inputs[index].value.length === 2) {
+        if (current_inputs[index].value.length === 2) {
 
-                if (nextInputName === 'i1_points[]') {
-                    inputs[index + 1].focus();
-                }else {
-                    inputs[index].focus();
-                }
+            if (nextInputName === 'i1_points[]') {
+                inputs[index + 1].focus();
+            } else if (nextInputName === 'moy_catch_up[]') {
+                inputs[index + 1].focus();
+            } else {
+                inputs[index].focus();
             }
-        // }
+        }
 
         event.preventDefault();
     }
