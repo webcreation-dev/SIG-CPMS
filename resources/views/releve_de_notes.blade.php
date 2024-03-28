@@ -17,7 +17,7 @@
 <body>
 
 
-    <div class="row">
+    <div class="row" style="margin: auto;">
         <div class="column left">
             <img src="logo.png" alt="">
         </div>
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin: auto;">
         <div class="column left">
         </div>
         <div class="column middle">
@@ -45,13 +45,15 @@
                     $student = App\Models\Student::find($studentId);
                 @endphp
 
-    <strong style="text-decoration: underline;text-align: start; margin-bottom:190px !important;" >Nom et Prénoms (s)</strong> <strong>:</strong> {{$student->lastname}} {{$student->firstname}} <br> <br>
-    <strong style="text-decoration: underline;text-align: start;" >Lieu et Date de Naissance</strong> <strong>:</strong> {{$student->birthplace}} le {{date("d/m/Y", strtotime($student->birthday))}} <br> <br>
-    <strong style="text-decoration: underline;text-align: start;" >Sexe</strong> <strong>:</strong> {{$student->sexe}}
+    <p>
+        <strong style="text-decoration: underline;text-align: start; transform:translateY(-10px);" >Nom et Prénoms (s)</strong> <strong style="transform:translateY(-10px)">:</strong> <span style="transform:translateY(-10px)">{{$student->lastname}} {{$student->firstname}}</span> <br>
+        <strong style="text-decoration: underline;text-align: start;" >Lieu et Date de Naissance</strong> <strong>:</strong> {{$student->birthplace}} le {{date("d/m/Y", strtotime($student->birthday))}} <br>
+        <strong style="text-decoration: underline;text-align: start; transform:translateY(10px);" >Sexe</strong> <strong style="transform:translateY(10px)">:</strong>  <span style="transform:translateY(10px)">{{$student->sexe}}</span>
+    </p>
+    <br>
 
-    <br><br>
-    <main>
-        <table style="text-align: center;">
+    <main style="margin: auto;">
+        <table style="margin: auto;">
             <thead>
                 <tr>
                     <th>Unités d'Enseignement UE </th>
@@ -138,7 +140,9 @@
                             <td rowspan="{{$ecues_count}}" >{{$ue->credit}}</td>
                             <td>{{$ecue_first->name}}</td>
                             <td>{{$ecue_first->credit}}</td>
-                            <td><strong>{{ rtrim(rtrim(number_format((App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_ecu), 3, '.', ''), '0'), '.') }}</strong></td>
+                            <td><strong>
+                                {{ rtrim(rtrim(number_format(is_null((App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up)) ? (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_ecu) : (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up), 3, '.', ''), '0'), '.') }}
+                            </strong></td>
                             <td rowspan="{{$ecues_count}}"><strong>  {{ rtrim(rtrim(number_format($moy_ue, 3, '.', ''), '0'), '.') }} </strong></td>
                             <td>{{$note?->freq_catch_up}}</td>
                             <td rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td>
@@ -151,7 +155,7 @@
 
                                 <td>{{$ecue->name}}</td>
                                 <td>{{$ecue->credit}}</td>
-                                <td><strong>{{ rtrim(rtrim(number_format($note?->moy_ecu, 3, '.', ''), '0'), '.') }}</strong></td>
+                                <td><strong>{{ rtrim(rtrim(number_format( is_null($note->moy_catch_up) ? $note?->moy_ecu : $note->moy_catch_up, 3, '.', ''), '0'), '.') }}</strong></td>
                                 <td>{{$note?->freq_catch_up}}</td>
                             </tr>
                         @endforeach
@@ -173,7 +177,7 @@
                 <li id="moyenne">Nombre de crédits validés : <strong>{{$credit_validés}}</strong> </li>
                 <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li>
                 <br>
-                <li id="credits-valides" > <strong>Total d'heures d'abscence depuis le début de l'année</strong> : <strong>{{ $student->total_hours_absence  }}</strong> </li>
+                <li id="credits-valides" > <strong>Total d'heures d'abscence annuel</strong> : <strong>{{ $student->total_hours_absence  }}</strong> </li>
                 <li id="moyenne">Total d'heures d'abscence excusées : <strong>{{$student->total_hours_excused_absence }}</strong> </li>
                 <li id="credits-non-valides">Total d'heures d'abscence non excusés : <strong>{{$student->total_hours_unexcused_absence }}</strong> </li>
                 <br>
@@ -191,14 +195,13 @@
             @endphp
 
             <p>Cotonou, le <strong>{{ $date }}</strong></p>
-            <p id="appreciation-texte"></p>
-        </section>
+            <p id="appreciation-texte" style="margin-bottom: 130px;"></p>
 
-        <section class="signatures">
             <p><strong>Abdou-Rahmann AGUEMON</strong></p>
             <p style="margin-bottom: 20px;" >Directeur Académique <span id="date"></span></p>
             <p><span id="directeur-academique"></span></p>
         </section>
+
     </main>
 
 
