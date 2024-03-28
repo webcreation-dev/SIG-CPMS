@@ -26,6 +26,10 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('users')->onDelete('cascade');
 
+            $table->integer('total_hours_absence')->nullable();
+            $table->integer('total_hours_excused_absence')->nullable();
+            $table->integer('total_hours_unexcused_absence')->nullable();
+
             $table->timestamps();
         });
     }

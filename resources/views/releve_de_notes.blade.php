@@ -173,6 +173,10 @@
                 <li id="moyenne">Nombre de crédits validés : <strong>{{$credit_validés}}</strong> </li>
                 <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li>
                 <br>
+                <li id="credits-valides" > <strong>Total d'heures d'abscence depuis le début de l'année</strong> : <strong>{{ $student->total_hours_absence  }}</strong> </li>
+                <li id="moyenne">Total d'heures d'abscence excusées : <strong>{{$student->total_hours_excused_absence }}</strong> </li>
+                <li id="credits-non-valides">Total d'heures d'abscence non excusés : <strong>{{$student->total_hours_unexcused_absence }}</strong> </li>
+                <br>
                 <li>Appréciation : <span id="credits-non-valides"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></span></li>
             </ul>
         </section>

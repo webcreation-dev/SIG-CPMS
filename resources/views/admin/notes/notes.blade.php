@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     @include('layouts.admin.head')
-  <body>
+  <body class="daactive-sidebar">
       <!-- Loader Start-->
         <div class="codex-loader">
           <div class="linespinner"></div>
@@ -13,7 +13,7 @@
 
     @livewire('notes-livewire-controller', ['classroom' => $classroom, 'ue' => $ue, 'type' => $type])
 
-    
+
     @include("layouts.admin.footer")
 </body>
 </html>

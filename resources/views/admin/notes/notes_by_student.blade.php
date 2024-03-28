@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     @include('layouts.admin.head')
-  <body>
+  <body class="daactive-sidebar">
       <!-- Loader Start-->
         <div class="codex-loader">
           <div class="linespinner"></div>

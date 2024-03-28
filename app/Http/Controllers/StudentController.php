@@ -117,6 +117,9 @@ class StudentController extends Controller
             'edit_birthplace' => ['required', 'string'],
             'edit_classroom_id' => ['required', 'numeric'],
             'edit_parent_id' => ['numeric'],
+            'edit_total_hours_absence' => ['numeric'],
+            'edit_total_hours_excused_absence' => ['numeric'],
+            'edit_total_hours_unexcused_absence' => ['numeric'],
         ]);
 
         $student->update([
@@ -127,6 +130,9 @@ class StudentController extends Controller
             'birthplace' => $request->edit_birthplace,
             'classroom_id' => $request->edit_classroom_id,
             'parent_id' => $request->edit_parent_id,
+            'total_hours_absence' => $request->edit_total_hours_absence,
+            'total_hours_excused_absence' => $request->edit_total_hours_excused_absence,
+            'total_hours_unexcused_absence' => $request->edit_total_hours_unexcused_absence,
         ]);
 
         return redirect()->route('students.index',['classroom_id' => $request->edit_classroom_id])->with('message','Elève modifié avec succès');
@@ -187,7 +193,7 @@ class StudentController extends Controller
             $note->moy_inter = $moy_inter[$key] ?? null;
             $note->moy_dev = $moy_dev[$key] ?? null;
             $note->moy_ecu = $moy_ecu[$key] ?? null;
-            
+
             $note->moy_catch_up = $moy_catch_up[$key] ?? null;
             $note->freq_catch_up = $freq_catch_up[$key] ?? null;
 

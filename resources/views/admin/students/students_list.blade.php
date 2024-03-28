@@ -124,7 +124,12 @@
                                             view-student-firstname="{{$student->firstname}}"
                                             view-student-sexe="{{$student->sexe}}"
                                             view-student-birthday="{{$student->birthday}}"
-                                            view-student-birthplace="{{$student->birthplace}}">
+                                            view-student-birthplace="{{$student->birthplace}}"
+                                            view-student-total-hours-absence = "{{$student->total_hours_absence}}"
+                                            view-student-total-hours-excused-absence = "{{$student->total_hours_excused_absence}}"
+                                            view-student-total-hours-unexcused-absence = "{{$student->total_hours_unexcused_absence}}"
+
+                                            >
 
                                             <span class="badge badge-info"></i> <i class="ti-eye"></i> </span>
                                         </a>
@@ -135,6 +140,9 @@
                                             data-student-birthday="{{$student->birthday}}"
                                             data-student-birthplace="{{$student->birthplace}}"
                                             data-student-id="{{$student->id}}"
+                                            data-student-total-hours-absence = "{{$student->total_hours_absence}}"
+                                            data-student-total-hours-excused-absence = "{{$student->total_hours_excused_absence}}"
+                                            data-student-total-hours-unexcused-absence = "{{$student->total_hours_unexcused_absence}}"
                                             @if(isset($classroom_id)) data-classroom-id="{{$classroom_id}}" @else data-classroom-id="{{$student->classroom->id}}" @endif
                                             >
                                             <span class="badge badge-warning"></i> <i class="ti-pencil"></i> </span>
@@ -282,6 +290,22 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-label">Total Abscenses</label>
+                    <input name="edit_total_hours_absence" required class="form-control" type="number" placeholder="Total d'heures d'absence">
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Abscences non excusés</label>
+                        <input name="edit_total_hours_excused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence excusées">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Abscenses excusés</label>
+                        <input name="edit_total_hours_unexcused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence non excusées">
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-success btn-md">MODIFIER</button>
 
               </form>
@@ -315,13 +339,32 @@
                         <label class="form-label">Sexe</label>
                         <input disabled name="view_sexe" required class="form-control" type="text" placeholder="Nom de l'étudiant">
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Lieu de naissance</label>
-                        <input disabled name="view_birthplace" required class="form-control" type="text" required value="Cotonou">
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Lieu de naissance</label>
+                            <input disabled name="view_birthplace" required class="form-control" type="text" required value="Cotonou">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Date de naissance</label>
+                            <input disabled name="view_birthday" required class="form-control" type="date" required value="2023-03-13">
+                        </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="form-label">Date de naissance</label>
-                        <input disabled name="view_birthday" required class="form-control" type="date" required value="2023-03-13">
+                        <label class="form-label">Total Abscenses</label>
+                        <input name="view_total_hours_absence" required class="form-control" type="number" placeholder="Total d'heures d'absence">
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Abscences non excusés</label>
+                            <input disabled name="view_total_hours_excused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence excusées">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Abscenses excusés</label>
+                            <input disabled name="view_total_hours_unexcused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence non excusées">
+                        </div>
                     </div>
 
 
@@ -352,7 +395,9 @@
                     var studentSexe = button.getAttribute('data-student-sexe');
                     var studentBirthday = button.getAttribute('data-student-birthday');
                     var studentBirthplace = button.getAttribute('data-student-birthplace');
-                    var studentBirthplace = button.getAttribute('data-student-birthplace');
+                    var studentTotalHoursAbsence = button.getAttribute('data-student-total-hours-absence');
+                    var studentTotalHoursExcusedAbsence = button.getAttribute('data-student-total-hours-excused-absence');
+                    var studentTotalHoursUnexcusedAbsence = button.getAttribute('data-student-total-hours-unexcused-absence');
                     var studentId = button.getAttribute('data-student-id');
                     var studentClassroomId = button.getAttribute('data-classroom-id');
 
@@ -368,6 +413,9 @@
                     document.querySelector('input[name="edit_sexe"]').value = studentSexe;
                     document.querySelector('input[name="edit_birthday"]').value = studentBirthday;
                     document.querySelector('input[name="edit_birthplace"]').value = studentBirthplace;
+                    document.querySelector('input[name="edit_total_hours_absence"]').value = studentTotalHoursAbsence;
+                    document.querySelector('input[name="edit_total_hours_excused_absence"]').value = studentTotalHoursExcusedAbsence;
+                    document.querySelector('input[name="edit_total_hours_unexcused_absence"]').value = studentTotalHoursUnexcusedAbsence;
                     document.querySelector('input[name="edit_classroom_id"]').value = studentClassroomId;
 
                 });
@@ -410,6 +458,9 @@
                     var viewstudentSexe = button.getAttribute('view-student-sexe');
                     var viewstudentBirthday = button.getAttribute('view-student-birthday');
                     var viewstudentBirthplace = button.getAttribute('view-student-birthplace');
+                    var viewstudentTotalHoursAbsence = button.getAttribute('view-student-total-hours-absence');
+                    var viewstudentTotalHoursExcusedAbsence = button.getAttribute('view-student-total-hours-excused-absence');
+                    var viewstudentTotalHoursUnexcusedAbsence = button.getAttribute('view-student-total-hours-unexcused-absence');
 
                     // Remplissez les champs du formulaire dans le modal avec ces données
                     document.querySelector('input[name="view_lastname"]').value = viewstudentlastName;
@@ -417,6 +468,9 @@
                     document.querySelector('input[name="view_sexe"]').value = viewstudentSexe;
                     document.querySelector('input[name="view_birthday"]').value = viewstudentBirthday;
                     document.querySelector('input[name="view_birthplace"]').value = viewstudentBirthplace;
+                    document.querySelector('input[name="view_total_hours_absence"]').value = viewstudentTotalHoursAbsence;
+                    document.querySelector('input[name="view_total_hours_excused_absence"]').value = viewstudentTotalHoursExcusedAbsence;
+                    document.querySelector('input[name="view_total_hours_unexcused_absence"]').value = viewstudentTotalHoursUnexcusedAbsence;
                 });
             });
 

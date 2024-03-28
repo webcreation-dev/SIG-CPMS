@@ -16,7 +16,10 @@ class Student extends Model
         'birthday',
         'birthplace',
         'classroom_id',
-        'parent_id'
+        'parent_id',
+        'total_hours_absence',
+        'total_hours_excused_absence',
+        'total_hours_unexcused_absence',
     ];
 
     public function classroom()
