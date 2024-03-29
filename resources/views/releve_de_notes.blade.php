@@ -47,7 +47,7 @@
 
     <p>
         <strong style="text-decoration: underline;text-align: start; transform:translateY(-10px);" >Nom et Prénoms (s)</strong> <strong style="transform:translateY(-10px)">:</strong> <span style="transform:translateY(-10px)">{{$student->lastname}} {{$student->firstname}}</span> <br>
-        <strong style="text-decoration: underline;text-align: start;" >Lieu et Date de Naissance</strong> <strong>:</strong> {{$student->birthplace}} le {{date("d/m/Y", strtotime($student->birthday))}} <br>
+        <strong style="text-decoration: underline;text-align: start;" >Date et Lieu de Naissance</strong> <strong>:</strong> {{date("d/m/Y", strtotime($student->birthday))}} à {{$student->birthplace}} <br>
         <strong style="text-decoration: underline;text-align: start; transform:translateY(10px);" >Sexe</strong> <strong style="transform:translateY(10px)">:</strong>  <span style="transform:translateY(10px)">{{$student->sexe}}</span>
     </p>
     <br>
