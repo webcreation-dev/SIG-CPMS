@@ -140,7 +140,7 @@
                             <td style="text-align: center;" rowspan="{{$ecues_count}}" >{{$ue->credit}}</td>
                             <td>{{$ecue_first->name}}</td>
                             <td style="text-align: center;">{{$ecue_first->credit}}</td>
-                            <td><strong>
+                            <td style="text-align: center;"><strong>
                                 {{ rtrim(rtrim(number_format(is_null((App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up)) ? (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_ecu) : (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up), 3, '.', ''), '0'), '.') }}
                             </strong></td>
                             <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>  {{ rtrim(rtrim(number_format($moy_ue, 3, '.', ''), '0'), '.') }} </strong></td>
