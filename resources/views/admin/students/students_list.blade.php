@@ -297,7 +297,7 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="form-label">Abscences non excusés</label>
+                        <label class="form-label">absences non excusés</label>
                         <input name="edit_total_hours_excused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence excusées">
                     </div>
                     <div class="form-group col-md-6">
@@ -358,7 +358,7 @@
 
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="form-label">Abscences non excusés</label>
+                            <label class="form-label">absences non excusés</label>
                             <input disabled name="view_total_hours_excused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence excusées">
                         </div>
                         <div class="form-group col-md-6">
