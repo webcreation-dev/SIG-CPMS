@@ -291,7 +291,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Total Abscenses</label>
+                    <label class="form-label">Total Absenses</label>
                     <input name="edit_total_hours_absence" required class="form-control" type="number" placeholder="Total d'heures d'absence">
                 </div>
 
@@ -301,7 +301,7 @@
                         <input name="edit_total_hours_excused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence excusées">
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="form-label">Abscenses excusés</label>
+                        <label class="form-label">Absenses excusés</label>
                         <input name="edit_total_hours_unexcused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence non excusées">
                     </div>
                 </div>
@@ -352,7 +352,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Total Abscenses</label>
+                        <label class="form-label">Total Absenses</label>
                         <input name="view_total_hours_absence" required class="form-control" type="number" placeholder="Total d'heures d'absence">
                     </div>
 
@@ -362,7 +362,7 @@
                             <input disabled name="view_total_hours_excused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence excusées">
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="form-label">Abscenses excusés</label>
+                            <label class="form-label">Absenses excusés</label>
                             <input disabled name="view_total_hours_unexcused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence non excusées">
                         </div>
                     </div>
