@@ -23,10 +23,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            // RoleTableSeeder::class,
-            LevelTableSeeder::class,
-        ]);
+        // $this->call([
+        //     RoleTableSeeder::class,
+        // ]);
 
         // User::create([
         //     'name' => 'Aline ADJIBI',
@@ -69,9 +68,10 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         // Classroom::create([
-        //     'name' => '1ère Année',
+        //     'type' => 'prepa1',
         //     'total_students' => 31,
         //     'total_teaching_units' => 10,
+        //     'year' => '2023-07-01',
         // ]);
 
         // $uesData = [
@@ -240,7 +240,8 @@ class DatabaseSeeder extends Seeder
         //             'name' => $ueData['ue'][0]['name'],
         //             'credit' => $ueData['ue'][0]['credit'],
         //             'status' => 'singular',
-        //             'classroom_id' => 1,
+        //             'type' => 'prepa1',
+        //             'semester' => 'semester1',
         //         ]);
         //     }else {
 
@@ -248,7 +249,8 @@ class DatabaseSeeder extends Seeder
         //             'name' => $ueData['ue'][0]['name'],
         //             'credit' => $ueData['ue'][0]['credit'],
         //             'status' => 'multiple',
-        //             'classroom_id' => 1,
+        //             'type' => 'prepa1',
+        //             'semester' => 'semester1',
         //         ]);
 
         //         foreach($ueData['ecue'] as $ecueData) {
@@ -463,6 +465,10 @@ class DatabaseSeeder extends Seeder
         //     $note->moy_ecu = ((($note->i1_points + $note->i2_points) * 0.2) / 2) + ((($note->d1_points + $note->d2_points) * 0.3) / 2) + ($note->e_points * 0.5);
         //     $note->save();
         // });
+
+        $this->call([
+            LevelTableSeeder::class,
+        ]);
 
     }
 }

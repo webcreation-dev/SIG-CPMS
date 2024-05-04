@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->enum('type', ['prepa1', 'prepa2'])->nullable();
             $table->string('total_students');
             $table->string('total_teaching_units')->nullable();
             $table->date('year')->nullable();

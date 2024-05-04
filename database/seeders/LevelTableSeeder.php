@@ -491,7 +491,11 @@ class LevelTableSeeder extends Seeder
             ],
         ];
 
-        $uesData = [$uesData2, $uesData3, $uesData4];
+        $uesData = [
+            // $uesData2,
+            // $uesData3,
+            $uesData4
+        ];
 
         foreach($uesData as $item ) {
             foreach($item as $key => $ueData) {
@@ -502,7 +506,8 @@ class LevelTableSeeder extends Seeder
                         'name' => $ueData['ue'][0]['name'],
                         'credit' => $ueData['ue'][0]['credit'],
                         'status' => 'singular',
-                        'classroom_id' => 1,
+                        'type' => 'prepa2',
+                        'semester' => 'semester4',
                     ]);
                 }else {
 
@@ -510,7 +515,8 @@ class LevelTableSeeder extends Seeder
                         'name' => $ueData['ue'][0]['name'],
                         'credit' => $ueData['ue'][0]['credit'],
                         'status' => 'multiple',
-                        'classroom_id' => 1,
+                        'type' => 'prepa2',
+                        'semester' => 'semester4',
                     ]);
 
                     foreach($ueData['ecue'] as $ecueData) {

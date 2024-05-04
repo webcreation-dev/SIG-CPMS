@@ -13,7 +13,7 @@ class NoteByStudentLivewireController extends Component
 
     public function render()
     {
-        $ues = TeachingUnit::all();
+        $ues = TeachingUnit::where('type', $this->student->classroom->type)->get();
 
         foreach ($ues as $ue) {
 

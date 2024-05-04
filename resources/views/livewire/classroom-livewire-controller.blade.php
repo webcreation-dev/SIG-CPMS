@@ -46,50 +46,64 @@
                       <th>Nom de la classe</th>
                       <th>Total des UE</th>
                       <th>Total des etudiants</th>
+                      <th>Année</th>
                       <th>Etudiants</th>
-                      <th>UE</th>
+                      {{-- <th>UE</th> --}}
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                       @foreach ($classrooms as $key => $classroom)
                           <tr>
+                            @php
+                                    $year = date('Y', strtotime($classroom->year)); // Extraire l'année de la date
+                                    $nextYear = $year + 1; // Ajouter une année supplémentaire
+                              @endphp
                               <td>
                                   <img width="50" height="50" src="{{asset('assets/images/classroom.png')}}" alt="">
                               </td>
-                              <td>{{$classroom->name}}</td>
+                              <td>
+                                {{-- {{$classroom->type}} --}}
+                                {{App\Models\Classroom::TYPES[$classroom->type] }} - {{$year}}
+                            </td>
                               <td>{{$classroom->total_teaching_units}}</td>
                               <td>{{$classroom->total_students}}</td>
+
+                              <td>{{$year . '-' . $nextYear}}</td>
+
                               <td>
                                 <a href="{{route('students.index', ['classroom_id' => $classroom->id ])}}" title="Voir les etudiants">
                                     <span class="badge badge-info"><i class="fa fa-user"></i> Voir les etudiants</span>
                                 </a>
                               </td>
-                              <td>
+                              {{-- <td> --}}
 
                                 {{-- <a  href="{{route('classrooms.create',['classroomId' => $classroom->id])}}" target="_blank" title="Ajouter les UE" >
                                     <span class="badge badge-warning"><i class="fa fa-plus"></i>  </span>
                                 </a> --}}
-                                <a href="{{route('teaching_units.index', ['classroom_id' => $classroom->id ])}}" title="Voir les UE">
+                                {{-- <a href="{{route('teaching_units.index', ['classroom_id' => $classroom->id ])}}" title="Voir les UE">
                                     <span class="badge badge-warning"><i class="ti-eye"></i> Voir les UE</span>
                                 </a>
-                              </td>
+                              </td> --}}
 
 
 
                               <td>
 
                                   <a href="#" title="Voir une classe" data-bs-toggle="modal" data-bs-target="#ViewModal"
-                                      view-classroom-name="{{$classroom->name}}"
+                                      view-classroom-type="{{$classroom->type}}"
                                       view-classroom-total-students="{{$classroom->total_students}}"
-                                      view-classroom-total-teaching-units="{{$classroom->total_teaching_units}}">
+                                      view-classroom-total-teaching-units="{{$classroom->total_teaching_units}}"
+                                        view-classroom-year="{{$classroom->year}}"
+                                      >
 
                                       <span class="badge badge-info"></i> <i class="ti-eye"></i> </span>
                                   </a>
                                   <a href="#" title="Modifier une classe" data-bs-toggle="modal" data-bs-target="#EditModal"
-                                      data-classroom-name="{{$classroom->name}}"
+                                      {{-- data-classroom-type="{{$classroom->type}}" --}}
                                       data-classroom-total-students="{{$classroom->total_students}}"
                                       data-classroom-total-teaching-units="{{$classroom->total_teaching_units}}"
+                                      data-classroom-year="{{$classroom->year}}"
                                       data-classroom-id="{{$classroom->id}}">
                                       <span class="badge badge-warning"></i> <i class="ti-pencil"></i> </span>
                                   </a>
@@ -172,10 +186,14 @@
             <form action="{{route('classrooms.store')}}" method="POST" >
               @csrf
 
+
               <div class="form-group">
-                  <label class="form-label">Nom de la classe</label>
-                  <input name="name" required class="form-control" type="text" placeholder="Nom de la classe">
-              </div>
+                <label class="form-label">Classe</label>
+                <select class="form-control basic-select" name="type" style="width: 100%;">
+                    <option value="prepa1">Classe Prépa 1</option>
+                    <option value="prepa2">Classe Prépa 2</option>
+                </select>
+            </div>
               <div class="form-group">
                   <label class="form-label">Total des etudiants</label>
                   <input name="total_students" required class="form-control" type="number" placeholder="Total des étudiants">
@@ -184,6 +202,10 @@
                   <label class="form-label">Total des filières</label>
                   <input name="total_teaching_units" required class="form-control" type="number" placeholder="Total des filières">
               </div>
+              <div class="form-group">
+                <label class="form-label">Année académique</label>
+                <input name="year" required class="form-control" type="date" required value="2023">
+            </div>
 
               <button type="submit" class="btn btn-success btn-md">ENREGISTRER</button>
 
@@ -207,10 +229,6 @@
               @csrf
 
               <div class="form-group">
-                  <label class="form-label">Nom de la classe</label>
-                  <input name="edit_name" required class="form-control" type="text" placeholder="Nom du classe">
-              </div>
-              <div class="form-group">
                   <label class="form-label">Total des etudiants</label>
                   <input name="edit_total_students" required class="form-control" type="number" placeholder="Poids du classe">
               </div>
@@ -218,6 +236,11 @@
                   <label class="form-label">Total des filières</label>
                   <input name="edit_total_teaching_units" required class="form-control" type="number" placeholder="Prix du classe">
               </div>
+
+                <div class="form-group col-md-6">
+                    <label class="form-label">Année académique</label>
+                    <input name="edit_year" required class="form-control" type="date" required value="2023">
+                </div>
 
               <button type="submit" class="btn btn-success btn-md">MODIFIER</button>
 
@@ -238,7 +261,7 @@
 
                 <div class="form-group">
                     <label class="form-label">Nom de la classe</label>
-                    <input disabled name="view_name" class="form-control" type="text" placeholder="Nom du classe">
+                    <input disabled name="view_type" class="form-control" type="text" placeholder="Classe">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Total des etudiants</label>
@@ -247,6 +270,11 @@
                 <div class="form-group">
                     <label class="form-label">Total des filières</label>
                     <input disabled name="view_total_teaching_units" class="form-control" type="number" placeholder="Prix du classe">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Année de académique</label>
+                    <input disabled name="view_year" required class="form-control" type="date" required value="2023">
                 </div>
 
             </div>

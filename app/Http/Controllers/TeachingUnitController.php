@@ -31,7 +31,7 @@ class TeachingUnitController extends Controller
 
             $classroom_id = $request->classroom_id;
             $classroom = Classroom::find($classroom_id);
-            $teaching_units = TeachingUnit::where('classroom_id',  $classroom_id)->with('classroom')->get();
+            $teaching_units = TeachingUnit::where('type',  $classroom->type)->get();
 
             return view('admin.teaching_units.teaching_units_list', compact('teaching_units','classroom'));
         }else{

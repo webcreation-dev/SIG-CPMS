@@ -6,6 +6,7 @@ use App\Models\Classroom;
 use App\Models\TeachingUnit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class ClassroomController extends Controller
 {
@@ -54,15 +55,17 @@ class ClassroomController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'type' => ['required', Rule::in(['prepa1', 'prepa2'])],
             'total_students' => ['required', 'numeric'],
             'total_teaching_units' => ['required', 'numeric'],
+            'year' => 'required|date_format:Y',
         ]);
 
         Classroom::create([
-            'name' => $request->name,
+            'type' => $request->type,
             'total_students' => $request->total_students,
             'total_teaching_units' => $request->total_teaching_units,
+            'year' => $request->year,
         ]);
 
         return redirect()->route('classrooms.index')->with('message','Classe ajouté avec succès');
@@ -100,15 +103,17 @@ class ClassroomController extends Controller
     public function update(Request $request, Classroom $classroom)
     {
         $request->validate([
-            'edit_name' => ['required', 'string', 'max:255'],
+            // 'edit_type' => ['required', Rule::in(['prepa1', 'prepa2'])],
             'edit_total_students' => ['required', 'numeric'],
             'edit_total_teaching_units' => ['required', 'numeric'],
+            'edit_year' => 'required|date_format:Y',
         ]);
 
         $classroom->update([
-            'name' => $request->edit_name,
+            'type' => $request->edit_type,
             'total_students' => $request->edit_total_students,
             'total_teaching_units' => $request->edit_total_teaching_units,
+            'year' => $request->edit_year,
         ]);
 
         return redirect()->route('classrooms.index')->with('message','Classe mis à jour avec succès');

@@ -72,7 +72,7 @@ class NoteController extends Controller
      */
     public function create(Request $request)
     {
-        $classroom = Classroom::find($request->classroom_id);
+        $classroom = Classroom::where('type', $request->classroom_type)->latest()->first();
 
         if($request->type == 'ue') {
             $ue = TeachingUnit::find($request->ue_id);
@@ -161,7 +161,7 @@ class NoteController extends Controller
                 $note->moy_inter = $moy_inter[$key] ?? null;
                 $note->moy_dev = $moy_dev[$key] ?? null;
                 $note->moy_ecu = $moy_ecu[$key] ?? null;
-                
+
                 $note->moy_catch_up = $moy_catch_up[$key] ?? null;
                 $note->freq_catch_up = $freq_catch_up[$key] ?? null;
 

@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('credit');
             $table->enum('status', ['singular', 'multiple']);
-            $table->unsignedBigInteger('classroom_id')->nullable();
-            $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
+            $table->enum('type', ['prepa1', 'prepa2'])->nullable();
+            $table->enum('semester', ['semester1', 'semester2', 'semester3', 'semester4'])->nullable();
+            // $table->unsignedBigInteger('classroom_id')->nullable();
+            // $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -6,7 +6,10 @@
             <ul class="breadcrumb mb-0">
               <li class="breadcrumb-item"><a href="index.html">
                   <h1>Gestion des notes</h1></a></li>
-              <li class="breadcrumb-item"><a href="javascript:void(0);">{{$classroom->name}}</a></li>
+                  @php
+                    $year = date('Y', strtotime($classroom->year)); // Extraire l'année de la date
+                @endphp
+              <li class="breadcrumb-item"><a href="javascript:void(0);"> {{App\Models\Classroom::TYPES[$classroom->type] }} - {{$year}}</a></li>
               <li class="breadcrumb-item active"><a href="javascript:void(0);">{{$ue->name}}</a></li>
             </ul>
           </div>

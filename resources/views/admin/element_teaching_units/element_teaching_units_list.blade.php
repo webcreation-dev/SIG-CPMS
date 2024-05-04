@@ -64,9 +64,12 @@
                     <thead>
                       <tr>
                         <th>#</th>
+                        <th>Semestre</th>
+
                         @if (!isset($teaching_unit_id))
                             <th>UE</th>
                         @endif
+
                         <th>Nom</th>
                         <th>Credit</th>
                         <th>Notations</th>
@@ -76,25 +79,27 @@
                     <tbody>
                         @foreach ($element_teaching_units as $key => $element_teaching_unit)
                             <tr>
+
                                 <td>
                                     <img width="40" height="40" src="{{asset('assets/images/ue.png')}}" alt="">
                                 </td>
+                                <td>{{App\Models\TeachingUnit::SEMESTER_VALUES[$element_teaching_unit->teachingUnit->semester]}}</td>
+
                                 @if (!isset($teaching_unit_id))
                                     <th>{{$element_teaching_unit->teachingUnit->name}}</th>
                                 @endif
+
+
 
                                 <td>{{$element_teaching_unit->name}}</td>
                                 <td>{{$element_teaching_unit->credit}}</td>
                                 <td>
 
-                                    @if ($element_teaching_unit->teachingUnit->classroom_id != null)
-                                        <a  href="{{route('notes.create',['classroom_id' => $element_teaching_unit->teachingUnit->classroom_id,'ue_id' => $element_teaching_unit->id,'type' => 'ecue'])}}"
+                                        <a  href="{{route('notes.create',['classroom_type' => $element_teaching_unit->teachingUnit->type,'ue_id' => $element_teaching_unit->id,'type' => 'ecue'])}}"
                                             title="Ajouter les notes" >
                                             <span class="badge badge-primary"><i class="fa fa-pencil"></i> Noter l'ECUE   </span>
                                         </a>
-                                    @else
-                                        <strong>INDISPONIBLE</strong>
-                                    @endif
+
                                 </td>
 
                                 <td>

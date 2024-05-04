@@ -9,9 +9,21 @@ class Classroom extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'total_students', 'total_teaching_units','year'];
+    protected $fillable = ['type', 'total_students', 'total_teaching_units','year'];
+
+    const TYPES = [
+        'prepa1' => 'Prépa 1',
+        'prepa2' => 'Prépa 2',
+    ];
 
     public static function list() {
-        return self::all();
+        $classrooms = self::all()->map(function ($classroom) {
+            $year = date('Y', strtotime($classroom->year)); // Extraire l'année de la date
+            $nextYear = $year + 1;
+            $classroom->name = $classroom->type . ' | ' . $year . '-' . $nextYear;
+            return $classroom;
+        });
+
+        return $classrooms;
     }
 }

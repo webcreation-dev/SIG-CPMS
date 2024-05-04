@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Classroom;
 use App\Models\Note;
 use App\Models\Student;
 use App\Models\TeachingUnit;
@@ -15,7 +16,12 @@ class NotesLivewireController extends Component
 
     public function render()
     {
-        $students = Student::all();
+        if ($this->type == 'ue') {
+            $classroom = Classroom::where('type', $this->ue->type)->latest()->first();
+        }else {
+            $classroom = Classroom::where('type', $this->ue->teachingUnit->type)->latest()->first();
+        }
+        $students = Student::where('classroom_id', $classroom->id)->get();
 
         foreach ($students as $student) {
 

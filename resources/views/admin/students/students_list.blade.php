@@ -86,6 +86,7 @@
                         @foreach ($students as $key => $student)
 
                             @php
+                                $year = date('Y', strtotime($student->classroom->year)); // Extraire l'année de la date
                                 $firstname = explode(' ', $student->firstname);
                             @endphp
                             <tr>
@@ -93,7 +94,7 @@
                                     <img width="40" height="40" src="{{asset('assets/images/student.png')}}" alt="">
                                 </td>
                                 @if (!isset($classroom_id))
-                                    <th>{{$student->classroom->name}}</th>
+                                    <th> {{App\Models\Classroom::TYPES[$student->classroom->type] }} - {{$year}}</th>
                                 @endif
 
                                 <td>{{$student->lastname}}</td>

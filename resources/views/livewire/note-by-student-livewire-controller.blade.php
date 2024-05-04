@@ -4,12 +4,14 @@
         <div class="breadcrumb-contain">
           <div class="left-breadcrumb">
             <ul class="breadcrumb mb-0">
-              <li class="breadcrumb-item"><a href="index.html">
-                  <h1>Gestion des notes</h1></a></li>
-              <li class="breadcrumb-item"><a href="javascript:void(0);">{{$student->classroom->name}}</a></li>
                 @php
+                    $year = date('Y', strtotime($student->classroom->year)); // Extraire l'année de la date
                     $firstname = explode(' ', $student->firstname);
                 @endphp
+              <li class="breadcrumb-item"><a href="index.html">
+                  <h1>Gestion des notes</h1></a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0);">{{App\Models\Classroom::TYPES[$student->classroom->type] }} - {{$year}}</a></li>
+
               <li class="breadcrumb-item active"><a href="javascript:void(0);">{{$student->lastname}} {{$firstname[0]}}</a></li>
             </ul>
           </div>

@@ -56,7 +56,7 @@
             </thead>
             <tbody>
                 @php
-                    $ues = App\Models\TeachingUnit::all();
+                    $ues = App\Models\TeachingUnit::where('type', $student->classroom->type)->get();
 
                     $count_ues = count($ues);
 

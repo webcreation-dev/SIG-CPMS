@@ -28,10 +28,12 @@
                 // Ajoutez un écouteur d'événements pour le clic
                 button.addEventListener('click', function() {
                     // Récupérez les données du produit associées à ce bouton
-                    var classroomName = button.getAttribute('data-classroom-name');
+
+                    // var classroomType = button.getAttribute('data-classroom-type');
                     var classroomTotalStudents = button.getAttribute('data-classroom-total-students');
                     var classroomTotalTeachingUnits = button.getAttribute('data-classroom-total-teaching-units');
                     var classroomId = button.getAttribute('data-classroom-id');
+                    var classroomYear = button.getAttribute('data-classroom-year');
 
                     // Mettez à jour l'attribut action du formulaire avec l'identifiant du classe
                     var editForm = document.getElementById('edit-classroom-form');
@@ -40,9 +42,10 @@
                     editForm.setAttribute('action', actionUrl);
 
                     // Remplissez les champs du formulaire dans le modal avec ces données
-                    document.querySelector('input[name="edit_name"]').value = classroomName;
+                    // document.querySelector('input[name="edit_name"]').value = classroomName;
                     document.querySelector('input[name="edit_total_students"]').value = classroomTotalStudents;
                     document.querySelector('input[name="edit_total_teaching_units"]').value = classroomTotalTeachingUnits;
+                    document.querySelector('input[name="edit_year"]').value = classroomYear;
 
                 });
             });
@@ -79,14 +82,16 @@
                 // Ajoutez un écouteur d'événements pour le clic
                 button.addEventListener('click', function() {
                     // Récupérez les données du produit associées à ce bouton
-                    var viewclassroomName = button.getAttribute('view-classroom-name');
+                    var viewclassroomType = button.getAttribute('view-classroom-type');
                     var viewclassroomTotalStudents = button.getAttribute('view-classroom-total-students');
                     var viewclassroomTotalTeachingUnits = button.getAttribute('view-classroom-total-teaching-units');
+                    var viewclassroomYear = button.getAttribute('view-classroom-year');
 
                     // Remplissez les champs du formulaire dans le modal avec ces données
-                    document.querySelector('input[name="view_name"]').value = viewclassroomName;
+                    document.querySelector('input[name="view_type"]').value = viewclassroomType;
                     document.querySelector('input[name="view_total_students"]').value = viewclassroomTotalStudents;
                     document.querySelector('input[name="view_total_teaching_units"]').value = viewclassroomTotalTeachingUnits;
+                    document.querySelector('input[name="view_year"]').value = viewclassroomYear;
                 });
             });
 

@@ -16,6 +16,13 @@ class TeachingUnit extends Model
         'classroom_id',
     ];
 
+    const SEMESTER_VALUES = [
+        'semester1' => 'Semestre 1',
+        'semester2' => 'Semestre 2',
+        'semester3' => 'Semestre 3',
+        'semester4' => 'Semestre 4',
+    ];
+
 
     public function classroom()
     {

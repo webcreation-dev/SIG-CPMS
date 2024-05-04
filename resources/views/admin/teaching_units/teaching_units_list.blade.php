@@ -20,11 +20,11 @@
               <ul class="breadcrumb mb-0">
                 <li class="breadcrumb-item"><a href="index.html">
                     <h1>
-                        @if (isset($classroom))
-                            <strong>{{$classroom->name}}</strong>
-                        @else
+                        {{-- @if (isset($classroom))
+                            <strong>{{$classroom->type}}</strong>
+                        @else --}}
                             Tableau de bord
-                        @endif
+                        {{-- @endif --}}
 
                     </h1></a></li>
                 <li class="breadcrumb-item"><a href="javascript:void(0);">Liste des UE</a></li>
@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col-md-8"></div>
                     <div class="col-md-4">
-                        <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter UE</button>
+                        <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal" style="pointer-events: none; opacity:0.5;" ><i class="ti-plus mr-5"></i>Ajouter UE</button>
                     </div>
                 </div>
 
@@ -61,9 +61,8 @@
                     <thead>
                       <tr>
                         <th>#</th>
-                        @if (!isset($classroom))
-                            <th>Classe</th>
-                        @endif
+                        <th>Classe</th>
+                        <th>Semestre</th>
                         <th>Nom</th>
                         <th>Crédit</th>
                         <th>Type</th>
@@ -77,16 +76,12 @@
                                 <td>
                                     <img width="40" height="40" src="{{asset('assets/images/ue.png')}}" alt="">
                                 </td>
-                                @if (!isset($classroom))
                                 <td>
-                                    @if ($teaching_unit->classroom_id != null)
-                                        {{$teaching_unit->classroom->name}}
-                                        @else
-                                        <strong>AUCUNE CLASSE</strong>
-                                    @endif
+                                    {{-- {{$teaching_unit->type}} --}}
+                                    {{App\Models\Classroom::TYPES[$teaching_unit->type]}}
                                 </td>
-                                @endif
 
+                                <td>{{App\Models\TeachingUnit::SEMESTER_VALUES[$teaching_unit->semester]}}</td>
 
                                 <td>{{$teaching_unit->name}}</td>
                                 <td>{{$teaching_unit->credit}}</td>
@@ -106,14 +101,11 @@
                                             <span class="badge badge-info"><i class="fa fa-qrcode"></i> Voir les ECUE </span>
                                         </a>
                                     @else
-                                        @if ($teaching_unit->classroom_id != null)
-                                            <a  href="{{route('notes.create',['classroom_id' => $teaching_unit->classroom_id,'ue_id' => $teaching_unit->id,'type' => 'ue'])}}"
+                                            <a  href="{{route('notes.create',['classroom_type' => $teaching_unit->type,'ue_id' => $teaching_unit->id,'type' => 'ue'])}}"
                                                     title="Ajouter les notes" >
                                                 <span class="badge badge-primary"><i class="fa fa-pencil"></i> Noter l'UE  </span>
                                             </a>
-                                        @else
-                                            <strong>INDISPONIBLE</strong>
-                                        @endif
+
                                     @endif
 
 
