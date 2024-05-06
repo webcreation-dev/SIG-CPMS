@@ -22,6 +22,25 @@ class Note extends Model
         'freq_catch_up'
     ];
 
+    const SEMESTER_NOTES = [
+        'semester1' => [
+            "skip" => 0,
+            "take" => 18
+        ],
+        'semester2' => [
+            "skip" => 18,
+            "take" => 18
+        ],
+        'semester3' => [
+            "skip" => 36,
+            "take" => 18
+        ],
+        'semester4' => [
+            "skip" => 54,
+            "take" => 18
+        ],
+    ];
+
 
     public function student()
     {

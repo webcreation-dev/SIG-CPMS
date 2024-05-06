@@ -11,7 +11,7 @@
 
     @include('layouts.admin.sidebar')
 
-    @livewire('note-by-student-livewire-controller', ['student' => $student])
+    @livewire('note-by-student-livewire-controller', ['student' => $student, 'semester'=> $semester])
 
     @include("layouts.admin.footer")
 

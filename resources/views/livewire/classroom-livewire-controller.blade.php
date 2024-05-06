@@ -31,7 +31,10 @@
         <div class="row">
           <div class="col-12">
               <div class="row">
-                  <div class="col-md-8"></div>
+                <div class="col-md-4" style="text-align: right;">
+                    <button style="pointer-events: none; opacity:0.5;" class="btn btn-md btn-primary mb-15 float-start" type="button">ARCHIVES</button>
+                </div>
+                  <div class="col-md-4"></div>
                   <div class="col-md-4">
                       <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter une classe</button>
                   </div>
@@ -203,7 +206,7 @@
                   <input name="total_teaching_units" required class="form-control" type="number" placeholder="Total des filières">
               </div>
               <div class="form-group">
-                <label class="form-label">Année académique</label>
+                <label class="form-label">Date rentrée</label>
                 <input name="year" required class="form-control" type="date" required value="2023">
             </div>
 
@@ -238,7 +241,7 @@
               </div>
 
                 <div class="form-group col-md-6">
-                    <label class="form-label">Année académique</label>
+                    <label class="form-label">Date rentrée</label>
                     <input name="edit_year" required class="form-control" type="date" required value="2023">
                 </div>
 
@@ -273,7 +276,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Année de académique</label>
+                    <label class="form-label">Date rentrée</label>
                     <input disabled name="view_year" required class="form-control" type="date" required value="2023">
                 </div>
 

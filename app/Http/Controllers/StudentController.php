@@ -24,7 +24,13 @@ class StudentController extends Controller
 
             return view('admin.students.students_list', compact('students', 'classroom_id','classroom'));
         }else{
-            $students = Student::all();
+            $lastTwoPrepaClassesIds = Classroom::whereIn('type', ['prepa1', 'prepa2'])
+                                    ->latest('created_at')
+                                    ->take(2)
+                                    ->pluck('id');
+
+            $students = Student::whereIn('classroom_id', $lastTwoPrepaClassesIds)->get();
+
             return view('admin.students.students_list', compact('students'));
         }
     }
@@ -44,7 +50,9 @@ class StudentController extends Controller
     {
         $student = Student::find($request->student_id);
 
-        return view('admin.notes.notes_by_student', compact('student'));
+        $semester = $request->semester;
+
+        return view('admin.notes.notes_by_student', compact('student', 'semester'));
     }
 
     /**

@@ -54,7 +54,7 @@
                 @can('access-manager')
                     <div class="row">
                         <div class="col-md-3" style="text-align: right;">
-                            <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter un étudiant</button>
+                            <button class="btn btn-md btn-primary mb-15 float-start" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter un étudiant</button>
                         </div>
                         <div class="col-md-6"></div>
                         <div class="col-md-3">
@@ -100,23 +100,30 @@
                                 <td>{{$student->lastname}}</td>
                                 <td>{{$firstname[0]}}</td>
                                 <td>
-                                    <a  href="{{route('students.create',['student_id' => $student->id ])}}"
-                                            title="Noter l'etudiant" >
-                                        <span class="badge badge-primary"><i class="fa fa-pencil"></i> Noter  </span>
+                                    @foreach (App\Models\Student::PREPA_SEMESTER[$student->classroom->type] as $semester )
+                                        <a  href="{{route('students.create',['student_id' => $student->id, 'semester' => $semester ])}}"
+                                                title="Noter l'etudiant" >
+                                            <span class="badge badge-primary"><i class="fa fa-pencil"></i> Noter {{App\Models\Student::SEMESTER_VALUES[$semester]}} </span>
                                     </a>
+                                    @endforeach
+
                                 </td>
 
                                 <td>
-                                    <a href="{{route('fiche.calcul', ['student_id' => $student->id ])}}" target="_blank" title="Voir la fiche de calcul">
-                                        <span class="badge badge-primary"><i class="fa fa-file-pdf-o"></i> Voir la fiche </span>
-                                    </a>
+                                    @foreach (App\Models\Student::PREPA_SEMESTER[$student->classroom->type] as $semester )
+                                        <a href="{{route('fiche.calcul', ['student_id' => $student->id, 'semester' => $semester ])}}" target="_blank" title="Voir la fiche de calcul">
+                                            <span class="badge badge-primary"><i class="fa fa-file-pdf-o"></i> Fiche {{App\Models\Student::SEMESTER_VALUES[$semester]}} </span>
+                                        </a>
+                                    @endforeach
                                 </td>
 
                                 @can('access-manager')
                                     <td>
-                                        <a href="{{route('releve.notes', ['student_id' => $student->id ])}}" target="_blank" title="Voir le Relevé de Notes">
-                                            <span class="badge badge-success"><i class="fa fa-file-text"></i> Voir le relevé </span>
-                                        </a>
+                                        @foreach (App\Models\Student::PREPA_SEMESTER[$student->classroom->type] as $semester )
+                                            <a href="{{route('releve.notes', ['student_id' => $student->id, 'semester' => $semester ])}}" target="_blank" title="Voir le Relevé de Notes">
+                                                <span class="badge badge-success"><i class="fa fa-file-text"></i> Relevé {{App\Models\Student::SEMESTER_VALUES[$semester]}} </span>
+                                            </a>
+                                        @endforeach
                                     </td>
 
                                     <td>

@@ -30,7 +30,12 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::whereIn('type', ['prepa1', 'prepa2'])
+                                ->latest('created_at')
+                                ->take(2)
+                                ->get();
+
+
         return view('admin.classrooms.classrooms_list', compact('classrooms'));
     }
 
