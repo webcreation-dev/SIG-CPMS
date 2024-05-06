@@ -164,6 +164,7 @@ class StudentController extends Controller
     {
 
         $student = Student::find($request->student_id);
+        $semester = $request->semester;
 
         $ues = $request->ues;
         $types = $request->types;
@@ -179,7 +180,6 @@ class StudentController extends Controller
 
         $moy_catch_up = $request->moy_catch_up;
         $freq_catch_up = $request->freq_catch_up;
-
 
         foreach($ues as $key => $ue) {
 
@@ -208,7 +208,7 @@ class StudentController extends Controller
             $note->save();
         }
 
-        return redirect(route('students.create',['student_id' => $student->id]))->with('message','Notes ajouté avec succès');
+        return redirect(route('students.create',['student_id' => $student->id, 'semester' => $semester]))->with('message','Notes ajouté avec succès');
 
     }
 }

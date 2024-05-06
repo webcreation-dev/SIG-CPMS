@@ -41,6 +41,7 @@
                     <button class="btn btn-md btn-primary mb-15 float-end">Enregistrer les notes <i class="fa fa-cloud-download"></i></button>
 
                     <input type="hidden" name="student_id" value="{{$student->id}}" >
+                    <input type="hidden" name="semester" value="{{$semester}}" >
 
                 <table class="display dataTable cell-border" id="datatbl-advance" style="width:100%">
                   <thead>
@@ -108,8 +109,6 @@
 
                             </tr>
                         @endforeach
-
-
                   </tbody>
                 </table>
                 <br>

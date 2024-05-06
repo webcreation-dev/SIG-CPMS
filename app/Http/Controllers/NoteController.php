@@ -173,7 +173,7 @@ class NoteController extends Controller
             }
         }
 
-        return redirect(route('notes.create',['classroom_id' => $classroom->id,'ue_id' => $ue->id,'type' => $type]))->with('message','Notes ajouté avec succès');
+        return redirect(route('notes.create',['classroom_type' => $classroom->typep, 'ue_id' => $ue->id,'type' => $type]))->with('message','Notes ajouté avec succès');
     }
 
     /**

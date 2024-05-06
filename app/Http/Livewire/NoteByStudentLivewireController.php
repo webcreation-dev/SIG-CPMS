@@ -60,28 +60,10 @@ class NoteByStudentLivewireController extends Component
             ->take($take)
             ->get();
 
-        // $singularTeachingUnitIds = $ues->where('status', 'singular')->pluck('id');
-        // $multipleTeachingUnitIds = $ues->where('status', 'multiple')->pluck('id');
-
-        // $elementTeachingUnitIds = ElementTeachingUnit::whereIn('teaching_unit_id', $multipleTeachingUnitIds)->pluck('id','name');
-
-        // $notesByStudentTeachingUnit = Note::where('student_id', $this->student->id)
-        //     ->whereIn('teaching_unit_id', $singularTeachingUnitIds)
-        //     ->get();
-
-        // $notesByStudentElementTeachingUnit = Note::where('student_id', $this->student->id)
-        //     ->whereIn('element_teaching_unit_id', $elementTeachingUnitIds)
-        //     ->get();
-        // dd($elementTeachingUnitIds, $notesByStudentElementTeachingUnit);
-
-        //     $notesByStudent = $notesByStudentTeachingUnit->merge($notesByStudentElementTeachingUnit)
-        //     ->sortBy('created_at');
-
-
-
         return view('livewire.note-by-student-livewire-controller', [
             'student' => $this->student,
             'notes' => $notesByStudent,
+            'semester'=> $this->semester,
         ]);
     }
 }
