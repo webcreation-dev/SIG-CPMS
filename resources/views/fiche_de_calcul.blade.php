@@ -87,7 +87,7 @@
                         <td><strong>{{ is_null($note->moy_ecu) ? '' : rtrim(rtrim(number_format($note?->moy_ecu, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>{{ is_null($note->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>{{ rtrim(rtrim(number_format((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up), 2, '.', ''), '0'), '.') }}</strong></td>
-                        <td><strong>{{App\Models\Note::getAppreciation($note?->moy_ecu)}}</strong></td>
+                        <td><strong>{{App\Models\Note::getAppreciation((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up))}}</strong></td>
                     </tr>
 
                 @else
