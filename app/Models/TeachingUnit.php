@@ -16,6 +16,11 @@ class TeachingUnit extends Model
         'classroom_id',
     ];
 
+    const SEMESTER_FINAL = [
+        'semester2',
+        'semester4',
+    ];
+
     const SEMESTER_VALUES = [
         'semester1' => 'Semestre 1',
         'semester2' => 'Semestre 2',
@@ -23,6 +28,12 @@ class TeachingUnit extends Model
         'semester4' => 'Semestre 4',
     ];
 
+    const SEMESTER_FICHE_VALUE = [
+        'semester1' => '1er Semestre',
+        'semester2' => '2e Semestre',
+        'semester3' => '3e Semestre',
+        'semester4' => '4e Semestre',
+    ];
 
     public function classroom()
     {

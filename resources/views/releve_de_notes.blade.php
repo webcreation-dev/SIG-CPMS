@@ -35,8 +35,8 @@
         <div class="column left">
         </div>
         <div class="column middle">
-            <p style="text-align: right;"><strong>Année Académique: 2023-2024</strong></p>
-            <p style="text-align: center;"><strong>RELEVE DE NOTES DU 1er SEMESTRE</strong></p>
+            <p style="text-align: right;"><strong>Année Académique: {{$year . '-' . $nextYear}} </strong></p>
+            <p style="text-align: center;"><strong>RELEVE DE NOTES DU {{ App\Models\TeachingUnit::SEMESTER_FICHE_VALUE[$semester] }} </strong></p>
         </div>
         <div class="column right">
         </div>
@@ -177,13 +177,17 @@
                 <li id="moyenne">Nombre de crédits validés : <strong>{{$credit_validés}}</strong> </li>
                 <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li>
                 <br>
-                <li id="credits-valides" > <strong>Total d'heures d'absence annuel</strong> : <strong>{{ $student->total_hours_absence  }}</strong> </li>
-                <li id="moyenne">Total d'heures d'absence excusées : <strong>{{$student->total_hours_excused_absence }}</strong> </li>
-                <li id="credits-non-valides">Total d'heures d'absence non excusés : <strong>{{$student->total_hours_unexcused_absence }}</strong> </li>
-                <br>
+
+                @if(in_array($semester, App\Models\TeachingUnit::SEMESTER_FINAL))
+                    <li id="credits-valides" > <strong>Total d'heures d'absence annuel</strong> : <strong>{{ $student->total_hours_absence  }}</strong> </li>
+                    <li id="moyenne">Total d'heures d'absence excusées : <strong>{{$student->total_hours_excused_absence }}</strong> </li>
+                    <li id="credits-non-valides">Total d'heures d'absence non excusés : <strong>{{$student->total_hours_unexcused_absence }}</strong> </li>
+                    <br>
+                @endif
                 <li>Appréciation : <span id="credits-non-valides"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></span></li>
             </ul>
         </section>
+
         <section class="appreciation">
             @php
             $jour = getdate();

@@ -15,6 +15,10 @@ class Classroom extends Model
         'prepa1' => 'Prépa 1',
         'prepa2' => 'Prépa 2',
     ];
+    const TYPES_VALUES = [
+        'prepa1' => '1e Année',
+        'prepa2' => '2e Année',
+    ];
 
     public static function list() {
         $classrooms = self::all()->map(function ($classroom) {

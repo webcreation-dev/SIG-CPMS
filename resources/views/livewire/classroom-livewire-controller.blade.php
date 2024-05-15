@@ -58,10 +58,10 @@
                   <tbody>
                       @foreach ($classrooms as $key => $classroom)
                           <tr>
-                            @php
+                                @php
                                     $year = date('Y', strtotime($classroom->year)); // Extraire l'année de la date
                                     $nextYear = $year + 1; // Ajouter une année supplémentaire
-                              @endphp
+                                @endphp
                               <td>
                                   <img width="50" height="50" src="{{asset('assets/images/classroom.png')}}" alt="">
                               </td>

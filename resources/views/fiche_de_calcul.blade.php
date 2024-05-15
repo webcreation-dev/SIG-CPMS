@@ -15,8 +15,8 @@
         <div class="column left" style="width: 10% !important;">
         </div>
         <div class="column middle" style="width: 80% !important; text-align: left;">
-            <p style="text-align: center;"><strong> <span >CPMS /</span> FICHE DE CALCUL DE MOYENNES - 1è SEMESTRE</strong></p>
-            <p style="text-align: center;">1è Année / 2023-2024</p>
+            <p style="text-align: center;"><strong> <span >CPMS /</span> FICHE DE CALCUL DE MOYENNES - {{ App\Models\TeachingUnit::SEMESTER_FICHE_VALUE[$semester] }}</strong></p>
+            <p style="text-align: center;"> {{ App\Models\Classroom::TYPES_VALUES[$type_classroom] }}  / {{$year . '-' . $nextYear}} </p>
         </div>
         <div class="column right" style="width: 10% !important;">
         </div>

@@ -38,10 +38,19 @@ class NoteController extends Controller
     public function releveNotes(Request $request)
     {
 
+
+
         $studentId = $request->student_id;
+
+        $student = Student::find($studentId);
+        $classroom = Classroom::find($student->classroom_id);
+
+        $year = date('Y', strtotime($classroom->year));
+        $nextYear = $year + 1;
+
         $semester = $request->semester;
 
-        $pdf = Pdf::loadView('releve_de_notes', ['studentId' => $studentId, 'semester' => $semester]);
+        $pdf = Pdf::loadView('releve_de_notes', ['studentId' => $studentId, 'semester' => $semester, 'year' => $year, 'nextYear' => $nextYear]);
         return $pdf->stream();
 
         // return view('releve_de_notes', compact('studentId'));
@@ -51,9 +60,16 @@ class NoteController extends Controller
     {
 
         $studentId = $request->student_id;
+
+        $student = Student::find($studentId);
+        $classroom = Classroom::find($student->classroom_id);
+
+        $year = date('Y', strtotime($classroom->year));
+        $nextYear = $year + 1;
+
         $semester = $request->semester;
 
-        $pdf = Pdf::loadView('fiche_de_calcul', ['studentId' => $studentId, 'semester' => $semester]);
+        $pdf = Pdf::loadView('fiche_de_calcul', ['studentId' => $studentId, 'semester' => $semester, 'year' => $year, 'nextYear' => $nextYear, 'type_classroom' => $classroom->type]);
         return $pdf->stream();
 
     }
