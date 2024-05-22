@@ -62,8 +62,8 @@
                     <th>Crédits 60</th>
                     <th>Moy ECUE </th>
                     <th> Moy UE </th>
-                    <th>Fréq</th>
-                    <th>Appr</th>
+                    {{-- <th>Fréq</th>
+                    <th>Appr</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -103,8 +103,8 @@
 
                             <td style="text-align: center;"><strong> {{ rtrim(rtrim(number_format((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up), 2, '.', ''), '0'), '.') }} </strong></td>
                             <td style="text-align: center;"><strong> {{ rtrim(rtrim(number_format((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up), 2, '.', ''), '0'), '.') }}</strong></td>
-                            <td style="text-align: center;">{{$note?->freq_catch_up}}</td>
-                            <td style="text-align: center;"><strong>{{App\Models\Note::getAppreciation((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up))}}</strong></td>
+                            {{-- <td style="text-align: center;">{{$note?->freq_catch_up}}</td> --}}
+                            {{-- <td style="text-align: center;"><strong>{{App\Models\Note::getAppreciation((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up))}}</strong></td> --}}
                         </tr>
                     @else
                         @php
@@ -144,8 +144,8 @@
                                 {{ rtrim(rtrim(number_format(is_null((App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up)) ? (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_ecu) : (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up), 2, '.', ''), '0'), '.') }}
                             </strong></td>
                             <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>  {{ rtrim(rtrim(number_format($moy_ue, 2, '.', ''), '0'), '.') }} </strong></td>
-                            <td style="text-align: center;">{{$note?->freq_catch_up}}</td>
-                            <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td>
+                            {{-- <td style="text-align: center;">{{$note?->freq_catch_up}}</td>
+                            <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td> --}}
                         </tr>
                         @foreach ($ecues_without_first as $ecue)
                             <tr>
@@ -156,7 +156,7 @@
                                 <td>{{$ecue->name}}</td>
                                 <td style="text-align: center;" >{{$ecue->credit}}</td>
                                 <td style="text-align: center;" ><strong>{{ rtrim(rtrim(number_format( is_null($note->moy_catch_up) ? $note?->moy_ecu : $note->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
-                                <td style="text-align: center;" >{{$note?->freq_catch_up}}</td>
+                                {{-- <td style="text-align: center;" >{{$note?->freq_catch_up}}</td> --}}
                             </tr>
                         @endforeach
                     @endif
@@ -174,8 +174,8 @@
         <section class="informations">
             <ul>
                 <li id="credits-valides" > <strong>Moyenne générale</strong> : <strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong> </li>
-                <li id="moyenne">Nombre de crédits validés : <strong>{{$credit_validés}}</strong> </li>
-                <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li>
+                {{-- <li id="moyenne">Nombre de crédits validés : <strong>{{$credit_validés}}</strong> </li> --}}
+                {{-- <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li> --}}
                 <br>
 
                 @if(in_array($semester, App\Models\TeachingUnit::SEMESTER_FINAL))
@@ -184,7 +184,7 @@
                     <li id="credits-non-valides">Total d'heures d'absence non excusés : <strong>{{$student->total_hours_unexcused_absence }}</strong> </li>
                     <br>
                 @endif
-                <li>Appréciation : <span id="credits-non-valides"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></span></li>
+                {{-- <li>Appréciation : <span id="credits-non-valides"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></span></li> --}}
             </ul>
         </section>
 

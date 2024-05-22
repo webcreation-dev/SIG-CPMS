@@ -91,6 +91,7 @@
                     </tr>
 
                 @else
+                
                     @php
                         $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
 
