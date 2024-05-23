@@ -184,7 +184,7 @@
                     <li id="credits-non-valides">Total d'heures d'absence non excusés : <strong>{{$student->total_hours_unexcused_absence }}</strong> </li>
                     <br>
                 @endif
-                {{-- <li>Appréciation : <span id="credits-non-valides"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></span></li> --}}
+                <li>Appréciation : <span id="credits-non-valides"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></span></li>
             </ul>
         </section>
 
