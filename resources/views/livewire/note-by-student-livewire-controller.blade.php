@@ -65,7 +65,7 @@
                         @foreach ($notes as $index => $note)
                             <tr>
 
-                                <td> <strong>{{$note->elementTeachingUnit?->name}} {{$note->teachingUnit?->name}}</strong>
+                                <td> <strong>{{$note->elementTeachingUnit?->name}} {{$note->teachingUnit?->name}} | {{$note->id}} </strong>
 
 
                                     @if ($note->teachingUnit)
