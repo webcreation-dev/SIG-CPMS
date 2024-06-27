@@ -188,7 +188,7 @@
             </ul>
         </section>
 
-        <section class="appreciation">
+        <section class="appreciation" style="transform: translateX(50)">
             @php
             $jour = getdate();
             $semaine = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
@@ -199,11 +199,23 @@
             @endphp
 
             <p>Cotonou, le <strong>{{ $date }}</strong></p>
-            <p id="appreciation-texte" style="margin-bottom: 130px;"></p>
 
-            <p><strong>Abdou-Rahmann AGUEMON</strong></p>
-            <p style="margin-bottom: 20px;" >Directeur Académique <span id="date"></span></p>
-            <p><span id="directeur-academique"></span></p>
+            @if($signed)
+                <div style="display: flex; justify-content: space-between;">
+                    <img src="signature_da.png" alt="Signature du Directeur Académique" style="max-width: 175px;">
+                    <img src="cachet_CPMS.png" alt="Cachet" style="max-width: 175px; margin-left: -30px;">
+                    </div>
+                <strong>Abdou-Rahmann AGUEMON</strong>
+                <br>
+                Directeur Académique
+            @else
+                <p id="appreciation-texte" style="margin-bottom: 130px;"></p>
+
+                <p><strong>Abdou-Rahmann AGUEMON</strong></p>
+                <p style="margin-bottom: 20px;" >Directeur Académique <span id="date"></span></p>
+                <p><span id="directeur-academique"></span></p>
+            @endif
+
         </section>
 
     </main>

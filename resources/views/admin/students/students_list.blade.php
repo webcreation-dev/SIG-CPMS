@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     @include("layouts.admin.head")
-  <body>
+  <body class="daactive-sidebar">
       <!-- Loader Start-->
         <div class="codex-loader">
           <div class="linespinner"></div>
@@ -76,8 +76,14 @@
                         <th>Prénom</th>
                         <th>Notations</th>
                         <th>Fiche de calcul</th>
+
+                        @can('access-admin')
+                            <th>Relevé de notes Signé</th>
+                        @endcan
                         @can('access-manager')
                             <th>Relevé de notes</th>
+                        @endcan
+                        @can('access-manager')
                             <th>Actions</th>
                         @endcan
                       </tr>
@@ -117,15 +123,25 @@
                                     @endforeach
                                 </td>
 
+
+
+                                @can('access-admin')
+                                    <td>
+                                        @foreach (App\Models\Student::PREPA_SEMESTER[$student->classroom->type] as $semester )
+                                            <a  href="{{route('releve.notes', ['student_id' => $student->id, 'semester' => $semester, 'signed' => true ])}}" target="_blank" title="Voir le Relevé de Notes">
+                                                <span style="color:black !important;" class="badge badge-info"><i class="fa fa-file-text"></i> Relevé {{App\Models\Student::SEMESTER_VALUES[$semester]}} Signé </span>
+                                            </a>
+                                        @endforeach
+                                    </td>
+                                @endcan
                                 @can('access-manager')
                                     <td>
                                         @foreach (App\Models\Student::PREPA_SEMESTER[$student->classroom->type] as $semester )
-                                            <a href="{{route('releve.notes', ['student_id' => $student->id, 'semester' => $semester ])}}" target="_blank" title="Voir le Relevé de Notes">
+                                            <a href="{{route('releve.notes', ['student_id' => $student->id, 'semester' => $semester , 'signed' => false ])}}" target="_blank" title="Voir le Relevé de Notes">
                                                 <span class="badge badge-success"><i class="fa fa-file-text"></i> Relevé {{App\Models\Student::SEMESTER_VALUES[$semester]}} </span>
                                             </a>
                                         @endforeach
                                     </td>
-
                                     <td>
                                         <a href="#" title="Voir l'étudiant" data-bs-toggle="modal" data-bs-target="#ViewModal"
                                             view-student-lastname="{{$student->lastname}}"
