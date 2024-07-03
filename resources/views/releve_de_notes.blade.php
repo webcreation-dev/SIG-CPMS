@@ -178,12 +178,12 @@
                 {{-- <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li> --}}
                 <br>
 
-                @if(in_array($semester, App\Models\TeachingUnit::SEMESTER_FINAL))
+                {{-- @if(in_array($semester, App\Models\TeachingUnit::SEMESTER_FINAL))
                     <li id="credits-valides" > <strong>Total d'heures d'absence annuel</strong> : <strong>{{ $student->total_hours_absence  }}</strong> </li>
                     <li id="moyenne">Total d'heures d'absence excusées : <strong>{{$student->total_hours_excused_absence }}</strong> </li>
                     <li id="credits-non-valides">Total d'heures d'absence non excusés : <strong>{{$student->total_hours_unexcused_absence }}</strong> </li>
                     <br>
-                @endif
+                @endif --}}
                 <li>Appréciation : <span id="credits-non-valides"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></span></li>
             </ul>
         </section>
