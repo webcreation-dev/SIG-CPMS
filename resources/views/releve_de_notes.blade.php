@@ -35,7 +35,7 @@
         <div class="column left">
         </div>
         <div class="column middle">
-            <p style="text-align: right;"><strong>Année Académique: {{$year . '-' . $nextYear}} </strong></p>
+            <p style="text-align: center;"><strong>{{ App\Models\Classroom::SEMESTER_CLASS[$semester]}}  &nbsp;&nbsp;</strong>  <strong> &nbsp;&nbsp; Année Académique: {{$year . '-' . $nextYear}} </strong></p>
             <p style="text-align: center;"><strong>RELEVE DE NOTES DU {{ App\Models\TeachingUnit::SEMESTER_FICHE_VALUE[$semester] }} </strong></p>
         </div>
         <div class="column right">

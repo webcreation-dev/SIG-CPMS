@@ -20,6 +20,13 @@ class Classroom extends Model
         'prepa2' => '2e Année',
     ];
 
+    const SEMESTER_CLASS = [
+        'semester1' => '1e Année',
+        'semester2' => '1e Année',
+        'semester3' => '2e Année',
+        'semester4' => '2e Année',
+    ];
+
     public static function list() {
         $classrooms = self::all()->map(function ($classroom) {
             $year = date('Y', strtotime($classroom->year)); // Extraire l'année de la date
