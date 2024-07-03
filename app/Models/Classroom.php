@@ -21,8 +21,8 @@ class Classroom extends Model
     ];
 
     const SEMESTER_CLASS = [
-        'semester1' => '1e Année',
-        'semester2' => '1e Année',
+        'semester1' => '1ère Année',
+        'semester2' => '1ère Année',
         'semester3' => '2e Année',
         'semester4' => '2e Année',
     ];
