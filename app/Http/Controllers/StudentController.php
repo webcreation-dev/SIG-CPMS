@@ -70,7 +70,6 @@ class StudentController extends Controller
             'birthday' => ['required', 'date'],
             'birthplace' => ['required', 'string'],
             'classroom_id' => ['required', 'numeric'],
-            'parent_id' => ['numeric'],
         ]);
 
         Student::create([
@@ -80,7 +79,7 @@ class StudentController extends Controller
             'birthday' => $request->birthday,
             'birthplace' => $request->birthplace,
             'classroom_id' => $request->classroom_id,
-            'parent_id' => $request->parent_id,
+            // 'parent_id' => $request->parent_id,
         ]);
 
         return redirect()->route('students.index',['classroom_id' => $request->classroom_id])->with('message','Elève ajouté avec succès');
@@ -123,11 +122,10 @@ class StudentController extends Controller
             'edit_sexe' => ['required', 'string', 'max:255'],
             'edit_birthday' => ['required', 'date'],
             'edit_birthplace' => ['required', 'string'],
-            'edit_classroom_id' => ['required', 'numeric'],
-            'edit_parent_id' => ['numeric'],
-            'edit_total_hours_absence' => ['numeric'],
-            'edit_total_hours_excused_absence' => ['numeric'],
-            'edit_total_hours_unexcused_absence' => ['numeric'],
+            // 'edit_classroom_id' => ['required', 'numeric'],
+            // 'edit_total_hours_absence' => ['numeric'],
+            // 'edit_total_hours_excused_absence' => ['numeric'],
+            // 'edit_total_hours_unexcused_absence' => ['numeric'],
         ]);
 
         $student->update([
@@ -136,11 +134,11 @@ class StudentController extends Controller
             'sexe' => $request->edit_sexe,
             'birthday' => $request->edit_birthday,
             'birthplace' => $request->edit_birthplace,
-            'classroom_id' => $request->edit_classroom_id,
-            'parent_id' => $request->edit_parent_id,
-            'total_hours_absence' => $request->edit_total_hours_absence,
-            'total_hours_excused_absence' => $request->edit_total_hours_excused_absence,
-            'total_hours_unexcused_absence' => $request->edit_total_hours_unexcused_absence,
+            // 'classroom_id' => $request->edit_classroom_id,
+            // 'parent_id' => $request->edit_parent_id,
+            // 'total_hours_absence' => $request->edit_total_hours_absence,
+            // 'total_hours_excused_absence' => $request->edit_total_hours_excused_absence,
+            // 'total_hours_unexcused_absence' => $request->edit_total_hours_unexcused_absence,
         ]);
 
         return redirect()->route('students.index',['classroom_id' => $request->edit_classroom_id])->with('message','Elève modifié avec succès');
