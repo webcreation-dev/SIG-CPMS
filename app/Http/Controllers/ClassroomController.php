@@ -51,27 +51,17 @@ class ClassroomController extends Controller
         return view('admin.classrooms.update_ue', compact('classroomId','ues'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         $request->validate([
             'type' => ['required', Rule::in(['prepa1', 'prepa2'])],
             'total_students' => ['required', 'numeric'],
             'total_teaching_units' => ['required', 'numeric'],
-            'year' => 'required|date_format:Y',
+            'year' => 'required|date',
         ]);
 
-        Classroom::create([
-            'type' => $request->type,
-            'total_students' => $request->total_students,
-            'total_teaching_units' => $request->total_teaching_units,
-            'year' => $request->year,
-        ]);
+        Classroom::create($request->all());
 
         return redirect()->route('classrooms.index')->with('message','Classe ajouté avec succès');
     }
@@ -108,14 +98,12 @@ class ClassroomController extends Controller
     public function update(Request $request, Classroom $classroom)
     {
         $request->validate([
-            // 'edit_type' => ['required', Rule::in(['prepa1', 'prepa2'])],
             'edit_total_students' => ['required', 'numeric'],
             'edit_total_teaching_units' => ['required', 'numeric'],
-            'edit_year' => 'required|date_format:Y',
+            'edit_year' => 'required|date',
         ]);
 
         $classroom->update([
-            'type' => $request->edit_type,
             'total_students' => $request->edit_total_students,
             'total_teaching_units' => $request->edit_total_teaching_units,
             'year' => $request->edit_year,
