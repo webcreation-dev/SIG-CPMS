@@ -209,6 +209,16 @@
               <h5 class="modal-title">AJOUTER UN NOUVEL ETUDIANT</h5><a href="javascript:void(0);" data-bs-dismiss="modal"><i class="ti-close"></i></a>
             </div>
             <div class="modal-body">
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
+
               <form action="{{route('students.store')}}" method="POST" >
                 @csrf
 
@@ -281,6 +291,16 @@
               <h5 class="modal-title">MODIFIER UN ETUDIANT</h5><a href="javascript:void(0);" data-bs-dismiss="modal"><i class="ti-close"></i></a>
             </div>
             <div class="modal-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
               <form action="{{ route('students.update', ['student' => '__STUDENT_ID__']) }}" method="POST" id="edit-student-form">
                 @method('PUT')
                 @csrf
@@ -314,9 +334,9 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-label">Total Absenses</label>
-                    <input name="edit_total_hours_absence" required class="form-control" type="number" placeholder="Total d'heures d'absence">
+                    <input name="edit_total_hours_absence" class="form-control" type="number" placeholder="Total d'heures d'absence">
                 </div>
 
                 <div class="row">
@@ -328,7 +348,7 @@
                         <label class="form-label">Absenses excusés</label>
                         <input name="edit_total_hours_unexcused_absence" class="form-control" type="number" placeholder="Total d'heures d'absence non excusées">
                     </div>
-                </div>
+                </div> -->
 
                 <button type="submit" class="btn btn-success btn-md">MODIFIER</button>
 
