@@ -9,7 +9,7 @@
                   @php
                     $year = date('Y', strtotime($classroom->year)); // Extraire l'année de la date
                 @endphp
-              <li class="breadcrumb-item"><a href="javascript:void(0);"> {{App\Models\Classroom::TYPES[$classroom->type] }} - {{$year}}</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0);"> {{App\Models\Classroom::TYPES[$classroom->type] }} - {{App\Models\Student::where('classroom_id', $classroom->id)->count()}} / {{$notes->count()}} - {{$year}}</a></li>
               <li class="breadcrumb-item active"><a href="javascript:void(0);">{{$ue->name}}</a></li>
             </ul>
           </div>
@@ -36,7 +36,7 @@
 
                 <form action="{{route('notes.store')}}" method="POST">
                     @csrf
-                    <button class="btn btn-md btn-primary mb-15 float-end">Enregistrer les notes <i class="fa fa-cloud-download"></i></button>
+                    <button class="btn btn-md btn-primary mb-15 float-end">Enregistrer de nouvelles notes <i class="fa fa-cloud-download"></i></button>
 
                     <input type="hidden" name="classroom_id" value="{{$classroom->id}}" >
                     <input type="hidden" name="ue_id" value="{{$ue->id}}" >
@@ -60,7 +60,7 @@
                     </thead>
                     <tbody>
 
-
+                            
                             @foreach ($notes as $index => $note)
                                 <tr>
                                     @php

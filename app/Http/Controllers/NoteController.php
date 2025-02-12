@@ -112,8 +112,9 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-
         $classroom = Classroom::find($request->classroom_id);
+        
+        //dd($classroom);
 
         $type = $request->type;
 
@@ -188,7 +189,7 @@ class NoteController extends Controller
             }
         }
 
-        return redirect(route('notes.create',['classroom_type' => $classroom->typep, 'ue_id' => $ue->id,'type' => $type]))->with('message','Notes ajouté avec succès');
+        return redirect(route('notes.create',['classroom_type' => $classroom->type, 'ue_id' => $ue->id,'type' => $type]))->with('message','Notes ajouté avec succès');
     }
 
     /**
