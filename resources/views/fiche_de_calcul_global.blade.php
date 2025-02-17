@@ -7,6 +7,13 @@
     <title>Fiche de calcul de moyennes</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.png" type="image/x-icon">
+    <style>
+        body {
+            font-size: 15.5px; 
+        }
+    </style>
+    
+
 </head>
 <body>
 
@@ -32,8 +39,13 @@
             $count_ues = count($ues);
 
             $moy_generale = 0;
+            
+            $lastTwoPrepaClassesIds = App\Models\Classroom::whereIn('type', ['prepa1', 'prepa2'])
+                                    ->latest('created_at')
+                                    ->take(2)
+                                    ->pluck('id');
 
-            $students = App\Models\Student::all();
+            $students = App\Models\Student::whereIn('classroom_id', $lastTwoPrepaClassesIds)->take(2)->get();
         @endphp
 
         @foreach ($students as $student)
