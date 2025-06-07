@@ -61,6 +61,10 @@
                     $count_ues = count($ues);
 
                     $moy_generale = 0;
+                    
+                    // Variables pour la validation CPMS
+                    $moyennes_ue = []; // Tableau pour stocker toutes les moyennes d'UE
+                    $all_ue_valid = true; // Flag pour vérifier si toutes les UE sont >= 8
 
                 @endphp
 
@@ -70,7 +74,16 @@
                     @php
                         $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
 
-                        $moy_generale += is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up;
+                        $moy_ue_final = is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up;
+                        $moy_generale += $moy_ue_final;
+                        
+                        // Stocker la moyenne de l'UE pour la validation
+                        $moyennes_ue[] = $moy_ue_final;
+                        
+                        // Vérifier si cette UE est valide (>= 8)
+                        if ($moy_ue_final < 8) {
+                            $all_ue_valid = false;
+                        }
                     @endphp
 
 
@@ -86,8 +99,13 @@
                         <td>{{$note?->e_points}}</td>
                         <td><strong>{{ is_null($note->moy_ecu) ? '' : rtrim(rtrim(number_format($note?->moy_ecu, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>{{ is_null($note->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
-                        <td><strong>{{ rtrim(rtrim(number_format((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up), 2, '.', ''), '0'), '.') }}</strong></td>
-                        <td><strong>{{App\Models\Note::getAppreciation((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up))}}</strong></td>
+                        <td><strong>{{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }}</strong></td>
+                        <td><strong>
+                            @php
+                                // Appréciation sera calculée après avoir toutes les moyennes
+                                echo "<!-- UE_APPRECIATION_" . $loop->index . " -->";
+                            @endphp
+                        </strong></td>
                     </tr>
 
                 @else
@@ -100,12 +118,19 @@
                         $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
                         $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
 
-                        // $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
                         $moy_ue = $notes->sum(function ($note) {
                             return $note->moy_catch_up !== null ? $note->moy_catch_up : $note->moy_ecu;
                         }) / $ecues_count;
 
                         $moy_generale += $moy_ue;
+                        
+                        // Stocker la moyenne de l'UE pour la validation
+                        $moyennes_ue[] = $moy_ue;
+                        
+                        // Vérifier si cette UE est valide (>= 8)
+                        if ($moy_ue < 8) {
+                            $all_ue_valid = false;
+                        }
 
                     @endphp
 
@@ -116,7 +141,12 @@
                         <td colspan="9"></td>
 
                         <td rowspan="{{$ecues_count + 1}}" style="vertical-align: top; "><strong>{{ rtrim(rtrim(number_format($moy_ue, 2, '.', ''), '0'), '.') }}</strong></td>
-                        <td rowspan="{{$ecues_count + 1}}" ><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong></td>
+                        <td rowspan="{{$ecues_count + 1}}" ><strong>
+                            @php
+                                // Appréciation sera calculée après avoir toutes les moyennes
+                                echo "<!-- UE_APPRECIATION_" . $loop->index . " -->";
+                            @endphp
+                        </strong></td>
                     </tr>
                     @foreach ($ecues as $ecue)
                                 @php
@@ -140,14 +170,66 @@
                 @endif
             @endforeach
 
+            @php
+                // Calcul de la moyenne générale
+                $moyenne_generale_finale = $moy_generale / $count_ues;
+                
+                // Logique de validation CPMS
+                $semestre_valide = ($moyenne_generale_finale >= 12) && $all_ue_valid;
+                
+                // Fonction pour déterminer l'appréciation selon les règles CPMS
+                function getAppreciationCPMS($moyenne_ue, $moyenne_generale_finale, $all_ue_valid) {
+                    // Si la moyenne générale >= 12 ET toutes les UE >= 8
+                    if ($moyenne_generale_finale >= 12 && $all_ue_valid) {
+                        return "Validé";
+                    }
+                    // Si cette UE spécifique < 8 (même si moyenne générale >= 12)
+                    elseif ($moyenne_ue < 8) {
+                        return "Non Validé";
+                    }
+                    // Si moyenne générale < 12 (peu importe les UE)
+                    elseif ($moyenne_generale_finale < 12) {
+                        return "Non Validé";
+                    }
+                    // Cas par défaut (ne devrait pas arriver avec la logique ci-dessus)
+                    else {
+                        return "Non Validé";
+                    }
+                }
+            @endphp
+
             <tr>
                 <td style="background-color: #ccc;" colspan="11"><strong> Moyenne générale : </strong></td>
-                <td  style="background-color: #ccc;" ><strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong></td>
-                <td style="background-color: #ccc;"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></td>
+                <td  style="background-color: #ccc;" ><strong>{{ number_format($moyenne_generale_finale, 2, '.', '');  }}</strong></td>
+                <td style="background-color: #ccc;"><strong>
+                    @if($semestre_valide)
+                        Validé
+                    @else
+                        Non Validé
+                    @endif
+                </strong></td>
             </tr>
 
             </tbody>
         </table>
+        
+        @php
+            // Maintenant, remplacer les placeholders d'appréciation par les vraies valeurs
+            $appreciation_replacements = '';
+            foreach ($moyennes_ue as $index => $moy_ue) {
+                $appreciation = getAppreciationCPMS($moy_ue, $moyenne_generale_finale, $all_ue_valid);
+                $appreciation_replacements .= "
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var placeholder = document.querySelector('td strong').innerHTML;
+                        if (placeholder.includes('UE_APPRECIATION_$index')) {
+                            document.querySelector('td strong').innerHTML = placeholder.replace('<!-- UE_APPRECIATION_$index -->', '$appreciation');
+                        }
+                    });
+                </script>";
+            }
+            echo $appreciation_replacements;
+        @endphp
     </main>
 
 </body>
