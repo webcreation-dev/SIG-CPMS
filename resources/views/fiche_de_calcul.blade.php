@@ -101,12 +101,13 @@
                         <td><strong>{{ is_null($note->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>{{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>
-                            @php
-                                // Appréciation sera calculée après avoir toutes les moyennes
-                                echo "<!-- UE_APPRECIATION_" . $loop->index . " -->";
-                            @endphp
-                        </strong></td>
-                    </tr>
+                                @if($moy_ue_final >= 8)
+                                    Validé
+                                @else
+                                    Non Validé
+                                @endif
+                            </strong></td>
+                        </tr>
 
                 @else
                 
@@ -142,11 +143,12 @@
 
                         <td rowspan="{{$ecues_count + 1}}" style="vertical-align: top; "><strong>{{ rtrim(rtrim(number_format($moy_ue, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td rowspan="{{$ecues_count + 1}}" ><strong>
-                            @php
-                                // Appréciation sera calculée après avoir toutes les moyennes
-                                echo "<!-- UE_APPRECIATION_" . $loop->index . " -->";
-                            @endphp
-                        </strong></td>
+    @if($moy_ue >= 8)
+        Validé
+    @else
+        Non Validé
+    @endif
+</strong></td>
                     </tr>
                     @foreach ($ecues as $ecue)
                                 @php
