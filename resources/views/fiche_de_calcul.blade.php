@@ -66,6 +66,18 @@
                     $moyennes_ue = []; // Tableau pour stocker toutes les moyennes d'UE
                     $all_ue_valid = true; // Flag pour vérifier si toutes les UE sont >= 8
 
+                    // Charger la configuration
+                    $validation_config = config('validation');
+                    $scientific_ues_names = $validation_config['scientific_ues'][$semester] ?? [];
+
+                    // Variables pour le calcul de la moyenne scientifique
+                    $total_weighted_scientific = 0;
+                    $total_scientific_credits = 0;
+
+                    // Déterminer le type de prépa
+                    $prep_type = in_array($semester, ['semester1', 'semester2']) ? 'prepa1' : 'prepa2';
+                    $thresholds = $validation_config['thresholds'][$prep_type];
+
                 @endphp
 
             @foreach ($ues as $ue)
@@ -83,6 +95,12 @@
                         // Vérifier si cette UE est valide (>= 8)
                         if ($moy_ue_final < 8) {
                             $all_ue_valid = false;
+                        }
+
+                        // Vérifier si cette UE est scientifique
+                        if (in_array(trim($ue->name), array_map('trim', $scientific_ues_names))) {
+                            $total_weighted_scientific += $moy_ue_final * $ue->credit;
+                            $total_scientific_credits += $ue->credit;
                         }
                     @endphp
 
@@ -133,6 +151,12 @@
                             $all_ue_valid = false;
                         }
 
+                        // Vérifier si cette UE est scientifique
+                        if (in_array(trim($ue->name), array_map('trim', $scientific_ues_names))) {
+                            $total_weighted_scientific += $moy_ue * $ue->credit;
+                            $total_scientific_credits += $ue->credit;
+                        }
+
                     @endphp
 
                     <tr>
@@ -175,36 +199,23 @@
             @php
                 // Calcul de la moyenne générale
                 $moyenne_generale_finale = $moy_generale / $count_ues;
-                
-                // Logique de validation CPMS
-                $semestre_valide = ($moyenne_generale_finale >= 12) && $all_ue_valid;
-                
-                // Fonction pour déterminer l'appréciation selon les règles CPMS
-                function getAppreciationCPMS($moyenne_ue, $moyenne_generale_finale, $all_ue_valid) {
-                    // Si la moyenne générale >= 12 ET toutes les UE >= 8
-                    if ($moyenne_generale_finale >= 12 && $all_ue_valid) {
-                        return "Validé";
-                    }
-                    // Si cette UE spécifique < 8 (même si moyenne générale >= 12)
-                    elseif ($moyenne_ue < 8) {
-                        return "Non Validé";
-                    }
-                    // Si moyenne générale < 12 (peu importe les UE)
-                    elseif ($moyenne_generale_finale < 12) {
-                        return "Non Validé";
-                    }
-                    // Cas par défaut (ne devrait pas arriver avec la logique ci-dessus)
-                    else {
-                        return "Non Validé";
-                    }
-                }
+
+                // Calcul de la moyenne scientifique (pondérée par crédits)
+                $moyenne_scientifique = $total_scientific_credits > 0
+                    ? $total_weighted_scientific / $total_scientific_credits
+                    : 0;
+
+                // Validation selon les nouvelles règles
+                $moyenne_generale_valid = $moyenne_generale_finale >= $thresholds['moyenne_generale'];
+                $moyenne_scientifique_valid = $moyenne_scientifique >= $thresholds['moyenne_scientifique'];
+                $semestre_valide = $moyenne_generale_valid && $moyenne_scientifique_valid;
             @endphp
 
-            <tr>
-                <td style="background-color: #ccc;" colspan="11"><strong> Moyenne générale : </strong></td>
-                <td  style="background-color: #ccc;" ><strong>{{ number_format($moyenne_generale_finale, 2, '.', '');  }}</strong></td>
-                <td style="background-color: #ccc;"><strong>
-                    @if($semestre_valide)
+            <tr style="background-color: #f0f0f0;">
+                <td colspan="11"><strong>Moyenne UE Scientifiques (pondérée) :</strong></td>
+                <td><strong>{{ number_format($moyenne_scientifique, 2, '.', ''); }}</strong></td>
+                <td><strong>
+                    @if($moyenne_scientifique >= $thresholds['moyenne_scientifique'])
                         Validé
                     @else
                         Non Validé
@@ -212,26 +223,26 @@
                 </strong></td>
             </tr>
 
+            <tr>
+                <td style="background-color: #ccc;" colspan="11"><strong>Moyenne générale :</strong></td>
+                <td style="background-color: #ccc;"><strong>{{ number_format($moyenne_generale_finale, 2, '.', ''); }}</strong></td>
+                <td style="background-color: #ccc;"><strong>
+                    @if($semestre_valide)
+                        Validé
+                    @else
+                        Non Validé
+                        @if(!$moyenne_generale_valid)
+                            <br><small>(MG < 12)</small>
+                        @endif
+                        @if(!$moyenne_scientifique_valid)
+                            <br><small>(MS < {{ $thresholds['moyenne_scientifique'] }})</small>
+                        @endif
+                    @endif
+                </strong></td>
+            </tr>
+
             </tbody>
         </table>
-        
-        @php
-            // Maintenant, remplacer les placeholders d'appréciation par les vraies valeurs
-            $appreciation_replacements = '';
-            foreach ($moyennes_ue as $index => $moy_ue) {
-                $appreciation = getAppreciationCPMS($moy_ue, $moyenne_generale_finale, $all_ue_valid);
-                $appreciation_replacements .= "
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        var placeholder = document.querySelector('td strong').innerHTML;
-                        if (placeholder.includes('UE_APPRECIATION_$index')) {
-                            document.querySelector('td strong').innerHTML = placeholder.replace('<!-- UE_APPRECIATION_$index -->', '$appreciation');
-                        }
-                    });
-                </script>";
-            }
-            echo $appreciation_replacements;
-        @endphp
     </main>
 
 </body>
