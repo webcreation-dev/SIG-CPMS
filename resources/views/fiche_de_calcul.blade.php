@@ -199,30 +199,42 @@
             @php
                 // Calcul de la moyenne générale
                 $moyenne_generale_finale = $moy_generale / $count_ues;
-
-                // Calcul de la moyenne scientifique (pondérée par crédits)
-                $moyenne_scientifique = $total_scientific_credits > 0
-                    ? $total_weighted_scientific / $total_scientific_credits
-                    : 0;
-
-                // Validation selon les nouvelles règles
+                
+                // --- Logique de validation CPMS ---
+                
+                // 1. Validation de la Moyenne Générale
                 $moyenne_generale_valid = $moyenne_generale_finale >= $thresholds['moyenne_generale'];
-                $moyenne_scientifique_valid = $moyenne_scientifique >= $thresholds['moyenne_scientifique'];
-                $semestre_valide = $moyenne_generale_valid && $moyenne_scientifique_valid;
+
+                // 2. Validation des UEs Scientifiques (Chaque UE doit être >= min_scientifique)
+                $scientific_condition_met = true;
+                
+                 foreach ($ues as $ue) {
+                    // Ignorer si pas scientifique
+                    if (!in_array(trim($ue->name), array_map('trim', $scientific_ues_names))) {
+                        continue;
+                    }
+
+                    // Calcul Note UE
+                    if ($ue->status == 'singular') {
+                        $n = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
+                        $val = is_null($n->moy_catch_up) ? $n->moy_ecu : $n->moy_catch_up;
+                    } else {
+                         $e_ids = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
+                         $ns = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $e_ids)->get();
+                         $count = $e_ids->count();
+                         $val = $ns->sum(function ($x) { return $x->moy_catch_up ?? $x->moy_ecu; }) / ($count?:1);
+                    }
+                    
+                    // Vérif seuil min_scientifique
+                    if ($val < $thresholds['min_scientifique']) {
+                        $scientific_condition_met = false;
+                        break; 
+                    }
+                }
+
+                $semestre_valide = $moyenne_generale_valid && $scientific_condition_met;
             @endphp
-
-            <tr style="background-color: #f0f0f0;">
-                <td colspan="11"><strong>Moyenne UE Scientifiques (pondérée) :</strong></td>
-                <td><strong>{{ number_format($moyenne_scientifique, 2, '.', ''); }}</strong></td>
-                <td><strong>
-                    @if($moyenne_scientifique >= $thresholds['moyenne_scientifique'])
-                        Validé
-                    @else
-                        Non Validé
-                    @endif
-                </strong></td>
-            </tr>
-
+ 
             <tr>
                 <td style="background-color: #ccc;" colspan="11"><strong>Moyenne générale :</strong></td>
                 <td style="background-color: #ccc;"><strong>{{ number_format($moyenne_generale_finale, 2, '.', ''); }}</strong></td>
@@ -232,10 +244,10 @@
                     @else
                         Non Validé
                         @if(!$moyenne_generale_valid)
-                            <br><small>(MG < 12)</small>
+                            <br><small>(MG < {{ $thresholds['moyenne_generale'] }})</small>
                         @endif
-                        @if(!$moyenne_scientifique_valid)
-                            <br><small>(MS < {{ $thresholds['moyenne_scientifique'] }})</small>
+                        @if(!$scientific_condition_met)
+                            <br><small>(UE Sci < {{ $thresholds['min_scientifique'] }})</small>
                         @endif
                     @endif
                 </strong></td>

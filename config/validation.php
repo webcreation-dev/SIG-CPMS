@@ -16,11 +16,11 @@ return [
     'thresholds' => [
         'prepa1' => [
             'moyenne_generale' => 12,
-            'moyenne_scientifique' => 10,
+            'min_scientifique' => 10,
         ],
         'prepa2' => [
             'moyenne_generale' => 12,
-            'moyenne_scientifique' => 8,
+            'min_scientifique' => 8,
         ],
     ],
 

@@ -173,18 +173,62 @@
     <main>
         <section class="informations">
             <ul>
-                <li id="credits-valides" > <strong>Moyenne générale</strong> : <strong>{{ number_format(($moy_generale / $count_ues), 2, '.', '');  }}</strong> </li>
+                @php
+                    // Chargement de la configuration
+                    $validation_config = config('validation');
+                    
+                    // Détermination du niveau (Prepa 1 ou Prepa 2)
+                    $prep_level = in_array($semester, ['semester1', 'semester2']) ? 'prepa1' : 'prepa2';
+                    $thresholds = $validation_config['thresholds'][$prep_level];
+                    
+                    // Récupération des UEs scientifiques pour le semestre
+                    $scientific_ues_names = $validation_config['scientific_ues'][$semester] ?? [];
+                    // Normalisation des noms pour comparaison
+                    $scientific_ues_names = array_map('trim', $scientific_ues_names);
+
+                    // Calcul de la moyenne générale
+                    $moyenne_generale_finale = ($count_ues > 0) ? ($moy_generale / $count_ues) : 0;
+                    
+                    // Vérification de la condition scientifique (Chaque UE scientifique doit avoir au moins min_scientifique)
+                    $scientific_condition_met = true;
+                    
+                    // Récupération de toutes les UEs du semestre (déjà récupéré dans $ues en haut)
+                    foreach ($ues as $ue) {
+                        // Si l'UE est dans la liste des scientifiques
+                        if (in_array(trim($ue->name), $scientific_ues_names)) {
+                            // Récupérer la note finale de l'UE
+                            if ($ue->status == 'singular') {
+                                $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
+                                $note_val = is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up;
+                            } else {
+                                // Pour les UE multiples, on recalcule la moyenne UE
+                                $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
+                                $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
+                                $notes_ue = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
+                                $note_val = $notes_ue->sum(function ($n) {
+                                    return $n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu;
+                                }) / ($ecues_count > 0 ? $ecues_count : 1);
+                            }
+                            
+                            // Vérification du seuil
+                            if ($note_val < $thresholds['min_scientifique']) {
+                                $scientific_condition_met = false;
+                            }
+                        }
+                    }
+
+                    // Détermination du status final
+                    $is_validated = ($moyenne_generale_finale >= $thresholds['moyenne_generale']) && $scientific_condition_met;
+                    
+                    $appreciation = $is_validated ? "Validé" : "Non Validé";
+                @endphp
+
+                <li id="credits-valides" > <strong>Moyenne générale</strong> : <strong>{{ number_format($moyenne_generale_finale, 2, '.', '');  }}</strong> </li>
                 {{-- <li id="moyenne">Nombre de crédits validés : <strong>{{$credit_validés}}</strong> </li> --}}
                 {{-- <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li> --}}
                 <br>
-
-                {{-- @if(in_array($semester, App\Models\TeachingUnit::SEMESTER_FINAL))
-                    <li id="credits-valides" > <strong>Total d'heures d'absence annuel</strong> : <strong>{{ $student->total_hours_absence  }}</strong> </li>
-                    <li id="moyenne">Total d'heures d'absence excusées : <strong>{{$student->total_hours_excused_absence }}</strong> </li>
-                    <li id="credits-non-valides">Total d'heures d'absence non excusés : <strong>{{$student->total_hours_unexcused_absence }}</strong> </li>
-                    <br>
-                @endif --}}
-                <li>Appréciation : <span id="credits-non-valides"><strong>{{App\Models\Note::getAppreciation(($moy_generale / $count_ues))}}</strong></span></li>
+                
+                <li>Appréciation : <span id="credits-non-valides"><strong>{{ $appreciation }}</strong></span></li>
             </ul>
         </section>
 
