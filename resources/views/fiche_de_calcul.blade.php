@@ -191,12 +191,6 @@
                         Validé
                     @else
                         Non Validé
-                        @if(!$moyenne_generale_valid)
-                            <br><small>(MG < {{ $thresholds['moyenne_generale'] }})</small>
-                        @endif
-                        @if(!$scientific_condition_met)
-                            <br><small>(UE Sci < {{ $thresholds['min_scientifique'] }})</small>
-                        @endif
                     @endif
                 </strong></td>
             </tr>
