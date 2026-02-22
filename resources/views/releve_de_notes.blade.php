@@ -144,8 +144,8 @@
                                 {{ rtrim(rtrim(number_format(is_null((App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up)) ? (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_ecu) : (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up), 2, '.', ''), '0'), '.') }}
                             </strong></td>
                             <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>  {{ rtrim(rtrim(number_format($moy_ue, 2, '.', ''), '0'), '.') }} </strong></td>
-                            {{-- <td style="text-align: center;">{{$note?->freq_catch_up}}</td>
-                            <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td> --}}
+                            {{-- <td style="text-align: center;">{{$note?->freq_catch_up}}</td> --}}
+                            {{-- <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td> --}}
                         </tr>
                         @foreach ($ecues_without_first as $ecue)
                             <tr>

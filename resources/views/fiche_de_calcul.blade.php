@@ -57,27 +57,46 @@
             <tbody>
                 @php
                     $ues = App\Models\TeachingUnit::where('type', $student->classroom->type)->where('semester', $semester)->get();
-
                     $count_ues = count($ues);
-
                     $moy_generale = 0;
-                    
-                    // Variables pour la validation CPMS
-                    $moyennes_ue = []; // Tableau pour stocker toutes les moyennes d'UE
-                    $all_ue_valid = true; // Flag pour vérifier si toutes les UE sont >= 8
 
                     // Charger la configuration
                     $validation_config = config('validation');
-                    $scientific_ues_names = $validation_config['scientific_ues'][$semester] ?? [];
-
-                    // Variables pour le calcul de la moyenne scientifique
-                    $total_weighted_scientific = 0;
-                    $total_scientific_credits = 0;
-
+                    
                     // Déterminer le type de prépa
                     $prep_type = in_array($semester, ['semester1', 'semester2']) ? 'prepa1' : 'prepa2';
                     $thresholds = $validation_config['thresholds'][$prep_type];
+                    
+                    $scientific_ues_names = $validation_config['scientific_ues'][$semester] ?? [];
+                    $scientific_ues_names = array_map('trim', $scientific_ues_names);
 
+                    // --- PREMIER PASSAGE : Calcul de la MG pour définir l'appréciation par UE ---
+                    $moy_generale_preview = 0;
+                    foreach ($ues as $ue) {
+                        if($ue->status == 'singular') {
+                            $n = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
+                            $moy_generale_preview += is_null($n->moy_catch_up) ? $n->moy_ecu : $n->moy_catch_up;
+                        } else {
+                            $e_ids = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
+                            $ns = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $e_ids)->get();
+                            $c = $e_ids->count();
+                            $moy_generale_preview += $ns->sum(function ($x) { return $x->moy_catch_up !== null ? $x->moy_catch_up : $x->moy_ecu; }) / ($c ?: 1);
+                        }
+                    }
+                    $moyenne_generale_finale = ($count_ues > 0) ? ($moy_generale_preview / $count_ues) : 0;
+
+                    if (!function_exists('getUeAppreciation')) {
+                        function getUeAppreciation($moy_ue, $moy_gen, $is_sci, $min_sci) {
+                            if ($moy_gen < 12) {
+                                return ($moy_ue >= 12) ? 'Validé' : 'Non Validé';
+                            } else {
+                                if ($is_sci) {
+                                    return ($moy_ue >= $min_sci) ? 'Validé' : 'Non Validé';
+                                }
+                                return 'Validé';
+                            }
+                        }
+                    }
                 @endphp
 
             @foreach ($ues as $ue)
@@ -89,19 +108,8 @@
                         $moy_ue_final = is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up;
                         $moy_generale += $moy_ue_final;
                         
-                        // Stocker la moyenne de l'UE pour la validation
-                        $moyennes_ue[] = $moy_ue_final;
-                        
-                        // Vérifier si cette UE est valide (>= 8)
-                        if ($moy_ue_final < 8) {
-                            $all_ue_valid = false;
-                        }
-
-                        // Vérifier si cette UE est scientifique
-                        if (in_array(trim($ue->name), array_map('trim', $scientific_ues_names))) {
-                            $total_weighted_scientific += $moy_ue_final * $ue->credit;
-                            $total_scientific_credits += $ue->credit;
-                        }
+                        $is_sci = in_array(trim($ue->name), $scientific_ues_names);
+                        $appreciation = getUeAppreciation($moy_ue_final, $moyenne_generale_finale, $is_sci, $thresholds['min_scientifique']);
                     @endphp
 
 
@@ -118,13 +126,7 @@
                         <td><strong>{{ is_null($note->moy_ecu) ? '' : rtrim(rtrim(number_format($note?->moy_ecu, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>{{ is_null($note->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>{{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }}</strong></td>
-                        <td><strong>
-                                @if($moy_ue_final >= 8)
-                                    Validé
-                                @else
-                                    Non Validé
-                                @endif
-                            </strong></td>
+                        <td><strong>{{ $appreciation }}</strong></td>
                         </tr>
 
                 @else
@@ -139,23 +141,12 @@
 
                         $moy_ue = $notes->sum(function ($note) {
                             return $note->moy_catch_up !== null ? $note->moy_catch_up : $note->moy_ecu;
-                        }) / $ecues_count;
+                        }) / ($ecues_count ?: 1);
 
                         $moy_generale += $moy_ue;
                         
-                        // Stocker la moyenne de l'UE pour la validation
-                        $moyennes_ue[] = $moy_ue;
-                        
-                        // Vérifier si cette UE est valide (>= 8)
-                        if ($moy_ue < 8) {
-                            $all_ue_valid = false;
-                        }
-
-                        // Vérifier si cette UE est scientifique
-                        if (in_array(trim($ue->name), array_map('trim', $scientific_ues_names))) {
-                            $total_weighted_scientific += $moy_ue * $ue->credit;
-                            $total_scientific_credits += $ue->credit;
-                        }
+                        $is_sci = in_array(trim($ue->name), $scientific_ues_names);
+                        $appreciation = getUeAppreciation($moy_ue, $moyenne_generale_finale, $is_sci, $thresholds['min_scientifique']);
 
                     @endphp
 
@@ -166,13 +157,7 @@
                         <td colspan="9"></td>
 
                         <td rowspan="{{$ecues_count + 1}}" style="vertical-align: top; "><strong>{{ rtrim(rtrim(number_format($moy_ue, 2, '.', ''), '0'), '.') }}</strong></td>
-                        <td rowspan="{{$ecues_count + 1}}" ><strong>
-    @if($moy_ue >= 8)
-        Validé
-    @else
-        Non Validé
-    @endif
-</strong></td>
+                        <td rowspan="{{$ecues_count + 1}}" ><strong>{{ $appreciation }}</strong></td>
                     </tr>
                     @foreach ($ecues as $ecue)
                                 @php
@@ -197,10 +182,9 @@
             @endforeach
 
             @php
-                // Calcul de la moyenne générale
-                $moyenne_generale_finale = $moy_generale / $count_ues;
+                // Moyenne générale déjà calculée, on la récupère ($moyenne_generale_finale)
                 
-                // --- Logique de validation CPMS ---
+                // --- Logique de validation CPMS globale pour le semestre ---
                 
                 // 1. Validation de la Moyenne Générale
                 $moyenne_generale_valid = $moyenne_generale_finale >= $thresholds['moyenne_generale'];
