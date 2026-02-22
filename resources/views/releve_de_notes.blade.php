@@ -69,10 +69,15 @@
             <tbody>
 
                 @php
-                    $ues = App\Models\TeachingUnit::where('type', $student->classroom->type)->where('semester', $semester)->get();
+                    // OPTIMISATION DES REQUETES BDD (N+1 Queries fix)
+                    $ues = App\Models\TeachingUnit::with('elementTeachingUnits')->where('type', $student->classroom->type)->where('semester', $semester)->get();
+                    $all_notes = App\Models\Note::where('student_id', $studentId)->get();
+
+                    // Indexation pour éviter les requêtes N+1
+                    $notes_by_ue = $all_notes->whereNotNull('teaching_unit_id')->keyBy('teaching_unit_id');
+                    $notes_by_ecue = $all_notes->whereNotNull('element_teaching_unit_id')->keyBy('element_teaching_unit_id');
 
                     $count_ues = count($ues);
-
                     $moy_generale = 0;
 
                     $credit_validés = 0;
@@ -84,10 +89,11 @@
                     @if($ue->status == 'singular')
 
                         @php
-                            $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
-                            $moy_generale += is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up;
+                            $note = $notes_by_ue->get($ue->id);
+                            $moy_ue_final = $note ? (is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up) : 0;
+                            $moy_generale += $moy_ue_final;
 
-                            if( (is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up) >= 12){
+                            if($moy_ue_final >= 12){
                                 $credit_validés += $ue->credit;
                             }else{
                                 $credit_non_validés += $ue->credit;
@@ -101,68 +107,65 @@
                             <td>{{$ue->name}}</td>
                             <td style="text-align: center;">{{$ue->credit}}</td>
 
-                            <td style="text-align: center;"><strong> {{ rtrim(rtrim(number_format((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up), 2, '.', ''), '0'), '.') }} </strong></td>
-                            <td style="text-align: center;"><strong> {{ rtrim(rtrim(number_format((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up), 2, '.', ''), '0'), '.') }}</strong></td>
+                            <td style="text-align: center;"><strong> {{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }} </strong></td>
+                            <td style="text-align: center;"><strong> {{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }}</strong></td>
                             {{-- <td style="text-align: center;">{{$note?->freq_catch_up}}</td> --}}
-                            {{-- <td style="text-align: center;"><strong>{{App\Models\Note::getAppreciation((is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up))}}</strong></td> --}}
+                            {{-- <td style="text-align: center;"><strong>{{App\Models\Note::getAppreciation($moy_ue_final)}}</strong></td> --}}
                         </tr>
                     @else
                         @php
-                            $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
+                            $ecues = $ue->elementTeachingUnits;
+                            $ecues_count = $ecues->count() ?: 1;
 
-                            $ecue_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->first();
+                            $ecue_first = $ecues->first();
+                            $ecues_without_first = $ecues->except($ecue_first ? $ecue_first->id : 0);
 
-                            $ecues_without_first = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get()->except($ecue_first->id);
+                            $sum_ue = 0;
+                            foreach($ecues as $ecue) {
+                                $n = $notes_by_ecue->get($ecue->id);
+                                $sum_ue += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
+                            }
+                            $moy_ue_final = $sum_ue / $ecues_count;
 
-                            $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
-                            $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
+                            $moy_generale += $moy_ue_final;
 
-                            // $moy_ue = $notes->sum('moy_ecu') / $ecues_count;
-
-                            $moy_ue = $notes->sum(function ($note) {
-                                return $note->moy_catch_up !== null ? $note->moy_catch_up : $note->moy_ecu;
-                            }) / $ecues_count;
-
-
-                            $moy_generale += $moy_ue;
-
-                            if($moy_ue >= 12){
-
+                            if($moy_ue_final >= 12){
                                 $credit_validés += $ue->credit;
                             }else{
                                 $credit_non_validés += $ue->credit;
                             }
-
+                            
+                            $first_note = $ecue_first ? $notes_by_ecue->get($ecue_first->id) : null;
+                            $first_moy = $first_note ? (is_null($first_note->moy_catch_up) ? $first_note->moy_ecu : $first_note->moy_catch_up) : 0;
                         @endphp
 
                         <tr>
                             <td rowspan="{{$ecues_count}}" >{{App\Models\TeachingUnit::UE_NAMES[$ue->name] ?? $ue->name}}</td>
                             <td style="text-align: center;" rowspan="{{$ecues_count}}" >{{$ue->credit}}</td>
-                            <td>{{$ecue_first->name}}</td>
-                            <td style="text-align: center;">{{$ecue_first->credit}}</td>
+                            <td>{{$ecue_first ? $ecue_first->name : ''}}</td>
+                            <td style="text-align: center;">{{$ecue_first ? $ecue_first->credit : ''}}</td>
                             <td style="text-align: center;"><strong>
-                                {{ rtrim(rtrim(number_format(is_null((App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up)) ? (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_ecu) : (App\Models\ElementTeachingUnit::getNote($ecue_first->id, $studentId)?->moy_catch_up), 2, '.', ''), '0'), '.') }}
+                                {{ rtrim(rtrim(number_format($first_moy, 2, '.', ''), '0'), '.') }}
                             </strong></td>
-                            <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>  {{ rtrim(rtrim(number_format($moy_ue, 2, '.', ''), '0'), '.') }} </strong></td>
-                            {{-- <td style="text-align: center;">{{$note?->freq_catch_up}}</td> --}}
-                            {{-- <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue)}}</strong> </td> --}}
+                            <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>  {{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }} </strong></td>
+                            {{-- <td style="text-align: center;">{{$note?->freq_catch_up}}</td>
+                            <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue_final)}}</strong> </td> --}}
                         </tr>
                         @foreach ($ecues_without_first as $ecue)
                             <tr>
                                 @php
-                                    $note = App\Models\Note::where('student_id', $studentId)->where('element_teaching_unit_id', $ecue->id)->first();
+                                    $note = $notes_by_ecue->get($ecue->id);
+                                    $ecue_moy = $note ? (is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up) : 0;
                                 @endphp
 
                                 <td>{{$ecue->name}}</td>
                                 <td style="text-align: center;" >{{$ecue->credit}}</td>
-                                <td style="text-align: center;" ><strong>{{ rtrim(rtrim(number_format( is_null($note->moy_catch_up) ? $note?->moy_ecu : $note->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
+                                <td style="text-align: center;" ><strong>{{ rtrim(rtrim(number_format( $ecue_moy, 2, '.', ''), '0'), '.') }}</strong></td>
                                 {{-- <td style="text-align: center;" >{{$note?->freq_catch_up}}</td> --}}
                             </tr>
                         @endforeach
                     @endif
                 @endforeach
-
-
             </tbody>
         </table>
     </main>
@@ -192,22 +195,23 @@
                     // Vérification de la condition scientifique (Chaque UE scientifique doit avoir au moins min_scientifique)
                     $scientific_condition_met = true;
                     
-                    // Récupération de toutes les UEs du semestre (déjà récupéré dans $ues en haut)
+                    // Utilisation des notes préchargées ("Eager loaded")
                     foreach ($ues as $ue) {
                         // Si l'UE est dans la liste des scientifiques
                         if (in_array(trim($ue->name), $scientific_ues_names)) {
                             // Récupérer la note finale de l'UE
                             if ($ue->status == 'singular') {
-                                $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
-                                $note_val = is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up;
+                                $note = $notes_by_ue->get($ue->id);
+                                $note_val = $note ? (is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up) : 0;
                             } else {
-                                // Pour les UE multiples, on recalcule la moyenne UE
-                                $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
-                                $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
-                                $notes_ue = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
-                                $note_val = $notes_ue->sum(function ($n) {
-                                    return $n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu;
-                                }) / ($ecues_count > 0 ? $ecues_count : 1);
+                                $ecues = $ue->elementTeachingUnits;
+                                $ecues_count = $ecues->count() ?: 1;
+                                $sum_ue = 0;
+                                foreach($ecues as $ecue) {
+                                    $n = $notes_by_ecue->get($ecue->id);
+                                    $sum_ue += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
+                                }
+                                $note_val = $sum_ue / $ecues_count;
                             }
                             
                             // Vérification du seuil

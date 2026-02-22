@@ -56,98 +56,85 @@
             </thead>
             <tbody>
                 @php
-                    $ues = App\Models\TeachingUnit::where('type', $student->classroom->type)->where('semester', $semester)->get();
+                    // OPTIMISATION DES REQUETES BDD (N+1 Queries fix)
+                    $ues = App\Models\TeachingUnit::with('elementTeachingUnits')->where('type', $student->classroom->type)->where('semester', $semester)->get();
+                    $all_notes = App\Models\Note::where('student_id', $studentId)->get();
+                    
+                    // Indexation pour accès instantané (O(1)) au lieu de multiples requêtes BDD (N+1 limitant)
+                    $notes_by_ue = $all_notes->whereNotNull('teaching_unit_id')->keyBy('teaching_unit_id');
+                    $notes_by_ecue = $all_notes->whereNotNull('element_teaching_unit_id')->keyBy('element_teaching_unit_id');
+
                     $count_ues = count($ues);
                     $moy_generale = 0;
+                    $scientific_condition_met = true;
 
-                    // Charger la configuration
+                    // Configuration Validation
                     $validation_config = config('validation');
-                    
-                    // Déterminer le type de prépa
                     $prep_type = in_array($semester, ['semester1', 'semester2']) ? 'prepa1' : 'prepa2';
                     $thresholds = $validation_config['thresholds'][$prep_type];
-                    
-                    $scientific_ues_names = $validation_config['scientific_ues'][$semester] ?? [];
-                    $scientific_ues_names = array_map('trim', $scientific_ues_names);
-
-                    // --- PREMIER PASSAGE : Calcul de la MG pour définir l'appréciation par UE ---
-                    $moy_generale_preview = 0;
-                    foreach ($ues as $ue) {
-                        if($ue->status == 'singular') {
-                            $n = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
-                            $moy_generale_preview += is_null($n->moy_catch_up) ? $n->moy_ecu : $n->moy_catch_up;
-                        } else {
-                            $e_ids = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
-                            $ns = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $e_ids)->get();
-                            $c = $e_ids->count();
-                            $moy_generale_preview += $ns->sum(function ($x) { return $x->moy_catch_up !== null ? $x->moy_catch_up : $x->moy_ecu; }) / ($c ?: 1);
-                        }
-                    }
-                    $moyenne_generale_finale = ($count_ues > 0) ? ($moy_generale_preview / $count_ues) : 0;
-
-                    if (!function_exists('getUeAppreciation')) {
-                        function getUeAppreciation($moy_ue, $moy_gen, $is_sci, $min_sci) {
-                            if ($moy_gen < 12) {
-                                return ($moy_ue >= 12) ? 'Validé' : 'Non Validé';
-                            } else {
-                                if ($is_sci) {
-                                    return ($moy_ue >= $min_sci) ? 'Validé' : 'Non Validé';
-                                }
-                                return 'Validé';
-                            }
-                        }
-                    }
+                    $scientific_ues_names = array_map('trim', $validation_config['scientific_ues'][$semester] ?? []);
                 @endphp
 
             @foreach ($ues as $ue)
+                @php
+                    $is_scientific = in_array(trim($ue->name), $scientific_ues_names);
+                    $moy_ue_final = 0;
+                @endphp
+
                 @if($ue->status == 'singular')
 
                     @php
-                        $note = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
-
-                        $moy_ue_final = is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up;
+                        $note = $notes_by_ue->get($ue->id);
+                        $moy_ue_final = $note ? (is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up) : 0;
                         $moy_generale += $moy_ue_final;
                         
-                        $is_sci = in_array(trim($ue->name), $scientific_ues_names);
-                        $appreciation = getUeAppreciation($moy_ue_final, $moyenne_generale_finale, $is_sci, $thresholds['min_scientifique']);
+                        // Vérification CPMS (Seuil Min par UE Scientifique)
+                        if ($is_scientific && $moy_ue_final < $thresholds['min_scientifique']) {
+                            $scientific_condition_met = false;
+                        }
                     @endphp
-
 
                    <tr>
                         <td style="background-color: #ccc;"><strong>{{$ue->name}}</strong></td>
                          <td style="background-color: #ccc;">{{$ue->credit}}</td>
                         <td>{{$note?->i1_points}}</td>
                         <td>{{$note?->i2_points}}</td>
-                        <td><strong>{{ is_null($note->moy_inter) ? '' : number_format($note?->moy_inter, 2, '.', '');  }} </strong></td>
+                        <td><strong>{{ is_null($note?->moy_inter) ? '' : number_format($note?->moy_inter, 2, '.', '');  }} </strong></td>
                         <td>{{$note?->d1_points}}</td>
                         <td>{{$note?->d2_points}}</td>
-                        <td><strong>{{ is_null($note->moy_dev) ? '' : number_format($note?->moy_dev, 2, '.', '');  }}</strong></td>
+                        <td><strong>{{ is_null($note?->moy_dev) ? '' : number_format($note?->moy_dev, 2, '.', '');  }}</strong></td>
                         <td>{{$note?->e_points}}</td>
-                        <td><strong>{{ is_null($note->moy_ecu) ? '' : rtrim(rtrim(number_format($note?->moy_ecu, 2, '.', ''), '0'), '.') }}</strong></td>
-                        <td><strong>{{ is_null($note->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
+                        <td><strong>{{ is_null($note?->moy_ecu) ? '' : rtrim(rtrim(number_format($note?->moy_ecu, 2, '.', ''), '0'), '.') }}</strong></td>
+                        <td><strong>{{ is_null($note?->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>{{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }}</strong></td>
-                        <td><strong>{{ $appreciation }}</strong></td>
+                        <td><strong>
+                                @if($moy_ue_final >= 12)
+                                    Validé
+                                @else
+                                    Non Validé
+                                @endif
+                            </strong></td>
                         </tr>
 
                 @else
                 
                     @php
-                        $ecues_count = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->count();
+                        $ecues = $ue->elementTeachingUnits;
+                        $ecues_count = $ecues->count() ?: 1;
 
-                        $ecues = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->get();
-
-                        $ecuesId = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
-                        $notes = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $ecuesId)->get();
-
-                        $moy_ue = $notes->sum(function ($note) {
-                            return $note->moy_catch_up !== null ? $note->moy_catch_up : $note->moy_ecu;
-                        }) / ($ecues_count ?: 1);
-
-                        $moy_generale += $moy_ue;
+                        $sum_ue = 0;
+                        foreach($ecues as $ecue) {
+                            $n = $notes_by_ecue->get($ecue->id);
+                            $sum_ue += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
+                        }
                         
-                        $is_sci = in_array(trim($ue->name), $scientific_ues_names);
-                        $appreciation = getUeAppreciation($moy_ue, $moyenne_generale_finale, $is_sci, $thresholds['min_scientifique']);
-
+                        $moy_ue_final = $sum_ue / $ecues_count;
+                        $moy_generale += $moy_ue_final;
+                        
+                        // Vérification CPMS Scientifique
+                        if ($is_scientific && $moy_ue_final < $thresholds['min_scientifique']) {
+                            $scientific_condition_met = false;
+                        }
                     @endphp
 
                     <tr>
@@ -156,25 +143,31 @@
 
                         <td colspan="9"></td>
 
-                        <td rowspan="{{$ecues_count + 1}}" style="vertical-align: top; "><strong>{{ rtrim(rtrim(number_format($moy_ue, 2, '.', ''), '0'), '.') }}</strong></td>
-                        <td rowspan="{{$ecues_count + 1}}" ><strong>{{ $appreciation }}</strong></td>
+                        <td rowspan="{{$ecues_count + 1}}" style="vertical-align: top; "><strong>{{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }}</strong></td>
+                        <td rowspan="{{$ecues_count + 1}}" ><strong>
+                            @if($moy_ue_final >= 12)
+                                Validé
+                            @else
+                                Non Validé
+                            @endif
+                        </strong></td>
                     </tr>
                     @foreach ($ecues as $ecue)
                                 @php
-                                    $note = App\Models\Note::where('student_id', $studentId)->where('element_teaching_unit_id', $ecue->id)->first();
+                                    $note = $notes_by_ecue->get($ecue->id);
                                 @endphp
                         <tr>
                             <td>{{$ecue->name}}</td>
                             <td>{{$ecue->credit}}</td>
                             <td>{{$note?->i1_points}}</td>
                             <td>{{$note?->i2_points}}</td>
-                            <td><strong>{{ is_null($note->moy_inter) ? '' : number_format($note?->moy_inter, 2, '.', '');  }}</strong></td>
+                            <td><strong>{{ is_null($note?->moy_inter) ? '' : number_format($note?->moy_inter, 2, '.', '');  }}</strong></td>
                             <td>{{$note?->d1_points}}</td>
                             <td>{{$note?->d2_points}}</td>
-                            <td><strong>{{ is_null($note->moy_dev) ? '' : number_format($note?->moy_dev, 2, '.', '');  }}</strong></td>
+                            <td><strong>{{ is_null($note?->moy_dev) ? '' : number_format($note?->moy_dev, 2, '.', '');  }}</strong></td>
                             <td>{{$note?->e_points}}</td>
-                            <td><strong>{{ is_null($note->moy_ecu) ? '' : rtrim(rtrim(number_format($note?->moy_ecu, 2, '.', ''), '0'), '.') }}</strong></td>
-                            <td><strong>{{ is_null($note->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
+                            <td><strong>{{ is_null($note?->moy_ecu) ? '' : rtrim(rtrim(number_format($note?->moy_ecu, 2, '.', ''), '0'), '.') }}</strong></td>
+                            <td><strong>{{ is_null($note?->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
                         </tr>
                     @endforeach
 
@@ -182,40 +175,11 @@
             @endforeach
 
             @php
-                // Moyenne générale déjà calculée, on la récupère ($moyenne_generale_finale)
+                // Calcul de la moyenne générale
+                $moyenne_generale_finale = $count_ues > 0 ? $moy_generale / $count_ues : 0;
                 
-                // --- Logique de validation CPMS globale pour le semestre ---
-                
-                // 1. Validation de la Moyenne Générale
+                // --- Logique de validation CPMS ---
                 $moyenne_generale_valid = $moyenne_generale_finale >= $thresholds['moyenne_generale'];
-
-                // 2. Validation des UEs Scientifiques (Chaque UE doit être >= min_scientifique)
-                $scientific_condition_met = true;
-                
-                 foreach ($ues as $ue) {
-                    // Ignorer si pas scientifique
-                    if (!in_array(trim($ue->name), array_map('trim', $scientific_ues_names))) {
-                        continue;
-                    }
-
-                    // Calcul Note UE
-                    if ($ue->status == 'singular') {
-                        $n = App\Models\Note::where('student_id', $studentId)->where('teaching_unit_id', $ue->id)->first();
-                        $val = is_null($n->moy_catch_up) ? $n->moy_ecu : $n->moy_catch_up;
-                    } else {
-                         $e_ids = App\Models\ElementTeachingUnit::where('teaching_unit_id', $ue->id)->pluck('id');
-                         $ns = App\Models\Note::where('student_id', $studentId)->whereIn('element_teaching_unit_id', $e_ids)->get();
-                         $count = $e_ids->count();
-                         $val = $ns->sum(function ($x) { return $x->moy_catch_up ?? $x->moy_ecu; }) / ($count?:1);
-                    }
-                    
-                    // Vérif seuil min_scientifique
-                    if ($val < $thresholds['min_scientifique']) {
-                        $scientific_condition_met = false;
-                        break; 
-                    }
-                }
-
                 $semestre_valide = $moyenne_generale_valid && $scientific_condition_met;
             @endphp
  
@@ -236,7 +200,6 @@
                     @endif
                 </strong></td>
             </tr>
-
             </tbody>
         </table>
     </main>
