@@ -68,6 +68,15 @@
             </thead>
             <tbody>
 
+                @php
+                    // OPTIMISATION DES REQUETES BDD (N+1 Queries fix)
+                    $ues = App\Models\TeachingUnit::with('elementTeachingUnits')->where('type', $student->classroom->type)->where('semester', $semester)->get();
+                    $all_notes = App\Models\Note::where('student_id', $studentId)->get();
+
+                    // Indexation pour éviter les requêtes N+1
+                    $notes_by_ue = $all_notes->whereNotNull('teaching_unit_id')->keyBy('teaching_unit_id');
+                    $notes_by_ecue = $all_notes->whereNotNull('element_teaching_unit_id')->keyBy('element_teaching_unit_id');
+
                     $count_ues = count($ues);
                     $moy_generale_temp = 0;
                     
