@@ -69,6 +69,7 @@
             <tbody>
 
                 @php
+                    ob_start();
                     // OPTIMISATION DES REQUETES BDD (N+1 Queries fix)
                     $ues = App\Models\TeachingUnit::with('elementTeachingUnits')->where('type', $student->classroom->type)->where('semester', $semester)->get();
                     $all_notes = App\Models\Note::where('student_id', $studentId)->get();
@@ -109,8 +110,7 @@
 
                             <td style="text-align: center;"><strong> {{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }} </strong></td>
                             <td style="text-align: center;"><strong> {{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }}</strong></td>
-                            {{-- <td style="text-align: center;">{{$note?->freq_catch_up}}</td> --}}
-                            {{-- <td style="text-align: center;"><strong>{{App\Models\Note::getAppreciation($moy_ue_final)}}</strong></td> --}}
+                            <td style="text-align: center;"><strong><!-- UE_APPRECIATION_{{$ue->id}} --></strong></td>
                         </tr>
                     @else
                         @php
@@ -148,8 +148,7 @@
                                 {{ rtrim(rtrim(number_format($first_moy, 2, '.', ''), '0'), '.') }}
                             </strong></td>
                             <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>  {{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }} </strong></td>
-                            {{-- <td style="text-align: center;">{{$note?->freq_catch_up}}</td>
-                            <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong>{{App\Models\Note::getAppreciation($moy_ue_final)}}</strong> </td> --}}
+                            <td style="text-align: center;" rowspan="{{$ecues_count}}"><strong><!-- UE_APPRECIATION_{{$ue->id}} --></strong></td>
                         </tr>
                         @foreach ($ecues_without_first as $ecue)
                             <tr>
@@ -168,6 +167,10 @@
                 @endforeach
             </tbody>
         </table>
+        @php
+            $html = ob_get_clean();
+            // Le post-processing sera fait plus bas après le calcul de la moyenne générale
+        @endphp
     </main>
     <header>
         <br>
@@ -230,6 +233,32 @@
                     $is_validated = ($moyenne_generale_finale >= $thresholds['moyenne_generale']) && $scientific_condition_met && $non_scientific_condition_met;
                     
                     $appreciation = $is_validated ? "Validé" : "Non Validé";
+
+                    foreach ($ues as $ue) {
+                        if ($ue->status == 'singular') {
+                            $n = $notes_by_ue->get($ue->id);
+                            $val = $n ? (is_null($n->moy_catch_up) ? $n->moy_ecu : $n->moy_catch_up) : 0;
+                        } else {
+                            $e_ids = $ue->elementTeachingUnits->pluck('id');
+                            $sum = 0;
+                            foreach($e_ids as $id) {
+                                $n = $notes_by_ecue->get($id);
+                                $sum += $n ? ($n->moy_catch_up ?? $n->moy_ecu) : 0;
+                            }
+                            $val = $sum / ($e_ids->count() ?: 1);
+                        }
+
+                        $is_sci = in_array(trim($ue->name), $scientific_ues_names);
+                        $threshold = $is_sci ? $thresholds['min_scientifique'] : $thresholds['min_non_scientifique'];
+                        
+                        $line_appr = "Non Validé";
+                        if ($val >= 12 || ($moyenne_generale_finale >= 12 && $val >= $threshold)) {
+                            $line_appr = "Validé";
+                        }
+                        
+                        $html = str_replace("<!-- UE_APPRECIATION_{{$ue->id}} -->", $line_appr, $html);
+                    }
+                    echo $html;
                 @endphp
 
                 <li id="credits-valides" > <strong>Moyenne générale</strong> : <strong>{{ number_format($moyenne_generale_finale, 2, '.', '');  }}</strong> </li>
