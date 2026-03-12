@@ -17,10 +17,12 @@ return [
         'prepa1' => [
             'moyenne_generale' => 12,
             'min_scientifique' => 10,
+            'min_non_scientifique' => 10,
         ],
         'prepa2' => [
             'moyenne_generale' => 12,
             'min_scientifique' => 8,
+            'min_non_scientifique' => 10,
         ],
     ],
 

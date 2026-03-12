@@ -67,6 +67,7 @@
                     $count_ues = count($ues);
                     $moy_generale = 0;
                     $scientific_condition_met = true;
+                    $non_scientific_condition_met = true;
 
                     // Configuration Validation
                     $validation_config = config('validation');
@@ -91,6 +92,11 @@
                         // Vérification CPMS (Seuil Min par UE Scientifique)
                         if ($is_scientific && $moy_ue_final < $thresholds['min_scientifique']) {
                             $scientific_condition_met = false;
+                        }
+
+                        // Vérification CPMS (Seuil Min par UE Non Scientifique)
+                        if (!$is_scientific && $moy_ue_final < $thresholds['min_non_scientifique']) {
+                            $non_scientific_condition_met = false;
                         }
                     @endphp
 
@@ -134,6 +140,11 @@
                         // Vérification CPMS Scientifique
                         if ($is_scientific && $moy_ue_final < $thresholds['min_scientifique']) {
                             $scientific_condition_met = false;
+                        }
+
+                        // Vérification CPMS Non Scientifique
+                        if (!$is_scientific && $moy_ue_final < $thresholds['min_non_scientifique']) {
+                            $non_scientific_condition_met = false;
                         }
                     @endphp
 
@@ -180,7 +191,7 @@
                 
                 // --- Logique de validation CPMS ---
                 $moyenne_generale_valid = $moyenne_generale_finale >= $thresholds['moyenne_generale'];
-                $semestre_valide = $moyenne_generale_valid && $scientific_condition_met;
+                $semestre_valide = $moyenne_generale_valid && $scientific_condition_met && $non_scientific_condition_met;
             @endphp
  
             <tr>
@@ -191,6 +202,15 @@
                         Validé
                     @else
                         Non Validé
+                        @if(!$moyenne_generale_valid)
+                            <br><small>(MG < {{ $thresholds['moyenne_generale'] }})</small>
+                        @endif
+                        @if(!$scientific_condition_met)
+                            <br><small>(UE Sci < {{ $thresholds['min_scientifique'] }})</small>
+                        @endif
+                        @if(!$non_scientific_condition_met)
+                            <br><small>(UE Non Sci < {{ $thresholds['min_non_scientifique'] }})</small>
+                        @endif
                     @endif
                 </strong></td>
             </tr>

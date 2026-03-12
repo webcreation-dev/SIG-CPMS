@@ -192,37 +192,42 @@
                     // Calcul de la moyenne générale
                     $moyenne_generale_finale = ($count_ues > 0) ? ($moy_generale / $count_ues) : 0;
                     
-                    // Vérification de la condition scientifique (Chaque UE scientifique doit avoir au moins min_scientifique)
+                    // Vérification des conditions par UE (Minima requis)
                     $scientific_condition_met = true;
+                    $non_scientific_condition_met = true;
                     
                     // Utilisation des notes préchargées ("Eager loaded")
                     foreach ($ues as $ue) {
-                        // Si l'UE est dans la liste des scientifiques
-                        if (in_array(trim($ue->name), $scientific_ues_names)) {
-                            // Récupérer la note finale de l'UE
-                            if ($ue->status == 'singular') {
-                                $note = $notes_by_ue->get($ue->id);
-                                $note_val = $note ? (is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up) : 0;
-                            } else {
-                                $ecues = $ue->elementTeachingUnits;
-                                $ecues_count = $ecues->count() ?: 1;
-                                $sum_ue = 0;
-                                foreach($ecues as $ecue) {
-                                    $n = $notes_by_ecue->get($ecue->id);
-                                    $sum_ue += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
-                                }
-                                $note_val = $sum_ue / $ecues_count;
+                        $is_scientific = in_array(trim($ue->name), $scientific_ues_names);
+                        
+                        // Récupérer la note finale de l'UE
+                        if ($ue->status == 'singular') {
+                            $note = $notes_by_ue->get($ue->id);
+                            $note_val = $note ? (is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up) : 0;
+                        } else {
+                            $ecues = $ue->elementTeachingUnits;
+                            $ecues_count = $ecues->count() ?: 1;
+                            $sum_ue = 0;
+                            foreach($ecues as $ecue) {
+                                $n = $notes_by_ecue->get($ecue->id);
+                                $sum_ue += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
                             }
-                            
-                            // Vérification du seuil
-                            if ($note_val < $thresholds['min_scientifique']) {
-                                $scientific_condition_met = false;
-                            }
+                            $note_val = $sum_ue / $ecues_count;
+                        }
+                        
+                        // Vérification du seuil scientifique
+                        if ($is_scientific && $note_val < $thresholds['min_scientifique']) {
+                            $scientific_condition_met = false;
+                        }
+                        
+                        // Vérification du seuil non-scientifique
+                        if (!$is_scientific && $note_val < $thresholds['min_non_scientifique']) {
+                            $non_scientific_condition_met = false;
                         }
                     }
 
                     // Détermination du status final
-                    $is_validated = ($moyenne_generale_finale >= $thresholds['moyenne_generale']) && $scientific_condition_met;
+                    $is_validated = ($moyenne_generale_finale >= $thresholds['moyenne_generale']) && $scientific_condition_met && $non_scientific_condition_met;
                     
                     $appreciation = $is_validated ? "Validé" : "Non Validé";
                 @endphp
@@ -232,7 +237,19 @@
                 {{-- <li id="credits-non-valides">Nombre de crédits non validés : <strong>{{$credit_non_validés}}</strong> </li> --}}
                 <br>
                 
-                <li>Appréciation : <span id="credits-non-valides"><strong>{{ $appreciation }}</strong></span></li>
+                <li>Appréciation : <span id="credits-non-valides"><strong>{{ $appreciation }}
+                    @if(!$is_validated)
+                        @if($moyenne_generale_finale < $thresholds['moyenne_generale'])
+                            <br><small>(MG < {{ $thresholds['moyenne_generale'] }})</small>
+                        @endif
+                        @if(!$scientific_condition_met)
+                            <br><small>(UE Sci < {{ $thresholds['min_scientifique'] }})</small>
+                        @endif
+                        @if(!$non_scientific_condition_met)
+                            <br><small>(UE Non Sci < {{ $thresholds['min_non_scientifique'] }})</small>
+                        @endif
+                    @endif
+                </strong></span></li>
             </ul>
         </section>
 
