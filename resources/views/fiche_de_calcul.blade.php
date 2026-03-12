@@ -55,18 +55,28 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    ob_start();
-                    // OPTIMISATION DES REQUETES BDD (N+1 Queries fix)
-                    $ues = App\Models\TeachingUnit::with('elementTeachingUnits')->where('type', $student->classroom->type)->where('semester', $semester)->get();
-                    $all_notes = App\Models\Note::where('student_id', $studentId)->get();
-                    
-                    // Indexation pour accès instantané (O(1)) au lieu de multiples requêtes BDD (N+1 limitant)
-                    $notes_by_ue = $all_notes->whereNotNull('teaching_unit_id')->keyBy('teaching_unit_id');
-                    $notes_by_ecue = $all_notes->whereNotNull('element_teaching_unit_id')->keyBy('element_teaching_unit_id');
-
                     $count_ues = count($ues);
-                    $moy_generale = 0;
+                    $moy_generale_temp = 0;
+                    
+                    // PRE-CALCUL DE LA MOYENNE GENERALE pour l'affichage des appréciations par ligne
+                    foreach ($ues as $ue) {
+                        if($ue->status == 'singular') {
+                            $note = $notes_by_ue->get($ue->id);
+                            $moy_generale_temp += $note ? (is_null($note->moy_catch_up) ? $note->moy_ecu : $note->moy_catch_up) : 0;
+                        } else {
+                            $ecues_list = $ue->elementTeachingUnits;
+                            $count_e = $ecues_list->count() ?: 1;
+                            $sum_e = 0;
+                            foreach($ecues_list as $ec) {
+                                $n = $notes_by_ecue->get($ec->id);
+                                $sum_e += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
+                            }
+                            $moy_generale_temp += $sum_e / $count_e;
+                        }
+                    }
+                    $moyenne_generale_finale = $count_ues > 0 ? $moy_generale_temp / $count_ues : 0;
+
+                    $moy_generale = 0; // Sera utilisé pour le calcul final de validation
                     $scientific_condition_met = true;
                     $non_scientific_condition_met = true;
 
@@ -115,7 +125,10 @@
                         <td><strong>{{ is_null($note?->moy_catch_up) ? '' : rtrim(rtrim(number_format($note?->moy_catch_up, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>{{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td><strong>
-                                <!-- UE_APPRECIATION_{{$ue->id}} -->
+                                @php
+                                    $threshold = $is_scientific ? $thresholds['min_scientifique'] : $thresholds['min_non_scientifique'];
+                                    echo ($moy_ue_final >= 12 || ($moyenne_generale_finale >= 12 && $moy_ue_final >= $threshold)) ? 'Validé' : 'Non Validé';
+                                @endphp
                             </strong></td>
                         </tr>
 
@@ -153,7 +166,10 @@
 
                         <td rowspan="{{$ecues_count + 1}}" style="vertical-align: top; "><strong>{{ rtrim(rtrim(number_format($moy_ue_final, 2, '.', ''), '0'), '.') }}</strong></td>
                         <td rowspan="{{$ecues_count + 1}}" ><strong>
-                            <!-- UE_APPRECIATION_{{$ue->id}} -->
+                            @php
+                                $threshold = $is_scientific ? $thresholds['min_scientifique'] : $thresholds['min_non_scientifique'];
+                                echo ($moy_ue_final >= 12 || ($moyenne_generale_finale >= 12 && $moy_ue_final >= $threshold)) ? 'Validé' : 'Non Validé';
+                            @endphp
                         </strong></td>
                     </tr>
                     @foreach ($ecues as $ecue)
@@ -179,9 +195,6 @@
             @endforeach
 
             @php
-                // Calcul de la moyenne générale
-                $moyenne_generale_finale = $count_ues > 0 ? $moy_generale / $count_ues : 0;
-                
                 // --- Logique de validation CPMS ---
                 $moyenne_generale_valid = $moyenne_generale_finale >= $thresholds['moyenne_generale'];
                 $semestre_valide = $moyenne_generale_valid && $scientific_condition_met && $non_scientific_condition_met;
@@ -209,40 +222,6 @@
             </tr>
             </tbody>
         </table>
-
-        @php
-            $html = ob_get_clean();
-            
-            foreach ($ues as $ue) {
-                // Calcul de la note d'UE
-                if ($ue->status == 'singular') {
-                    $n = $notes_by_ue->get($ue->id);
-                    $val = $n ? (is_null($n->moy_catch_up) ? $n->moy_ecu : $n->moy_catch_up) : 0;
-                } else {
-                    $e_ids = $ue->elementTeachingUnits->pluck('id');
-                    $sum = 0;
-                    foreach($e_ids as $id) {
-                        $n = $notes_by_ecue->get($id);
-                        $sum += $n ? ($n->moy_catch_up ?? $n->moy_ecu) : 0;
-                    }
-                    $val = $sum / ($e_ids->count() ?: 1);
-                }
-
-                $is_sci = in_array(trim($ue->name), $scientific_ues_names);
-                $threshold = $is_sci ? $thresholds['min_scientifique'] : $thresholds['min_non_scientifique'];
-                
-                // Logique de validation par ligne d'UE:
-                // 1. Soit l'UE >= 12
-                // 2. Soit MG >= 12 ET UE >= Seuil (8 pour Sci en P2, 10 sinon)
-                $appr = "Non Validé";
-                if ($val >= 12 || ($moyenne_generale_finale >= 12 && $val >= $threshold)) {
-                    $appr = "Validé";
-                }
-                
-                $html = str_replace("<!-- UE_APPRECIATION_{{$ue->id}} -->", $appr, $html);
-            }
-            echo $html;
-        @endphp
     </main>
 
 </body>
