@@ -7,6 +7,7 @@ use App\Models\ElementTeachingUnit;
 use App\Models\Note;
 use App\Models\Student;
 use App\Models\TeachingUnit;
+use App\Services\SemesterValidation;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -79,6 +80,13 @@ class NoteController extends Controller
         ini_set('max_execution_time', 0);
         ini_set('memory_limit','-1');
 
+        $classrooms = Classroom::whereIn('type', ['prepa1', 'prepa2'])->latest('created_at')->take(2)->get();
+        // L'export historique reste inchangé tant qu'aucune nouvelle promotion n'est concernée.
+        if ($classrooms->contains(fn ($classroom) => app(SemesterValidation::class)->ruleForYear((int) date('Y', strtotime($classroom->year))) !== null)) {
+            $students = Student::with('classroom')->whereIn('classroom_id', $classrooms->pluck('id'))->get();
+            return Pdf::loadView('fiche_de_calcul_global_versioned', compact('students'))->stream();
+        }
+
         $pdf = Pdf::loadView('fiche_de_calcul_global');
         return $pdf->stream();
 
@@ -91,13 +99,9 @@ class NoteController extends Controller
      */
     public function create(Request $request)
     {
-        $classroom = Classroom::where('type', $request->classroom_type)->latest()->first();
-
-        if($request->type == 'ue') {
-            $ue = TeachingUnit::find($request->ue_id);
-        }else{
-            $ue = ElementTeachingUnit::find($request->ue_id);
-        }
+        $classroom = $request->filled('classroom_id') ? Classroom::findOrFail($request->classroom_id)
+            : Classroom::where('type', $request->classroom_type)->latest()->firstOrFail();
+        $ue = TeachingUnit::gradingTarget($classroom, (string) $request->type, (int) $request->ue_id);
 
         $type = $request->type;
 
@@ -118,12 +122,9 @@ class NoteController extends Controller
 
         $type = $request->type;
 
-        if($request->type == 'ue') {
-            $ue = TeachingUnit::find($request->ue_id);
-        }else{
-            $ue = ElementTeachingUnit::find($request->ue_id);
-        }
-
+        $ue = TeachingUnit::gradingTarget($classroom, (string) $request->type, (int) $request->ue_id);
+        abort_unless(Student::where('classroom_id', $classroom->id)->whereIn('id', $request->student_id ?? [])->count()
+            === count(array_unique($request->student_id ?? [])), 422);
 
         $students = $request->student_id;
 
@@ -189,7 +190,7 @@ class NoteController extends Controller
             }
         }
 
-        return redirect(route('notes.create',['classroom_type' => $classroom->type, 'ue_id' => $ue->id,'type' => $type]))->with('message','Notes ajouté avec succès');
+        return redirect(route('notes.create',['classroom_type' => $classroom->type, 'classroom_id' => $classroom->id, 'ue_id' => $ue->id,'type' => $type]))->with('message','Notes ajouté avec succès');
     }
 
     /**

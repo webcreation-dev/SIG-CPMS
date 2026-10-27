@@ -1,6 +1,10 @@
 <?php
 
 return [
+    // Ajouter une version et sa date d’effet, sans modifier les versions publiées.
+    'versions' => [
+        2026 => require __DIR__.'/validation_versions/2026.php',
+    ],
     /*
     |--------------------------------------------------------------------------
     | Validation Thresholds by Preparation Level

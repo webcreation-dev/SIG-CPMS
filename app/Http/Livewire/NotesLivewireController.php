@@ -17,11 +17,8 @@ class NotesLivewireController extends Component
 
     public function render()
     {
-        if ($this->type == 'ue') {
-            $classroom = Classroom::where('type', $this->ue->type)->latest()->first();
-        }else {
-            $classroom = Classroom::where('type', $this->ue->teachingUnit->type)->latest()->first();
-        }
+        $classroom = $this->classroom;
+        $this->ue = TeachingUnit::gradingTarget($classroom, $this->type, $this->ue->id);
         $students = Student::where('classroom_id', $classroom->id)->get();
         
         // dd($this->ue->id);

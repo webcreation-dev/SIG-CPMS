@@ -35,6 +35,49 @@ class TeachingUnit extends Model
         'semester4' => '4e Semestre',
     ];
 
+    public function scopeForAcademicYear($query, int $year)
+    {
+        // Le statut stocké reste historique ; seul le résultat de lecture varie par promotion.
+        return $query->select('teaching_units.*')
+            ->selectRaw("CASE WHEN composite_from_year <= ? THEN 'multiple' ELSE status END AS status", [$year])
+            ->with(['elementTeachingUnits' => fn ($ecues) => $ecues
+                ->where(fn ($q) => $q->whereNull('effective_from_year')->orWhere('effective_from_year', '<=', $year))]);
+    }
+
+    public static function gradingTarget(Classroom $classroom, string $type, int $id)
+    {
+        $year = (int) date('Y', strtotime($classroom->year));
+        $ecue = $type === 'ecue' ? ElementTeachingUnit::findOrFail($id) : null;
+        abort_unless(in_array($type, ['ue', 'ecue'], true), 422);
+        $unit = self::forAcademicYear($year)->where('type', $classroom->type)
+            ->findOrFail($ecue ? $ecue->teaching_unit_id : $id);
+        if ($ecue) {
+            abort_unless($unit->status === 'multiple' && $unit->elementTeachingUnits->contains('id', $id), 422);
+            return $ecue;
+        }
+        abort_unless($unit->status === 'singular', 422);
+        return $unit;
+    }
+
+    public function usesWeightedAverage(int $year): bool
+    {
+        return $this->weighted_from_year !== null && $year >= $this->weighted_from_year;
+    }
+
+    public function averageFromNotes($notesByEcue, int $year): float
+    {
+        $weighted = $this->usesWeightedAverage($year);
+        $sum = 0;
+        $divisor = 0;
+        foreach ($this->elementTeachingUnits as $ecue) {
+            $weight = $weighted ? (float) $ecue->credit : 1;
+            $note = $notesByEcue->get($ecue->id);
+            $sum += $weight * (float) ($note?->moy_catch_up ?? $note?->moy_ecu ?? 0);
+            $divisor += $weight;
+        }
+        return $divisor > 0 ? $sum / $divisor : 0;
+    }
+
     public function classroom()
     {
         return $this->belongsTo(Classroom::class);

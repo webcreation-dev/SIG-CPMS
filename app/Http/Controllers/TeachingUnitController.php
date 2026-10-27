@@ -31,12 +31,17 @@ class TeachingUnitController extends Controller
 
             $classroom_id = $request->classroom_id;
             $classroom = Classroom::find($classroom_id);
-            $teaching_units = TeachingUnit::where('type',  $classroom->type)->get();
+            $teaching_units = TeachingUnit::forAcademicYear((int) date('Y', strtotime($classroom->year)))->where('type', $classroom->type)->get();
 
             return view('admin.teaching_units.teaching_units_list', compact('teaching_units','classroom'));
         }else{
 
-            $teaching_units = TeachingUnit::all();
+            $teaching_units = collect();
+            foreach (array_keys(Classroom::TYPES) as $type) {
+                $latest = Classroom::where('type', $type)->latest()->first();
+                $year = $latest ? (int) date('Y', strtotime($latest->year)) : 2025;
+                $teaching_units = $teaching_units->concat(TeachingUnit::forAcademicYear($year)->where('type', $type)->get());
+            }
             return view('admin.teaching_units.teaching_units_list', compact('teaching_units'));
         }
 

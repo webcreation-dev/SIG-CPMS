@@ -95,7 +95,7 @@
                                 <td>{{$element_teaching_unit->credit}}</td>
                                 <td>
 
-                                        <a  href="{{route('notes.create',['classroom_type' => $element_teaching_unit->teachingUnit->type,'ue_id' => $element_teaching_unit->id,'type' => 'ecue'])}}"
+                                        <a  href="{{route('notes.create',['classroom_id' => $classroom->id ?? null, 'classroom_type' => $element_teaching_unit->teachingUnit->type,'ue_id' => $element_teaching_unit->id,'type' => 'ecue'])}}"
                                             title="Ajouter les notes" >
                                             <span class="badge badge-primary"><i class="fa fa-pencil"></i> Noter l'ECUE   </span>
                                         </a>

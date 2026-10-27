@@ -43,6 +43,7 @@
     </div>
                 @php
                     $student = App\Models\Student::find($studentId);
+                    $semester_validation = app(App\Services\SemesterValidation::class)->forStudent($student, $semester);
                 @endphp
 
     <p>
@@ -62,15 +63,14 @@
                     <th>Crédits 60</th>
                     <th>Moy ECUE </th>
                     <th> Moy UE </th>
-                    {{-- <th>Fréq</th>
-                    <th>Appr</th> --}}
+                    @if($semester_validation !== null)<th>Appr</th>@endif
                 </tr>
             </thead>
             <tbody>
 
                 @php
                     // OPTIMISATION DES REQUETES BDD (N+1 Queries fix)
-                    $ues = App\Models\TeachingUnit::with('elementTeachingUnits')->where('type', $student->classroom->type)->where('semester', $semester)->get();
+                    $ues = App\Models\TeachingUnit::forAcademicYear((int) $year)->where('type', $student->classroom->type)->where('semester', $semester)->get();
                     $all_notes = App\Models\Note::where('student_id', $studentId)->get();
 
                     // Indexation pour éviter les requêtes N+1
@@ -93,7 +93,7 @@
                                 $n = $notes_by_ecue->get($ec->id);
                                 $sum_e += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
                             }
-                            $moy_generale_temp += $sum_e / $count_e;
+                            $moy_generale_temp += $ue->averageFromNotes($notes_by_ecue, (int) $year);
                         }
                     }
                     $moyenne_generale_finale = $count_ues > 0 ? $moy_generale_temp / $count_ues : 0;
@@ -137,7 +137,9 @@
                                 @php
                                     $is_sci = in_array(trim($ue->name), $scientific_ues_names);
                                     $threshold = $is_sci ? $thresholds['min_scientifique'] : $thresholds['min_non_scientifique'];
-                                    echo ($moy_ue_final >= 12 || ($moyenne_generale_finale >= 12 && $moy_ue_final >= $threshold)) ? 'Validé' : 'Non Validé';
+                                    echo $semester_validation !== null
+                                        ? $semester_validation['appreciations'][$ue->id]
+                                        : (($moy_ue_final >= 12 || ($moyenne_generale_finale >= 12 && $moy_ue_final >= $threshold)) ? 'Validé' : 'Non Validé');
                                 @endphp
                             </strong></td>
                         </tr>
@@ -154,7 +156,7 @@
                                 $n = $notes_by_ecue->get($ecue->id);
                                 $sum_ue += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
                             }
-                            $moy_ue_final = $sum_ue / $ecues_count;
+                            $moy_ue_final = $ue->averageFromNotes($notes_by_ecue, (int) $year);
 
                             $moy_generale += $moy_ue_final;
 
@@ -181,7 +183,9 @@
                                 @php
                                     $is_sci = in_array(trim($ue->name), $scientific_ues_names);
                                     $threshold = $is_sci ? $thresholds['min_scientifique'] : $thresholds['min_non_scientifique'];
-                                    echo ($moy_ue_final >= 12 || ($moyenne_generale_finale >= 12 && $moy_ue_final >= $threshold)) ? 'Validé' : 'Non Validé';
+                                    echo $semester_validation !== null
+                                        ? $semester_validation['appreciations'][$ue->id]
+                                        : (($moy_ue_final >= 12 || ($moyenne_generale_finale >= 12 && $moy_ue_final >= $threshold)) ? 'Validé' : 'Non Validé');
                                 @endphp
                             </strong></td>
                         </tr>
@@ -246,7 +250,7 @@
                                 $n = $notes_by_ecue->get($ecue->id);
                                 $sum_ue += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
                             }
-                            $note_val = $sum_ue / $ecues_count;
+                            $note_val = $ue->averageFromNotes($notes_by_ecue, (int) $year);
                         }
                         
                         // Vérification du seuil scientifique
@@ -263,6 +267,12 @@
                     // Détermination du status final
                     $is_validated = ($moyenne_generale_finale >= $thresholds['moyenne_generale']) && $scientific_condition_met && $non_scientific_condition_met;
                     
+                    if ($semester_validation !== null) {
+                        $is_validated = $semester_validation['validated'];
+                        $scientific_condition_met = $semester_validation['scientificValid'];
+                        $non_scientific_condition_met = true;
+                        $thresholds = $semester_validation['rule'];
+                    }
                     $appreciation = $is_validated ? "Validé" : "Non Validé";
                 @endphp
 
@@ -274,13 +284,13 @@
                 <li>Appréciation : <span id="credits-non-valides"><strong>{{ $appreciation }}
                     @if(!$is_validated)
                         @if($moyenne_generale_finale < $thresholds['moyenne_generale'])
-                            <br><small>(MG < {{ $thresholds['moyenne_generale'] }})</small>
+                            <br><small>(MG {!! $semester_validation !== null ? '&lt;' : '<' !!} {{ $thresholds['moyenne_generale'] }})</small>
                         @endif
                         @if(!$scientific_condition_met)
-                            <br><small>(UE Sci < {{ $thresholds['min_scientifique'] }})</small>
+                            <br><small>(UE Sci {!! $semester_validation !== null ? '&lt;' : '<' !!} {{ $thresholds['min_scientifique'] }})</small>
                         @endif
                         @if(!$non_scientific_condition_met)
-                            <br><small>(UE Non Sci < {{ $thresholds['min_non_scientifique'] }})</small>
+                            <br><small>(UE Non Sci {!! $semester_validation !== null ? '&lt;' : '<' !!} {{ $thresholds['min_non_scientifique'] }})</small>
                         @endif
                     @endif
                 </strong></span></li>

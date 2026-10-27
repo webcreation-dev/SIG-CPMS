@@ -34,7 +34,10 @@
                 <div class="col-md-4" style="text-align: right;">
                     <button style="pointer-events: none; opacity:0.5;" class="btn btn-md btn-primary mb-15 float-start" type="button">ARCHIVES</button>
                 </div>
-                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <a href="{{ route('simulation.semester') }}" class="btn btn-info mb-15">Simuler un semestre</a>
+                    <a href="{{ route('students.import.index') }}" class="btn btn-success mb-15">Importer les étudiants (Excel)</a>
+                  </div>
                   <div class="col-md-4">
                       <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter une classe</button>
                   </div>

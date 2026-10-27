@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ElementTeachingUnit;
+use App\Models\Classroom;
 use App\Models\TeachingUnit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -29,12 +30,20 @@ class ElementTeachingUnitController extends Controller
     {
         if($request->has('teaching_unit_id')){
             $teaching_unit_id = $request->teaching_unit_id;
-            $teaching_unit = TeachingUnit::find($teaching_unit_id);
-            $element_teaching_units = ElementTeachingUnit::where('teaching_unit_id', $request->teaching_unit_id)->with('teachingUnit')->get();
+            $rawUnit = TeachingUnit::findOrFail($teaching_unit_id);
+            $classroom = $request->filled('classroom_id') ? Classroom::findOrFail($request->classroom_id)
+                : Classroom::where('type', $rawUnit->type)->latest()->first();
+            abort_unless($classroom && $classroom->type === $rawUnit->type, 422);
+            $year = (int) date('Y', strtotime($classroom->year));
+            $teaching_unit = TeachingUnit::forAcademicYear($year)->findOrFail($teaching_unit_id);
+            $element_teaching_units = $teaching_unit->status === 'multiple' ? $teaching_unit->elementTeachingUnits : collect();
 
-            return view('admin.element_teaching_units.element_teaching_units_list', compact('element_teaching_units', 'teaching_unit_id','teaching_unit'));
+            return view('admin.element_teaching_units.element_teaching_units_list', compact('element_teaching_units', 'teaching_unit_id','teaching_unit', 'classroom'));
         }else{
-            $element_teaching_units = ElementTeachingUnit::all();
+            $years = Classroom::all()->sortByDesc('created_at')->unique('type')
+                ->mapWithKeys(fn ($class) => [$class->type => (int) date('Y', strtotime($class->year))]);
+            $element_teaching_units = ElementTeachingUnit::with('teachingUnit')->get()->filter(fn ($ecue) =>
+                $ecue->effective_from_year === null || $ecue->effective_from_year <= ($years[$ecue->teachingUnit->type] ?? 2025));
             return view('admin.element_teaching_units.element_teaching_units_list', compact('element_teaching_units'));
         }
     }

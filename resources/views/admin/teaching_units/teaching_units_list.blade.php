@@ -97,11 +97,11 @@
                                 <td>
 
                                     @if($teaching_unit->status == 'multiple')
-                                        <a href="{{route('element_teaching_units.index', ['teaching_unit_id' => $teaching_unit->id ])}}" title="Voir les ECUE">
+                                        <a href="{{route('element_teaching_units.index', ['teaching_unit_id' => $teaching_unit->id, 'classroom_id' => $classroom->id ?? null ])}}" title="Voir les ECUE">
                                             <span class="badge badge-info"><i class="fa fa-qrcode"></i> Voir les ECUE </span>
                                         </a>
                                     @else
-                                            <a  href="{{route('notes.create',['classroom_type' => $teaching_unit->type,'ue_id' => $teaching_unit->id,'type' => 'ue'])}}"
+                                            <a  href="{{route('notes.create',['classroom_id' => $classroom->id ?? null, 'classroom_type' => $teaching_unit->type,'ue_id' => $teaching_unit->id,'type' => 'ue'])}}"
                                                     title="Ajouter les notes" >
                                                 <span class="badge badge-primary"><i class="fa fa-pencil"></i> Noter l'UE  </span>
                                             </a>

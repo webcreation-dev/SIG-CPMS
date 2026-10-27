@@ -7,6 +7,8 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentImportController;
+use App\Http\Controllers\SemesterSimulationController;
 use App\Http\Controllers\TeachingUnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidatorFormController;
@@ -61,6 +63,9 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
+Route::get('/simulation-semestre', [SemesterSimulationController::class, 'index'])->name('simulation.semester');
+Route::post('/simulation-semestre', [SemesterSimulationController::class, 'calculate'])->middleware('throttle:120,1')->name('simulation.semester.calculate');
+
 Route::middleware(['auth'])->group(function () {
 
     // ADMINISTRATION
@@ -81,6 +86,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('teaching_units', TeachingUnitController::class);
 
     Route::resource('element_teaching_units', ElementTeachingUnitController::class);
+
+    Route::get('students/import', [StudentImportController::class, 'index'])->name('students.import.index');
+    Route::post('students/import/preview', [StudentImportController::class, 'preview'])->name('students.import.preview');
+    Route::post('students/import', [StudentImportController::class, 'store'])->name('students.import.store');
 
     Route::resource('students', StudentController::class);
     Route::get('students_by_parent', [StudentController::class,'studentsByParent'])->name('students.by.parent');

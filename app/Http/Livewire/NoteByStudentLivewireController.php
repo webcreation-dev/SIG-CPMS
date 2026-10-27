@@ -14,7 +14,7 @@ class NoteByStudentLivewireController extends Component
 
     public function render()
     {
-        $ues = TeachingUnit::where('type', $this->student->classroom->type)
+        $ues = TeachingUnit::forAcademicYear((int) date('Y', strtotime($this->student->classroom->year)))->where('type', $this->student->classroom->type)
                             ->where('semester', $this->semester)
                             ->get();
 
@@ -52,13 +52,12 @@ class NoteByStudentLivewireController extends Component
             }
         }
 
-        $skip = Note::SEMESTER_NOTES[$this->semester]['skip'];
-        $take = Note::SEMESTER_NOTES[$this->semester]['take'];
-
+        $ueIds = $ues->where('status', 'singular')->pluck('id');
+        $ecueIds = $ues->where('status', 'multiple')->flatMap(fn ($ue) => $ue->elementTeachingUnits->pluck('id'));
         $notesByStudent = Note::where('student_id', $this->student->id)
-            ->skip($skip)
-            ->take($take)
-            ->get();
+            ->where(fn ($query) => $query->whereIn('teaching_unit_id', $ueIds)
+                ->orWhereIn('element_teaching_unit_id', $ecueIds))
+            ->orderBy('id')->get();
 
         return view('livewire.note-by-student-livewire-controller', [
             'student' => $this->student,

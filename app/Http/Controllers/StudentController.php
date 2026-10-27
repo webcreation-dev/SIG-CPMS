@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classroom;
 use App\Models\Note;
 use App\Models\Student;
+use App\Models\TeachingUnit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -166,6 +167,16 @@ class StudentController extends Controller
 
         $ues = $request->ues;
         $types = $request->types;
+
+        $units = TeachingUnit::forAcademicYear((int) date('Y', strtotime($student->classroom->year)))
+            ->where('type', $student->classroom->type)->where('semester', $semester)->get();
+        $allowedUes = $units->where('status', 'singular')->pluck('id')->all();
+        $allowedEcues = $units->where('status', 'multiple')->flatMap(fn ($unit) => $unit->elementTeachingUnits->pluck('id'))->all();
+        foreach ($ues as $key => $id) {
+            abort_unless(in_array($types[$key] ?? '', ['ue', 'ecue'], true)
+                && in_array((int) $id, ($types[$key] === 'ue' ? $allowedUes : $allowedEcues), true), 422);
+        }
+
 
         $i1_points = $request->i1_points;
         $i2_points = $request->i2_points;
