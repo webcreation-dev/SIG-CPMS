@@ -49,7 +49,7 @@
 </tr>
 @empty<tr><td colspan="4">Aucune UE pour ce semestre.</td></tr>@endforelse
 </tbody></table></div>
-<button class="btn btn-primary mt-15" type="submit" @disabled($catalog->isEmpty())>Calculer le résultat</button><span id="calculation-state" class="text-muted" role="status" style="margin-left:12px">Le résultat se met à jour à chaque modification.</span>
+<button class="btn btn-primary mt-15" type="submit" @disabled($catalog->isEmpty())>Calculer le résultat</button><button class="btn btn-success mt-15" type="submit" name="export" value="pdf" formaction="{{ route('simulation.semester.sheet') }}" formtarget="_blank" @disabled($catalog->isEmpty())>Générer la fiche de calcul (PDF)</button><span id="calculation-state" class="text-muted" role="status" style="margin-left:12px">Le résultat se met à jour à chaque modification.</span>
 <div id="calculation-error" class="alert alert-danger" role="alert" hidden></div>
 </form>
 </div></section>
@@ -91,7 +91,7 @@ async function calculate() {
  catch(e){if(e.name==='AbortError'||current!==revision)return;error.textContent=e.message;error.hidden=false;state.textContent='Le résultat affiché n’est pas à jour.';}
 }
 form.addEventListener('input',()=>{++revision;if(abort)abort.abort();summary.classList.add('opacity-50');state.textContent='Modification en cours…';clearTimeout(timer);timer=setTimeout(calculate,250);});
-form.addEventListener('submit',event=>{event.preventDefault();clearTimeout(timer);calculate();});
+form.addEventListener('submit',event=>{if(event.submitter?.name==='export')return;event.preventDefault();clearTimeout(timer);calculate();});
 document.querySelectorAll('[data-example]').forEach(button=>button.addEventListener('click',()=>{
  const example=button.dataset.example;inputs.forEach(input=>input.value='12');
  const scientific=inputs.filter(input=>input.dataset.scientific==='1');

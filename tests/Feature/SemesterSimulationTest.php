@@ -76,3 +76,24 @@ it('refuse les valeurs absentes et hors limites', function ($value) {
     $f['scores']['ecue'][$f['fhs']->id] = $value;
     $this->postJson(route('simulation.semester.calculate'), ['year' => 2026, 'semester' => 'semester1', 'scores' => $f['scores']])->assertUnprocessable()->assertJsonValidationErrors('scores');
 })->with([null, '', -1, 21, 'texte']);
+
+it('génère une fiche PDF fictive sans créer de données', function ($year) {
+    $f = simulationFixture();
+    $response = $this->post(route('simulation.semester.sheet'), ['year' => $year, 'semester' => 'semester1', 'scores' => $f['scores']]);
+    $response->assertOk()->assertHeader('content-type', 'application/pdf');
+    expect($response->getContent())->toStartWith('%PDF-');
+    expect(App\Models\Student::count())->toBe(0)->and(App\Models\Note::count())->toBe(0);
+})->with([2025, 2026]);
+
+it('recalcule les appréciations de la fiche et conserve Humanité historique', function () {
+    $f = simulationFixture();
+    $service = app(SemesterSimulation::class);
+    foreach ([2025, 2026] as $year) {
+        $html = view('simulation.calculation-sheet', ['year' => $year, 'semester' => 'semester1', 'scores' => $f['scores'], 'result' => $service->simulate($year, 'semester1', $f['scores']), 'catalog' => $service->catalog($year, 'semester1')])->render();
+        expect($html)->toContain('SIMULATION - DONNÉES FICTIVES', '12,00');
+        if ($year === 2026) { expect($html)->toContain('Conduite', '(4 × 10 + 1 × 20) / 5'); }
+        else { expect($html)->not->toContain('Conduite'); }
+    }
+    $f['scores']['ue'][$f['science']->id] = 21;
+    $this->postJson(route('simulation.semester.sheet'), ['year' => 2026, 'semester' => 'semester1', 'scores' => $f['scores']])->assertUnprocessable();
+});

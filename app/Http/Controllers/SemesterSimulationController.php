@@ -31,6 +31,25 @@ class SemesterSimulationController extends Controller
         return view('simulation.semester', compact('year', 'semester', 'catalog', 'scores', 'result'));
     }
 
+    public function calculationSheet(Request $request, SemesterSimulation $simulation)
+    {
+        $request->validate([
+            'year' => ['required', 'integer', 'between:2023,2100'],
+            'semester' => ['required', 'in:semester1,semester2,semester3,semester4'],
+            'scores' => ['required', 'array'],
+        ]);
+        $year = (int) $request->year;
+        $semester = $request->semester;
+        $scores = $request->input('scores');
+        // Recalcul côté serveur à partir des saisies, jamais depuis un résultat fourni par le navigateur.
+        $result = $simulation->simulate($year, $semester, $scores);
+        $catalog = $simulation->catalog($year, $semester);
+        abort_if($catalog->isEmpty(), 422, 'Aucune UE configurée pour ce semestre.');
+        return \Barryvdh\DomPDF\Facade\Pdf::loadView('simulation.calculation-sheet', compact('year', 'semester', 'scores', 'result', 'catalog'))
+            ->setPaper('a4', 'landscape')
+            ->stream('simulation-fiche-calcul-'.$year.'-'.$semester.'.pdf');
+    }
+
     public function calculate(Request $request, SemesterSimulation $simulation)
     {
         $request->validate(['year' => ['required', 'integer', 'between:2023,2100'], 'semester' => ['required', 'in:semester1,semester2,semester3,semester4'],

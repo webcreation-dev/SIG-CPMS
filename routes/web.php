@@ -63,6 +63,7 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
+Route::post('/simulation-semestre/fiche-calcul', [SemesterSimulationController::class, 'calculationSheet'])->middleware('throttle:30,1')->name('simulation.semester.sheet');
 Route::get('/simulation-semestre', [SemesterSimulationController::class, 'index'])->name('simulation.semester');
 Route::post('/simulation-semestre', [SemesterSimulationController::class, 'calculate'])->middleware('throttle:120,1')->name('simulation.semester.calculate');
 
