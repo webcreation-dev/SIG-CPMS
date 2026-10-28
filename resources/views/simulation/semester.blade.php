@@ -41,7 +41,7 @@
 </tr>
 @empty<tr><td colspan="4">Aucune UE pour ce semestre.</td></tr>@endforelse
 </tbody></table></div>
-<button class="btn btn-primary mt-15" type="submit" @disabled($catalog->isEmpty())>Calculer le résultat</button><button class="btn btn-success mt-15" type="submit" name="export" value="pdf" formaction="{{ route('simulation.semester.sheet') }}" formtarget="_blank" @disabled($catalog->isEmpty())>Générer la fiche de calcul (PDF)</button><span id="calculation-state" class="text-muted" role="status" style="margin-left:12px">Le résultat se met à jour à chaque modification.</span>
+
 <div id="calculation-error" class="alert alert-danger" role="alert" hidden></div>
 </form>
 </div></section>
@@ -64,7 +64,7 @@
 @include('layouts.admin.footer')
 <script>
 (() => {
-const form = document.getElementById('simulation-form'), error = document.getElementById('calculation-error'), state = document.getElementById('calculation-state');
+const form = document.getElementById('simulation-form'), error = document.getElementById('calculation-error');
 const summary = document.getElementById('summary');
 const format = new Intl.NumberFormat('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:4});
 let timer, abort, revision = 0;
@@ -77,13 +77,13 @@ function show(result) {
 }
 async function calculate() {
  const current = ++revision; if(abort)abort.abort(); abort=new AbortController(); error.hidden=true;
- if(!form.checkValidity()){summary.classList.add('opacity-50');state.textContent='Complète les moyennes entre 0 et 20 pour recalculer.';return;}
- state.textContent='Calcul en cours…';summary.classList.add('opacity-50');
- try {const response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'},signal:abort.signal});const data=await response.json();if(current!==revision)return;if(!response.ok)throw new Error(Object.values(data.errors ?? {}).flat().join(' ') || 'Calcul indisponible. Réessaie ou recharge la page.');show(data);state.textContent='Résultat à jour.';summary.classList.remove('opacity-50');}
- catch(e){if(e.name==='AbortError'||current!==revision)return;error.textContent=e.message;error.hidden=false;state.textContent='Le résultat affiché n’est pas à jour.';}
+ if(!form.checkValidity()){summary.classList.add('opacity-50');return;}
+ summary.classList.add('opacity-50');
+ try {const response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'},signal:abort.signal});const data=await response.json();if(current!==revision)return;if(!response.ok)throw new Error(Object.values(data.errors ?? {}).flat().join(' ') || 'Calcul indisponible. Réessaie ou recharge la page.');show(data);summary.classList.remove('opacity-50');}
+ catch(e){if(e.name==='AbortError'||current!==revision)return;error.textContent=e.message;error.hidden=false;}
 }
-form.addEventListener('input',()=>{++revision;if(abort)abort.abort();summary.classList.add('opacity-50');state.textContent='Modification en cours…';clearTimeout(timer);timer=setTimeout(calculate,250);});
-form.addEventListener('submit',event=>{if(event.submitter?.name==='export')return;event.preventDefault();clearTimeout(timer);calculate();});
+form.addEventListener('input',()=>{++revision;if(abort)abort.abort();summary.classList.add('opacity-50');clearTimeout(timer);timer=setTimeout(calculate,250);});
+form.addEventListener('submit',event=>{event.preventDefault();clearTimeout(timer);calculate();});
 
 })();
 </script>
