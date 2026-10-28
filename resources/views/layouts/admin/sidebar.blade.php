@@ -64,6 +64,12 @@
                         <span>ECUE</span>
                     </a>
                 </li>
+                <li class="menu-item {{ Route::is('simulation.*') ? 'active' : '' }}">
+                    <a href="{{ route('simulation.semester') }}">
+                        <div class="icon-item"><i class="ti-panel"></i></div>
+                        <span>Simulation de semestre</span>
+                    </a>
+                </li>
             @endcan
 
             @if(Auth::user()->role->name == "Parent")

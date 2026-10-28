@@ -4,6 +4,12 @@ use App\Models\TeachingUnit;
 use App\Models\ElementTeachingUnit;
 use App\Services\SemesterSimulation;
 
+beforeEach(function () {
+    $role = App\Models\Role::create(['name' => 'Directeur des études']);
+    $user = App\Models\User::forceCreate(['name' => 'Test', 'email' => 'simulation@test.local', 'password' => bcrypt('test'), 'avatar' => 'avatar.png', 'role_id' => $role->id]);
+    $this->actingAs($user);
+});
+
 function simulationFixture(int $number = 1): array
 {
     $semester = 'semester'.$number;
@@ -17,9 +23,9 @@ function simulationFixture(int $number = 1): array
     return compact('science', 'other', 'humanity', 'fhs', 'conduct', 'scores', 'semester');
 }
 
-it('affiche un simulateur utilisable sans dossier étudiant et sans connexion', function () {
+it('affiche le simulateur dans la mise en page de l’administration', function () {
     simulationFixture();
-    $this->get(route('simulation.semester'))->assertOk()->assertSee('Simuler la validation')->assertSee('Conduite')->assertSee('4 crédit(s)')->assertSee('Données fictives uniquement');
+    $this->get(route('simulation.semester'))->assertOk()->assertSee('Simulation de semestre')->assertSee('codex-sidebar')->assertDontSee('<style>', false)->assertSee('Conduite')->assertSee('4 crédit(s)')->assertSee('Données fictives uniquement');
 });
 
 it('calcule Humanité avec les vrais coefficients et les appréciations du semestre', function ($number) {

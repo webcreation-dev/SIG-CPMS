@@ -16,7 +16,7 @@ class ClassroomLivewireController extends Component
 
     public function render()
     {
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::orderByDesc('year')->orderBy('type')->orderByDesc('id')->get();
         return view('livewire.classroom-livewire-controller', [
             'classrooms' => $classrooms,
             'classroomId' => $this->classroomId,

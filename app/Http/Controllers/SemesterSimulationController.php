@@ -7,7 +7,15 @@ use Illuminate\Http\Request;
 
 class SemesterSimulationController extends Controller
 {
-    // Simulateur public sans données d’étudiants : lecture du catalogue et calculs fictifs uniquement.
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            abort_unless(\Illuminate\Support\Facades\Gate::allows('access-admin') || \Illuminate\Support\Facades\Gate::allows('access-manager'), 403);
+            return $next($request);
+        });
+    }
+
     public function index(Request $request, SemesterSimulation $simulation)
     {
         $request->validate(['year' => ['sometimes', 'integer', 'between:2023,2100'], 'semester' => ['sometimes', 'in:semester1,semester2,semester3,semester4']]);

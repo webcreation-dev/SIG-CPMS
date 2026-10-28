@@ -71,15 +71,13 @@ Après l’évolution Humanité C : 19 tests ciblés réussis, dont la saisie HT
 
 ## Import annuel des étudiants
 
-Dans **Classes → Importer les étudiants (Excel)**, ou à l’adresse `/students/import`, la direction et le directeur des études peuvent charger un ou deux fichiers `.xlsx` du modèle de l’administration. L’import propose un aperçu avant de créer les classes et les fiches.
+Dans **Classes → Importer les étudiants (Excel)**, un popup reprend le style des formulaires existants. Sélectionner une classe à partir de 2026-2027 et un fichier `.xlsx` (5 Mo maximum), puis importer. L’ancienne adresse `/students/import` ouvre ce popup sur la liste des classes.
 
-Le lecteur reconnaît les colonnes `Nom et Prénoms`, `Sexe`, `Date et lieu de naissance`, les noms de famille en majuscules (y compris composés), les dates `jj/mm/aaaa à Lieu` ou `jj-mm-aaaa à Lieu`, et ignore les numéros seuls après la fin de la liste. Les accents sont conservés. Les fichiers d’origine ne sont ni modifiés ni conservés par l’application après lecture ; l’aperçu est stocké dans la session pendant une heure.
+La classe choisie détermine l’année et le niveau de destination. Un niveau différent dans le fichier bloque l’import ; une ancienne année dans l’en-tête est signalée, mais la destination sélectionnée est utilisée.
 
-Le niveau est proposé d’après l’en-tête. L’année est proposée d’après le nom du fichier s’il contient une année scolaire, sinon d’après l’en-tête. Tout écart entre ces deux années est signalé. L’utilisateur vérifie et peut corriger les destinations avant d’importer. L’année cible doit être consécutive et commencer entre 2026 et 2100.
+Le lecteur reconnaît les colonnes `Nom et Prénoms`, `Sexe`, `Date et lieu de naissance`, les noms de famille en majuscules (y compris composés), les dates `jj/mm/aaaa à Lieu` ou `jj-mm-aaaa à Lieu`, et ignore les numéros seuls après la fin de la liste. Les accents sont conservés. Les fichiers ne sont pas conservés après lecture.
 
-Une classe existante de même niveau et année est réutilisée. Sinon, une classe est créée avec une date de début au 1er septembre. La fiche d’un étudiant est identifiée, dans sa classe, par son nom complet normalisé et sa date de naissance. Un réimport ne crée pas de doublon. Les conflits de naissance, sexe ou lieu sont signalés sans écraser les fiches. Les étudiants absents d’une nouvelle liste ne sont pas supprimés. Un étudiant inscrit une nouvelle année reçoit une nouvelle fiche dans la nouvelle classe : ses anciennes inscriptions, liens et notes restent intacts.
-
-Toutes les listes d’un lot sont importées dans une transaction : en cas d’erreur, aucune création du lot n’est conservée. Un verrou d’import et des clés uniques protègent les réimports simultanés.
+La fiche d’un étudiant est identifiée dans sa classe par son nom complet normalisé et sa date de naissance. Un réimport ne crée pas de doublon. Les conflits de naissance, sexe ou lieu bloquent la transaction sans écraser les fiches. Les étudiants absents d’une nouvelle liste ne sont pas supprimés. Les anciennes inscriptions et notes restent intactes. Un verrou et des clés uniques protègent les réimports simultanés.
 
 Après un déploiement sur une base existante :
 
@@ -97,7 +95,7 @@ Vérifications : 32 tests ciblés réussis. Les fichiers administratifs fournis 
 
 ## Simulateur de semestre
 
-La page `/simulation-semestre` permet de tester les quatre semestres pour une année scolaire choisie. Elle est accessible directement, sans connexion, et n’expose aucun dossier étudiant : elle lit seulement le catalogue des UE et calcule des moyennes fictives. Un lien est également disponible dans la liste des classes.
+La page `/simulation-semestre` permet de tester les quatre semestres pour une année scolaire choisie. Elle est accessible après connexion à la direction et au directeur des études, depuis « Simulation de semestre » en bas du menu de gestion des étudiants. Elle reprend l’en-tête, le menu et les composants de l’interface d’administration. Elle lit seulement le catalogue des UE et calcule des moyennes fictives.
 
 Les moyennes se recalculent à la saisie. La page affiche les appréciations par UE, la moyenne générale, le statut du semestre et les motifs de non-validation. Les exemples incluent une scientifique à 10 compensée, une scientifique sous 10 bloquante, des non scientifiques sous 10 compensées, et Humanité avec FHS à 10 et Conduite à 20.
 

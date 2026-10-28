@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
 use App\Services\Imports\StudentRosterReader;
 use App\Services\Imports\StudentRosterImporter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class StudentImportController extends Controller
@@ -20,45 +20,42 @@ class StudentImportController extends Controller
         });
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        return view('admin.students.import', ['preview' => $request->session()->get('student_import')]);
+        return redirect()->route('classrooms.index')->with('open_student_import', true);
     }
 
-    public function preview(Request $request, StudentRosterReader $reader)
+    public function store(Request $request, StudentRosterReader $reader, StudentRosterImporter $importer)
     {
-        $request->session()->forget('student_import');
-        $request->validate(['files' => ['required', 'array', 'min:1', 'max:2'], 'files.*' => ['required', 'file', 'mimes:xlsx', 'max:5120']]);
-        $lists = [];
-        foreach ($request->file('files') as $file) {
-            $lists[] = $reader->read($file->getRealPath(), $file->getClientOriginalName());
-        }
-        // Les données restent côté serveur ; le navigateur ne transmet que les destinations choisies.
-        $request->session()->put('student_import', ['token' => (string) Str::uuid(), 'expires' => time()+3600, 'lists' => $lists]);
-        return redirect()->route('students.import.index');
-    }
-
-    public function store(Request $request, StudentRosterImporter $importer)
-    {
-        $request->validate(['token' => ['required', 'string'], 'targets' => ['required', 'array'],
-            'targets.*.type' => ['required', 'in:prepa1,prepa2'], 'targets.*.year' => ['required', 'regex:/^20\d{2}-20\d{2}$/']]);
-        $preview = $request->session()->get('student_import');
-        if (!$preview || $preview['expires'] < time() || !hash_equals($preview['token'], $request->token)) {
-            throw ValidationException::withMessages(['import' => 'L’aperçu a expiré. Sélectionnez à nouveau les fichiers.']);
-        }
-        $lists = $preview['lists'];
-        foreach ($lists as $index => &$list) {
-            $target = $request->input("targets.$index");
-            if (!$target || (int) substr($target['year'], 5) !== (int) substr($target['year'], 0, 4)+1) {
-                throw ValidationException::withMessages(['import' => 'Indiquez une année scolaire complète, par exemple 2026-2027.']);
+        try {
+            $request->validate(['classroom_id' => ['required', 'integer', 'exists:classrooms,id'],
+                'file' => ['required', 'file', 'mimes:xlsx', 'max:5120']]);
+            $classroom = Classroom::findOrFail($request->classroom_id);
+            $year = (int) date('Y', strtotime($classroom->year));
+            if ($year < 2026) {
+                throw ValidationException::withMessages(['classroom_id' => 'L’import est disponible à partir de 2026-2027.']);
             }
-            $list['target_type'] = $target['type'];
-            $list['target_year'] = (int) substr($target['year'], 0, 4);
+            $file = $request->file('file');
+            $list = $reader->read($file->getRealPath(), $file->getClientOriginalName());
+            if ($list['type'] !== null && $list['type'] !== $classroom->type) {
+                throw ValidationException::withMessages(['file' => 'Le niveau indiqué dans le fichier ne correspond pas à la classe sélectionnée.']);
+            }
+            // La classe choisie est la destination explicite, même si l’en-tête a gardé une ancienne année.
+            $list['target_year'] = $year;
+            $list['target_type'] = $classroom->type;
+            $result = $importer->import([$list])[0];
+            $response = redirect()->route('classrooms.index')->with('message',
+                $result['created'].' étudiant(s) importé(s), '.$result['skipped'].' déjà présent(s) — '.Classroom::TYPES[$classroom->type].' '.$year.'-'.($year+1).'.');
+            $warnings = $list['warnings'];
+            if (($list['year'] !== null && $list['year'] !== $year) || ($list['filename_year'] !== null && $list['filename_year'] !== $year)) {
+                $warnings[] = 'L’année de la classe sélectionnée ('.$year.'-'.($year+1).') a été utilisée malgré une année différente dans le fichier.';
+            }
+            if ($warnings) { $response->with('warning', implode(' ', array_unique($warnings))); }
+            return $response;
+        } catch (ValidationException $exception) {
+            $exception->errorBag = 'studentImport';
+            $exception->redirectTo = route('classrooms.index');
+            throw $exception;
         }
-        unset($list);
-        $results = $importer->import($lists);
-        $request->session()->forget('student_import');
-        $request->session()->flash('roster_import_results', $results);
-        return redirect()->route('students.import.index')->with('message', 'Import terminé. Les fiches et notes des années précédentes sont conservées.');
     }
 }

@@ -7,20 +7,21 @@ $(document).ready(function() {
 
 
   //Advance Datatable
-  $('#datatbl-advance').DataTable({    
-    "scrollX": true,    
+  $('#datatbl-advance').DataTable({
+    order: $('#datatbl-advance').data('order') || [[0, 'asc']],
+    "scrollX": true,
     stateSave: false,
-    dom: 'Bfrtip',    
+    dom: 'Bfrtip',
     buttons: [
       'print','excel','pdf', 'csv', 'copy',
-    ] 
+    ]
   });
 
   //Ajax Datatable JS
   $('#datatbl-ajax').DataTable( {
-    "scrollX": true,  
+    "scrollX": true,
     "ajax": '../assets/js/vendors/datatable/ajax-data/datatable-ajax.txt',
     scrollCollapse: true,
   });
-  
+
 });

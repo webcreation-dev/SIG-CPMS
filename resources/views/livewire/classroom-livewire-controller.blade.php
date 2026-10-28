@@ -30,22 +30,18 @@
       <div class="custom-container">
         <div class="row">
           <div class="col-12">
-              <div class="row">
-                <div class="col-md-4" style="text-align: right;">
-                    <button style="pointer-events: none; opacity:0.5;" class="btn btn-md btn-primary mb-15 float-start" type="button">ARCHIVES</button>
-                </div>
-                  <div class="col-md-4">
-                    <a href="{{ route('simulation.semester') }}" class="btn btn-info mb-15">Simuler un semestre</a>
-                    <a href="{{ route('students.import.index') }}" class="btn btn-success mb-15">Importer les étudiants (Excel)</a>
-                  </div>
-                  <div class="col-md-4">
-                      <button class="btn btn-md btn-primary mb-15 float-end" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter une classe</button>
+              <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-15">
+                  <button style="pointer-events: none; opacity:0.5;" class="btn btn-md btn-primary" type="button">ARCHIVES</button>
+                  <div class="d-flex align-items-center flex-wrap gap-2">
+                      <button class="btn btn-md btn-success" type="button" data-bs-toggle="modal" data-bs-target="#StudentImportModal"><i class="ti-import mr-5"></i>Importer les étudiants (Excel)</button>
+                      <button class="btn btn-md btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#DataModal"><i class="ti-plus mr-5"></i>Ajouter une classe</button>
                   </div>
               </div>
+              @if(session('warning'))<div class="alert alert-warning">{{ session('warning') }}</div>@endif
 
             <div class="card">
               <div class="card-body">
-                <table class="display dataTable cell-border" id="datatbl-advance" style="width:100%">
+                <table class="display dataTable cell-border" id="datatbl-advance" data-order="[]" style="width:100%">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -180,6 +176,45 @@
     </div> --}}
     <!-- Data Modal end-->
 
+
+    <div class="modal fade" id="StudentImportModal" wire:ignore.self tabindex="-1" aria-labelledby="student-import-title" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="student-import-title">IMPORTER LES ÉTUDIANTS</h5><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Fermer"><i class="ti-close"></i></a>
+          </div>
+          <div class="modal-body">
+            @if($errors->studentImport->any())
+              <div class="alert alert-danger" role="alert">@foreach($errors->studentImport->all() as $error)<div>{{ $error }}</div>@endforeach</div>
+            @endif
+            <form action="{{ route('students.import.store') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <div class="form-group">
+                <label class="form-label" for="import-classroom">Classe</label>
+                <select id="import-classroom" name="classroom_id" class="form-control" required>
+                  <option value="">Sélectionner une classe</option>
+                  @foreach($classrooms as $importClass)
+                    @php($startYear = (int) date('Y', strtotime($importClass->year)))
+                    @if($startYear >= 2026)
+                      <option value="{{ $importClass->id }}" @selected((string) old('classroom_id') === (string) $importClass->id)>{{ App\Models\Classroom::TYPES[$importClass->type] }} — {{ $startYear }}-{{ $startYear+1 }}</option>
+                    @endif
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="import-file">Fichier Excel</label>
+                <input id="import-file" name="file" class="form-control" type="file" accept=".xlsx" required>
+                <small class="text-muted">Liste de l’administration au format .xlsx, 5 Mo maximum. L’année de la classe sélectionnée sera utilisée. Les étudiants déjà présents ne sont pas dupliqués.</small>
+              </div>
+              <button class="btn btn-success btn-md" type="submit">IMPORTER</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    @if($errors->studentImport->any() || session('open_student_import'))
+      <script>document.addEventListener('DOMContentLoaded', function () { new bootstrap.Modal(document.getElementById('StudentImportModal')).show(); });</script>
+    @endif
 
     <!-- Data Modal Start-->
     <div class="modal fade" id="DataModal">

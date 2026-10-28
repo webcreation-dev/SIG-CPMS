@@ -88,7 +88,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('element_teaching_units', ElementTeachingUnitController::class);
 
     Route::get('students/import', [StudentImportController::class, 'index'])->name('students.import.index');
-    Route::post('students/import/preview', [StudentImportController::class, 'preview'])->name('students.import.preview');
+
     Route::post('students/import', [StudentImportController::class, 'store'])->name('students.import.store');
 
     Route::resource('students', StudentController::class);

@@ -115,26 +115,45 @@ it('limite l’import à la direction et au directeur des études', function () 
     $user = App\Models\User::forceCreate(['name' => 'Test', 'email' => 'parent@test.local', 'password' => bcrypt('test'), 'avatar' => 'avatar.png', 'role_id' => $role->id]);
     $this->actingAs($user)->get(route('students.import.index'))->assertForbidden();
     $role->update(['name' => 'Directeur des études']);
-    $this->actingAs($user->fresh())->get(route('students.import.index'))->assertOk()->assertSee('Analyser les fichiers');
+    $this->actingAs($user->fresh())->get(route('students.import.index'))->assertRedirect(route('classrooms.index'));
     $this->get(route('classrooms.index'))->assertOk()->assertSee('Importer les étudiants (Excel)');
 });
 
-it('impose un aperçu valide puis importe la destination vérifiée', function () {
+it('importe directement le fichier dans la classe sélectionnée depuis le popup', function () {
     $role = App\Models\Role::create(['name' => 'Directrice CPMS']);
     $user = App\Models\User::forceCreate(['name' => 'Test', 'email' => 'admin@test.local', 'password' => bcrypt('test'), 'avatar' => 'avatar.png', 'role_id' => $role->id]);
     $this->actingAs($user);
+    $classroom = Classroom::create(['type' => 'prepa2', 'year' => '2026-09-01', 'total_students' => 0, 'total_teaching_units' => 20]);
     $path = rosterWorkbook('2025-2026', '2èe');
     try {
+        $this->get(route('classrooms.index'))->assertOk()->assertSee('StudentImportModal')->assertSee('Prépa 2 — 2026-2027')->assertDontSee('Analyser les fichiers');
         $file = new UploadedFile($path, 'Liste 2e An_26-27.xlsx', null, null, true);
-        $this->post(route('students.import.preview'), ['files' => [$file]])->assertRedirect(route('students.import.index'))->assertSessionHasNoErrors();
-        $preview = session('student_import');
-        expect($preview['lists'][0]['type'])->toBe('prepa2');
-        $this->get(route('students.import.index'))->assertOk()->assertSee('années différentes')->assertSee('2026-2027');
-        $this->post(route('students.import.store'), ['token' => 'incorrect', 'targets' => [['type' => 'prepa2', 'year' => '2026-2027']]])->assertSessionHasErrors('import');
-        expect(Student::count())->toBe(0);
-        $this->post(route('students.import.store'), ['token' => $preview['token'], 'targets' => [['type' => 'prepa2', 'year' => '2026-2028']]])->assertSessionHasErrors('import');
-        $this->post(route('students.import.store'), ['token' => $preview['token'], 'targets' => [['type' => 'prepa2', 'year' => '2026-2027']]])->assertRedirect(route('students.import.index'))->assertSessionHasNoErrors();
-        expect(Student::count())->toBe(1)->and(Classroom::first()->type)->toBe('prepa2');
-        expect(session('student_import'))->toBeNull();
+        $this->post(route('students.import.store'), ['classroom_id' => $classroom->id, 'file' => $file])->assertRedirect(route('classrooms.index'))->assertSessionHasNoErrors()->assertSessionHas('warning');
+        expect(Student::count())->toBe(1)->and(Student::first()->classroom_id)->toBe($classroom->id);
+        expect(Classroom::count())->toBe(1);
+        $file = new UploadedFile($path, 'Liste 2e An_26-27.xlsx', null, null, true);
+        $this->post(route('students.import.store'), ['classroom_id' => $classroom->id, 'file' => $file])->assertSessionHasNoErrors();
+        expect(Student::count())->toBe(1);
     } finally { unlink($path); }
+});
+
+it('garde les erreurs d’import dans le popup sans écrire de données', function () {
+    $role = App\Models\Role::create(['name' => 'Directeur des études']);
+    $user = App\Models\User::forceCreate(['name' => 'Test', 'email' => 'manager@test.local', 'password' => bcrypt('test'), 'avatar' => 'avatar.png', 'role_id' => $role->id]);
+    $this->actingAs($user);
+    $classroom = Classroom::create(['type' => 'prepa1', 'year' => '2026-09-01', 'total_students' => 0, 'total_teaching_units' => 20]);
+    $path = rosterWorkbook('2026-2027', '2èe');
+    try {
+        $this->post(route('students.import.store'), ['classroom_id' => $classroom->id, 'file' => new UploadedFile($path, 'liste.xlsx', null, null, true)])
+            ->assertRedirect(route('classrooms.index'))->assertSessionHasErrors(['file'], null, 'studentImport');
+        expect(Student::count())->toBe(0);
+    } finally { unlink($path); }
+});
+
+it('trie les classes par année décroissante sans imposer un tri DataTables sur les images', function () {
+    Classroom::create(['type' => 'prepa1', 'year' => '2023-09-01', 'total_students' => 0, 'total_teaching_units' => 10]);
+    Classroom::create(['type' => 'prepa1', 'year' => '2026-09-01', 'total_students' => 0, 'total_teaching_units' => 20]);
+    Classroom::create(['type' => 'prepa2', 'year' => '2025-09-01', 'total_students' => 0, 'total_teaching_units' => 10]);
+    $component = new App\Http\Livewire\ClassroomLivewireController;
+    expect($component->render()->getData()['classrooms']->pluck('year')->all())->toBe(['2026-09-01', '2025-09-01', '2023-09-01']);
 });
