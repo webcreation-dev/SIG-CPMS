@@ -20,7 +20,7 @@
 .login-page .auth-main::before {
     inset: -16px;
     background: url("../images/login-campus.webp") center center / cover no-repeat;
-    filter: blur(3px);
+    filter: blur(2px);
 }
 .login-page .auth-main::after {
     inset: 0;
