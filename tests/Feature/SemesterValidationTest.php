@@ -38,7 +38,13 @@ it('utilise les notes finales et la même décision dans les deux documents', fu
     $failed = app(SemesterValidation::class)->forStudent($student, $semester);
     expect($failed['average'])->toBe(12.0)->and($failed['validated'])->toBeFalse();
     foreach (['fiche_de_calcul', 'releve_de_notes'] as $view) {
-        expect(substr_count(view($view, $data)->render(), 'Non Validé'))->toBe(3);
+        $html = view($view, $data)->render();
+        expect(substr_count(mb_strtolower($html), 'non validé'))->toBe(3);
+        if ($view === 'fiche_de_calcul') {
+            expect($html)->not->toContain('(MG ', '(UE Sci ', '(UE Non Sci ');
+            preg_match('/Moyenne générale :(.*)<\/tr>/s', $html, $total);
+            expect(preg_replace('/\s+/', ' ', strip_tags($total[1])))->toContain('Non validé')->not->toContain('(');
+        }
     }
 })->with([
     ['semester1', 'prepa1', ['Algèbre 1', 'SNI 1', 'Humanité 1A']],

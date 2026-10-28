@@ -94,3 +94,15 @@ it('conserve la classe sélectionnée et permet la saisie séparée des deux ECU
     expect($original->fresh()->moy_ecu)->toBe('18');
     expect(Note::where('student_id', $old->id)->count())->toBe(1);
 });
+
+it('corrige TP Physique 4B à deux crédits pour les nouvelles années', function () {
+    $unit = TeachingUnit::forceCreate(['name' => 'Physique 4B', 'status' => 'multiple', 'type' => 'prepa2', 'semester' => 'semester4', 'credit' => 5]);
+    ElementTeachingUnit::forceCreate(['name' => 'Physique', 'credit' => 3, 'teaching_unit_id' => $unit->id]);
+    $tp = ElementTeachingUnit::forceCreate(['name' => 'TP Physique', 'credit' => 3, 'teaching_unit_id' => $unit->id]);
+    foreach ([2025, 2026, 2027] as $year) {
+        $read = TeachingUnit::forAcademicYear($year)->findOrFail($unit->id);
+        expect((int) $read->credit)->toBe(5);
+        expect($read->elementTeachingUnits->pluck('credit')->map(fn ($credit) => (int) $credit)->all())->toBe([3, $year < 2026 ? 3 : 2]);
+    }
+    expect((int) $tp->fresh()->credit)->toBe(3);
+});

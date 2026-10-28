@@ -232,16 +232,7 @@
                     @if($semestre_valide)
                         Validé
                     @else
-                        Non Validé
-                        @if(!$moyenne_generale_valid)
-                            <br><small>(MG {!! $semester_validation !== null ? '&lt;' : '<' !!} {{ $thresholds['moyenne_generale'] }})</small>
-                        @endif
-                        @if(!$scientific_condition_met)
-                            <br><small>(UE Sci {!! $semester_validation !== null ? '&lt;' : '<' !!} {{ $thresholds['min_scientifique'] }})</small>
-                        @endif
-                        @if(!$non_scientific_condition_met)
-                            <br><small>(UE Non Sci {!! $semester_validation !== null ? '&lt;' : '<' !!} {{ $thresholds['min_non_scientifique'] }})</small>
-                        @endif
+                        Non validé
                     @endif
                 </strong></td>
             </tr>

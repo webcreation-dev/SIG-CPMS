@@ -43,6 +43,8 @@ class TeachingUnit extends Model
             // Le libellé enregistré reste celui des anciens bulletins.
             ->selectRaw("CASE WHEN composite_from_year <= ? AND name IN ('Humanité 1C (FHS)', 'Humanité 2C (FHS)', 'Humanité 3C (FHS)', 'Humanité 4C (FHS)') THEN REPLACE(name, ' (FHS)', '') ELSE name END AS name", [$year])
             ->with(['elementTeachingUnits' => fn ($ecues) => $ecues
+                ->select('element_teaching_units.*')
+                ->selectRaw("CASE WHEN ? >= 2026 AND name = 'TP Physique' AND teaching_unit_id IN (SELECT id FROM teaching_units WHERE name = 'Physique 4B' AND semester = 'semester4') THEN 2 ELSE credit END AS credit", [$year])
                 ->where(fn ($q) => $q->whereNull('effective_from_year')->orWhere('effective_from_year', '<=', $year))]);
     }
 
