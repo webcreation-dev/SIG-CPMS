@@ -19,7 +19,7 @@
 @if($errors->any())<div class="alert alert-danger">{{ $errors->first() }}</div>@endif
 <div class="row"><div class="col-xl-9">
 <section class="card"><div class="card-body">
-<h4>Moyennes à tester</h4>
+
 <form id="simulation-form" action="{{ route('simulation.semester.calculate') }}" method="POST">
 @csrf<input type="hidden" name="year" value="{{ $year }}"><input type="hidden" name="semester" value="{{ $semester }}">
 <div class="table-responsive"><table class="table table-bordered align-middle"><thead><tr><th>UNITÉ D’ENSEIGNEMENT</th><th>SAISIE /20</th><th>MOYENNE UE</th><th>APPRÉCIATION</th></tr></thead><tbody>
