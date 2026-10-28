@@ -25,7 +25,7 @@ function simulationFixture(int $number = 1): array
 
 it('affiche le simulateur dans la mise en page de l’administration', function () {
     simulationFixture();
-    $this->get(route('simulation.semester'))->assertOk()->assertSee('Simulation de semestre')->assertSee('codex-sidebar')->assertDontSee('<style>', false)->assertSee('Conduite')->assertSee('4 crédit(s)')->assertSee('Données fictives uniquement');
+    $this->get(route('simulation.semester'))->assertOk()->assertSee('Simulation de semestre')->assertSee('codex-sidebar')->assertDontSee('<style>', false)->assertSee('Conduite')->assertSee('4 crédit(s)')->assertDontSee('Données fictives uniquement')->assertDontSee('Changer de semestre remet')->assertDontSee('Saisis les moyennes finales')->assertDontSee('data-example', false);
 });
 
 it('calcule Humanité avec les vrais coefficients et les appréciations du semestre', function ($number) {

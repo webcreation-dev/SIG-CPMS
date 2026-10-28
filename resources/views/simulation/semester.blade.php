@@ -9,25 +9,17 @@
     <ul class="breadcrumb mb-0"><li class="breadcrumb-item"><a href="{{ route('classrooms.index') }}"><h1>Gestion des étudiants</h1></a></li><li class="breadcrumb-item active">Simulation de semestre</li></ul>
   </div></div></div>
   <div class="theme-body"><div class="custom-container">
-<div class="alert alert-info"><strong>Données fictives uniquement.</strong> Aucun étudiant n’est sélectionné et aucune note n’est enregistrée. Le simulateur utilise les règles et le calcul d’Humanité de l’application.</div>
 <section class="card"><div class="card-body">
 <form class="row align-items-end" method="GET" action="{{ route('simulation.semester') }}">
 <div class="form-group col-md-4"><label for="year">Année scolaire</label><select class="form-control" id="year" name="year">@for($y = 2023; $y <= max(2030, $year); $y++)<option value="{{ $y }}" @selected($y === $year)>{{ $y }}-{{ $y+1 }}</option>@endfor</select></div>
 <div class="form-group col-md-4"><label for="semester">Semestre</label><select class="form-control" id="semester" name="semester">@foreach(App\Models\TeachingUnit::SEMESTER_VALUES as $key => $label)<option value="{{ $key }}" @selected($key === $semester)>{{ $label }} · {{ in_array($key, ['semester1','semester2']) ? 'Prépa 1' : 'Prépa 2' }}</option>@endforeach</select></div>
-<div class="form-group col-md-4"><button class="btn btn-primary" type="submit">Charger ce semestre</button></div><small class="text-muted">Changer de semestre remet les moyennes à 12.</small>
+<div class="form-group col-md-4"><button class="btn btn-primary" type="submit">Charger ce semestre</button></div>
 </form>
 </div></section>
 @if($errors->any())<div class="alert alert-danger">{{ $errors->first() }}</div>@endif
 <div class="row"><div class="col-xl-9">
 <section class="card"><div class="card-body">
-<h4>Moyennes à tester</h4><p class="text-muted">Saisis les moyennes finales sur 20. Pour les autres UE composées, saisis directement leur moyenne d’UE.</p>
-<div class="d-flex flex-wrap gap-2 mb-15" aria-label="Exemples de simulation">
-<button class="btn btn-sm btn-primary" type="button" data-example="reset">Tout à 12</button>
-<button class="btn btn-sm btn-primary" type="button" data-example="compensated">Scientifique à 10 compensée</button>
-<button class="btn btn-sm btn-primary" type="button" data-example="blocked">Une scientifique sous 10</button>
-<button class="btn btn-sm btn-primary" type="button" data-example="non-scientific">Non scientifiques sous 10</button>
-<button class="btn btn-sm btn-primary" type="button" data-example="humanities" @disabled(!$catalog->contains(fn ($u) => $u->usesWeightedAverage($year)))>Humanité : FHS 10, Conduite 20</button>
-</div>
+<h4>Moyennes à tester</h4>
 <form id="simulation-form" action="{{ route('simulation.semester.calculate') }}" method="POST">
 @csrf<input type="hidden" name="year" value="{{ $year }}"><input type="hidden" name="semester" value="{{ $semester }}">
 <div class="table-responsive"><table class="table table-bordered align-middle"><thead><tr><th>UNITÉ D’ENSEIGNEMENT</th><th>SAISIE /20</th><th>MOYENNE UE</th><th>APPRÉCIATION</th></tr></thead><tbody>
@@ -73,7 +65,7 @@
 <script>
 (() => {
 const form = document.getElementById('simulation-form'), error = document.getElementById('calculation-error'), state = document.getElementById('calculation-state');
-const summary = document.getElementById('summary'), inputs = [...form.querySelectorAll('input[type="number"]')];
+const summary = document.getElementById('summary');
 const format = new Intl.NumberFormat('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:4});
 let timer, abort, revision = 0;
 function show(result) {
@@ -92,15 +84,7 @@ async function calculate() {
 }
 form.addEventListener('input',()=>{++revision;if(abort)abort.abort();summary.classList.add('opacity-50');state.textContent='Modification en cours…';clearTimeout(timer);timer=setTimeout(calculate,250);});
 form.addEventListener('submit',event=>{if(event.submitter?.name==='export')return;event.preventDefault();clearTimeout(timer);calculate();});
-document.querySelectorAll('[data-example]').forEach(button=>button.addEventListener('click',()=>{
- const example=button.dataset.example;inputs.forEach(input=>input.value='12');
- const scientific=inputs.filter(input=>input.dataset.scientific==='1');
- if(example==='compensated'){inputs.forEach(input=>input.value=input.dataset.scientific==='1'?'12':'16');if(scientific[0])scientific[0].value='10';}
- if(example==='blocked'){inputs.forEach(input=>input.value='16');if(scientific[0])scientific[0].value='9';if(scientific[1])scientific[1].value='10';}
- if(example==='non-scientific'){inputs.forEach(input=>input.value=input.dataset.scientific==='1'?'16':'8');if(scientific[0])scientific[0].value='10';}
- if(example==='humanities'){inputs.forEach(input=>{if(input.dataset.ecue==='FHS')input.value='10';if(input.dataset.ecue==='Conduite')input.value='20';});}
- clearTimeout(timer);calculate();
-}));
+
 })();
 </script>
 </body>
