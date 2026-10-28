@@ -31,8 +31,10 @@
         <table>
             <thead>
                 @php
-                    $student = App\Models\Student::find($studentId);
-                    $semester_validation = app(App\Services\SemesterValidation::class)->forStudent($student, $semester);
+                    $student = $simulation_student ?? App\Models\Student::find($studentId);
+                    $semester_validation = isset($simulation_result)
+                        ? ($simulation_result['version'] !== 'historique' ? $simulation_result + ['rule' => $simulation_result['thresholds']] : null)
+                        : app(App\Services\SemesterValidation::class)->forStudent($student, $semester);
                 @endphp
                 <tr>
                     <th colspan="13"> @if($student->sexe =='M') Mr @else Mlle @endif {{$student->lastname}} {{$student->firstname}}</th>
@@ -61,8 +63,8 @@
             <tbody>
                 @php
                     // OPTIMISATION DES REQUETES BDD (N+1 Queries fix)
-                    $ues = App\Models\TeachingUnit::forAcademicYear((int) $year)->where('type', $student->classroom->type)->where('semester', $semester)->get();
-                    $all_notes = App\Models\Note::where('student_id', $studentId)->get();
+                    $ues = $simulation_catalog ?? App\Models\TeachingUnit::forAcademicYear((int) $year)->where('type', $student->classroom->type)->where('semester', $semester)->get();
+                    $all_notes = $simulation_notes ?? App\Models\Note::where('student_id', $studentId)->get();
                     
                     // Indexation pour accès instantané (O(1)) au lieu de multiples requêtes BDD (N+1 limitant)
                     $notes_by_ue = $all_notes->whereNotNull('teaching_unit_id')->keyBy('teaching_unit_id');
@@ -87,7 +89,7 @@
                             $moy_generale_temp += $ue->averageFromNotes($notes_by_ecue, (int) $year);
                         }
                     }
-                    $moyenne_generale_finale = $count_ues > 0 ? $moy_generale_temp / $count_ues : 0;
+                    $moyenne_generale_finale = $simulation_result['average'] ?? ($count_ues > 0 ? $moy_generale_temp / $count_ues : 0);
 
                     $moy_generale = 0; // Sera utilisé pour le calcul final de validation
                     $scientific_condition_met = true;
@@ -159,7 +161,7 @@
                             $sum_ue += $n ? ($n->moy_catch_up !== null ? $n->moy_catch_up : $n->moy_ecu) : 0;
                         }
                         
-                        $moy_ue_final = $ue->averageFromNotes($notes_by_ecue, (int) $year);
+                        $moy_ue_final = $simulation_result['details'][$ue->id]['average'] ?? $ue->averageFromNotes($notes_by_ecue, (int) $year);
                         $moy_generale += $moy_ue_final;
                         
                         // Vérification CPMS Scientifique

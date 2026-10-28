@@ -42,11 +42,8 @@ class SemesterSimulationController extends Controller
         $semester = $request->semester;
         $scores = $request->input('scores');
         // Recalcul côté serveur à partir des saisies, jamais depuis un résultat fourni par le navigateur.
-        $result = $simulation->simulate($year, $semester, $scores);
-        $catalog = $simulation->catalog($year, $semester);
-        abort_if($catalog->isEmpty(), 422, 'Aucune UE configurée pour ce semestre.');
-        return \Barryvdh\DomPDF\Facade\Pdf::loadView('simulation.calculation-sheet', compact('year', 'semester', 'scores', 'result', 'catalog'))
-            ->setPaper('a4', 'landscape')
+        $data = $simulation->calculationSheetData($year, $semester, $scores);
+        return \Barryvdh\DomPDF\Facade\Pdf::loadView('fiche_de_calcul', $data)
             ->stream('simulation-fiche-calcul-'.$year.'-'.$semester.'.pdf');
     }
 

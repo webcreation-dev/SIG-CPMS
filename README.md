@@ -97,7 +97,7 @@ Vérifications : 32 tests ciblés réussis. Les fichiers administratifs fournis 
 
 La page `/simulation-semestre` permet de tester les quatre semestres pour une année scolaire choisie. Elle est accessible après connexion à la direction et au directeur des études, depuis « Simulation de semestre » en bas du menu de gestion des étudiants. Elle reprend l’en-tête, le menu et les composants de l’interface d’administration. Elle lit seulement le catalogue des UE et calcule des moyennes fictives.
 
-Le bouton **Générer la fiche de calcul (PDF)** ouvre une fiche dans un nouvel onglet à partir des valeurs fictives actuellement saisies. Le serveur recalcule les moyennes et appréciations selon l’année choisie. Le document porte la mention « Simulation - données fictives », conserve les colonnes du modèle de fiche et laisse les notes détaillées non saisies vides. Aucun étudiant ni aucune note ne sont créés.
+Le bouton **Générer la fiche de calcul (PDF)** ouvre une fiche dans un nouvel onglet à partir des valeurs fictives actuellement saisies. Le serveur recalcule les moyennes et appréciations selon l’année choisie. Le document porte la mention « Simulation - données fictives », utilise directement la vue `fiche_de_calcul`, ses styles et le même format PDF que la fiche réelle et laisse les notes détaillées non saisies vides. Aucun étudiant ni aucune note ne sont créés.
 
 Les moyennes se recalculent à la saisie. La page affiche les appréciations par UE, la moyenne générale, le statut du semestre et les motifs de non-validation. Les exemples incluent une scientifique à 10 compensée, une scientifique sous 10 bloquante, des non scientifiques sous 10 compensées, et Humanité avec FHS à 10 et Conduite à 20.
 

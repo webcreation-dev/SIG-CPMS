@@ -89,11 +89,26 @@ it('recalcule les appréciations de la fiche et conserve Humanité historique', 
     $f = simulationFixture();
     $service = app(SemesterSimulation::class);
     foreach ([2025, 2026] as $year) {
-        $html = view('simulation.calculation-sheet', ['year' => $year, 'semester' => 'semester1', 'scores' => $f['scores'], 'result' => $service->simulate($year, 'semester1', $f['scores']), 'catalog' => $service->catalog($year, 'semester1')])->render();
-        expect($html)->toContain('SIMULATION - DONNÉES FICTIVES', '12,00');
-        if ($year === 2026) { expect($html)->toContain('Conduite', '(4 × 10 + 1 × 20) / 5'); }
+        $html = view('fiche_de_calcul', $service->calculationSheetData($year, 'semester1', $f['scores']))->render();
+        expect($html)->toContain('SIMULATION', 'DONNÉES FICTIVES', 'background-color: #ccc;', 'Moyenne générale :');
+        if ($year === 2026) { expect($html)->toContain('Conduite'); }
         else { expect($html)->not->toContain('Conduite'); }
     }
     $f['scores']['ue'][$f['science']->id] = 21;
     $this->postJson(route('simulation.semester.sheet'), ['year' => 2026, 'semester' => 'semester1', 'scores' => $f['scores']])->assertUnprocessable();
 });
+
+it('utilise le même HTML que la fiche réelle pour les mêmes moyennes', function ($year) {
+    $f = simulationFixture();
+    $data = app(SemesterSimulation::class)->calculationSheetData($year, 'semester1', $f['scores']);
+    $classroom = App\Models\Classroom::forceCreate(['total_students' => '1', 'type' => 'prepa1', 'year' => $year.'-09-01']);
+    $student = App\Models\Student::forceCreate(['lastname' => 'SIMULATION', 'firstname' => '- DONNÉES FICTIVES', 'sexe' => 'M', 'classroom_id' => $classroom->id]);
+    foreach ($data['simulation_notes'] as $note) {
+        $copy = $note->replicate();
+        $copy->student_id = $student->id;
+        $copy->save();
+    }
+    $actual = view('fiche_de_calcul', ['year' => $year, 'nextYear' => $year + 1, 'semester' => 'semester1', 'type_classroom' => 'prepa1', 'studentId' => $student->id])->render();
+    $simulated = view('fiche_de_calcul', $data)->render();
+    expect(preg_replace('/\s+/', ' ', $simulated))->toBe(preg_replace('/\s+/', ' ', $actual));
+})->with([2025, 2026]);

@@ -75,6 +75,29 @@ class SemesterSimulation
         return $result + ['details' => $details, 'reasons' => $reasons, 'version' => $rule['id'] ?? 'historique', 'thresholds' => $thresholds];
     }
 
+    public function calculationSheetData(int $year, string $semester, array $scores): array
+    {
+        $result = $this->simulate($year, $semester, $scores);
+        $catalog = $this->catalog($year, $semester);
+        abort_if($catalog->isEmpty(), 422, 'Aucune UE configurée pour ce semestre.');
+        $type = in_array($semester, ['semester1', 'semester2'], true) ? 'prepa1' : 'prepa2';
+        $student = new \App\Models\Student();
+        $student->forceFill(['sexe' => 'M', 'lastname' => 'SIMULATION', 'firstname' => '- DONNÉES FICTIVES']);
+        $student->setRelation('classroom', new \App\Models\Classroom(['type' => $type]));
+        $notes = collect();
+        foreach ($catalog as $unit) {
+            if ($unit->status === 'singular') {
+                $notes->push((new \App\Models\Note())->forceFill(['teaching_unit_id' => $unit->id, 'moy_ecu' => $result['details'][$unit->id]['average']]));
+            } elseif ($unit->usesWeightedAverage($year)) {
+                foreach ($unit->elementTeachingUnits as $ecue) {
+                    $notes->push((new \App\Models\Note())->forceFill(['element_teaching_unit_id' => $ecue->id, 'moy_ecu' => $scores['ecue'][$ecue->id]]));
+                }
+            }
+        }
+        return ['year' => $year, 'nextYear' => $year + 1, 'semester' => $semester, 'type_classroom' => $type,
+            'simulation_student' => $student, 'simulation_catalog' => $catalog, 'simulation_notes' => $notes, 'simulation_result' => $result];
+    }
+
     private function score($value, string $name): float
     {
         if (!is_numeric($value) || !is_finite((float) $value) || $value < 0 || $value > 20) {
