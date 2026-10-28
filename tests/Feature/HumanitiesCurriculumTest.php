@@ -30,6 +30,7 @@ it('réserve FHS et Conduite et leur moyenne pondérée aux nouvelles promotions
                 'moy_ecu' => $ecue->name === 'FHS' ? 8 : 20, 'moy_catch_up' => $ecue->name === 'FHS' ? 10 : null]);
         }
         $unit = TeachingUnit::forAcademicYear($year)->findOrFail($id);
+        expect($unit->name)->toBe('Humanité '.$number.'C'.($year < 2026 ? ' (FHS)' : ''));
         expect($unit->status)->toBe($year < 2026 ? 'singular' : 'multiple');
         expect($unit->elementTeachingUnits->pluck('credit')->map(fn ($x) => (int) $x)->all())->toBe($year < 2026 ? [] : [4, 1]);
         $component = new NoteByStudentLivewireController;
@@ -56,6 +57,7 @@ it('réserve FHS et Conduite et leur moyenne pondérée aux nouvelles promotions
     }
     // La lecture des nouvelles promotions n’a changé ni le statut historique ni ses notes.
     expect(TeachingUnit::find($id)->status)->toBe('singular');
+    expect(TeachingUnit::find($id)->name)->toBe('Humanité '.$number.'C (FHS)');
     expect(Note::where('teaching_unit_id', $id)->pluck('moy_ecu')->unique()->all())->toBe(['19']);
 })->with([1, 2, 3, 4]);
 

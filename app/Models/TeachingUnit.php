@@ -40,6 +40,8 @@ class TeachingUnit extends Model
         // Le statut stocké reste historique ; seul le résultat de lecture varie par promotion.
         return $query->select('teaching_units.*')
             ->selectRaw("CASE WHEN composite_from_year <= ? THEN 'multiple' ELSE status END AS status", [$year])
+            // Le libellé enregistré reste celui des anciens bulletins.
+            ->selectRaw("CASE WHEN composite_from_year <= ? AND name IN ('Humanité 1C (FHS)', 'Humanité 2C (FHS)', 'Humanité 3C (FHS)', 'Humanité 4C (FHS)') THEN REPLACE(name, ' (FHS)', '') ELSE name END AS name", [$year])
             ->with(['elementTeachingUnits' => fn ($ecues) => $ecues
                 ->where(fn ($q) => $q->whereNull('effective_from_year')->orWhere('effective_from_year', '<=', $year))]);
     }
