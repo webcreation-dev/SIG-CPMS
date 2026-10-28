@@ -51,7 +51,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
       <!-- Required meta tags-->
       <meta charset="utf-8">
@@ -77,8 +77,9 @@
       <link href="{{asset('assets/css/vendor/bootstrap.css')}}" rel="stylesheet">
       <!-- Custom css-->
       <link href="{{asset('assets/css/style.css')}}" id="customstyle" rel="stylesheet">
+      <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet">
     </head>
-  <body>
+  <body class="login-page">
     <!-- Login Start-->
     <div class="auth-main">
       <div class="codex-authbox">

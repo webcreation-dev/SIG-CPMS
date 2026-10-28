@@ -1,0 +1,40 @@
+/* Fond photographique limité à la page de connexion. */
+.login-page {
+    background: #102b46;
+}
+.login-page .auth-main {
+    position: relative;
+    isolation: isolate;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 32px 20px;
+}
+.login-page .auth-main::before,
+.login-page .auth-main::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+}
+.login-page .auth-main::before {
+    inset: -16px;
+    background: url("../images/login-campus.webp") center center / cover no-repeat;
+    filter: blur(6px);
+}
+.login-page .auth-main::after {
+    inset: 0;
+    background: linear-gradient(135deg, rgba(6, 30, 54, .72), rgba(0, 71, 123, .4));
+}
+.login-page .codex-authbox {
+    min-width: 0;
+    width: 100%;
+    max-width: 560px;
+    background: rgba(255, 255, 255, .97);
+    border-radius: 12px;
+    border-bottom: 5px solid #0066b3;
+    box-shadow: 0 24px 70px rgba(3, 20, 36, .3);
+}
+@media (max-width: 575px) {
+    .login-page .auth-main { padding: 24px 16px; }
+}
